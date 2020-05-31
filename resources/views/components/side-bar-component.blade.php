@@ -36,7 +36,7 @@
           <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('user/*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-user"></i>
             <p>
-              user
+              User
             </p>
           </a>
         </li>
@@ -44,7 +44,7 @@
           <a href="{{ route('user.create') }}" class="nav-link {{ request()->is('user/*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-user-plus"></i>
             <p>
-              user
+              Create
             </p>
           </a>
         </li>
