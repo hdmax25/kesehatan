@@ -33,15 +33,15 @@
         </li>
         @admin
         <li class="nav-item">
-        <a href="{{ route('department.index') }}" class="nav-link {{ request()->is('department') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-plus"></i>
+          <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('user/*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-user-plus"></i>
             <p>
-              Department
+              user
             </p>
           </a>
         </li>
         <li class="nav-item">
-        <a href="{{ route('department.index') }}" class="nav-link {{ request()->is('department') ? 'active' : '' }}">
+          <a href="{{ route('department.index') }}" class="nav-link {{ request()->is('department') ? 'active' : '' }}">
             <i class="nav-icon fas fa-home"></i>
             <p>
               Department
