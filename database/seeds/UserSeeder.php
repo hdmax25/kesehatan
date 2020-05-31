@@ -13,7 +13,13 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => Str::random(10),
-            'password' => Hash::make('password'),
+            'password' => Hash::make('admin'),
+            'username' => 'admin',
+            'role' => '1',
+            'departement' => '1',
+            'phone' => '0',
+            'ktpaddress' => 'Madiun',
+
         ]);
     }
 }

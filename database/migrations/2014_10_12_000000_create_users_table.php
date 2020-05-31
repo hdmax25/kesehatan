@@ -20,12 +20,9 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('role');
-            $table->integer('id_departement');
-            $table->string('phone');
-            $table->string('position');
+            $table->integer('id_department');
+            $table->string('phone')
             $table->string('ktpaddress');
-            $table->string('domicile');
-            $table->string('complaint');
             $table->rememberToken();
             $table->timestamps();
         });
