@@ -3,11 +3,11 @@
 @section('content')
   <div class="login-logo">
     <a href="{{ url('/') }}">
-      <img src="{{ asset('dist/img/logo.jpg') }}" class="login-logo elevation-" style="width: 300px;" alt="logo">
+      <img src="{{ asset('dist/img/logo.jpg') }}" class="login-logo img-circle elevation-2" style="width: 300px;" alt="logo">
     </a>
   </div>
   <!-- /.login-logo -->
-  <div class="card">
+  <div class="card elevation-2">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Login</p>
       <form action="{{ route('login') }}" method="post">
