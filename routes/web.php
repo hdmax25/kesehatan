@@ -49,7 +49,6 @@ Route::get('/destroy/{id}', 'PenyakitController@destroy')->name('destroy')->midd
 
 Route::group(['prefix' => 'department', 'as' => 'department.'], static function () {
   Route::get('/', 'DepartementController@index')->name('index')->middleware('auth', 'role:1');
-  Route::get('/create', 'DepartementController@create')->name('create')->middleware('auth', 'role:1');
   Route::post('/store', 'DepartementController@store')->name('store')->middleware('auth', 'role:1');
   Route::get('/show/{id}', 'DepartementController@show')->name('show')->middleware('auth');
   Route::get('/edit/{id}', 'DepartementController@edit')->name('edit')->middleware('auth', 'role:1');
