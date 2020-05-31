@@ -182,7 +182,7 @@
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Jika terdapat keluhan, silahkan jelaskan gejala/keluhan yang anda alami saat ini </label>
-                <input type="email" class="form-control" placeholder="Tidak Ada">
+                <input type="text" class="form-control" placeholder="Tidak Ada">
               </div>
               <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">

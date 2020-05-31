@@ -40,13 +40,20 @@
             </tr>
             </thead>
             <tbody>
+            @foreach($user as $item)
             <tr>
-              <td>#</td>
-              <td>#</td>
-              <td>#</td>
-              <td>#</td>
-              <td>#</td>
-              <td>#</td>
+            @if ($item->role == 1)
+              <td>Admin</td>
+              @elseif ($item->role == 2)
+              <td>Kadiv</td>
+              @else
+              <td>User</td>
+            @endif
+              <td>{{ $item->username }}</td>
+              <td>{{ $item->name }}</td>
+              <td>{{ $item->id_department }}</td>
+              <td>{{ $item->phone }}</td>
+              <td>{{ $item->ktpaddress }}</td>
               <td>
                 <div class="btn-group">
                   <button type="button" class="btn btn-info">Action</button>
@@ -60,6 +67,7 @@
                 </div>
               </td>
             </tr>
+            @endforeach
             </tbody>
           </table>
         </div>
