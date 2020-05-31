@@ -23,7 +23,7 @@
   <div class="row">
     @admin
     <div class="col-md-12">
-      <div class="card card-outline card-primary">
+      <div class="card card-outline card-danger">
         <form action="{{ route('findSDM') }}" method="post">
           @csrf
           <div class="card-body">
@@ -62,7 +62,7 @@
     @endadmin
     @kadiv
     <div class="col-md-12">
-      <div class="card card-outline card-primary">
+      <div class="card card-outline card-danger">
         <form action="{{ route('findDevise') }}" method="post">
           @csrf
           <div class="card-body">
@@ -92,7 +92,7 @@
     @user
     @if (!$report->where('created_at', \Carbon\Carbon::now())->count())
       <div class="col-md-12">
-        <div class="card card-primary">
+        <div class="card card-danger">
           <div class="card-header">
             <h3 class="card-title">{{ \Carbon\Carbon::now()->format('d/m/Y') }}</h3>
           </div>
@@ -174,7 +174,7 @@
               </div>
               <div class="form-group">
                 <label for="x">Bagaimana Kondisi anda saat ini?</label>
-                <select id="x" name="user" class="form-control select2 select2-primary" data-dropdown-css-class="select2-primary" required>
+                <select id="x" name="user" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" required>
                   @foreach($disease as $item)
                   <option value="{{ $item->id }}">{{ $item->penyakit_name }}</option>
                   @endforeach
@@ -199,7 +199,7 @@
     @endif
     @enduser
     <div class="col-md-12">
-      <div class="card card-primary">
+      <div class="card card-danger">
         <div class="card-header">
           <h3 class="card-title">Primary Outline</h3>
         </div>
