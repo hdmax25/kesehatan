@@ -34,9 +34,17 @@
         @admin
         <li class="nav-item">
           <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('user/*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-user"></i>
+            <p>
+              User
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('user.create') }}" class="nav-link {{ request()->is('user/*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-user-plus"></i>
             <p>
-              user
+              Create
             </p>
           </a>
         </li>
