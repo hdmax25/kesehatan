@@ -178,12 +178,20 @@
           <table id="report" class="table table-bordered table-striped text-center">
             <thead>
             <tr>
-              <th style="width: 10px">#</th>
-              <th>#</th>
+              <th style="width: 10px">No</th>
+              <th>NIP</th>
+              <th>Nama</th>
+              <th>Unit Kerja</th>
+              <th>Posisi</th>
+              <th>Kondisi</th>
             </tr>
             </thead>
             <tbody>
             <tr>
+              <td>#</td>
+              <td>#</td>
+              <td>#</td>
+              <td>#</td>
               <td>#</td>
               <td>#</td>
             </tr>
