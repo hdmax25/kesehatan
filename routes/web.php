@@ -24,6 +24,7 @@ Route::get('/', static function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/find', 'HomeController@findSDM')->name('findSDM');
 
 Route::group(['prefix' => 'user', 'as' => 'user.'], static function () {
   Route::get('/', 'UserController@index')->name('index')->middleware('auth', 'role:1');
