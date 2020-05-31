@@ -21,6 +21,24 @@
   <link href="{{ url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700') }}" rel="stylesheet">
   @yield('css')
 </head>
+<style>
+  .select2-selection {
+    border: 0;
+    border-radius: 0;
+    font-size: 14px;
+    outline: 0;
+    min-height: 38px;
+    text-align: left;
+  }
+
+  .select2-selection__rendered {
+    margin: 10px;
+  }
+
+  .select2-selection__arrow {
+    margin: 10px;
+  }
+</style>
 <body class="sidebar-mini layout-fixed">
 <div id="app" class="wrapper">
   <!-- header -->

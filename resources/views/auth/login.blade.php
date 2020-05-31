@@ -3,7 +3,7 @@
 @section('content')
   <div class="login-logo">
     <a href="{{ url('/') }}">
-      <img src="{{ asset('dist/img/logo.jpg') }}" class="login-logo" style="width: 300px;" alt="logo">
+      <img src="{{ asset('dist/img/logo.jpg') }}" class="login-logo elevation-" style="width: 300px;" alt="logo">
     </a>
   </div>
   <!-- /.login-logo -->

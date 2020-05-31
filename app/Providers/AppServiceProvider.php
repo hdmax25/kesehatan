@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+      Blade::if('admin', static function () {
+        return (Auth::user() && Auth::user()->role == 1);
+      });
+
+      Blade::if('kadiv', static function () {
+        return (Auth::user() && Auth::user()->role == 2);
+      });
+
+      Blade::if('user', static function () {
+        return (Auth::user() && Auth::user()->role == 3);
+      });
     }
 }
