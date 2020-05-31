@@ -24,6 +24,9 @@ class UserController extends Controller
   public function index()
   {
     $user = User::all();
+    $user->map(function ($item) {
+      $item->department = Departement::find($item->id_department);
+    });
 
     $data = [
       'user' => $user

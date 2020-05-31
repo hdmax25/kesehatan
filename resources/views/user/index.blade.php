@@ -51,7 +51,7 @@
             @endif
               <td>{{ $item->username }}</td>
               <td>{{ $item->name }}</td>
-              <td>{{ $item->id_department }}</td>
+              <td>{{ $item->department ? $item->department->department_name : '' }}</td>
               <td>{{ $item->phone }}</td>
               <td>{{ $item->ktpaddress }}</td>
               <td>
