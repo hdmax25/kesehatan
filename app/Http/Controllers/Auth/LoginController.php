@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Request;
+use Symfony\Component\HttpFoundation\Request;
 
 class LoginController extends Controller
 {
@@ -53,6 +53,8 @@ class LoginController extends Controller
   }
 
   /**
+   * Get the login username to be used by the controller.
+   *
    * @return string
    */
   public function findUsername(): string
@@ -79,8 +81,9 @@ class LoginController extends Controller
    */
   protected function credentials(Request $request): array
   {
-    return array_merge($request->only($this->username(), 'password'), ['role' => [1]]);
+    return array_merge($request->only($this->username(), 'password'));
   }
+
 
   /**
    * @param Request $request
@@ -91,7 +94,7 @@ class LoginController extends Controller
     $errors = [$this->username() => trans('auth.failed')];
     $user = User::where($this->username(), $request->{$this->username()})->first();
 
-    if ($user && Hash::check($request->password, $user->password) && $user->role != 1) {
+    if ($user && Hash::check($request->password, $user->password)) {
       $errors = [$this->username() => trans('Anada Tidak Miliki izin yang sesuwai')];
     }
 
