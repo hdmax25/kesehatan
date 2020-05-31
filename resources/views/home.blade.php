@@ -122,7 +122,7 @@
                     <span class="info-box-icon bg-info"><i class="far fa-user"></i></span>
                     <div class="info-box-content">
                       <span class="info-box-text">Departement</span>
-                      <span class="info-box-number">{{ \App\model\Departement::find(Auth::user()->id_department)->department_name }}</span>
+                      <span class="info-box-number">{{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}</span>
                     </div>
                   </div>
                 </div>

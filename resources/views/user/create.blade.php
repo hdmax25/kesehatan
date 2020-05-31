@@ -49,8 +49,8 @@
               <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="">
             </div>
             <div class="form-group">
-              <label for="x">Unit Kerja</label>
-              <select id="x" name="work_unit" class="form-control select2 select2-primary" data-dropdown-css-class="select2-primary" required>
+              <label for="work_unit">Unit Kerja</label>
+              <select id="work_unit" name="work_unit" class="form-control @error('phone') is-invalid @enderror select2 select2-primary" data-dropdown-css-class="select2-primary" required>
                 <option value="#">#</option>
                 <option value="#">#</option>
                 <option value="#">#</option>
@@ -123,21 +123,28 @@
       @error('nip')
       toastr.warning('{{ $message }}')
       @enderror
+
       @error('password')
       toastr.warning('{{ $message }}')
       @enderror
+
       @error('name')
       toastr.warning('{{ $message }}')
       @enderror
+
       @error('work_unit')
       toastr.warning('{{ $message }}')
       @enderror
+
       @error('phone')
       toastr.warning('{{ $message }}')
       @enderror
+
       @error('address')
       toastr.warning('{{ $message }}')
-      @enderror@error('nip')
+      @enderror
+
+      @error('nip')
       toastr.warning('{{ $message }}')
       @enderror
 
