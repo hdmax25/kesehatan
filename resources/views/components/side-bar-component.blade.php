@@ -32,6 +32,22 @@
           </a>
         </li>
         <li class="nav-item">
+        <a href="{{ route('department.index') }}" class="nav-link {{ request()->is('department') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-home"></i>
+            <p>
+              Department
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+        <a href="{{ route('penyakit.index') }}" class="nav-link {{ request()->is('penyakit') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-home"></i>
+            <p>
+              Kondisi
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="nav-link">
             <i class="nav-icon fas fa-power-off"></i>
             <p>

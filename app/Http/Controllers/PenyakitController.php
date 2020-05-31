@@ -14,7 +14,7 @@ class PenyakitController extends Controller
      */
     public function index()
     {
-        //
+        return view('penyakit.index');
     }
 
     /**
