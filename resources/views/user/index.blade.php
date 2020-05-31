@@ -21,7 +21,7 @@
 
 @section('content')
   <div class="row">
-  <div class="col-md-12">
+    <div class="col-md-12">
       <div class="card card-primary">
         <div class="card-header">
           <h3 class="card-title">Daftar User</h3>
@@ -40,26 +40,26 @@
             </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>#</td>
-                <td>#</td>
-                <td>#</td>
-                <td>#</td>
-                <td>#</td>
-                <td>#</td>
-                <td>
+            <tr>
+              <td>#</td>
+              <td>#</td>
+              <td>#</td>
+              <td>#</td>
+              <td>#</td>
+              <td>#</td>
+              <td>
                 <div class="btn-group">
-                    <button type="button" class="btn btn-info">Action</button>
-                    <button type="button" class="btn btn-info dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
-                      <span class="sr-only">Toggle Dropdown</span>
-                      <div class="dropdown-menu" role="menu" style="">
-                        <a class="dropdown-item" href="#">Edit</a>
-                        <a class="dropdown-item" href="#">Delete</a>
-                      </div>
-                    </button>
-                  </div>
-                </td>
-              </tr>
+                  <button type="button" class="btn btn-info">Action</button>
+                  <button type="button" class="btn btn-info dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                    <div class="dropdown-menu" role="menu" style="">
+                      <a class="dropdown-item" href="#">Edit</a>
+                      <a class="dropdown-item" href="#">Delete</a>
+                    </div>
+                  </button>
+                </div>
+              </td>
+            </tr>
             </tbody>
           </table>
         </div>
@@ -112,14 +112,6 @@
 
       //Initialize Select2 Elements
       $('.select2').select2();
-
     });
   </script>
-  @admin
-  <script>
-    $(function () {
-
-    });
-  </script>
-  @endadmin
 @endsection

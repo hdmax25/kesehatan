@@ -90,6 +90,7 @@ class HomeController extends Controller
       'date' => 'required|string',
       'department' => 'required|numeric|exists:departements,id',
     ]);
+
     $date = explode(' - ', $request->date);
     $dateStart = $date[0];
     $dateEnd = $date[1];

@@ -26,43 +26,44 @@
         <div class="card-header">
           <h3 class="card-title">Tambah User</h3>
         </div>
-        <form role="form">
+        <form action="{{ route('user.store') }}" method="post">
+          @csrf
           <div class="card-body">
             <div class="form-group">
               <label for="role">Hak akses</label>
-              <select id="role" name="department" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" required>
-                <option value="1">Admin</option>
-                <option value="2">Kadiv</option>
-                <option value="3">User</option>
+              <select id="role" name="role" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" required>
+                <option value="1" {{ old('role') == 1 ? 'selected' : '' }}>Admin</option>
+                <option value="2" {{ old('role') == 2 ? 'selected' : '' }}>Kadiv</option>
+                <option value="3" {{ old('role') == 3 ? 'selected' : '' }}>User</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="nip">NIP</label>
-              <input type="text" class="form-control @error('nip') is-invalid @enderror" name="nip" id="nip" placeholder="">
+              <label for="username">NIP</label>
+              <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" id="username" placeholder="" value="{{ old('username') }}">
             </div>
             <div class="form-group">
               <label for="password">Password</label>
-              <input type="text" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="">
+              <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="" value="{{ old('password') }}">
             </div>
             <div class="form-group">
               <label for="name">Nama</label>
-              <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="">
+              <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="" value="{{ old('name') }}">
             </div>
             <div class="form-group">
-              <label for="work_unit">Unit Kerja</label>
-              <select id="work_unit" name="work_unit" class="form-control @error('phone') is-invalid @enderror select2 select2-primary" data-dropdown-css-class="select2-primary" required>
-                <option value="#">#</option>
-                <option value="#">#</option>
-                <option value="#">#</option>
+              <label for="department">Unit Kerja</label>
+              <select id="department" name="department" class="form-control @error('department') is-invalid @enderror select2 select2-danger" data-dropdown-css-class="select2-danger" required>
+                @foreach($department as $item)
+                  <option value="{{ $item->id }}" {{ old('role') == $item->id ? 'selected' : '' }}>{{ $item->department_name }}</option>
+                @endforeach
               </select>
             </div>
             <div class="form-group">
               <label for="phone">Phone</label>
-              <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" placeholder="">
+              <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" placeholder="" value="{{ old('phone') }}">
             </div>
             <div class="form-group">
               <label for="address">Alamat KTP</label>
-              <input type="text" class="form-control @error('address') is-invalid @enderror" placeholder="" name="address" id="address">
+              <input type="text" class="form-control @error('address') is-invalid @enderror" placeholder="" name="address" id="address" value="{{ old('address') }}">
             </div>
           </div>
 
@@ -86,6 +87,9 @@
 
   <!-- daterange picker -->
   <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
+
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
 @endsection
 
 @section('js')
@@ -101,6 +105,9 @@
   <!-- daterange picker -->
   <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
   <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+
+  <!-- Toastr -->
+  <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
 
   <script>
     $(function () {
@@ -120,8 +127,8 @@
       //Initialize Select2 Elements
       $('.select2').select2();
 
-      @error('nip')
-      toastr.warning('{{ $message }}')
+      @error('username')
+      toastr.warning('{{ str_replace('username', 'NIP', $message) }}')
       @enderror
 
       @error('password')
@@ -132,7 +139,7 @@
       toastr.warning('{{ $message }}')
       @enderror
 
-      @error('work_unit')
+      @error('department')
       toastr.warning('{{ $message }}')
       @enderror
 
@@ -144,9 +151,13 @@
       toastr.warning('{{ $message }}')
       @enderror
 
-      @error('nip')
+      @error('role')
       toastr.warning('{{ $message }}')
       @enderror
+
+      @if (\Session::has('message'))
+      toastr.success('{{ \Session::get('message') }}')
+      @endif
 
     });
   </script>
