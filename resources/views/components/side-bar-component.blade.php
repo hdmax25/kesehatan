@@ -24,15 +24,16 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-          <a href="{{ route('home') }}" class="nav-link {{ request()->is('home') ? 'active' : '' }}">
+          <a href="{{ route('home') }}" class="nav-link {{ request()->is(['home', 'home/*']) ? 'active' : '' }}">
             <i class="nav-icon fas fa-home"></i>
             <p>
               Home
             </p>
           </a>
         </li>
+        @admin
         <li class="nav-item">
-        <a href="{{ route('department.index') }}" class="nav-link {{ request()->is('department') ? 'active' : '' }}">
+          <a href="{{ route('department.index') }}" class="nav-link {{ request()->is('department') ? 'active' : '' }}">
             <i class="nav-icon fas fa-home"></i>
             <p>
               Department
@@ -40,13 +41,14 @@
           </a>
         </li>
         <li class="nav-item">
-        <a href="{{ route('penyakit.index') }}" class="nav-link {{ request()->is('penyakit') ? 'active' : '' }}">
+          <a href="{{ route('penyakit.index') }}" class="nav-link {{ request()->is('penyakit') ? 'active' : '' }}">
             <i class="nav-icon fas fa-home"></i>
             <p>
               Kondisi
             </p>
           </a>
         </li>
+        @endadmin
         <li class="nav-item">
           <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="nav-link">
             <i class="nav-icon fas fa-power-off"></i>
