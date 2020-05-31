@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\model\Departement;
+use App\model\Penyakit;
 use App\model\Report;
 use App\User;
 use Illuminate\Contracts\Foundation\Application;
@@ -10,6 +11,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -60,13 +62,27 @@ class HomeController extends Controller
       ];
       return view('home', $data);
     } else {
-      return view('home');
+      $disease = Penyakit::all();
+      $report = Report::orderBy('id', 'desc')->where('id_user', Auth::user()->id)->get();
+      $report->map(function ($item) {
+        $item->user = User::find($item->id_user);
+        $item->department = Departement::find($item->id_department);
+        $item->penyakit = Departement::find($item->id_penyakit);
+        return $item;
+      });
+
+      $data = [
+        'report' => $report,
+        'disease' => $disease
+      ];
+      return view('home', $data);
     }
   }
 
   /**
    * @param Request $request
    * @return Application|Factory|View
+   * @throws ValidationException
    */
   public function findSDM(Request $request)
   {
@@ -89,6 +105,36 @@ class HomeController extends Controller
     $data = [
       'report' => $report,
       'department' => Departement::all()
+    ];
+    return view('home', $data);
+  }
+
+
+
+  /**
+   * @param Request $request
+   * @return Application|Factory|View
+   * @throws ValidationException
+   */
+  public function findDevise(Request $request)
+  {
+    $this->validate($request, [
+      'date' => 'required|string',
+    ]);
+    $date = explode(' - ', $request->date);
+    $dateStart = $date[0];
+    $dateEnd = $date[1];
+    $report = Report::orderBy('id', 'desc')->whereBetween('created_at', [$dateStart, $dateEnd])->get();
+    $report->map(function ($item) {
+      $item->user = User::find($item->id_user);
+      $item->department = Departement::find($item->id_department);
+      $item->penyakit = Departement::find($item->id_penyakit);
+      return $item;
+    });
+
+
+    $data = [
+      'report' => $report,
     ];
     return view('home', $data);
   }

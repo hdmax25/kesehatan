@@ -46,7 +46,7 @@
                   <label for="department">Department</label>
                   <select id="department" name="department" class="form-control select2 select2-primary" data-dropdown-css-class="select2-primary" required>
                     @foreach($department as $item)
-                    <option value="{{ $item->id }}">{{ $item->department_name }}</option>
+                      <option value="{{ $item->id }}">{{ $item->department_name }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -63,111 +63,140 @@
     @kadiv
     <div class="col-md-12">
       <div class="card card-outline card-primary">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label for="x">#</label>
-                <select id="x" name="user" class="form-control select2 select2-primary" data-dropdown-css-class="select2-primary" required>
-                  <option value="#">#</option>
-                  <option value="#">#</option>
-                  <option value="#">#</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card-footer">
-          <button type="button" class="btn btn-block btn-info btn-xs">Info</button>
-        </div>
-      </div>
-    </div>
-    @endkadiv
-    @user
-    <div class="col-md-12">
-      <div class="card card-primary">
-        <div class="card-header">
-          <h3 class="card-title">Tanggal</h3>
-        </div>
-        <form role="form">
+        <form action="{{ route('findDevise') }}" method="post">
+          @csrf
           <div class="card-body">
             <div class="row">
-              <div class="col-md-3">
-                <div class="info-box">
-                  <span class="info-box-icon bg-info"><i class="far fa-user"></i></span>
-                  <div class="info-box-content">
-                    <span class="info-box-text">NIP</span>
-                    <span class="info-box-number">0</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="info-box">
-                  <span class="info-box-icon bg-info"><i class="far fa-user"></i></span>
-                  <div class="info-box-content">
-                    <span class="info-box-text">Nama</span>
-                    <span class="info-box-number">Name</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="info-box">
-                  <span class="info-box-icon bg-info"><i class="far fa-user"></i></span>
-                  <div class="info-box-content">
-                    <span class="info-box-text">Departement</span>
-                    <span class="info-box-number">Finishing</span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="info-box">
-                  <span class="info-box-icon bg-info"><i class="fa fa-phone"></i></span>
-                  <div class="info-box-content">
-                    <span class="info-box-text">Phone</span>
-                    <span class="info-box-number">0</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <div class="form-group">
-                  <label>Alamat Sesuai KTP</label>
-                  <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                  <label for="reservation">Tanggal</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="far fa-calendar-alt"></i>
+                      </span>
+                    </div>
+                    <input type="text" class="form-control float-right" name="date" id="reservation">
+                  </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label>Domisili</label>
-                  <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="x">Bagaimana Kondisi anda saat ini?</label>
-              <select id="x" name="user" class="form-control select2 select2-primary" data-dropdown-css-class="select2-primary" required>
-                <option value="#">#</option>
-                <option value="#">#</option>
-                <option value="#">#</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Jika terdapat keluhan, silahkan jelaskan gejala/keluhan yang anda alami saat ini </label>
-              <input type="email" class="form-control" placeholder="Tidak Ada">
-            </div>
-            <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Data ini saya buat dengan sebenar - benarnya dan dapat dipertanggungjawabkan</label>
             </div>
           </div>
-
           <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-block btn-info btn-xs">Find</button>
           </div>
         </form>
       </div>
     </div>
+    @endkadiv
+    @user
+    @if (!$report->where('created_at', \Carbon\Carbon::now())->count())
+      <div class="col-md-12">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">{{ \Carbon\Carbon::now()->format('d/m/Y') }}</h3>
+          </div>
+          <form role="form">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-info"><i class="far fa-user"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">NIP</span>
+                      <span class="info-box-number">{{ Auth::user()->username }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-info"><i class="far fa-user"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">Nama</span>
+                      <span class="info-box-number">{{ Auth::user()->name }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-info"><i class="far fa-user"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">Departement</span>
+                      <span class="info-box-number">{{ \App\model\Departement::find(Auth::user()->id_department)->department_name }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-info"><i class="fa fa-phone"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">Phone</span>
+                      <span class="info-box-number">{{ Auth::user()->phone }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Alamat Sesuai KTP</label>
+                    <textarea class="form-control" rows="3" placeholder="Enter ...">{{ Auth::user()->ktpaddress  }}</textarea>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Domisili</label>
+                    <textarea class="form-control" rows="3" placeholder="Enter ...">{{ $report->first() ? $report->first()->domicile : ''  }}</textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="custom-control custom-radio col-md-3">
+                  <input class="custom-control-input" type="radio" id="customRadio1" name="customRadio" checked>
+                  <label for="customRadio1" class="custom-control-label">Rumah</label>
+                </div>
+                <div class="custom-control custom-radio col-md-3">
+                  <input class="custom-control-input" type="radio" id="customRadio2" name="customRadio">
+                  <label for="customRadio2" class="custom-control-label">Kantor</label>
+                </div>
+                <div class="custom-control custom-radio col-md-3">
+                  <input class="custom-control-input" type="radio" id="customRadio3" name="customRadio">
+                  <label for="customRadio3" class="custom-control-label">Kost</label>
+                </div>
+                <div class="input-group col-md-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <input type="radio" id="customRadio4" name="customRadio">
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Lain-Lain...">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="x">Bagaimana Kondisi anda saat ini?</label>
+                <select id="x" name="user" class="form-control select2 select2-primary" data-dropdown-css-class="select2-primary" required>
+                  @foreach($disease as $item)
+                  <option value="{{ $item->id }}">{{ $item->penyakit_name }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Jika terdapat keluhan, silahkan jelaskan gejala/keluhan yang anda alami saat ini </label>
+                <input type="email" class="form-control" placeholder="Tidak Ada">
+              </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Data ini saya buat dengan sebenar - benarnya dan dapat dipertanggungjawabkan</label>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    @endif
     @enduser
     <div class="col-md-12">
       <div class="card card-primary">
@@ -178,30 +207,34 @@
           <table id="report" class="table table-bordered table-striped text-center">
             <thead>
             <tr>
-              <th style="width: 10px">No</th>
+              <th>Tanggal</th>
               <th>NIP</th>
               <th>Nama</th>
-              <th>Unit Kerja</th>
+              <th>Department</th>
+              <th>Phone</th>
               <th>Posisi</th>
               <th>Kondisi</th>
+              <th>Keluhan</th>
+              <th>Alamat</th>
+              <th>Domisili</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td>#</td>
-              <td>#</td>
-              <td>#</td>
-              <td>#</td>
-              <td>#</td>
-              <td>#</td>
-            </tr>
+            @foreach($report as $item)
+              <tr>
+                <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}</td>
+                <td>{{ $item->user->username }}</td>
+                <td>{{ $item->user->name }}</td>
+                <td>{{ $item->department->department_name }}</td>
+                <td>{{ $item->user->phone }}</td>
+                <td>{{ $item->position }}</td>
+                <td>{{ $item->user->name }}</td>
+                <td>{{ $item->penyakit->penyakit_name }}</td>
+                <td>{{ $item->detail }}</td>
+                <td>{{ $item->user->ktpaddress }}</td>
+              </tr>
+            @endforeach
             </tbody>
-            <tfoot>
-            <tr>
-              <th style="width: 10px">#</th>
-              <th>#</th>
-            </tr>
-            </tfoot>
           </table>
         </div>
       </div>
