@@ -33,6 +33,14 @@
         </li>
         <li class="nav-item">
         <a href="{{ route('department.index') }}" class="nav-link {{ request()->is('department') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-plus"></i>
+            <p>
+              Department
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+        <a href="{{ route('department.index') }}" class="nav-link {{ request()->is('department') ? 'active' : '' }}">
             <i class="nav-icon fas fa-home"></i>
             <p>
               Department
