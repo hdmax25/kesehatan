@@ -4,14 +4,14 @@
   <div class="row mb-2">
     <div class="col-sm-6">
       <h1>
-        Home
+        Data Kesehatan
       </h1>
     </div>
     <div class="col-sm-6">
       <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item">
           <a href="#">
-            Home
+            Data Kesehatan
           </a>
         </li>
       </ol>
@@ -28,7 +28,7 @@
           @csrf
           <div class="card-body">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-5">
                 <div class="form-group">
                   <label for="reservation">Tanggal</label>
                   <div class="input-group">
@@ -41,7 +41,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-5">
                 <div class="form-group">
                   <label for="department">Department</label>
                   <select id="department" name="department" class="form-control select2 select2-primary" data-dropdown-css-class="select2-primary" required>
@@ -52,9 +52,11 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="card-footer">
-            <button type="submit" class="btn btn-block btn-info btn-xs">Find</button>
+            <div class="col-md-2">
+              <div class="card-footer">
+                <button type="submit" class="btn btn-block btn-info btn-xs">Find</button>
+              </div>
+            </div>
           </div>
         </form>
       </div>
@@ -94,14 +96,14 @@
       <div class="col-md-12">
         <div class="card card-danger">
           <div class="card-header">
-            <h3 class="card-title">{{ \Carbon\Carbon::now()->format('d/m/Y') }}</h3>
+            <h3 class="card-title">Data Kesehatan Tanggal {{ \Carbon\Carbon::now()->format('d/m/Y') }}</h3>
           </div>
           <form role="form">
             <div class="card-body">
               <div class="row">
                 <div class="col-md-3">
                   <div class="info-box">
-                    <span class="info-box-icon bg-info"><i class="far fa-user"></i></span>
+                    <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
                     <div class="info-box-content">
                       <span class="info-box-text">NIP</span>
                       <span class="info-box-number">{{ Auth::user()->username }}</span>
@@ -110,7 +112,7 @@
                 </div>
                 <div class="col-md-3">
                   <div class="info-box">
-                    <span class="info-box-icon bg-info"><i class="far fa-user"></i></span>
+                    <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
                     <div class="info-box-content">
                       <span class="info-box-text">Nama</span>
                       <span class="info-box-number">{{ Auth::user()->name }}</span>
@@ -119,7 +121,7 @@
                 </div>
                 <div class="col-md-3">
                   <div class="info-box">
-                    <span class="info-box-icon bg-info"><i class="far fa-user"></i></span>
+                    <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
                     <div class="info-box-content">
                       <span class="info-box-text">Departement</span>
                       <span class="info-box-number">{{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}</span>
@@ -128,7 +130,7 @@
                 </div>
                 <div class="col-md-3">
                   <div class="info-box">
-                    <span class="info-box-icon bg-info"><i class="fa fa-phone"></i></span>
+                    <span class="info-box-icon bg-danger"><i class="fa fa-phone"></i></span>
                     <div class="info-box-content">
                       <span class="info-box-text">Phone</span>
                       <span class="info-box-number">{{ Auth::user()->phone }}</span>
@@ -150,27 +152,36 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group row">
-                <div class="custom-control custom-radio col-md-3">
-                  <input class="custom-control-input" type="radio" id="customRadio1" name="customRadio" checked>
-                  <label for="customRadio1" class="custom-control-label">Rumah</label>
-                </div>
-                <div class="custom-control custom-radio col-md-3">
-                  <input class="custom-control-input" type="radio" id="customRadio2" name="customRadio">
-                  <label for="customRadio2" class="custom-control-label">Kantor</label>
-                </div>
-                <div class="custom-control custom-radio col-md-3">
-                  <input class="custom-control-input" type="radio" id="customRadio3" name="customRadio">
-                  <label for="customRadio3" class="custom-control-label">Kost</label>
-                </div>
-                <div class="input-group col-md-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <input type="radio" id="customRadio4" name="customRadio">
-                    </span>
+              <div class="col-md-12">
+                <div class="card card-outline card-danger">
+                  <div class="card-header">
+                    <h3 class="card-title">Posisi anda saat ini</h3>
                   </div>
-                  <input type="text" class="form-control" placeholder="Lain-Lain...">
+                  <div class="card-body">
+                    <div class="form-group row">
+                      <div class="custom-control custom-radio col-md-3">
+                        <input class="custom-control-input" type="radio" id="customRadio1" name="customRadio" checked>
+                        <label for="customRadio1" class="custom-control-label">Rumah</label>
+                      </div>
+                      <div class="custom-control custom-radio col-md-3">
+                        <input class="custom-control-input" type="radio" id="customRadio2" name="customRadio">
+                        <label for="customRadio2" class="custom-control-label">Kantor</label>
+                      </div>
+                      <div class="custom-control custom-radio col-md-3">
+                        <input class="custom-control-input" type="radio" id="customRadio3" name="customRadio">
+                        <label for="customRadio3" class="custom-control-label">Kost</label>
+                      </div>
+                      <div class="input-group col-md-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <input type="radio" id="customRadio4" name="customRadio">
+                          </span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Lain-Lain...">
+                      </div>
+                    </div>
                 </div>
+              </div>
               </div>
               <div class="form-group">
                 <label for="x">Bagaimana Kondisi anda saat ini?</label>

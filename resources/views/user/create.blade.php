@@ -39,7 +39,7 @@
             </div>
             <div class="form-group">
               <label for="username">NIP</label>
-              <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" id="username" placeholder="" value="{{ old('username') }}">
+              <input type="number" class="form-control @error('username') is-invalid @enderror" name="username" id="username" placeholder="" value="{{ old('username') }}">
             </div>
             <div class="form-group">
               <label for="password">Password</label>
