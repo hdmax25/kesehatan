@@ -49,8 +49,8 @@
         <table id="report" class="table table-bordered table-striped text-center">
           <thead>
           <tr>
-            <th style="width: 10px">#</th>
-            <th>#</th>
+            <th style="width: 10px">id</th>
+            <th>Kondisi</th>
           </tr>
           </thead>
           <tbody>
