@@ -39,7 +39,7 @@
     margin: 10px;
   }
 </style>
-<body class="sidebar-mini layout-fixed">
+<body class="sidebar-mini layout-fixed layout-navbar-fixed">
 <div id="app" class="wrapper">
   <!-- header -->
   <x-HeaderBarComponent/>
@@ -78,12 +78,6 @@
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{ asset('dist/js/demo.js') }}"></script>
-<!-- ChartJS -->
-<script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
-<!-- SweetAlert2 -->
-<script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 @yield('js')
 </body>
 </html>
