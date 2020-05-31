@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-light-danger elevation-4">
+<aside class="main-sidebar sidebar-dark-danger elevation-4">
   <!-- Brand Logo -->
   <a href="#" class="brand-link navbar-danger">
     <img src="{{ asset('dist/img/logo.jpg') }}"
@@ -8,9 +8,7 @@
     <span class="brand-text font-weight-light">IMS</span>
   </a>
 
-  <!-- Sidebar -->
   <div class="sidebar">
-    <!-- Sidebar user (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
         <img src="{{ asset('dist/img/avatar5.png') }}" class="img-circle elevation-2" alt="User Image">
@@ -20,7 +18,6 @@
       </div>
     </div>
 
-    <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
@@ -33,7 +30,7 @@
         </li>
         @admin
         <li class="nav-item">
-          <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('user/*') ? 'active' : '' }}">
+          <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('user') ? 'active' : '' }}">
             <i class="nav-icon fas fa-user"></i>
             <p>
               User
@@ -41,7 +38,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('user.create') }}" class="nav-link {{ request()->is('user/*') ? 'active' : '' }}">
+          <a href="{{ route('user.create') }}" class="nav-link {{ request()->is('user/create') ? 'active' : '' }}">
             <i class="nav-icon fas fa-user-plus"></i>
             <p>
               Create

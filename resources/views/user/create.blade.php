@@ -22,47 +22,47 @@
 @section('content')
   <div class="row">
     <div class="col-md-12">
-      <div class="card card-primary">
+      <div class="card card-outline card-danger">
         <div class="card-header">
           <h3 class="card-title">Tambah User</h3>
         </div>
         <form role="form">
           <div class="card-body">
             <div class="form-group">
-                <label for="x">Hak akses</label>
-                <select id="x" name="user" class="form-control select2 select2-primary" data-dropdown-css-class="select2-primary" required>
-                  <option value="1">Admin</option>
-                  <option value="2">Kadiv</option>
-                  <option value="3">User</option>
-                </select>
-              </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">NIP</label>
-              <input type="text" class="form-control" placeholder="">
+              <label for="role">Hak akses</label>
+              <select id="role" name="department" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" required>
+                <option value="1">Admin</option>
+                <option value="2">Kadiv</option>
+                <option value="3">User</option>
+              </select>
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Password</label>
-              <input type="text" class="form-control" placeholder="">
+              <label for="nip">NIP</label>
+              <input type="text" class="form-control @error('nip') is-invalid @enderror" name="nip" id="nip" placeholder="">
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Nama</label>
-              <input type="text" class="form-control" placeholder="">
+              <label for="password">Password</label>
+              <input type="text" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="">
             </div>
             <div class="form-group">
-                <label for="x">Unit Kerja</label>
-                <select id="x" name="user" class="form-control select2 select2-primary" data-dropdown-css-class="select2-primary" required>
-                  <option value="#">#</option>
-                  <option value="#">#</option>
-                  <option value="#">#</option>
-                </select>
-              </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Phone</label>
-              <input type="text" class="form-control" placeholder="">
+              <label for="name">Nama</label>
+              <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="">
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Alamat KTP</label>
-              <input type="text" class="form-control" placeholder="">
+              <label for="x">Unit Kerja</label>
+              <select id="x" name="work_unit" class="form-control select2 select2-primary" data-dropdown-css-class="select2-primary" required>
+                <option value="#">#</option>
+                <option value="#">#</option>
+                <option value="#">#</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="address">Alamat KTP</label>
+              <input type="text" class="form-control @error('address') is-invalid @enderror" placeholder="" name="address" id="address">
             </div>
           </div>
 
@@ -120,13 +120,27 @@
       //Initialize Select2 Elements
       $('.select2').select2();
 
-    });
-  </script>
-  @admin
-  <script>
-    $(function () {
+      @error('nip')
+      toastr.warning('{{ $message }}')
+      @enderror
+      @error('password')
+      toastr.warning('{{ $message }}')
+      @enderror
+      @error('name')
+      toastr.warning('{{ $message }}')
+      @enderror
+      @error('work_unit')
+      toastr.warning('{{ $message }}')
+      @enderror
+      @error('phone')
+      toastr.warning('{{ $message }}')
+      @enderror
+      @error('address')
+      toastr.warning('{{ $message }}')
+      @enderror@error('nip')
+      toastr.warning('{{ $message }}')
+      @enderror
 
     });
   </script>
-  @endadmin
 @endsection

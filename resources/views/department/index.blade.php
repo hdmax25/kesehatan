@@ -32,7 +32,7 @@
           <div class="card-body">
             <div class="form-group">
               <label for="exampleInputEmail1">Unit Kerja Divisi/Department</label>
-              <input type="text" class="form-control" placeholder="Department" name="department_name">
+              <input type="text" class="form-control @error('department_name') is-invalid @enderror" placeholder="Department" name="department_name" value="{{ old('department_name') }}">
             </div>
           </div>
           <div class="card-footer">
