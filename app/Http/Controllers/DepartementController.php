@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\model\Departement;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class DepartementController extends Controller
@@ -18,18 +20,32 @@ class DepartementController extends Controller
    */
   public function index()
   {
-    return view('department.index');
+    $department = Departement::all();
+
+    $data = [
+      'department' => $department
+    ];
+
+    return view('department.index', $data);
   }
 
   /**
    * Store a newly created resource in storage.
    *
    * @param Request $request
-   * @return Response
+   * @return RedirectResponse|Response
+   * @throws ValidationException
    */
   public function store(Request $request)
   {
-    //
+    $this->validate($request, [
+      'department_name' => 'required|string|unique:departements',
+    ]);
+    $department = new Departement();
+    $department->department_name = $request->department_name;
+    $department->save();
+
+    return redirect()->back();
   }
 
   /**
@@ -58,12 +74,20 @@ class DepartementController extends Controller
    * Update the specified resource in storage.
    *
    * @param Request $request
-   * @param Departement $departement
-   * @return Response
+   * @param $id
+   * @return RedirectResponse|Response
+   * @throws ValidationException
    */
-  public function update(Request $request, Departement $departement)
+  public function update(Request $request, $id)
   {
-    //
+    $this->validate($request, [
+      'department_name' => 'required|string|unique:departements',
+    ]);
+    $department = Departement::find($id);
+    $department->department_name = $request->department_name;
+    $department->save();
+
+    return redirect()->back();
   }
 
   /**

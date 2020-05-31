@@ -27,12 +27,12 @@
         <div class="card-header">
           <h3 class="card-title">Masukan Unit Kerja</h3>
         </div>
-        <form action="{{ route('findSDM') }}" method="post">
+        <form action="{{ route('department.store') }}" method="post">
           @csrf
           <div class="card-body">
             <div class="form-group">
               <label for="exampleInputEmail1">Unit Kerja Divisi/Department</label>
-              <input type="text" class="form-control" placeholder="Kondisi">
+              <input type="text" class="form-control" placeholder="Department" name="department_name">
             </div>
           </div>
           <div class="card-footer">
@@ -40,17 +40,6 @@
           </div>
         </form>
       </div>
-<<<<<<< HEAD
-      <div class="card-body table-responsive">
-        <table id="report" class="table table-bordered table-striped text-center">
-          <thead>
-          <tr>
-            <th style="width: 10px">No</th>
-            <th>Department</th>
-          </tr>
-          </thead>
-          <tbody>
-=======
     </div>
     <div class="col-md-12">
       <div class="card card-primary">
@@ -62,22 +51,48 @@
             <thead>
             <tr>
               <th style="width: 10px">#</th>
-              <th>#</th>
+              <th>Department</th>
+              <th>Edit</th>
             </tr>
             </thead>
             <tbody>
->>>>>>> 41950a9dc8ffa0f0e10270da22d91a7984378e2b
-            <tr>
-              <td>#</td>
-              <td>#</td>
-            </tr>
+            @foreach($department as $item)
+              <tr>
+                <td>{{ $loop->index + 1 }}</td>
+                <td>{{ $item->department_name }}</td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-sm{{ $item->department_name }}">
+                    Launch Small Modal
+                  </button>
+                </td>
+              </tr>
+              <div class="modal fade" id="modal-sm{{ $item->department_name }}">
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Edit Department</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <form action="{{ route('department.update', $item->id) }}" method="post">
+                      @csrf
+                      <div class="modal-body">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Unit Kerja Divisi/Department</label>
+                          <input type="text" class="form-control" placeholder="Department" name="department_name" value="{{ $item->department_name }}">
+                        </div>
+                      </div>
+                      <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            @endforeach
             </tbody>
-            <tfoot>
-            <tr>
-              <th style="width: 10px">#</th>
-              <th>#</th>
-            </tr>
-            </tfoot>
           </table>
         </div>
       </div>
@@ -93,6 +108,9 @@
   <!-- Select2 -->
   <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
 @endsection
 
 @section('js')
@@ -101,10 +119,12 @@
   <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
   <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
   <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-  <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
 
   <!-- Select2 -->
   <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+
+  <!-- Toastr -->
+  <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
 
   <script>
     $(function () {
@@ -120,6 +140,10 @@
 
       //Initialize Select2 Elements
       $('.select2').select2()
+
+      @error('department_name')
+      toastr.warning('{{ $message }}')
+      @enderror
     });
   </script>
 @endsection
