@@ -40,17 +40,6 @@
           </div>
         </form>
       </div>
-<<<<<<< HEAD
-      <div class="card-body table-responsive">
-        <table id="report" class="table table-bordered table-striped text-center">
-          <thead>
-          <tr>
-            <th style="width: 10px">No</th>
-            <th>Department</th>
-          </tr>
-          </thead>
-          <tbody>
-=======
     </div>
     <div class="col-md-12">
       <div class="card card-primary">
@@ -66,7 +55,6 @@
             </tr>
             </thead>
             <tbody>
->>>>>>> 41950a9dc8ffa0f0e10270da22d91a7984378e2b
             <tr>
               <td>#</td>
               <td>#</td>
