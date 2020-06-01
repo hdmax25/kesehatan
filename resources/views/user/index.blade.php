@@ -55,16 +55,9 @@
               <td>{{ $item->phone }}</td>
               <td>{{ $item->ktpaddress }}</td>
               <td>
-                <div class="btn-group">
-                  <button type="button" class="btn btn-info">Action</button>
-                  <button type="button" class="btn btn-info dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
-                    <div class="dropdown-menu" role="menu" style="">
-                      <a class="dropdown-item" href="#">Edit</a>
-                      <a class="dropdown-item" href="#">Delete</a>
-                    </div>
-                  </button>
-                </div>
+                <a href="{{ route('user.edit', $item->id) }}" type="button" class="btn btn-primary btn-sm">
+                  Edit
+                </button>
               </td>
             </tr>
             @endforeach
