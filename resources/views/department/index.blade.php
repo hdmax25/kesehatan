@@ -61,12 +61,12 @@
                 <td>{{ $loop->index + 1 }}</td>
                 <td>{{ $item->department_name }}</td>
                 <td>
-                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-sm{{ $item->department_name }}">
+                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-sm{{ $item->id }}">
                     Launch Small Modal
                   </button>
                 </td>
               </tr>
-              <div class="modal fade" id="modal-sm{{ $item->department_name }}">
+              <div class="modal fade" id="modal-sm{{ $item->id }}">
                 <div class="modal-dialog modal-sm">
                   <div class="modal-content">
                     <div class="modal-header">
