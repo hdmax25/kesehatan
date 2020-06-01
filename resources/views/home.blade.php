@@ -52,9 +52,6 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-block btn-danger">Find</button>
-            </div>
           </div>
         </form>
       </div>
