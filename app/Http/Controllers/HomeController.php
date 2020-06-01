@@ -99,8 +99,8 @@ class HomeController extends Controller
     ]);
 
     $date = explode(' - ', $request->date);
-    $dateStart = $date[0];
-    $dateEnd = $date[1];
+    $dateStart = Carbon::parse($date[0].' 00:00:00')->format('Y-m-d H:i:s');
+    $dateEnd = Carbon::parse($date[1]. '23:59:59')->format('Y-m-d H:i:s');
     $report = Report::orderBy('id', 'desc')->where('id_department', $request->department)->whereBetween('created_at', [$dateStart, $dateEnd])->get();
     $report->map(function ($item) {
       $item->user = User::find($item->id_user);
@@ -129,8 +129,8 @@ class HomeController extends Controller
     $validateToday = Report::where('id_user', Auth::user()->id)->whereDate('created_at', Carbon::now())->count();
     $disease = Penyakit::where('delete', 0)->get();
     $date = explode(' - ', $request->date);
-    $dateStart = $date[0];
-    $dateEnd = $date[1];
+    $dateStart = Carbon::parse($date[0].' 00:00:00')->format('Y-m-d H:i:s');
+    $dateEnd = Carbon::parse($date[1]. '23:59:59')->format('Y-m-d H:i:s');
     $report = Report::orderBy('id', 'desc')->whereBetween('created_at', [$dateStart, $dateEnd])->get();
     $report->map(function ($item) {
       $item->user = User::find($item->id_user);
