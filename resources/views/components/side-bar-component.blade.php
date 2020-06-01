@@ -19,7 +19,7 @@
     </div>
 
     <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+      <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
           <a href="{{ route('home') }}" class="nav-link {{ request()->is(['home', 'home/*']) ? 'active' : '' }}">
             @if (Auth::user()->role == 3)
@@ -36,41 +36,41 @@
           </a>
         </li>
         @admin
-        <li class="nav-item has-treeview nav-link {{ request()->is('user/*') ? 'active' : '">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                User
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview" style="display: none;">
-              <li class="nav-item">
-                <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('user') ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-user"></i>
-                  <p>
-                    User
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('user.create') }}" class="nav-link {{ request()->is('user/create') ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-user-plus"></i>
-                  <p>
-                    Tambah User
-                  </p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-                <a href="{{ route('department.index') }}" class="nav-link {{ request()->is('department') ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-home"></i>
-                      <p>
-                   Department
-                  </p>
-                </a>
-              </li>
+        <li class="nav-item has-treeview {{ request()->is(['user', 'user/create']) ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ request()->is(['user', 'user/create']) ? 'active' : '' }}">
+            <i class="nav-icon fas fa-user"></i>
+            <p>
+              User
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('user') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                  User
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('user.create') }}" class="nav-link {{ request()->is('user/create') ? 'active' : '' }}">
+                <i class="nav-icon fas fa-user-plus"></i>
+                <p>
+                  Tambah User
+                </p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('department.index') }}" class="nav-link {{ request()->is('department') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-home"></i>
+            <p>
+              Department
+            </p>
+          </a>
+        </li>
         <li class="nav-item">
           <a href="{{ route('penyakit.index') }}" class="nav-link {{ request()->is('penyakit') ? 'active' : '' }}">
             <i class="nav-icon fas fa-home"></i>

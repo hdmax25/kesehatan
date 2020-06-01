@@ -35,7 +35,7 @@ class HomeController extends Controller
   public function index(): Renderable
   {
     if (Auth::user()->role == 1) {
-      $department = Departement::all();
+      $department = Departement::where('delete', 0)->get();
       $report = Report::orderBy('id', 'desc')->get();
       $report->map(function ($item) {
         $item->user = User::find($item->id_user);
@@ -111,7 +111,7 @@ class HomeController extends Controller
 
     $data = [
       'report' => $report,
-      'department' => Departement::all()
+      'department' => Departement::where('delete', 0)->get()
     ];
     return view('home', $data);
   }
