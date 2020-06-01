@@ -14,13 +14,23 @@ use Illuminate\View\View;
 class PenyakitController extends Controller
 {
   /**
+   * Create a new controller instance.
+   *
+   * @return void
+   */
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
+
+  /**
    * Display a listing of the resource.
    *
    * @return Application|Factory|Response|View
    */
   public function index()
   {
-    $disease = Penyakit::all();
+    $disease = Penyakit::where('delete', 0)->get();
 
     $data = [
       'disease' => $disease
@@ -67,5 +77,21 @@ class PenyakitController extends Controller
     $disease->save();
 
     return redirect()->back();
+  }
+
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param $id
+   * @return RedirectResponse|Response
+   */
+  public function destroy($id)
+  {
+    $disease = Penyakit::find($id);
+    $disease->delete = 1;
+    $disease->save();
+
+    return redirect()->back();
+
   }
 }

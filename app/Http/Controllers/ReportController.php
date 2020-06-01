@@ -105,7 +105,7 @@ class ReportController extends Controller
    * @param Report $report
    * @return Response
    */
-  public function destroy(Report $report)
+  public function destroy($id)
   {
     //
   }

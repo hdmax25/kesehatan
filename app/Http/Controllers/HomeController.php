@@ -51,7 +51,7 @@ class HomeController extends Controller
       return view('home', $data);
     } else if (Auth::user()->role == 2) {
       $validateToday = Report::where('id_user', Auth::user()->id)->whereDate('created_at', Carbon::now())->count();
-      $disease = Penyakit::all();
+      $disease = Penyakit::where('delete', 0)->get();
       $report = Report::orderBy('id', 'desc')->where('id_department', Auth::user()->id_department)->get();
       $report->map(function ($item) {
         $item->user = User::find($item->id_user);
@@ -68,7 +68,7 @@ class HomeController extends Controller
       return view('home', $data);
     } else {
       $validateToday = Report::where('id_user', Auth::user()->id)->whereDate('created_at', Carbon::now())->count();
-      $disease = Penyakit::all();
+      $disease = Penyakit::where('delete', 0)->get();
       $report = Report::orderBy('id', 'desc')->where('id_user', Auth::user()->id)->get();
       $report->map(function ($item) {
         $item->user = User::find($item->id_user);
@@ -109,15 +109,12 @@ class HomeController extends Controller
       return $item;
     });
 
-
     $data = [
       'report' => $report,
       'department' => Departement::all()
     ];
     return view('home', $data);
   }
-
-
 
   /**
    * @param Request $request
@@ -129,6 +126,8 @@ class HomeController extends Controller
     $this->validate($request, [
       'date' => 'required|string',
     ]);
+    $validateToday = Report::where('id_user', Auth::user()->id)->whereDate('created_at', Carbon::now())->count();
+    $disease = Penyakit::where('delete', 0)->get();
     $date = explode(' - ', $request->date);
     $dateStart = $date[0];
     $dateEnd = $date[1];
@@ -140,9 +139,10 @@ class HomeController extends Controller
       return $item;
     });
 
-
     $data = [
       'report' => $report,
+      'disease' => $disease,
+      'todayCheck' => $validateToday
     ];
     return view('home', $data);
   }

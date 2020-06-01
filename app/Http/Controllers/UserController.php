@@ -17,6 +17,16 @@ use Illuminate\View\View;
 class UserController extends Controller
 {
   /**
+   * Create a new controller instance.
+   *
+   * @return void
+   */
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
+
+  /**
    * Display a listing of the resource.
    *
    * @return Application|Factory|Response|View
@@ -42,7 +52,7 @@ class UserController extends Controller
    */
   public function create()
   {
-    $department = Departement::all();
+    $department = Departement::where('delete', 0)->get();
 
     $data = [
       'department' => $department

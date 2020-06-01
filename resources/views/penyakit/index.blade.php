@@ -51,7 +51,8 @@
             <tr>
               <th style="width: 10px">id</th>
               <th>Kondisi</th>
-              <th>Edit</th>
+              <th style="width: 10px">Edit</th>
+              <th style="width: 10px">Delete</th>
             </tr>
             </thead>
             <tbody>
@@ -63,6 +64,13 @@
                   <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-sm{{ $item->id }}">
                     Edit
                   </button>
+                </td>
+                <td>
+                  <a href="{{ route('penyakit.destroy', $item->id) }}">
+                    <button type="button" class="btn btn-danger btn-sm">
+                      Delete
+                    </button>
+                  </a>
                 </td>
               </tr>
               <div class="modal fade" id="modal-sm{{ $item->id }}">
