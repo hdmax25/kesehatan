@@ -50,6 +50,8 @@ class HomeController extends Controller
       ];
       return view('home', $data);
     } else if (Auth::user()->role == 2) {
+      $validateToday = Report::where('id_user', Auth::user()->id)->whereDate('created_at', Carbon::now())->count();
+      $disease = Penyakit::all();
       $report = Report::orderBy('id', 'desc')->where('id_department', Auth::user()->id_department)->get();
       $report->map(function ($item) {
         $item->user = User::find($item->id_user);
@@ -60,6 +62,8 @@ class HomeController extends Controller
 
       $data = [
         'report' => $report,
+        'disease' => $disease,
+        'todayCheck' => $validateToday
       ];
       return view('home', $data);
     } else {

@@ -80,6 +80,124 @@
     </div>
     @endadmin
     @kadiv
+    @if (!$todayCheck)
+      <div class="col-md-12">
+        <div class="card card-danger">
+          <div class="card-header">
+            <h3 class="card-title">Data Kesehatan Tanggal {{ \Carbon\Carbon::now()->format('d/m/Y') }}</h3>
+          </div>
+          <form action="{{ route('report.store') }}" method="post">
+            @csrf
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">NIP</span>
+                      <span class="info-box-number">{{ Auth::user()->username }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">Nama</span>
+                      <span class="info-box-number">{{ Auth::user()->name }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">Departement</span>
+                      <span class="info-box-number">{{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-danger"><i class="fa fa-phone"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">Phone</span>
+                      <span class="info-box-number">{{ Auth::user()->phone }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Alamat Sesuai KTP</label>
+                    <textarea class="form-control" name="address" rows="3" placeholder="Enter ..." readonly>{{ Auth::user()->ktpaddress  }}</textarea>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Domisili</label>
+                    <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
+                              placeholder="Enter ...">{{ old('domicile') ? ($report->first() ? $report->first()->domicile : old('domicile')) : ''  }}</textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="card card-outline card-danger">
+                  <div class="card-header">
+                    <h3 class="card-title">Posisi anda saat ini</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="form-group row">
+                      <div class="custom-control custom-radio col-md-3">
+                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio1" name="position" value="Rumah" {{ old('position') == 'Rumah' ? 'checked' : '' }}>
+                        <label for="customRadio1" class="custom-control-label">Rumah</label>
+                      </div>
+                      <div class="custom-control custom-radio col-md-3">
+                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio2" name="position" value="Kantor" {{ old('position') == 'Kantor' ? 'checked' : '' }}>
+                        <label for="customRadio2" class="custom-control-label">Kantor</label>
+                      </div>
+                      <div class="custom-control custom-radio col-md-3">
+                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio"  id="customRadio3"  name="position" value="Kost" {{ old('position') == 'Kost' ? 'checked' : '' }}>
+                        <label for="customRadio3" class="custom-control-label">Kost</label>
+                      </div>
+                      <div class="input-group col-md-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <input type="radio" name="position" value="0" {{ old('position') != 'Rumah' && old('position') != 'Kantor' && old('position') != 'Kost' ? 'checked' : '' }}>
+                          </span>
+                        </div>
+                        <input type="text" class="form-control @error('positionDescription') is-invalid @enderror" name="positionDescription" placeholder="Lain-Lain..." value="{{ old('positionDescription') }}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="disease">Bagaimana Kondisi anda saat ini?</label>
+                <select id="disease" name="disease" class="form-control @error('disease') is-invalid @enderror select2 select2-danger" data-dropdown-css-class="select2-danger" required>
+                  @foreach($disease as $item)
+                    <option value="{{ $item->id }}" {{ old('disease') == $item->id ? 'selected' : '' }}>{{ $item->penyakit_name }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="description">Jika terdapat keluhan, silahkan jelaskan gejala/keluhan yang anda alami saat ini </label>
+                <input type="text" class="form-control @error('description') is-invalid @enderror" id="description" name="description" placeholder="Tidak Ada" value="{{ old('description') }}">
+              </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="check" name="check">
+                <label class="form-check-label @error('description') text-danger @enderror" for="check">Data ini saya buat dengan sebenar - benarnya dan dapat dipertanggungjawabkan</label>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    @endif
     <div class="col-md-12">
       <div class="card card-outline card-danger">
         <form action="{{ route('findDevise') }}" method="post">
@@ -325,6 +443,35 @@
 
     });
   </script>
+  @kadiv
+  <script>
+    $(function () {
+      @error('domicile')
+      toastr.warning('{{ $message }}')
+      @enderror
+
+      @error('position')
+      toastr.warning('{{ $message }}')
+      @enderror
+
+      @error('positionDescription')
+      toastr.warning('{{ $message }}')
+      @enderror
+
+      @error('disease')
+      toastr.warning('{{ $message }}')
+      @enderror
+
+      @error('description')
+      toastr.warning('{{ $message }}')
+      @enderror
+
+      @error('check')
+      toastr.warning('{{ $message }}')
+      @enderror
+    });
+  </script>
+  @endkadiv
   @user
   <script>
     $(function () {
