@@ -98,7 +98,8 @@
           <div class="card-header">
             <h3 class="card-title">Data Kesehatan Tanggal {{ \Carbon\Carbon::now()->format('d/m/Y') }}</h3>
           </div>
-          <form role="form">
+          <form action="{{ route('findDevise') }}" method="post">
+            @csrf
             <div class="card-body">
               <div class="row">
                 <div class="col-md-3">
@@ -141,14 +142,15 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Alamat Sesuai KTP</label>
-                    <textarea class="form-control" rows="3" placeholder="Enter ...">{{ Auth::user()->ktpaddress  }}</textarea>
+                    <label for="address">Alamat Sesuai KTP</label>
+                    <textarea class="form-control @error('address') is-invalid @enderror" rows="3" name="address" id="address" placeholder="Enter ...">{{ Auth::user()->ktpaddress  }}</textarea>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Domisili</label>
-                    <textarea class="form-control" rows="3" placeholder="Enter ...">{{ $report->first() ? $report->first()->domicile : ''  }}</textarea>
+                    <label for="domicile">Domisili</label>
+                    <textarea class="form-control @error('domicile') is-invalid @enderror" rows="3" name="domicile" id="domicile"
+                              placeholder="Enter ...">{{ $report->first() ? $report->first()->domicile : ''  }}</textarea>
                   </div>
                 </div>
               </div>
@@ -160,43 +162,43 @@
                   <div class="card-body">
                     <div class="form-group row">
                       <div class="custom-control custom-radio col-md-3">
-                        <input class="custom-control-input" type="radio" id="customRadio1" name="customRadio" checked>
-                        <label for="customRadio1" class="custom-control-label">Rumah</label>
+                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" name="position" value="Rumah" checked>
+                        <label class="custom-control-label">Rumah</label>
                       </div>
                       <div class="custom-control custom-radio col-md-3">
-                        <input class="custom-control-input" type="radio" id="customRadio2" name="customRadio">
-                        <label for="customRadio2" class="custom-control-label">Kantor</label>
+                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" name="position" value="Kantor">
+                        <label class="custom-control-label">Kantor</label>
                       </div>
                       <div class="custom-control custom-radio col-md-3">
-                        <input class="custom-control-input" type="radio" id="customRadio3" name="customRadio">
-                        <label for="customRadio3" class="custom-control-label">Kost</label>
+                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" name="position" value="Kost">
+                        <label class="custom-control-label">Kost</label>
                       </div>
                       <div class="input-group col-md-3">
                         <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <input type="radio" id="customRadio4" name="customRadio">
+                          <span class="input-group-text @error('position') is-invalid @enderror">
+                            <input type="radio" id="position" name="position" value="0">
                           </span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Lain-Lain...">
+                        <input type="text" class="form-control @error('positionDescription') is-invalid @enderror" name="positionDescription" placeholder="Lain-Lain...">
                       </div>
                     </div>
+                  </div>
                 </div>
               </div>
-              </div>
               <div class="form-group">
-                <label for="x">Bagaimana Kondisi anda saat ini?</label>
-                <select id="x" name="user" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" required>
+                <label for="disease">Bagaimana Kondisi anda saat ini?</label>
+                <select id="disease" name="disease" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" required>
                   @foreach($disease as $item)
-                  <option value="{{ $item->id }}">{{ $item->penyakit_name }}</option>
+                    <option value="{{ $item->id }}">{{ $item->penyakit_name }}</option>
                   @endforeach
                 </select>
               </div>
               <div class="form-group">
-                <label for="exampleInputEmail1">Jika terdapat keluhan, silahkan jelaskan gejala/keluhan yang anda alami saat ini </label>
-                <input type="text" class="form-control" placeholder="Tidak Ada">
+                <label for="description">Jika terdapat keluhan, silahkan jelaskan gejala/keluhan yang anda alami saat ini </label>
+                <input type="text" class="form-control @error('description') is-invalid @enderror" name="description" id="description" placeholder="Tidak Ada">
               </div>
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <input type="checkbox" class="form-check-input">
                 <label class="form-check-label" for="exampleCheck1">Data ini saya buat dengan sebenar - benarnya dan dapat dipertanggungjawabkan</label>
               </div>
             </div>
@@ -264,6 +266,9 @@
 
   <!-- daterange picker -->
   <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
+
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
 @endsection
 
 @section('js')
@@ -279,6 +284,9 @@
   <!-- daterange picker -->
   <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
   <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+
+  <!-- Toastr -->
+  <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
 
   <script>
     $(function () {
@@ -300,11 +308,25 @@
 
     });
   </script>
-  @admin
+  @user
   <script>
     $(function () {
-
+      @error('address')
+      toastr.warning('{{ $message }}');
+      @enderror
+      @error('domicile')
+      toastr.warning('{{ $message }}');
+      @enderror
+      @error('position')
+      toastr.warning('{{ $message }}');
+      @enderror
+      @error('positionDescription')
+      toastr.warning('{{ $message }}');
+      @enderror
+      @error('description')
+      toastr.warning('{{ $message }}');
+      @enderror
     });
   </script>
-  @endadmin
+  @enduser
 @endsection

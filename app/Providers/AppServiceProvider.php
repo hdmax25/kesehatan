@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Schema\Builder;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,9 +14,9 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
-        //
+        Builder::defaultStringLength(191);
     }
 
     /**
@@ -23,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
       Blade::if('admin', static function () {
         return (Auth::user() && Auth::user()->role == 1);

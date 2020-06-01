@@ -20,56 +20,56 @@
 @endsection
 
 @section('content')
-<div class="row">
+  <div class="row">
 
-  <div class="col-md-12">
-    <div class="card card-danger">
-      <div class="card-header">
-        <h3 class="card-title">Masukan Kondisi</h3>
-      </div>
-      <form role="form">
-        <div class="card-body">
-          <div class="form-group">
-            <label for="exampleInputEmail1">Kondisi</label>
-            <input type="text" class="form-control" placeholder="Kondisi">
+    <div class="col-md-12">
+      <div class="card card-danger">
+        <div class="card-header">
+          <h3 class="card-title">Masukan Kondisi</h3>
+        </div>
+        <form role="form">
+          <div class="card-body">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Kondisi</label>
+              <input type="text" class="form-control" placeholder="Kondisi">
+            </div>
           </div>
-        </div>
-        <div class="card-footer">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-      </form>
-    </div>
-  </div>
-  <div class="col-md-12">
-    <div class="card card-danger">
-      <div class="card-header">
-        <h3 class="card-title">Daftar Kondisi</h3>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
       </div>
-      <div class="card-body table-responsive">
-        <table id="report" class="table table-bordered table-striped text-center">
-          <thead>
-          <tr>
-            <th style="width: 10px">id</th>
-            <th>Kondisi</th>
-          </tr>
-          </thead>
-          <tbody>
+    </div>
+    <div class="col-md-12">
+      <div class="card card-danger">
+        <div class="card-header">
+          <h3 class="card-title">Daftar Kondisi</h3>
+        </div>
+        <div class="card-body table-responsive">
+          <table id="report" class="table table-bordered table-striped text-center">
+            <thead>
+            <tr>
+              <th style="width: 10px">id</th>
+              <th>Kondisi</th>
+            </tr>
+            </thead>
+            <tbody>
             <tr>
               <td>#</td>
               <td>#</td>
             </tr>
-          </tbody>
-          <tfoot>
-          <tr>
-            <th style="width: 10px">#</th>
-            <th>#</th>
-          </tr>
-          </tfoot>
-        </table>
+            </tbody>
+            <tfoot>
+            <tr>
+              <th style="width: 10px">#</th>
+              <th>#</th>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
       </div>
     </div>
   </div>
-</div>
 @endsection
 
 @section('css')
