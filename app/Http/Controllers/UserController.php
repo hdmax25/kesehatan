@@ -70,7 +70,7 @@ class UserController extends Controller
     ]);
 
     $user = new User();
-    $user->username = $request->nip;
+    $user->username = $request->username;
     $user->name = $request->name;
     $user->id_department = $request->department;
     $user->password = Hash::make($request->password);
