@@ -49,7 +49,7 @@
               <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('user') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-user"></i>
                 <p>
-                  User
+                  Daftar User
                 </p>
               </a>
             </li>

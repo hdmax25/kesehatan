@@ -32,9 +32,9 @@
             <div class="form-group">
               <label for="role">Hak akses</label>
               <select id="role" name="role" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" required>
-                <option value="1" {{ old('role') == 1 ? 'selected' : '' }}>Admin</option>
-                <option value="2" {{ old('role') == 2 ? 'selected' : '' }}>Kadiv</option>
                 <option value="3" {{ old('role') == 3 ? 'selected' : '' }}>User</option>
+                <option value="2" {{ old('role') == 2 ? 'selected' : '' }}>Kadiv</option>
+                <option value="1" {{ old('role') == 1 ? 'selected' : '' }}>Admin</option>
               </select>
             </div>
             <div class="form-group">

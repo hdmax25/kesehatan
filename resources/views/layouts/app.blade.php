@@ -39,7 +39,7 @@
     margin: 10px;
   }
 </style>
-<body class="sidebar-mini layout-fixed layout-navbar-fixed">
+<body class="sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div id="app" class="wrapper">
   <!-- header -->
   <x-HeaderBarComponent/>
@@ -68,7 +68,7 @@
       <b>Version</b> 0.0.7
     </div>
     <strong>Copyright &copy; 2020 <a href="{{ url('/') }}">{{ url('/') }}</a>.</strong> All rights
-    reserved. Website ini yang buat Mas Hari.
+    reserved. Website ini yang buat oleh Mas Hari IT-ERP.
   </footer>
 
 </div>
