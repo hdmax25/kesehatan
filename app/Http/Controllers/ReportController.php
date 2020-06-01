@@ -46,6 +46,7 @@ class ReportController extends Controller
       'position' => 'required|string|max:191',
       'positionDescription' => 'nullable|string|max:191',
       'description' => 'required|string|max:191',
+      'check' => 'accepted',
     ]);
 
     $report = new Report();
@@ -58,7 +59,7 @@ class ReportController extends Controller
       $report->position = $request->position;
     }
     $report->domicile = $request->domicile;
-    $report->detail = $request->description;
+    $report->deatail = $request->description;
     $report->save();
 
     return redirect()->back();

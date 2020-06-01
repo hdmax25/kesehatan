@@ -1,22 +1,41 @@
 @extends('layouts.app')
 
 @section('title')
-  <div class="row mb-2">
-    <div class="col-sm-6">
-      <h1>
-        Data Kesehatan
-      </h1>
+  @if (Auth::user()->role == 3)
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>
+          Data Kesehatan
+        </h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item">
+            <a href="#">
+              Data Kesehatan
+            </a>
+          </li>
+        </ol>
+      </div>
     </div>
-    <div class="col-sm-6">
-      <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item">
-          <a href="#">
-            Data Kesehatan
-          </a>
-        </li>
-      </ol>
+  @else
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>
+          Home
+        </h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item">
+            <a href="#">
+              Home
+            </a>
+          </li>
+        </ol>
+      </div>
     </div>
-  </div>
+  @endif
 @endsection
 
 @section('content')
@@ -96,7 +115,8 @@
           <div class="card-header">
             <h3 class="card-title">Data Kesehatan Tanggal {{ \Carbon\Carbon::now()->format('d/m/Y') }}</h3>
           </div>
-          <form role="form">
+          <form action="{{ route('report.store') }}" method="post">
+            @csrf
             <div class="card-body">
               <div class="row">
                 <div class="col-md-3">
@@ -136,20 +156,21 @@
                   </div>
                 </div>
               </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Alamat Sesuai KTP</label>
-                      <textarea class="form-control" rows="3" placeholder="Enter ...">{{ Auth::user()->ktpaddress  }}</textarea>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Domisili</label>
-                      <textarea class="form-control" rows="3" placeholder="Enter ...">{{ $report->first() ? $report->first()->domicile : ''  }}</textarea>
-                    </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Alamat Sesuai KTP</label>
+                    <textarea class="form-control" name="address" rows="3" placeholder="Enter ..." readonly>{{ Auth::user()->ktpaddress  }}</textarea>
                   </div>
                 </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Domisili</label>
+                    <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
+                              placeholder="Enter ...">{{ old('domicile') ? ($report->first() ? $report->first()->domicile : old('domicile')) : ''  }}</textarea>
+                  </div>
+                </div>
+              </div>
               <div class="col-md-12">
                 <div class="card card-outline card-danger">
                   <div class="card-header">
@@ -158,44 +179,44 @@
                   <div class="card-body">
                     <div class="form-group row">
                       <div class="custom-control custom-radio col-md-3">
-                        <input class="custom-control-input" type="radio" id="customRadio1" name="customRadio" checked>
+                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio1" name="position" value="Rumah" {{ old('position') == 'Rumah' ? 'checked' : '' }}>
                         <label for="customRadio1" class="custom-control-label">Rumah</label>
                       </div>
                       <div class="custom-control custom-radio col-md-3">
-                        <input class="custom-control-input" type="radio" id="customRadio2" name="customRadio">
+                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio2" name="position" value="Kantor" {{ old('position') == 'Kantor' ? 'checked' : '' }}>
                         <label for="customRadio2" class="custom-control-label">Kantor</label>
                       </div>
                       <div class="custom-control custom-radio col-md-3">
-                        <input class="custom-control-input" type="radio" id="customRadio3" name="customRadio">
+                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio"  id="customRadio3"  name="position" value="Kost" {{ old('position') == 'Kost' ? 'checked' : '' }}>
                         <label for="customRadio3" class="custom-control-label">Kost</label>
                       </div>
                       <div class="input-group col-md-3">
                         <div class="input-group-prepend">
                           <span class="input-group-text">
-                            <input type="radio" id="customRadio4" name="customRadio">
+                            <input type="radio" name="position" value="0" {{ old('position') != 'Rumah' && old('position') != 'Kantor' && old('position') != 'Kost' ? 'checked' : '' }}>
                           </span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Lain-Lain...">
+                        <input type="text" class="form-control @error('positionDescription') is-invalid @enderror" name="positionDescription" placeholder="Lain-Lain..." value="{{ old('positionDescription') }}">
                       </div>
                     </div>
+                  </div>
                 </div>
               </div>
-              </div>
               <div class="form-group">
-                <label for="x">Bagaimana Kondisi anda saat ini?</label>
-                <select id="x" name="user" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" required>
+                <label for="disease">Bagaimana Kondisi anda saat ini?</label>
+                <select id="disease" name="disease" class="form-control @error('disease') is-invalid @enderror select2 select2-danger" data-dropdown-css-class="select2-danger" required>
                   @foreach($disease as $item)
-                  <option value="{{ $item->id }}">{{ $item->penyakit_name }}</option>
+                    <option value="{{ $item->id }}" {{ old('disease') == $item->id ? 'selected' : '' }}>{{ $item->penyakit_name }}</option>
                   @endforeach
                 </select>
               </div>
               <div class="form-group">
-                <label for="exampleInputEmail1">Jika terdapat keluhan, silahkan jelaskan gejala/keluhan yang anda alami saat ini </label>
-                <input type="text" class="form-control" placeholder="Tidak Ada">
+                <label for="description">Jika terdapat keluhan, silahkan jelaskan gejala/keluhan yang anda alami saat ini </label>
+                <input type="text" class="form-control @error('description') is-invalid @enderror" id="description" name="description" placeholder="Tidak Ada" value="{{ old('description') }}">
               </div>
               <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Data ini saya buat dengan sebenar - benarnya dan dapat dipertanggungjawabkan</label>
+                <input type="checkbox" class="form-check-input" id="check" name="check">
+                <label class="form-check-label @error('description') text-danger @enderror" for="check">Data ini saya buat dengan sebenar - benarnya dan dapat dipertanggungjawabkan</label>
               </div>
             </div>
 
@@ -237,10 +258,10 @@
                 <td>{{ $item->department->department_name }}</td>
                 <td>{{ $item->user->phone }}</td>
                 <td>{{ $item->position }}</td>
-                <td>{{ $item->user->name }}</td>
                 <td>{{ $item->penyakit->penyakit_name }}</td>
-                <td>{{ $item->detail }}</td>
+                <td>{{ $item->deatail }}</td>
                 <td>{{ $item->user->ktpaddress }}</td>
+                <td>{{ $item->domicile }}</td>
               </tr>
             @endforeach
             </tbody>
@@ -262,6 +283,9 @@
 
   <!-- daterange picker -->
   <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
+
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
 @endsection
 
 @section('js')
@@ -277,6 +301,9 @@
   <!-- daterange picker -->
   <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
   <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+
+  <!-- Toastr -->
+  <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
 
   <script>
     $(function () {
@@ -294,15 +321,37 @@
       });
 
       //Initialize Select2 Elements
-      $('.select2').select2({ width: 'resolve' });
+      $('.select2').select2({width: 'resolve'});
 
     });
   </script>
-  @admin
+  @user
   <script>
     $(function () {
+      @error('domicile')
+      toastr.warning('{{ $message }}')
+      @enderror
 
+      @error('position')
+      toastr.warning('{{ $message }}')
+      @enderror
+
+      @error('positionDescription')
+      toastr.warning('{{ $message }}')
+      @enderror
+
+      @error('disease')
+      toastr.warning('{{ $message }}')
+      @enderror
+
+      @error('description')
+      toastr.warning('{{ $message }}')
+      @enderror
+
+      @error('check')
+      toastr.warning('{{ $message }}')
+      @enderror
     });
   </script>
-  @endadmin
+  @enduser
 @endsection

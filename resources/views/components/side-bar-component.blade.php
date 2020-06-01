@@ -22,10 +22,17 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
           <a href="{{ route('home') }}" class="nav-link {{ request()->is(['home', 'home/*']) ? 'active' : '' }}">
-            <i class="nav-icon fas fa-home"></i>
-            <p>
-              Home
-            </p>
+            @if (Auth::user()->role == 3)
+              <i class="nav-icon fas fa-heartbeat"></i>
+              <p>
+                Data Kesehatan
+              </p>
+            @else
+              <i class="nav-icon fas fa-home"></i>
+              <p>
+                Home
+              </p>
+            @endif
           </a>
         </li>
         @admin

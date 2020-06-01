@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer id_penyakit
  * @property string position
  * @property string domicile
- * @property string detail
+ * @property string deatail
  */
 class Report extends Model
 {
@@ -30,6 +30,6 @@ class Report extends Model
     'id_penyakit',
     'position',
     'domicile',
-    'detail',
+    'deatail',
   ];
 }

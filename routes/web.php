@@ -51,7 +51,7 @@ Route::group(['prefix' => 'department', 'as' => 'department.'], static function 
 
 Route::group(['prefix' => 'report', 'as' => 'report.'], static function () {
   Route::get('/', 'ReportController@index')->name('index')->middleware('auth', 'role:1');
-  Route::post('/store', 'ReportController@store')->name('store')->middleware('auth', 'role:1');
+  Route::post('/store', 'ReportController@store')->name('store')->middleware('auth', 'role:1|3');
   Route::get('/show/{id}', 'ReportController@show')->name('show')->middleware('auth');
   Route::get('/edit/{id}', 'ReportController@edit')->name('edit')->middleware('auth', 'role:1');
   Route::post('/update/{id}', 'ReportController@update')->name('update')->middleware('auth', 'role:1');

@@ -67,7 +67,7 @@ class HomeController extends Controller
       $report->map(function ($item) {
         $item->user = User::find($item->id_user);
         $item->department = Departement::find($item->id_department);
-        $item->penyakit = Departement::find($item->id_penyakit);
+        $item->penyakit = Penyakit::find($item->id_penyakit);
         return $item;
       });
 
