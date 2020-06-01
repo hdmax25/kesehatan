@@ -28,7 +28,7 @@
           @csrf
           <div class="card-body">
             <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-6">
                 <div class="form-group">
                   <label for="reservation">Tanggal</label>
                   <div class="input-group">
@@ -41,7 +41,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-6">
                 <div class="form-group">
                   <label for="department">Department</label>
                   <select id="department" name="department" class="form-control select2 select2-primary" data-dropdown-css-class="select2-primary" required>
@@ -52,11 +52,9 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-2">
-              <div class="card-footer">
-                <button type="submit" class="btn btn-block btn-info btn-xs">Find</button>
-              </div>
-            </div>
+          </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-info">Find</button>
           </div>
         </form>
       </div>
@@ -304,7 +302,7 @@
       });
 
       //Initialize Select2 Elements
-      $('.select2').select2();
+      $('.select2').select2({ width: 'resolve' });
 
     });
   </script>

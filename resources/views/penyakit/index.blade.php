@@ -54,17 +54,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-              <td>#</td>
-              <td>#</td>
-            </tr>
+            @foreach($disease as $item)
+              <tr>
+                <td>{{ $loop->index + 1 }}</td>
+                <td>{{ $item->penyakit_name }}</td>
+              </tr>
+            @endforeach
             </tbody>
-            <tfoot>
-            <tr>
-              <th style="width: 10px">#</th>
-              <th>#</th>
-            </tr>
-            </tfoot>
           </table>
         </div>
       </div>
@@ -76,10 +72,6 @@
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-
-  <!-- Select2 -->
-  <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 @endsection
 
 @section('js')
@@ -88,10 +80,6 @@
   <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
   <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
   <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-  <script src="../../plugins/sweetalert2/sweetalert2.min.js"></script>
-
-  <!-- Select2 -->
-  <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
 
   <script>
     $(function () {
@@ -104,9 +92,6 @@
         "autoWidth": true,
         "responsive": true,
       });
-
-      //Initialize Select2 Elements
-      $('.select2').select2()
     });
   </script>
 @endsection
