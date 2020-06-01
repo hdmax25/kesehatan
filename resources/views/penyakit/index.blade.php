@@ -62,13 +62,13 @@
                 <td>{{ $item->penyakit_name }}</td>
                 <td>
                   <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-sm{{ $item->id }}">
-                    Edit
+                  <i class="fas fa-edit"></i>
                   </button>
                 </td>
                 <td>
                   <a href="{{ route('penyakit.destroy', $item->id) }}">
                     <button type="button" class="btn btn-danger btn-sm">
-                      Delete
+                      <i class="fas fa-trash-alt"></i>
                     </button>
                   </a>
                 </td>

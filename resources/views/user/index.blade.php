@@ -56,7 +56,7 @@
               <td>{{ $item->ktpaddress }}</td>
               <td>
                 <a href="{{ route('user.edit', $item->id) }}" type="button" class="btn btn-primary btn-sm">
-                  Edit
+                  <i class="fas fa-edit"></i>
                 </button>
               </td>
             </tr>
