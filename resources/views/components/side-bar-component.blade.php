@@ -36,7 +36,7 @@
           </a>
         </li>
         @admin
-        <li class="nav-item has-treeview">
+        <li class="nav-item has-treeview nav-link {{ request()->is('user/*') ? 'active' : '">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
