@@ -14,13 +14,23 @@ use Illuminate\View\View;
 class DepartementController extends Controller
 {
   /**
+   * Create a new controller instance.
+   *
+   * @return void
+   */
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
+
+  /**
    * Display a listing of the resource.
    *
    * @return Application|Factory|Response|View
    */
   public function index()
   {
-    $department = Departement::all();
+    $department = Departement::where('delete', 0)->get();
 
     $data = [
       'department' => $department
@@ -66,5 +76,21 @@ class DepartementController extends Controller
     $department->save();
 
     return redirect()->back();
+  }
+
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param $id
+   * @return RedirectResponse|Response
+   */
+  public function destroy($id)
+  {
+    $department = Departement::find($id);
+    $department->delete = 1;
+    $department->save();
+
+    return redirect()->back();
+
   }
 }
