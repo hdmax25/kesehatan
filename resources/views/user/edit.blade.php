@@ -24,7 +24,7 @@
     <div class="col-md-12">
       <div class="card card-outline card-danger">
         <div class="card-header">
-          <h3 class="card-title">Tambah User</h3>
+          <h3 class="card-title">Edit User</h3>
         </div>
         <form action="{{ route('user.store') }}" method="post">
           @csrf

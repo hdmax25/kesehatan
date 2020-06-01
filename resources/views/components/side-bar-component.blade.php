@@ -36,30 +36,41 @@
           </a>
         </li>
         @admin
-        <li class="nav-item">
-          <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('user') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-user"></i>
-            <p>
-              User
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{{ route('user.create') }}" class="nav-link {{ request()->is('user/create') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-user-plus"></i>
-            <p>
-              Create
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{{ route('department.index') }}" class="nav-link {{ request()->is('department') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-home"></i>
-            <p>
-              Department
-            </p>
-          </a>
-        </li>
+        <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                User
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="display: none;">
+              <li class="nav-item">
+                <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('user') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-user"></i>
+                  <p>
+                    User
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('user.create') }}" class="nav-link {{ request()->is('user/create') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-user-plus"></i>
+                  <p>
+                    Tambah User
+                  </p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+                <a href="{{ route('department.index') }}" class="nav-link {{ request()->is('department') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-home"></i>
+                      <p>
+                   Department
+                  </p>
+                </a>
+              </li>
         <li class="nav-item">
           <a href="{{ route('penyakit.index') }}" class="nav-link {{ request()->is('penyakit') ? 'active' : '' }}">
             <i class="nav-icon fas fa-home"></i>
