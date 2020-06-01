@@ -14,7 +14,13 @@ class PenyakitController extends Controller
      */
     public function index()
     {
-        return view('penyakit.index');
+        $department = Departement::all();
+
+        $data = [
+          'penyakit' => $penyakit
+        ];
+    
+        return view('penyakit.index', $data);
     }
 
     /**

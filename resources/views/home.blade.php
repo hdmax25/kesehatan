@@ -28,7 +28,7 @@
           @csrf
           <div class="card-body">
             <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-4">
                 <div class="form-group">
                   <label for="reservation">Tanggal</label>
                   <div class="input-group">
@@ -41,7 +41,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-4">
                 <div class="form-group">
                   <label for="department">Department</label>
                   <select id="department" name="department" class="form-control select2 select2-primary" data-dropdown-css-class="select2-primary" required>
@@ -53,9 +53,7 @@
               </div>
             </div>
             <div class="col-md-2">
-              <div class="card-footer">
-                <button type="submit" class="btn btn-block btn-info btn-xs">Find</button>
-              </div>
+                <button type="submit" class="btn btn-block btn-danger">Find</button>
             </div>
           </div>
         </form>
@@ -138,20 +136,20 @@
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Alamat Sesuai KTP</label>
-                    <textarea class="form-control" rows="3" placeholder="Enter ...">{{ Auth::user()->ktpaddress  }}</textarea>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Alamat Sesuai KTP</label>
+                      <textarea class="form-control" rows="3" placeholder="Enter ...">{{ Auth::user()->ktpaddress  }}</textarea>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Domisili</label>
+                      <textarea class="form-control" rows="3" placeholder="Enter ...">{{ $report->first() ? $report->first()->domicile : ''  }}</textarea>
+                    </div>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label>Domisili</label>
-                    <textarea class="form-control" rows="3" placeholder="Enter ...">{{ $report->first() ? $report->first()->domicile : ''  }}</textarea>
-                  </div>
-                </div>
-              </div>
               <div class="col-md-12">
                 <div class="card card-outline card-danger">
                   <div class="card-header">
@@ -212,7 +210,7 @@
     <div class="col-md-12">
       <div class="card card-danger">
         <div class="card-header">
-          <h3 class="card-title">Primary Outline</h3>
+          <h3 class="card-title">Data yang sudah ada</h3>
         </div>
         <div class="card-body table-responsive">
           <table id="report" class="table table-bordered table-striped text-center">
