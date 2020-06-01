@@ -62,7 +62,7 @@
                 <td>{{ $item->department_name }}</td>
                 <td>
                   <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-sm{{ $item->id }}">
-                    Launch Small Modal
+                    Edit
                   </button>
                 </td>
               </tr>
@@ -105,10 +105,6 @@
   <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
 
-  <!-- Select2 -->
-  <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
-
   <!-- Toastr -->
   <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
 @endsection
@@ -119,9 +115,6 @@
   <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
   <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
   <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-
-  <!-- Select2 -->
-  <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
 
   <!-- Toastr -->
   <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
@@ -137,9 +130,6 @@
         "autoWidth": true,
         "responsive": true,
       });
-
-      //Initialize Select2 Elements
-      $('.select2').select2()
 
       @error('department_name')
       toastr.warning('{{ $message }}')

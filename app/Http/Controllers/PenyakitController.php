@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\model\Penyakit;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class PenyakitController extends Controller
@@ -27,68 +29,43 @@ class PenyakitController extends Controller
   }
 
   /**
-   * Show the form for creating a new resource.
-   *
-   * @return Response
-   */
-  public function create()
-  {
-    //
-  }
-
-  /**
    * Store a newly created resource in storage.
    *
    * @param Request $request
-   * @return Response
+   * @return RedirectResponse|Response
+   * @throws ValidationException
    */
   public function store(Request $request)
   {
-    //
-  }
+    $this->validate($request, [
+      'penyakit_name' => 'required|string|unique:penyakits',
+    ]);
 
-  /**
-   * Display the specified resource.
-   *
-   * @param Penyakit $penyakit
-   * @return Response
-   */
-  public function show(Penyakit $penyakit)
-  {
-    //
-  }
+    $disease = new Penyakit();
+    $disease->penyakit_name = $request->penyakit_name;
+    $disease->save();
 
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param Penyakit $penyakit
-   * @return Response
-   */
-  public function edit(Penyakit $penyakit)
-  {
-    //
+    return redirect()->back();
   }
 
   /**
    * Update the specified resource in storage.
    *
    * @param Request $request
-   * @param Penyakit $penyakit
-   * @return Response
+   * @param $id
+   * @return RedirectResponse|Response
+   * @throws ValidationException
    */
-  public function update(Request $request, Penyakit $penyakit)
+  public function update(Request $request, $id)
   {
-    //
-  }
+    $this->validate($request, [
+      'penyakit_name' => 'required|string|unique:penyakits',
+    ]);
 
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param Penyakit $penyakit
-   * @return Response
-   */
-  public function destroy(Penyakit $penyakit)
-  {
-    //
+    $disease = Penyakit::find($id);
+    $disease->penyakit_name = $request->penyakit_name;
+    $disease->save();
+
+    return redirect()->back();
   }
 }

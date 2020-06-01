@@ -49,28 +49,6 @@ class DepartementController extends Controller
   }
 
   /**
-   * Display the specified resource.
-   *
-   * @param Departement $departement
-   * @return Response
-   */
-  public function show(Departement $departement)
-  {
-    //
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param Departement $departement
-   * @return Response
-   */
-  public function edit(Departement $departement)
-  {
-    //
-  }
-
-  /**
    * Update the specified resource in storage.
    *
    * @param Request $request
@@ -88,16 +66,5 @@ class DepartementController extends Controller
     $department->save();
 
     return redirect()->back();
-  }
-
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param Departement $departement
-   * @return Response
-   */
-  public function destroy(Departement $departement)
-  {
-    //
   }
 }

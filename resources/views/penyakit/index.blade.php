@@ -21,17 +21,17 @@
 
 @section('content')
   <div class="row">
-
     <div class="col-md-12">
       <div class="card card-danger">
         <div class="card-header">
           <h3 class="card-title">Masukan Kondisi</h3>
         </div>
-        <form role="form">
+        <form action="{{ route('penyakit.store') }}" method="post">
+          @csrf
           <div class="card-body">
             <div class="form-group">
               <label for="exampleInputEmail1">Kondisi</label>
-              <input type="text" class="form-control" placeholder="Kondisi">
+              <input type="text" class="form-control @error('penyakit_name') is-invalid @enderror" id="penyakit_name" name="penyakit_name" placeholder="penyakit">
             </div>
           </div>
           <div class="card-footer">
@@ -51,6 +51,7 @@
             <tr>
               <th style="width: 10px">id</th>
               <th>Kondisi</th>
+              <th>Edit</th>
             </tr>
             </thead>
             <tbody>
@@ -58,7 +59,37 @@
               <tr>
                 <td>{{ $loop->index + 1 }}</td>
                 <td>{{ $item->penyakit_name }}</td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-sm{{ $item->id }}">
+                    Edit
+                  </button>
+                </td>
               </tr>
+              <div class="modal fade" id="modal-sm{{ $item->id }}">
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Edit Kondisi</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <form action="{{ route('penyakit.update', $item->id) }}" method="post">
+                      @csrf
+                      <div class="modal-body">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Kondisi</label>
+                          <input type="text" class="form-control @error('penyakit_name') is-invalid @enderror" placeholder="Penyakit" name="penyakit_name" value="{{ $item->penyakit_name }}">
+                        </div>
+                      </div>
+                      <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
             @endforeach
             </tbody>
           </table>
@@ -72,6 +103,9 @@
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+
+  <!-- Toastr -->
+  <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
 @endsection
 
 @section('js')
@@ -80,6 +114,9 @@
   <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
   <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
   <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+
+  <!-- Toastr -->
+  <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
 
   <script>
     $(function () {
@@ -92,6 +129,10 @@
         "autoWidth": true,
         "responsive": true,
       });
+
+      @error('penyakit_name')
+      toastr.warning('{{ $message }}')
+      @enderror
     });
   </script>
 @endsection

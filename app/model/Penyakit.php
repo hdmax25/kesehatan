@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @package App\model
  *
  * @property integer id
- * @property string pneyakit_name
+ * @property string penyakit_name
  */
 class Penyakit extends Model
 {
