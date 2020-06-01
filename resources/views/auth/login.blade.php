@@ -13,7 +13,7 @@
       <form action="{{ route('login') }}" method="post">
         @csrf
         <div class="input-group mb-3">
-          <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Masukan NIM">
+          <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="Masukan NIP">
           <div class="input-group-append">
             <div class="input-group-text">
               <div class="fas fa-user"></div>
