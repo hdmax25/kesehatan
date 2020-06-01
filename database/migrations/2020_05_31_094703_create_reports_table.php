@@ -22,6 +22,7 @@ class CreateReportsTable extends Migration
             $table->string('domicile');
             $table->text('deatail')->nullable();
             $table->timestamps();
+            $table->integer('delete')->default(0);
         });
     }
 

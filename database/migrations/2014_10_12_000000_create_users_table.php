@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('ktpaddress');
             $table->rememberToken();
             $table->timestamps();
+            $table->integer('delete')->default(0);
         });
     }
 
