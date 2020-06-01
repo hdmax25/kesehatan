@@ -109,7 +109,7 @@
     </div>
     @endkadiv
     @user
-    @if (!$report->where('created_at', \Carbon\Carbon::now())->count())
+    @if (!$todayCheck)
       <div class="col-md-12">
         <div class="card card-danger">
           <div class="card-header">

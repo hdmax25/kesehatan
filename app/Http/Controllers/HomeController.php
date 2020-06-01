@@ -6,6 +6,7 @@ use App\model\Departement;
 use App\model\Penyakit;
 use App\model\Report;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
@@ -62,6 +63,7 @@ class HomeController extends Controller
       ];
       return view('home', $data);
     } else {
+      $validateToday = Report::where('id_user', Auth::user()->id)->whereDate('created_at', Carbon::now())->count();
       $disease = Penyakit::all();
       $report = Report::orderBy('id', 'desc')->where('id_user', Auth::user()->id)->get();
       $report->map(function ($item) {
@@ -73,7 +75,8 @@ class HomeController extends Controller
 
       $data = [
         'report' => $report,
-        'disease' => $disease
+        'disease' => $disease,
+        'todayCheck' => $validateToday
       ];
       return view('home', $data);
     }

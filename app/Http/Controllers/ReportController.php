@@ -53,7 +53,7 @@ class ReportController extends Controller
     $report->id_user = Auth::user()->id;
     $report->id_department = Auth::user()->id_department;
     $report->id_penyakit = $request->disease;
-    if ($request->position == 0) {
+    if ($request->position == '0') {
       $report->position = $request->positionDescription;
     } else {
       $report->position = $request->position;
