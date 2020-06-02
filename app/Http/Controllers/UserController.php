@@ -106,24 +106,54 @@ class UserController extends Controller
   /**
    * Show the form for editing the specified resource.
    *
-   * @param Departement $departement
-   * @return Response
+   * @param $id
+   * @return Application|Factory|Response|View
    */
   public function edit($id)
   {
-    //
+    $user = User::find($id);
+    $department = Departement::where('delete', 0)->get();
+
+    $data = [
+      'department' => $department,
+      'user' => $user
+    ];
+    return view('user.edit', $data);
   }
 
   /**
    * Update the specified resource in storage.
    *
    * @param Request $request
-   * @param Departement $departement
-   * @return Response
+   * @param $id
+   * @return RedirectResponse|Response
+   * @throws ValidationException
    */
   public function update(Request $request, $id)
   {
-    //
+    $this->validate($request, [
+      'department' => 'required|numeric|exists:departements,id',
+      'username' => 'required|numeric|unique:users',
+      'password' => 'nullable|string',
+      'name' => 'required|string',
+      'phone' => 'required|numeric',
+      'address' => 'required|string',
+      'role' => 'required|numeric',
+    ]);
+
+    $user = User::find($id);
+    $user->username = $request->username;
+    $user->name = $request->name;
+    $user->id_department = $request->department;
+    if ($request->password) {
+      $user->password = Hash::make($request->password);
+    }
+    $user->phone = $request->phone;
+    $user->ktpaddress = $request->address;
+    $user->role = $request->role;
+    $user->save();
+
+    return redirect()->route('user.edit')->with(['message' => 'input data berhasil']);
   }
 
   /**

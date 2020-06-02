@@ -32,38 +32,39 @@
             <div class="form-group">
               <label for="role">Hak akses</label>
               <select id="role" name="role" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" required>
-                <option value="1" {{ old('role') == 1 ? 'selected' : '' }}>Admin</option>
-                <option value="2" {{ old('role') == 2 ? 'selected' : '' }}>Kadiv</option>
-                <option value="3" {{ old('role') == 3 ? 'selected' : '' }}>User</option>
+                <option value="1" {{ old('role') == 1 || $user->role == 1 ? 'selected' : '' }}>Admin</option>
+                <option value="2" {{ old('role') == 2 || $user->role == 2 ? 'selected' : '' }}>Kadiv</option>
+                <option value="3" {{ old('role') == 3 || $user->role == 3 ? 'selected' : '' }}>User</option>
               </select>
             </div>
             <div class="form-group">
               <label for="username">NIP</label>
-              <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" id="username" placeholder="" value="{{ old('username') }}">
+              <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" id="username" placeholder="" value="{{ old('username') ? old('username') : $user->username }}">
             </div>
             <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="" value="{{ old('password') }}">
+              <label for="password">Password <small>make it blank if not change</small></label>
+              <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder=""
+                     value="{{ old('password') }}">
             </div>
             <div class="form-group">
               <label for="name">Nama</label>
-              <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="" value="{{ old('name') }}">
+              <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="" value="{{ old('name') ? old('name') : $user->name }}">
             </div>
             <div class="form-group">
               <label for="department">Unit Kerja</label>
               <select id="department" name="department" class="form-control @error('department') is-invalid @enderror select2 select2-danger" data-dropdown-css-class="select2-danger" required>
                 @foreach($department as $item)
-                  <option value="{{ $item->id }}" {{ old('role') == $item->id ? 'selected' : '' }}>{{ $item->department_name }}</option>
+                  <option value="{{ $item->id }}" {{ old('role') == $item->id || $user->id_department == $item->id ? 'selected' : '' }}>{{ $item->department_name }}</option>
                 @endforeach
               </select>
             </div>
             <div class="form-group">
               <label for="phone">Phone</label>
-              <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" placeholder="" value="{{ old('phone') }}">
+              <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" placeholder="" value="{{ old('phone') ? old('phone') : $user->phone }}">
             </div>
             <div class="form-group">
               <label for="address">Alamat KTP</label>
-              <input type="text" class="form-control @error('address') is-invalid @enderror" placeholder="" name="address" id="address" value="{{ old('address') }}">
+              <input type="text" class="form-control @error('address') is-invalid @enderror" placeholder="" name="address" id="address" value="{{ old('address') ? old('address') : $user->ktpaddress }}">
             </div>
           </div>
 
