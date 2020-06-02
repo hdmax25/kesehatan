@@ -63,7 +63,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="department">Department</label>
-                  <select id="department" name="department" class="form-control select2 select2-primary" data-dropdown-css-class="select2-primary" required>
+                  <select id="department" name="department" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" required>
                     @foreach($department as $item)
                       <option value="{{ $item->id }}">{{ $item->department_name }}</option>
                     @endforeach
@@ -192,7 +192,7 @@
             </div>
 
             <div class="card-footer">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-danger">Submit</button>
             </div>
           </form>
         </div>
@@ -339,7 +339,7 @@
             </div>
 
             <div class="card-footer">
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-danger">Submit</button>
             </div>
           </form>
         </div>
