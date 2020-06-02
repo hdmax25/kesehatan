@@ -26,7 +26,7 @@
         <div class="card-header">
           <h3 class="card-title">Edit User</h3>
         </div>
-        <form action="{{ route('user.store') }}" method="post">
+        <form action="{{ route('user.update', $user->id)}}" method="post">
           @csrf
           <div class="card-body">
             <div class="form-group">
@@ -42,7 +42,7 @@
               <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" id="username" placeholder="" value="{{ old('username') ? old('username') : $user->username }}">
             </div>
             <div class="form-group">
-              <label for="password">Password <small>make it blank if not change</small></label>
+              <label for="password">Password <small>Kosongi jika tidak diubah</small></label>
               <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder=""
                      value="{{ old('password') }}">
             </div>

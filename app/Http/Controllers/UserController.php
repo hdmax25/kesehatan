@@ -133,7 +133,6 @@ class UserController extends Controller
   {
     $this->validate($request, [
       'department' => 'required|numeric|exists:departements,id',
-      'username' => 'required|numeric|unique:users',
       'password' => 'nullable|string',
       'name' => 'required|string',
       'phone' => 'required|numeric',
@@ -142,8 +141,11 @@ class UserController extends Controller
     ]);
 
     $user = User::find($id);
-    $user->username = $request->username;
-    $user->name = $request->name;
+    if ($user->username != $reuqert->username){
+      $this->validate($request, [
+        'username' => 'nullable|numeric|unique:users'
+      ]);
+    }
     $user->id_department = $request->department;
     if ($request->password) {
       $user->password = Hash::make($request->password);
