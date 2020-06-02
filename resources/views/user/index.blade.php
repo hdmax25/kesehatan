@@ -22,7 +22,7 @@
 @section('content')
   <div class="row">
     <div class="col-md-12">
-      <div class="card card-primary">
+      <div class="card card-outline card-danger">
         <div class="card-header">
           <h3 class="card-title">Daftar User</h3>
         </div>
