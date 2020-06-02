@@ -137,8 +137,13 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Domisili</label>
-                    <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
-                              placeholder="Enter ...">{{ old('domicile') ? ($report->first() ? $report->first()->domicile : old('domicile')) : ''  }}</textarea>
+                    @if ($report->first())
+                      <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
+                                placeholder="Enter ...">{{ old('domicile') ? old('domicile') : $report->first()->domicile  }}</textarea>
+                    @else
+                      <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
+                                placeholder="Enter ...">{{ old('domicile') }}</textarea>
+                    @endif
                   </div>
                 </div>
               </div>
@@ -158,7 +163,7 @@
                         <label for="customRadio2" class="custom-control-label">Kantor</label>
                       </div>
                       <div class="custom-control custom-radio col-md-3">
-                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio"  id="customRadio3"  name="position" value="Kost" {{ old('position') == 'Kost' ? 'checked' : '' }}>
+                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio3" name="position" value="Kost" {{ old('position') == 'Kost' ? 'checked' : '' }}>
                         <label for="customRadio3" class="custom-control-label">Kost</label>
                       </div>
                       <div class="input-group col-md-3">
@@ -284,8 +289,13 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Domisili</label>
-                    <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
-                              placeholder="Enter ...">{{ old('domicile') ? ($report->first() ? $report->first()->domicile : old('domicile')) : ''  }}</textarea>
+                    @if ($report->first())
+                      <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
+                                placeholder="Enter ...">{{ old('domicile') ? old('domicile') : $report->first()->domicile  }}</textarea>
+                    @else
+                      <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
+                                placeholder="Enter ...">{{ old('domicile') }}</textarea>
+                    @endif
                   </div>
                 </div>
               </div>
@@ -305,7 +315,7 @@
                         <label for="customRadio2" class="custom-control-label">Kantor</label>
                       </div>
                       <div class="custom-control custom-radio col-md-3">
-                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio"  id="customRadio3"  name="position" value="Kost" {{ old('position') == 'Kost' ? 'checked' : '' }}>
+                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio3" name="position" value="Kost" {{ old('position') == 'Kost' ? 'checked' : '' }}>
                         <label for="customRadio3" class="custom-control-label">Kost</label>
                       </div>
                       <div class="input-group col-md-3">
