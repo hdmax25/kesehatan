@@ -141,7 +141,7 @@ class UserController extends Controller
     ]);
 
     $user = User::find($id);
-    if ($user->username != $reuqert->username){
+    if ($user->username != $request->username){
       $this->validate($request, [
         'username' => 'nullable|numeric|unique:users'
       ]);
