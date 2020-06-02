@@ -143,7 +143,7 @@ class UserController extends Controller
     $user = User::find($id);
     if ($user->username != $request->username){
       $this->validate($request, [
-        'username' => 'nullable|numeric|unique:users'
+        'username' => 'required|numeric|unique:users'
       ]);
     }
     $user->id_department = $request->department;
@@ -155,7 +155,7 @@ class UserController extends Controller
     $user->role = $request->role;
     $user->save();
 
-    return redirect()->route('user.edit')->with(['message' => 'input data berhasil']);
+    return redirect()->route('user.edit')->with(['message' => 'Input data berhasil']);
   }
 
   /**
