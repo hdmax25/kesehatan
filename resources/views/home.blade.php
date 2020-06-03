@@ -70,7 +70,7 @@
               <div class="info-box">
                 <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
                 <div class="info-box-content">
-                  <span class="info-box-text">Belum</span>
+                  <span class="info-box-text">Belum Mengisi</span>
                   <span class="info-box-number">500</span>
                 </div>
               </div>

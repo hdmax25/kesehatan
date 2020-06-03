@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\model\Departement;
+use App\model\Penyakit;
 use App\model\Report;
-use Illuminate\Http\RedirectResponse;
+use App\User;
+use Carbon\Carbon;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
 
 class ReportController extends Controller
 {
@@ -18,7 +25,20 @@ class ReportController extends Controller
    */
   public function index()
   {
-    //
+    $department = Departement::where('delete', 0)->get();
+      $report = Report::orderBy('id', 'desc')->get();
+      $report->map(function ($item) {
+        $item->user = User::find($item->id_user);
+        $item->department = Departement::find($item->id_department);
+        $item->penyakit = Penyakit::find($item->id_penyakit);
+        return $item;
+      });
+
+      $data = [
+        'report' => $report,
+        'department' => $department
+      ];
+      return view('report.index', $data);
   }
 
   /**
@@ -109,4 +129,14 @@ class ReportController extends Controller
   {
     //
   }
+}
+
+class InvoicesExport implements FromView
+{
+    public function view(): View
+    {
+        return view('exports.invoices', [
+            'invoices' => Invoice::all()
+        ]);
+    }
 }
