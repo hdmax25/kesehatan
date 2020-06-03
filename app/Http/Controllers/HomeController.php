@@ -76,7 +76,10 @@ class HomeController extends Controller
       $validateToday = Report::where('id_user', Auth::user()->id)->whereDate('created_at', Carbon::now())->count();
       $disease = Penyakit::where('delete', 0)->get();
 
+      $domicile = Report::where('id_user', Auth::user()->id)->orderBy('id', 'desc')->frist();
+
       $data = [
+        'domicile' => $domicile,
         'disease' => $disease,
         'todayCheck' => $validateToday
       ];
