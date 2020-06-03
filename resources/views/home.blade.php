@@ -43,30 +43,6 @@
     @admin
     <div class="col-md-12">
       <div class="card card-outline card-danger">
-        <form action="{{ route('findSDM') }}" method="post">
-          @csrf
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="department">Department</label>
-                  <select id="department" name="department" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" required>
-                    @foreach($department as $item)
-                      <option value="{{ $item->id }}">{{ $item->department_name }}</option>
-                    @endforeach
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-footer">
-            <button type="submit" class="btn btn-danger">Find</button>
-          </div>
-        </form>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <div class="card card-outline card-danger">
         <div class="card-header">
           <h3 class="card-title">Data Kesehatan</h3>
         </div>
