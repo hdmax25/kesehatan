@@ -62,8 +62,10 @@ class HomeController extends Controller
         $item->absenes = Report::where('id_user', $item->id)->whereDate('created_at', Carbon::now())->first();
       });
 
+      $domicile = Report::where('id_user', Auth::user()->id)->orderBy('id', 'desc')->frist();
+
       $data = [
-        'report' => $report,
+        'domicile' => $domicile,
         'disease' => $disease,
         'todayCheck' => $validateToday,
         'sudah' => $report->whereNotNull('absenes'),

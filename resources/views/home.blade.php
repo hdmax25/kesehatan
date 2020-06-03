@@ -231,14 +231,8 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Domisili</label>
-                    @if ($report->first())
-                      <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
-                                placeholder="Enter ...">{{ old('domicile') ? old('domicile') : ($report->where('id_user', Auth::user()->id)->first() ? $report->where('id_user', Auth::user()->id)->first()->domicile : '')
-                                }}</textarea>
-                    @else
-                      <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
-                                placeholder="Enter ...">{{ old('domicile') }}</textarea>
-                    @endif
+                    <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
+                              placeholder="Enter ...">{{ old('domicile') ? old('domicile') : ($domicile ? $domicile->domicile : '')}}</textarea>
                   </div>
                 </div>
               </div>
@@ -482,13 +476,8 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Domisili</label>
-                    @if ($report->first())
-                      <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
-                                placeholder="Enter ...">{{ old('domicile') ? old('domicile') : $report->first()->domicile  }}</textarea>
-                    @else
-                      <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
-                                placeholder="Enter ...">{{ old('domicile') }}</textarea>
-                    @endif
+                    <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
+                              placeholder="Enter ...">{{ old('domicile') ? old('domicile') : ($domicile ? $domicile->domicile : '') }}</textarea>
                   </div>
                 </div>
               </div>
@@ -593,10 +582,10 @@
     $(function () {
       //Date range picker
       $('#reservation').daterangepicker({
-          locale: {
-            format: 'DD/MM/YYYY'
-          }
-        });
+        locale: {
+          format: 'DD/MM/YYYY'
+        }
+      });
 
       $('#sudah-t').DataTable({
         "paging": true,
