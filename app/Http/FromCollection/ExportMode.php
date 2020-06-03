@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\FromCollection;
 
 use App\model\Departement;
@@ -17,17 +18,19 @@ class ExportMode implements FromCollection
         'username' => 'NIP',
         'name' => 'Nama',
         'department' => 'Department',
-        'phone' => 'phone',
-        'position' => 'posisi',
+        'phone' => 'Phone',
+        'position' => 'Posisi',
+        'disease' => ' Kondisi/Penyakit',
+        'diseaseDescription' => 'Keluhan/detail',
+        'address' => 'Alamat/ktpaddress',
         'domicile' => 'Domisili',
-        'address' => 'alamat'
       ]
     ];
     $report = Report::all();
     $report->map(function ($item) {
       $item->user = User::find($item->id_user);
       $item->department = Departement::find($item->id_department);
-      $item->penyakit = Penyakit::find($item->id_penyakit);
+      $item->disease = Penyakit::find($item->id_penyakit);
     });
 
     foreach ($report as $id => $item) {
@@ -37,8 +40,10 @@ class ExportMode implements FromCollection
       $data[$id + 1]['department'] = $item->deparment ? $item->deparment->department_name : '';
       $data[$id + 1]['phone'] = $item->user->phone;
       $data[$id + 1]['position'] = $item->position;
-      $data[$id + 1]['domicile'] = $item->domicile;
+      $data[$id + 1]['disease'] = $item->disease->penyakit_name;
+      $data[$id + 1]['diseaseDescription'] = $item->deatail;
       $data[$id + 1]['address'] = $item->user->address;
+      $data[$id + 1]['domicile'] = $item->domicile;
     }
 
     return collect($data);
