@@ -100,7 +100,14 @@ class UserController extends Controller
    */
   public function show($id)
   {
-    //
+    $user = User::find($id);
+    $department = Departement::where('delete', 0)->get();
+
+    $data = [
+      'department' => $department,
+      'user' => $user
+    ];
+    return view('user.show', $data);
   }
 
   /**
