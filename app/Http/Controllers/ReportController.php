@@ -8,20 +8,20 @@ use App\model\Report;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Contracts\View\View;
-use Maatwebsite\Excel\Concerns\FromView;
 
 class ReportController extends Controller
 {
   /**
    * Display a listing of the resource.
    *
-   * @return Response
+   * @return Application|Factory|Response|\Illuminate\View\View
    */
   public function index()
   {
@@ -91,7 +91,7 @@ class ReportController extends Controller
    * Display the specified resource.
    *
    * @param Report $report
-   * @return Response
+   * @return void
    */
   public function show(Report $report)
   {
@@ -102,7 +102,7 @@ class ReportController extends Controller
    * Show the form for editing the specified resource.
    *
    * @param Report $report
-   * @return Response
+   * @return void
    */
   public function edit(Report $report)
   {
@@ -114,7 +114,7 @@ class ReportController extends Controller
    *
    * @param Request $request
    * @param Report $report
-   * @return Response
+   * @return void
    */
   public function update(Request $request, Report $report)
   {
@@ -124,8 +124,8 @@ class ReportController extends Controller
   /**
    * Remove the specified resource from storage.
    *
-   * @param Report $report
-   * @return Response
+   * @param $id
+   * @return void
    */
   public function destroy($id)
   {

@@ -32,21 +32,15 @@
 
           <p class="text-muted text-center">{{ $user->department ? $user->department->name : '' }}</p>
 
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <div class="nav-link">
-                NIP <span class="float-right">{{ $user->username }}</span>
-              </div>
+          <ul class="list-group list-group-unbordered mb-3">
+            <li class="list-group-item">
+              <b>NIP</b> <a class="float-right">{{ $user->username }}</a>
             </li>
-            <li class="nav-item">
-              <div class="nav-link">
-                Phone <span class="float-right">{{ $user->phone }}</span>
-              </div>
+            <li class="list-group-item">
+              <b>Phone</b> <a class="float-right">{{ $user->phone }}</a>
             </li>
-            <li class="nav-item">
-              <div class="nav-link">
-                Alamat <span class="float-right">{{ $user->ktpaddress }}</span>
-              </div>
+            <li class="list-group-item">
+              <b>Alamat</b> <a class="float-right">{{ $user->ktpaddress }}</a>
             </li>
           </ul>
         </div>
@@ -56,63 +50,67 @@
       <div class="card">
         <div class="card-header p-2">
           <ul class="nav nav-pills">
-            <li class="nav-item"><a class="nav-link active" href="#timeline" data-toggle="tab">History</a></li>
-            <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Edit</a></li>
+            <li class="nav-item"><a class="nav-link {{ $errors->isEmpty() ? 'active' : '' }}" href="#timeline" data-toggle="tab">History</a></li>
+            <li class="nav-item"><a class="nav-link {{ $errors->isEmpty() ? '' : 'active' }}" href="#settings" data-toggle="tab">Edit</a></li>
           </ul>
         </div>
         <div class="card-body">
           <div class="tab-content">
-            <div class="tab-pane active" id="timeline">
+            <div class="tab-pane {{ $errors->isEmpty() ? 'active' : '' }}" id="timeline">
               <div class="timeline timeline-inverse">
-                <div class="time-label">
+                @foreach($report as $item)
+                  <div class="time-label">
                   <span class="bg-success">
-                    10 Februari 2020
+                    {{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}
                   </span>
-                </div>
-                <div>
-                  <i class="fas fa-heartbeat bg-success"></i>
-                  <div class="timeline-item">
-                    <span class="time"><i class="far fa-clock"></i> 12:05</span>
-
-                    <h3 class="timeline-header">Penyakit - di Posisi</h3>
-
-                    <div class="timeline-body">
-                      Keluhan
-                    </div>
-                    <div class="timeline-footer">
+                  </div>
+                  <div>
+                    <i class="fas fa-heartbeat bg-success"></i>
+                    <div class="timeline-item">
+                      <span class="time"><i class="far fa-clock"></i> {{ \Carbon\Carbon::parse($item->created_at)->format('H:i:s') }}</span>
+                      <h3 class="timeline-header">{{ $item->disease ? $item->disease->penyakit_name : "?" }}</h3>
+                      <div class="timeline-body">
+                        {!! $item->deatail !!}
+                      </div>
+                      <div class="timeline-footer">
+                      </div>
                     </div>
                   </div>
-                </div>
+                @endforeach
                 <div>
                   <i class="far fa-clock bg-gray"></i>
                 </div>
               </div>
             </div>
-            <div class="tab-pane" id="settings">
-              <form class="form-horizontal">
+            <div class="tab-pane {{ $errors->isEmpty() ? '' : 'active' }}" id="settings">
+              <form class="form-horizontal" action="{{ route('user.updateProfile', $user->id) }}" method="post">
+                @csrf
                 <div class="form-group row">
-                  <label for="inputName" class="col-sm-2 col-form-label">Nama</label>
+                  <label for="name" class="col-sm-2 col-form-label">Nama</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputName" placeholder="Nama">
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="" value="{{ old('name') ? old('name') : $user->name }}">
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="inputPassword" class="col-sm-2 col-form-label">Pasword</label>
+                  <label for="password" class="col-sm-2 col-form-label">Pasword <small>Kosongi jika tidak diubah</small></label>
                   <div class="col-sm-10">
-                    <input type="password" class="form-control" id="Password" placeholder="Name">
+                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="" value="{{ old('password') }}">
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="inputExperience" class="col-sm-2 col-form-label">Alamat</label>
+                  <label for="address" class="col-sm-2 col-form-label">Alamat</label>
                   <div class="col-sm-10">
-                    <textarea class="form-control" id="inputExperience" placeholder="Alamat">KTP ADDRESS</textarea>
+                    <textarea class="form-control @error('address') is-invalid @enderror" name="address" id="address" placeholder="Alamat">{{ old('address') ? old('address') : $user->ktpaddress }}</textarea>
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="offset-sm-2 col-sm-10">
                     <div class="checkbox">
                       <label>
-                        <input type="checkbox"> Data sudah benar
+                        <input type="checkbox" id="check" name="check" class="">
+                        <span class="@error('check') text-danger @enderror">
+                          Data sudah benar
+                        </span>
                       </label>
                     </div>
                   </div>
@@ -132,36 +130,36 @@
 @endsection
 
 @section('css')
-  <!-- DataTables -->
-  <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-
-  <!-- Select2 -->
-  <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
-
-  <!-- daterange picker -->
-  <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
-
   <!-- Toastr -->
   <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css') }}">
 @endsection
 
 @section('js')
-  <!-- DataTables -->
-  <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-  <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-  <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-
-  <!-- Select2 -->
-  <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
-
-  <!-- daterange picker -->
-  <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
-  <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
-
   <!-- Toastr -->
   <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
 
+  <script>
+    $(function () {
+      @error('password')
+      toastr.warning('{{ $message }}')
+      @enderror
+
+      @error('name')
+      toastr.warning('{{ $message }}')
+      @enderror
+
+      @error('check')
+      toastr.warning('{{ $message }}')
+      @enderror
+
+      @error('address')
+      toastr.warning('{{ $message }}')
+      @enderror
+
+      @if (\Session::has('message'))
+      toastr.success('{{ \Session::get('message') }}')
+      @endif
+
+    });
+  </script>
 @endsection

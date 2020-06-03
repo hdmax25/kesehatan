@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\model\Departement;
+use App\model\Penyakit;
 use App\model\Report;
 use App\User;
 use Illuminate\Contracts\Foundation\Application;
@@ -105,12 +106,16 @@ class UserController extends Controller
     $user->department = Departement::find($user->id_department);
 
     $report = Report::where('id_user', $id)->orderBy('id', 'desc')->take(30)->get();
+    $report->map(function ($item) {
+      $item->disease = Penyakit::find($item->id_penyakit);
+
+      return $item;
+    });
 
     $data = [
       'user' => $user,
       'report' => $report
     ];
-    dump($data);
     return view('user.show', $data);
   }
 
@@ -169,6 +174,44 @@ class UserController extends Controller
     $user->save();
 
     return redirect()->route('user.edit', $user->id)->with(['message' => 'Input data berhasil']);
+  }
+
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param Request $request
+   * @param $id
+   * @return RedirectResponse|Response
+   * @throws ValidationException
+   */
+  public function updateProfile(Request $request, $id)
+  {
+    $this->validate($request, [
+      'check' => 'accepted',
+    ]);
+
+    $user = User::find($id);
+    if ($user->name != $request->name) {
+      $this->validate($request, [
+        'name' => 'required|string',
+      ]);
+      $user->name = $request->name;
+    }
+    if ($request->password) {
+      $this->validate($request, [
+        'password' => 'nullable|string',
+      ]);
+      $user->password = Hash::make($request->password);
+    }
+    if ($user->ktpaddress != $request->address) {
+      $this->validate($request, [
+        'address' => 'required|string',
+      ]);
+      $user->ktpaddress = $request->address;
+    }
+    $user->save();
+
+    return redirect()->back()->with(['message' => 'Input data berhasil']);
   }
 
   /**
