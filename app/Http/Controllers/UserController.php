@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\model\Departement;
+use App\model\Report;
 use App\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -95,18 +96,21 @@ class UserController extends Controller
   /**
    * Display the specified resource.
    *
-   * @param Departement $departement
-   * @return Response
+   * @param $id
+   * @return Application|Factory|Response|View
    */
   public function show($id)
   {
     $user = User::find($id);
-    $department = Departement::where('delete', 0)->get();
+    $user->department = Departement::find($user->id_department);
+
+    $report = Report::where('id_user', $id)->orderBy('id', 'desc')->take(30)->get();
 
     $data = [
-      'department' => $department,
-      'user' => $user
+      'user' => $user,
+      'report' => $report
     ];
+    dump($data);
     return view('user.show', $data);
   }
 
@@ -148,7 +152,8 @@ class UserController extends Controller
     ]);
 
     $user = User::find($id);
-    if ($user->username != $request->username){
+    $user->name = $request->name;
+    if ($user->username != $request->username) {
       $this->validate($request, [
         'username' => 'required|numeric|unique:users'
       ]);
