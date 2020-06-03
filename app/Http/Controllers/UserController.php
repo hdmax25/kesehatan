@@ -163,7 +163,7 @@ class UserController extends Controller
     $user->role = $request->role;
     $user->save();
 
-    return redirect()->route('user.edit')->with(['message' => 'Input data berhasil']);
+    return redirect()->route('user.edit', $user->id)->with(['message' => 'Input data berhasil']);
   }
 
   /**
