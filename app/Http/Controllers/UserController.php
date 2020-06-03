@@ -209,6 +209,12 @@ class UserController extends Controller
       ]);
       $user->ktpaddress = $request->address;
     }
+    if ($user->phone != $request->phone) {
+      $this->validate($request, [
+        'phone' => 'required|numeric',
+      ]);
+      $user->phone = $request->phone;
+    }
     $user->save();
 
     return redirect()->back()->with(['message' => 'Input data berhasil']);
