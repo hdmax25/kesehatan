@@ -43,44 +43,6 @@
     @admin
     <div class="col-md-12">
       <div class="card card-outline card-danger">
-        <div class="card-header">
-            <h3 class="card-title">Data Kesehatan Tanggal {{ \Carbon\Carbon::now()->format('d-m-Y') }}</h3>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="info-box">
-                <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Jumlah Karyawan</span>
-                  <span class="info-box-number">1.500</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="info-box">
-                <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Sudah Mengisi</span>
-                  <span class="info-box-number">1000</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="info-box">
-                <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Belum Mengisi</span>
-                  <span class="info-box-number">500</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <div class="card card-outline card-danger">
         <form action="{{ route('findSDM') }}" method="post">
           @csrf
           <div class="card-body">
@@ -122,7 +84,7 @@
       <div class="col-md-12">
         <div class="card card-danger">
           <div class="card-header">
-            <h3 class="card-title">Data Kesehatan Tanggal {{ \Carbon\Carbon::now()->format('d/m/Y') }}</h3>
+            <h3 class="card-title">Data Kesehatan Tanggal {{ \Carbon\Carbon::now()->format('d-m-Y') }}</h3>
           </div>
           <form action="{{ route('report.store') }}" method="post">
             @csrf
@@ -432,6 +394,44 @@
       </div>
     @endif
     @enduser
+    <div class="col-md-12">
+      <div class="card card-outline card-danger">
+        <div class="card-header">
+            <h3 class="card-title">Data Kesehatan Tanggal {{ \Carbon\Carbon::now()->format('d-m-Y') }}</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="info-box">
+                <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Jumlah Karyawan</span>
+                  <span class="info-box-number">1.500</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="info-box">
+                <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Sudah Mengisi</span>
+                  <span class="info-box-number">1000</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="info-box">
+                <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Belum Mengisi</span>
+                  <span class="info-box-number">500</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="col-md-12">
       <div class="card card-outline card-danger">
         <div class="card-header">
