@@ -131,14 +131,11 @@ class ReportController extends Controller
   {
     //
   }
-}
 
-class InvoicesExport implements FromView
-{
-    public function view(): View
-    {
-        return view('exports.invoices', [
-            'invoices' => Invoice::all()
-        ]);
-    }
+  public function exportAll(): View
+  {
+    return view('exports.invoices', [
+      'invoices' => Invoice::all()
+    ]);
+  }
 }

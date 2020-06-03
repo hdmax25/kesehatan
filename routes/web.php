@@ -58,4 +58,5 @@ Route::group(['prefix' => 'report', 'as' => 'report.'], static function () {
   Route::get('/edit/{id}', 'ReportController@edit')->name('edit')->middleware('auth', 'role:1');
   Route::post('/update/{id}', 'ReportController@update')->name('update')->middleware('auth', 'role:1');
   Route::get('/destroy/{id}', 'ReportController@destroy')->name('destroy')->middleware('auth', 'role:1');
+  Route::get('/export/all', 'ReportController@exportAll')->name('exportAll')->middleware('auth', 'role:1|2');
 });
