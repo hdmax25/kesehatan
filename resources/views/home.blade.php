@@ -471,6 +471,9 @@
             </tbody>
           </table>
         </div>
+        <div class="card-footer">
+            <a href="{{ route('report.index') }}" class="btn btn-danger">Report</a>
+        </div>
       </div>
     </div>
   </div>
