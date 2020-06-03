@@ -110,12 +110,6 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="address" class="col-sm-2 col-form-label">Alamat</label>
-                  <div class="col-sm-10">
-                    <textarea class="form-control @error('address') is-invalid @enderror" name="address" id="address" placeholder="Alamat">{{ old('address') ? old('address') : $user->ktpaddress }}</textarea>
-                  </div>
-                </div>
-                <div class="form-group row">
                   <div class="offset-sm-2 col-sm-10">
                     <div class="checkbox">
                       <label>
