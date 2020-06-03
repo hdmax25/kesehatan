@@ -2,40 +2,46 @@
 @extends('layouts.app')
 
 @section('content')
-<button onclick="exportTableToExcel('tblData', 'Data-Kesehatan')" class="btn btn-danger">Export Table Data To Excel File</button>
-<div class="card-body table-responsive p-0">
-    <table id="tblData" class="table table-hover table-head-fixed text-wrap">
-        <thead>
-            <tr>
-                <th>Tanggal</th>
-                <th>NIP</th>
-                <th>Nama</th>
-                <th>Department</th>
-                <th>Phone</th>
-                <th>Posisi</th>
-                <th>Kondisi</th>
-                <th>Keluhan</th>
-                <th>Alamat</th>
-                <th>Domisili</th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach($report as $item)
-            <tr>
-            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y h:m') }}</td>
-            <td>{{ $item->user->username }}</td>
-            <td>{{ $item->user->name }}</td>
-            <td>{{ $item->department->department_name }}</td>
-            <td>'{{ $item->user->phone }}</td>
-            <td>{{ $item->position }}</td>
-            <td>{{ $item->penyakit->penyakit_name }}</td>
-            <td>{{ $item->deatail }}</td>
-            <td>{{ $item->user->ktpaddress }}</td>
-            <td>{{ $item->domicile }}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+<div class="row">
+    <div class="col-md-12">
+      <div class="card card-outline card-danger">
+        <div class="card-header">
+        <button onclick="exportTableToExcel('tblData', 'Data-Kesehatan')" class="btn btn-block btn-danger">Export Table Data To Excel File</button>
+        </div>
+        <div class="card-body table-responsive p-0">
+            <table id="tblData" class="table table-hover table-head-fixed text-wrap">
+                <thead>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>NIP</th>
+                        <th>Nama</th>
+                        <th>Department</th>
+                        <th>Phone</th>
+                        <th>Posisi</th>
+                        <th>Kondisi</th>
+                        <th>Keluhan</th>
+                        <th>Alamat</th>
+                        <th>Domisili</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach($report as $item)
+                    <tr>
+                    <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y h:m') }}</td>
+                    <td>{{ $item->user->username }}</td>
+                    <td>{{ $item->user->name }}</td>
+                    <td>{{ $item->department->department_name }}</td>
+                    <td>'{{ $item->user->phone }}</td>
+                    <td>{{ $item->position }}</td>
+                    <td>{{ $item->penyakit->penyakit_name }}</td>
+                    <td>{{ $item->deatail }}</td>
+                    <td>{{ $item->user->ktpaddress }}</td>
+                    <td>{{ $item->domicile }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+    </div>
 </div>
 @endsection
 
