@@ -25,6 +25,7 @@ class ReportController extends Controller
    */
   public function index()
   {
+    if (Auth::user()->role == 1) {
     $department = Departement::where('delete', 0)->get();
       $report = Report::orderBy('id', 'desc')->get();
       $report->map(function ($item) {
@@ -38,6 +39,7 @@ class ReportController extends Controller
         'report' => $report,
         'department' => $department
       ];
+    }
       return view('report.index', $data);
   }
 
