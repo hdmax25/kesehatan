@@ -78,6 +78,100 @@
         </form>
       </div>
     </div>
+    <div class="col-md-12">
+      <div class="card card-outline card-danger">
+        <div class="card-header">
+          <h3 class="card-title">Data Kesehatan</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="info-box">
+                <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Jumlah Karyawan</span>
+                  <span class="info-box-number">1.500</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="info-box">
+                <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Sudah Mengisi</span>
+                  <span class="info-box-number">1000</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="info-box">
+                <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Belum Mengisi</span>
+                  <span class="info-box-number">500</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header p-2">
+                  <ul class="nav nav-pills">
+                    <li class="nav-item"><a class="nav-link active" href="#belum" data-toggle="tab">Belum</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sudah" data-toggle="tab">Sudah</a></li>
+                  </ul>
+                </div><!-- /.card-header -->
+                <div class="card-body">
+                  <div class="tab-content">
+                    <div class="tab-pane  table-responsive active" id="belum">
+                      <table id="belum-t" class="table table-bordered table-striped text-center">
+                        <thead>
+                        <tr>
+                          <th>NIP</th>
+                          <th>Nama</th>
+                          <th>Phone</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($belum as $item)
+                          <tr>
+                            <td>{{ $item->username }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->phone }}</td>
+                          </tr>
+                        @endforeach
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="tab-pane  table-responsive" id="sudah">
+                      <table id="sudah-t" class="table table-bordered table-striped text-center">
+                        <thead>
+                        <tr>
+                          <th>NIP</th>
+                          <th>Nama</th>
+                          <th>Phone</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($sudah as $item)
+                          <tr>
+                            <td>{{ $item->username }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->phone }}</td>
+                          </tr>
+                        @endforeach
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     @endadmin
     @kadiv
     @if (!$todayCheck)
@@ -235,6 +329,100 @@
         </form>
       </div>
     </div>
+    <div class="col-md-12">
+      <div class="card card-outline card-danger">
+        <div class="card-header">
+          <h3 class="card-title">Data Kesehatan</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="info-box">
+                <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Jumlah Karyawan</span>
+                  <span class="info-box-number">1.500</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="info-box">
+                <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Sudah Mengisi</span>
+                  <span class="info-box-number">1000</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="info-box">
+                <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Belum Mengisi</span>
+                  <span class="info-box-number">500</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header p-2">
+                  <ul class="nav nav-pills">
+                    <li class="nav-item"><a class="nav-link active" href="#belum" data-toggle="tab">Belum</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sudah" data-toggle="tab">Sudah</a></li>
+                  </ul>
+                </div><!-- /.card-header -->
+                <div class="card-body">
+                  <div class="tab-content">
+                    <div class="tab-pane  table-responsive active" id="belum">
+                      <table id="belum-t" class="table table-bordered table-striped text-center">
+                        <thead>
+                        <tr>
+                          <th>NIP</th>
+                          <th>Nama</th>
+                          <th>Phone</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($belum as $item)
+                          <tr>
+                            <td>{{ $item->username }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->phone }}</td>
+                          </tr>
+                        @endforeach
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="tab-pane  table-responsive" id="sudah">
+                      <table id="sudah-t" class="table table-bordered table-striped text-center">
+                        <thead>
+                        <tr>
+                          <th>NIP</th>
+                          <th>Nama</th>
+                          <th>Phone</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($sudah as $item)
+                          <tr>
+                            <td>{{ $item->username }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->phone }}</td>
+                          </tr>
+                        @endforeach
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     @endkadiv
     @user
     @if (!$todayCheck)
@@ -365,151 +553,6 @@
       </div>
     @endif
     @enduser
-    <div class="col-md-12">
-      <div class="card card-outline card-danger">
-        <div class="card-header">
-          <h3 class="card-title">Data Kesehatan</h3>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="info-box">
-                <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Jumlah Karyawan</span>
-                  <span class="info-box-number">1.500</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="info-box">
-                <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Sudah Mengisi</span>
-                  <span class="info-box-number">1000</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="info-box">
-                <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Belum Mengisi</span>
-                  <span class="info-box-number">500</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header p-2">
-                  <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link active" href="#belum" data-toggle="tab">Belum</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#sudah" data-toggle="tab">Sudah</a></li>
-                  </ul>
-                </div><!-- /.card-header -->
-                <div class="card-body">
-                  <div class="tab-content">
-                    <div class="tab-pane active" id="belum">
-                      <div class="card-body table-responsive">
-                        <table id="report" class="table table-bordered table-striped text-center">
-                          <thead>
-                          <tr>
-                            <th>NIP</th>
-                            <th>Nama</th>
-                            <th>Phone</th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                          @foreach($report as $item)
-                            <tr>
-                              <td>{{ $item->user->username }}</td>
-                              <td>{{ $item->user->name }}</td>
-                              <td>{{ $item->user->phone }}</td>
-                            </tr>
-                          @endforeach
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                    <div class="tab-pane" id="sudah">
-                      <div class="card-body table-responsive">
-                        <table id="report1" class="table table-bordered table-striped text-center">
-                          <thead>
-                          <tr>
-                            <th>NIP</th>
-                            <th>Nama</th>
-                            <th>Phone</th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                          @foreach($report as $item)
-                            <tr>
-                              <td>{{ $item->user->username }}</td>
-                              <td>{{ $item->user->name }}</td>
-                              <td>{{ $item->user->phone }}</td>
-                            </tr>
-                          @endforeach
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                    <!-- /.tab-pane -->
-                  </div>
-                  <!-- /.tab-content -->
-                </div><!-- /.card-body -->
-              </div>
-              <!-- /.nav-tabs-custom -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  <!-- <div class="col-md-12">
-      <div class="card card-outline card-danger">
-        <div class="card-header">
-          <h3 class="card-title">Data yang sudah ada</h3>
-        </div>
-        <div class="card-body table-responsive">
-          <table id="report" class="table table-bordered table-striped text-center">
-            <thead>
-            <tr>
-              <th>Tanggal</th>
-              <th>NIP</th>
-              <th>Nama</th>
-              <th>Department</th>
-              <th>Phone</th>
-              <th>Posisi</th>
-              <th>Kondisi</th>
-              <th>Keluhan</th>
-              <th>Alamat</th>
-              <th>Domisili</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($report as $item)
-    <tr>
-      <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y h:m') }}</td>
-                <td>{{ $item->user->username }}</td>
-                <td>{{ $item->user->name }}</td>
-                <td>{{ $item->department->department_name }}</td>
-                <td>{{ $item->user->phone }}</td>
-                <td>{{ $item->position }}</td>
-                <td>{{ $item->penyakit->penyakit_name }}</td>
-                <td>{{ $item->deatail }}</td>
-                <td>{{ $item->user->ktpaddress }}</td>
-                <td>{{ $item->domicile }}</td>
-              </tr>
-            @endforeach
-      </tbody>
-    </table>
-  </div>
-  <div class="card-footer">
-    <a href="{{route('report.index')}}" class="btn btn-danger">Download Excel</a>
-        </div>
-      </div>
-    </div>-->
   </div>
 @endsection
 
@@ -549,9 +592,23 @@
   <script>
     $(function () {
       //Date range picker
-      $('#reservation').daterangepicker();
+      $('#reservation').daterangepicker({
+          locale: {
+            format: 'DD/MM/YYYY'
+          }
+        });
 
-      $('#report').DataTable({
+      $('#sudah-t').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": true,
+        "responsive": true,
+      });
+
+      $('#belum-t').DataTable({
         "paging": true,
         "lengthChange": true,
         "searching": true,

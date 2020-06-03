@@ -36,34 +36,33 @@ class HomeController extends Controller
   {
     if (Auth::user()->role == 1) {
       $department = Departement::where('delete', 0)->get();
-      $report = Report::orderBy('id', 'desc')->get();
+      $report = User::where('role', '!=', 1)->get();
       $report->map(function ($item) {
-        $item->user = User::find($item->id_user);
         $item->department = Departement::find($item->id_department);
-        $item->penyakit = Penyakit::find($item->id_penyakit);
-        return $item;
+        $item->absenes = Report::where('id_user', $item->id)->whereDate('created_at', Carbon::now())->first();
       });
 
       $data = [
-        'report' => $report,
-        'department' => $department
+        'department' => $department,
+        'sudah' => $report->whereNotNull('absenes'),
+        'belum' => $report->whereNull('absenes')
       ];
       return view('home', $data);
     } else if (Auth::user()->role == 2) {
       $validateToday = Report::where('id_user', Auth::user()->id)->whereDate('created_at', Carbon::now())->count();
       $disease = Penyakit::where('delete', 0)->get();
-      $report = Report::orderBy('id', 'desc')->where('id_department', Auth::user()->id_department)->get();
+      $report = User::where('role', '!=', 1)->where('id_department', Auth::user()->id_department)->get();
       $report->map(function ($item) {
-        $item->user = User::find($item->id_user);
         $item->department = Departement::find($item->id_department);
-        $item->penyakit = Penyakit::find($item->id_penyakit);
-        return $item;
+        $item->absenes = Report::where('id_user', $item->id)->whereDate('created_at', Carbon::now())->first();
       });
 
       $data = [
         'report' => $report,
         'disease' => $disease,
-        'todayCheck' => $validateToday
+        'todayCheck' => $validateToday,
+        'sudah' => $report->whereNotNull('absenes'),
+        'belum' => $report->whereNull('absenes')
       ];
       return view('home', $data);
     } else {
@@ -101,16 +100,16 @@ class HomeController extends Controller
     $date = explode(' - ', $request->date);
     $dateStart = Carbon::parse($date[0].' 00:00:00')->format('Y-m-d H:i:s');
     $dateEnd = Carbon::parse($date[1]. '23:59:59')->format('Y-m-d H:i:s');
-    $report = Report::orderBy('id', 'desc')->where('id_department', $request->department)->whereBetween('created_at', [$dateStart, $dateEnd])->get();
-    $report->map(function ($item) {
-      $item->user = User::find($item->id_user);
+    $report = User::where('role', '!=', 1)->where('id_department', $request->department)->get();
+    $report->map(function ($item) use($dateStart, $dateEnd) {
       $item->department = Departement::find($item->id_department);
-      $item->penyakit = Penyakit::find($item->id_penyakit);
+      $item->absenes = Report::where('id_user', $item->id)->whereBetween('created_at', [$dateStart, $dateEnd])->first();
       return $item;
     });
 
     $data = [
-      'report' => $report,
+      'sudah' => $report->whereNotNull('absenes'),
+      'belum' => $report->whereNull('absenes'),
       'department' => Departement::where('delete', 0)->get()
     ];
     return view('home', $data);
