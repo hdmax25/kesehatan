@@ -92,9 +92,21 @@
                   </div>
                 </div>
                 <div class="form-group row">
+                  <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" placeholder="" value="{{ old('phone') ? old('phone') : $user->phone }}">
+                  </div>
+                </div>
+                <div class="form-group row">
                   <label for="password" class="col-sm-2 col-form-label">Pasword <small>Kosongi jika tidak diubah</small></label>
                   <div class="col-sm-10">
                     <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="" value="{{ old('password') }}">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="address" class="col-sm-2 col-form-label">Alamat</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control @error('address') is-invalid @enderror" name="address" id="address" placeholder="Alamat">{{ old('address') ? old('address') : $user->ktpaddress }}</textarea>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -141,6 +153,10 @@
   <script>
     $(function () {
       @error('password')
+      toastr.warning('{{ $message }}')
+      @enderror
+
+      @error('phone')
       toastr.warning('{{ $message }}')
       @enderror
 
