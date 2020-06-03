@@ -26,7 +26,7 @@
             <td>{{ $item->user->username }}</td>
             <td>{{ $item->user->name }}</td>
             <td>{{ $item->department->department_name }}</td>
-            <td>{{ $item->user->phone }}</td>
+            <td>'{{ $item->user->phone }}</td>
             <td>{{ $item->position }}</td>
             <td>{{ $item->penyakit->penyakit_name }}</td>
             <td>{{ $item->deatail }}</td>
