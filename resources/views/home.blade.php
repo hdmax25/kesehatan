@@ -381,7 +381,6 @@
                         <tr>
                           <th>NIP</th>
                           <th>Nama</th>
-                          <th>Unitkerja</th>
                           <th>Phone</th>
                         </tr>
                         </thead>
@@ -390,7 +389,6 @@
                           <tr>
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>Unit Kerja</td>
                             <td>{{ $item->phone }}</td>
                           </tr>
                         @endforeach
@@ -403,7 +401,6 @@
                         <tr>
                           <th>NIP</th>
                           <th>Nama</th>
-                          <th>Unitkerja</th>
                           <th>Phone</th>
                         </tr>
                         </thead>
@@ -412,7 +409,6 @@
                           <tr>
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>Unit Kerja</td>
                             <td>{{ $item->phone }}</td>
                           </tr>
                         @endforeach
