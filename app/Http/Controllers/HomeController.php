@@ -62,7 +62,7 @@ class HomeController extends Controller
         $item->absenes = Report::where('id_user', $item->id)->whereDate('created_at', Carbon::now())->first();
       });
 
-      $domicile = Report::where('id_user', Auth::user()->id)->orderBy('id', 'desc')->frist();
+      $domicile = Report::where('id_user', Auth::user()->id)->orderBy('id', 'desc')->first();
 
       $data = [
         'domicile' => $domicile,
@@ -76,7 +76,7 @@ class HomeController extends Controller
       $validateToday = Report::where('id_user', Auth::user()->id)->whereDate('created_at', Carbon::now())->count();
       $disease = Penyakit::where('delete', 0)->get();
 
-      $domicile = Report::where('id_user', Auth::user()->id)->orderBy('id', 'desc')->frist();
+      $domicile = Report::where('id_user', Auth::user()->id)->orderBy('id', 'desc')->first();
 
       $data = [
         'domicile' => $domicile,
