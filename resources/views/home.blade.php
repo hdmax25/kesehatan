@@ -90,7 +90,7 @@
                 <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Jumlah Karyawan</span>
-                  <span class="info-box-number">1.500</span>
+                  <span class="info-box-number">{{ $sudah->count() + $belum->count() }}</span>
                 </div>
               </div>
             </div>
@@ -99,7 +99,7 @@
                 <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Sudah Mengisi</span>
-                  <span class="info-box-number">1000</span>
+                  <span class="info-box-number">{{ $sudah->count() }}</span>
                 </div>
               </div>
             </div>
@@ -108,7 +108,7 @@
                 <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Belum Mengisi</span>
-                  <span class="info-box-number">500</span>
+                  <span class="info-box-number">{{ $belum->count() }}</span>
                 </div>
               </div>
             </div>
@@ -341,7 +341,7 @@
                 <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Jumlah Karyawan</span>
-                  <span class="info-box-number">1.500</span>
+                  <span class="info-box-number">{{ $sudah->count() + $belum->count() }}</span>
                 </div>
               </div>
             </div>
@@ -350,7 +350,7 @@
                 <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Sudah Mengisi</span>
-                  <span class="info-box-number">1000</span>
+                  <span class="info-box-number">{{ $sudah->count() }}</span>
                 </div>
               </div>
             </div>
@@ -359,7 +359,7 @@
                 <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Belum Mengisi</span>
-                  <span class="info-box-number">500</span>
+                  <span class="info-box-number">{{ $belum->count() }}</span>
                 </div>
               </div>
             </div>
