@@ -24,6 +24,7 @@ Route::get('/', static function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/export', 'HomeController@export')->name('export');
 Route::post('/home/sdm', 'HomeController@findSDM')->name('findSDM');
 Route::post('/home/devise', 'HomeController@findDevise')->name('findDevise');
 

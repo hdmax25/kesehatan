@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\FromCollection\ExportMode;
 use App\model\Departement;
 use App\model\Penyakit;
 use App\model\Report;
@@ -14,17 +15,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
+use Maatwebsite\Excel\Facades\Excel;
 
 class HomeController extends Controller
 {
   /**
    * Create a new controller instance.
-   *
-   * @return void
    */
   public function __construct()
   {
     $this->middleware('auth');
+  }
+
+  public function export()
+  {
+    return Excel::download(new ExportMode, 'report.xlsx');
   }
 
   /**
@@ -98,8 +103,8 @@ class HomeController extends Controller
     ]);
 
     $date = explode(' - ', $request->date);
-    $dateStart = Carbon::parse($date[0].' 00:00:00')->format('Y-m-d H:i:s');
-    $dateEnd = Carbon::parse($date[1]. '23:59:59')->format('Y-m-d H:i:s');
+    $dateStart = Carbon::parse($date[0] . ' 00:00:00')->format('Y-m-d H:i:s');
+    $dateEnd = Carbon::parse($date[1] . '23:59:59')->format('Y-m-d H:i:s');
     $report = Report::orderBy('id', 'desc')->where('id_department', $request->department)->whereBetween('created_at', [$dateStart, $dateEnd])->get();
     $report->map(function ($item) {
       $item->user = User::find($item->id_user);
@@ -128,8 +133,8 @@ class HomeController extends Controller
     $validateToday = Report::where('id_user', Auth::user()->id)->whereDate('created_at', Carbon::now())->count();
     $disease = Penyakit::where('delete', 0)->get();
     $date = explode(' - ', $request->date);
-    $dateStart = Carbon::parse($date[0].' 00:00:00')->format('Y-m-d H:i:s');
-    $dateEnd = Carbon::parse($date[1]. '23:59:59')->format('Y-m-d H:i:s');
+    $dateStart = Carbon::parse($date[0] . ' 00:00:00')->format('Y-m-d H:i:s');
+    $dateEnd = Carbon::parse($date[1] . '23:59:59')->format('Y-m-d H:i:s');
     $report = Report::orderBy('id', 'desc')->whereBetween('created_at', [$dateStart, $dateEnd])->get();
     $report->map(function ($item) {
       $item->user = User::find($item->id_user);
