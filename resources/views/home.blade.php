@@ -52,7 +52,7 @@
               <div class="info-box">
                 <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
                 <div class="info-box-content">
-                  <span class="info-box-text">Jumlah Karyawan</span>
+                  <span class="info-box-text">Jumlah Pegawai</span>
                   <span class="info-box-number">{{ $sudah->count() + $belum->count() }}</span>
                 </div>
               </div>
@@ -103,7 +103,7 @@
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->department->department_name }}</td>
-                            <td>{{ $item->phone }}</td>
+                            <td><a href="tel:{{$item->phone}}"><i class="fas fa-phone"></i></a></td>
                           </tr>
                         @endforeach
                         </tbody>
@@ -125,7 +125,7 @@
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->department->department_name }}</td>
-                            <td>{{ $item->phone }}</td>
+                            <td><a href="tel:{{$item->phone}}"><i class="fas fa-phone"></i></a></td>
                           </tr>
                         @endforeach
                         </tbody>
@@ -274,7 +274,7 @@
               <div class="info-box">
                 <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
                 <div class="info-box-content">
-                  <span class="info-box-text">Jumlah Karyawan</span>
+                  <span class="info-box-text">Jumlah Pegawai</span>
                   <span class="info-box-number">{{ $sudah->count() + $belum->count() }}</span>
                 </div>
               </div>
@@ -325,7 +325,7 @@
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->department->department_name }}</td>
-                            <td>{{ $item->phone }}</td>
+                            <td><a href="tel:{{$item->phone}}"><i class="fas fa-phone"></i></a></td>
                           </tr>
                         @endforeach
                         </tbody>
@@ -347,7 +347,7 @@
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->department->department_name }}</td>
-                            <td>{{ $item->phone }}</td>
+                            <td><a href="tel:{{$item->phone}}"><i class="fas fa-phone"></i></a></td>
                           </tr>
                         @endforeach
                         </tbody>
