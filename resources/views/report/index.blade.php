@@ -1,4 +1,4 @@
-<button onclick="exportTableToExcel('tblData')">Export Table Data To Excel File</button>
+<button onclick="exportTableToExcel('tblData', 'Data-Kesehatan')">Export Table Data To Excel File</button>
 <table id="tblData">
     <thead>
         <tr>
