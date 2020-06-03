@@ -2,6 +2,46 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="col-md-6">
+    <div class="form-group">
+        <label for="reservation">Tanggal</label>
+        <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">
+            <i class="far fa-calendar-alt"></i>
+            </span>
+        </div>
+        <input type="text" class="form-control float-right" name="date" id="reservation">
+    </div>
+</div>
+</div>
+<div class="col-md-12">
+      <div class="card card-outline card-danger">
+        <form action="{{ route('findDevise') }}" method="post">
+          @csrf
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="reservation">Tanggal</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="far fa-calendar-alt"></i>
+                      </span>
+                    </div>
+                    <input type="text" class="form-control float-right" name="date" id="reservation">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-danger">Find</button>
+          </div>
+        </form>
+      </div>
+    </div>
 <div class="row">
     <div class="col-md-12">
       <div class="card card-outline card-danger">

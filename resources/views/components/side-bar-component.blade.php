@@ -79,7 +79,23 @@
             </p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="{{ route('export') }}" class="nav-link {{ request()->is('penyakit') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-file-excel"></i>
+            <p>
+              Report Excel
+            </p>
+          </a>
+        </li>
         @endadmin
+        <li class="nav-item">
+          <a href="{{ route('user.show', Auth::user()->id) }}" class="nav-link {{ request()->is('user/show*') ? 'active' : '' }}"> 
+            <i class="nav-icon fas fa-user"></i>
+            <p>
+              Profile
+            </p>
+          </a>
+        </li>
         <li class="nav-item">
           <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="nav-link">
             <i class="nav-icon fas fa-power-off"></i>

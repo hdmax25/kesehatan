@@ -30,7 +30,7 @@
 
           <h3 class="profile-username text-center">{{ $user->name }}</h3>
 
-          <p class="text-muted text-center">{{ $user->department ? $user->department->name : '' }}</p>
+          <p class="text-muted text-center">{{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}</p>
 
           <ul class="list-group list-group-unbordered mb-3">
             <li class="list-group-item">
@@ -51,7 +51,7 @@
         <div class="card-header p-2">
           <ul class="nav nav-pills">
             <li class="nav-item"><a class="nav-link {{ $errors->isEmpty() ? 'active' : '' }}" href="#timeline" data-toggle="tab">History</a></li>
-            <li class="nav-item"><a class="nav-link {{ $errors->isEmpty() ? '' : 'active' }}" href="#settings" data-toggle="tab">Edit</a></li>
+            <li class="nav-item"><a class="nav-link {{ $errors->isEmpty() ? '' : 'active' }}" href="#settings" data-toggle="tab">Edit Profile</a></li>
           </ul>
         </div>
         <div class="card-body">
@@ -70,7 +70,7 @@
                       <span class="time"><i class="far fa-clock"></i> {{ \Carbon\Carbon::parse($item->created_at)->format('H:i:s') }}</span>
                       <h3 class="timeline-header">{{ $item->disease ? $item->disease->penyakit_name : "?" }}</h3>
                       <div class="timeline-body">
-                        {!! $item->deatail !!}
+                        Keluhan {!! $item->deatail !!}
                       </div>
                       <div class="timeline-footer">
                       </div>
@@ -98,9 +98,10 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="password" class="col-sm-2 col-form-label">Pasword <small>Kosongi jika tidak diubah</small></label>
+                  <label for="password" class="col-sm-2 col-form-label">Pasword</label>
                   <div class="col-sm-10">
                     <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="" value="{{ old('password') }}">
+                    <small>Kosongi jika tidak diubah</small>
                   </div>
                 </div>
                 <div class="form-group row">

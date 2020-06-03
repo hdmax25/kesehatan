@@ -47,20 +47,7 @@
           @csrf
           <div class="card-body">
             <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="reservation">Tanggal</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="far fa-calendar-alt"></i>
-                      </span>
-                    </div>
-                    <input type="text" class="form-control float-right" name="date" id="reservation">
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <div class="form-group">
                   <label for="department">Department</label>
                   <select id="department" name="department" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" required>
@@ -130,6 +117,7 @@
                         <tr>
                           <th>NIP</th>
                           <th>Nama</th>
+                          <th>Unit Kerja</th>
                           <th>Phone</th>
                         </tr>
                         </thead>
@@ -138,6 +126,7 @@
                           <tr>
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->name }}</td>
+                            <td>{{ $item->department->department_name }}</td>
                             <td>{{ $item->phone }}</td>
                           </tr>
                         @endforeach
@@ -150,6 +139,7 @@
                         <tr>
                           <th>NIP</th>
                           <th>Nama</th>
+                          <th>Unit Kerja</th>
                           <th>Phone</th>
                         </tr>
                         </thead>
@@ -158,6 +148,7 @@
                           <tr>
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->name }}</td>
+                            <td>{{ $item->department->department_name }}</td>
                             <td>{{ $item->phone }}</td>
                           </tr>
                         @endforeach
@@ -298,35 +289,8 @@
     @endif
     <div class="col-md-12">
       <div class="card card-outline card-danger">
-        <form action="{{ route('findDevise') }}" method="post">
-          @csrf
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="reservation">Tanggal</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="far fa-calendar-alt"></i>
-                      </span>
-                    </div>
-                    <input type="text" class="form-control float-right" name="date" id="reservation">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-footer">
-            <button type="submit" class="btn btn-danger">Find</button>
-          </div>
-        </form>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <div class="card card-outline card-danger">
         <div class="card-header">
-          <h3 class="card-title">Data Kesehatan</h3>
+          <h3 class="card-title">Data Kesehatan - {{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}</h3>
         </div>
         <div class="card-body">
           <div class="row">
@@ -375,6 +339,7 @@
                         <tr>
                           <th>NIP</th>
                           <th>Nama</th>
+                          <th>Unit Kerja</th>
                           <th>Phone</th>
                         </tr>
                         </thead>
@@ -383,6 +348,7 @@
                           <tr>
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->name }}</td>
+                            <td>{{ $item->department->department_name }}</td>
                             <td>{{ $item->phone }}</td>
                           </tr>
                         @endforeach
@@ -395,6 +361,7 @@
                         <tr>
                           <th>NIP</th>
                           <th>Nama</th>
+                          <th>Unit Kerja</th>
                           <th>Phone</th>
                         </tr>
                         </thead>
@@ -403,6 +370,7 @@
                           <tr>
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->name }}</td>
+                            <td>{{ $item->department->department_name }}</td>
                             <td>{{ $item->phone }}</td>
                           </tr>
                         @endforeach
@@ -540,6 +508,20 @@
           </form>
         </div>
       </div>
+    @else
+        <div class="col-md-12">
+          <div class="card card-outline card-danger">
+            <div class="card-header">
+              <h3 class="card-title">Berhasil</h3>
+            </div>
+            <div class="card-body">
+              Terimakasih telah mengisi data kesehatan. Jangan lupa besok ngisi lagi ya kak....
+            </div>
+            <div class="card-footer">
+              <a  href="{{ route('user.show', Auth::user()->id) }}" class="btn btn-danger">History</a>
+            </div>
+          </div>
+        </div>
     @endif
     @enduser
   </div>
