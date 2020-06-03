@@ -381,7 +381,7 @@
             <tbody>
             @foreach($report as $item)
               <tr>
-                <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}</td>
+                <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y h:m') }}</td>
                 <td>{{ $item->user->username }}</td>
                 <td>{{ $item->user->name }}</td>
                 <td>{{ $item->department->department_name }}</td>
