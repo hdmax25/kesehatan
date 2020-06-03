@@ -152,7 +152,7 @@ class UserController extends Controller
       $this->validate($request, [
         'username' => 'required|numeric|unique:users'
       ]);
-      $user->username = $request->username
+      $user->username = $request->username;
     }
     $user->id_department = $request->department;
     if ($request->password) {
