@@ -139,7 +139,7 @@
                     <label>Domisili</label>
                     @if ($report->first())
                       <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
-                                placeholder="Enter ...">{{ old('domicile') ? old('domicile') : ($report->where('id_user', Auth::user()->id)->first() ? $report->where('id_user', Atuh::user()->id)->first()->domicile : '')
+                                placeholder="Enter ...">{{ old('domicile') ? old('domicile') : ($report->where('id_user', Auth::user()->id)->first() ? $report->where('id_user', Auth::user()->id)->first()->domicile : '')
                                 }}</textarea>
                     @else
                       <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
