@@ -155,15 +155,18 @@
                   <div class="card-body">
                     <div class="form-group row">
                       <div class="custom-control custom-radio col-md-3">
-                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio1" name="position" value="Rumah" {{ old('position') == 'Rumah' ? 'checked' : '' }}>
+                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio1" name="position"
+                               value="Rumah" {{ old('position') == 'Rumah' ? 'checked' : '' }}>
                         <label for="customRadio1" class="custom-control-label">Rumah</label>
                       </div>
                       <div class="custom-control custom-radio col-md-3">
-                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio2" name="position" value="Kantor" {{ old('position') == 'Kantor' ? 'checked' : '' }}>
+                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio2" name="position"
+                               value="Kantor" {{ old('position') == 'Kantor' ? 'checked' : '' }}>
                         <label for="customRadio2" class="custom-control-label">Kantor</label>
                       </div>
                       <div class="custom-control custom-radio col-md-3">
-                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio3" name="position" value="Kost" {{ old('position') == 'Kost' ? 'checked' : '' }}>
+                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio3" name="position"
+                               value="Kost" {{ old('position') == 'Kost' ? 'checked' : '' }}>
                         <label for="customRadio3" class="custom-control-label">Kost</label>
                       </div>
                       <div class="input-group col-md-3">
@@ -172,7 +175,8 @@
                             <input type="radio" name="position" value="0" {{ old('position') != 'Rumah' && old('position') != 'Kantor' && old('position') != 'Kost' ? 'checked' : '' }}>
                           </span>
                         </div>
-                        <input type="text" class="form-control @error('positionDescription') is-invalid @enderror" name="positionDescription" placeholder="Lain-Lain..." value="{{ old('positionDescription') }}">
+                        <input type="text" class="form-control @error('positionDescription') is-invalid @enderror" name="positionDescription" placeholder="Lain-Lain..."
+                               value="{{ old('positionDescription') }}">
                       </div>
                     </div>
                   </div>
@@ -307,15 +311,18 @@
                   <div class="card-body">
                     <div class="form-group row">
                       <div class="custom-control custom-radio col-md-3">
-                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio1" name="position" value="Rumah" {{ old('position') == 'Rumah' ? 'checked' : '' }}>
+                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio1" name="position"
+                               value="Rumah" {{ old('position') == 'Rumah' ? 'checked' : '' }}>
                         <label for="customRadio1" class="custom-control-label">Rumah</label>
                       </div>
                       <div class="custom-control custom-radio col-md-3">
-                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio2" name="position" value="Kantor" {{ old('position') == 'Kantor' ? 'checked' : '' }}>
+                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio2" name="position"
+                               value="Kantor" {{ old('position') == 'Kantor' ? 'checked' : '' }}>
                         <label for="customRadio2" class="custom-control-label">Kantor</label>
                       </div>
                       <div class="custom-control custom-radio col-md-3">
-                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio3" name="position" value="Kost" {{ old('position') == 'Kost' ? 'checked' : '' }}>
+                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio3" name="position"
+                               value="Kost" {{ old('position') == 'Kost' ? 'checked' : '' }}>
                         <label for="customRadio3" class="custom-control-label">Kost</label>
                       </div>
                       <div class="input-group col-md-3">
@@ -324,7 +331,8 @@
                             <input type="radio" name="position" value="0" {{ old('position') != 'Rumah' && old('position') != 'Kantor' && old('position') != 'Kost' ? 'checked' : '' }}>
                           </span>
                         </div>
-                        <input type="text" class="form-control @error('positionDescription') is-invalid @enderror" name="positionDescription" placeholder="Lain-Lain..." value="{{ old('positionDescription') }}">
+                        <input type="text" class="form-control @error('positionDescription') is-invalid @enderror" name="positionDescription" placeholder="Lain-Lain..."
+                               value="{{ old('positionDescription') }}">
                       </div>
                     </div>
                   </div>
@@ -359,7 +367,7 @@
     <div class="col-md-12">
       <div class="card card-outline card-danger">
         <div class="card-header">
-            <h3 class="card-title">Data Kesehatan</h3>
+          <h3 class="card-title">Data Kesehatan</h3>
         </div>
         <div class="card-body">
           <div class="row">
@@ -406,42 +414,42 @@
                       <div class="card-body table-responsive">
                         <table id="report" class="table table-bordered table-striped text-center">
                           <thead>
-                            <tr>
-                              <th>NIP</th>
-                              <th>Nama</th>
-                              <th>Phone</th>
-                            </tr>
+                          <tr>
+                            <th>NIP</th>
+                            <th>Nama</th>
+                            <th>Phone</th>
+                          </tr>
                           </thead>
                           <tbody>
-                              @foreach($report as $item)
-                                <tr>
-                                  <td>{{ $item->user->username }}</td>
-                                  <td>{{ $item->user->name }}</td>
-                                  <td>{{ $item->user->phone }}</td>
-                                </tr>
-                              @endforeach
+                          @foreach($report as $item)
+                            <tr>
+                              <td>{{ $item->user->username }}</td>
+                              <td>{{ $item->user->name }}</td>
+                              <td>{{ $item->user->phone }}</td>
+                            </tr>
+                          @endforeach
                           </tbody>
                         </table>
                       </div>
                     </div>
                     <div class="tab-pane" id="sudah">
-                     <div class="card-body table-responsive">
+                      <div class="card-body table-responsive">
                         <table id="report1" class="table table-bordered table-striped text-center">
                           <thead>
-                            <tr>
-                              <th>NIP</th>
-                              <th>Nama</th>
-                              <th>Phone</th>
-                            </tr>
+                          <tr>
+                            <th>NIP</th>
+                            <th>Nama</th>
+                            <th>Phone</th>
+                          </tr>
                           </thead>
                           <tbody>
-                              @foreach($report as $item)
-                                <tr>
-                                  <td>{{ $item->user->username }}</td>
-                                  <td>{{ $item->user->name }}</td>
-                                  <td>{{ $item->user->phone }}</td>
-                                </tr>
-                              @endforeach
+                          @foreach($report as $item)
+                            <tr>
+                              <td>{{ $item->user->username }}</td>
+                              <td>{{ $item->user->name }}</td>
+                              <td>{{ $item->user->phone }}</td>
+                            </tr>
+                          @endforeach
                           </tbody>
                         </table>
                       </div>
@@ -457,7 +465,7 @@
         </div>
       </div>
     </div>
-    <!-- <div class="col-md-12">
+  <!-- <div class="col-md-12">
       <div class="card card-outline card-danger">
         <div class="card-header">
           <h3 class="card-title">Data yang sudah ada</h3>
@@ -480,8 +488,8 @@
             </thead>
             <tbody>
             @foreach($report as $item)
-              <tr>
-                <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y h:m') }}</td>
+    <tr>
+      <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y h:m') }}</td>
                 <td>{{ $item->user->username }}</td>
                 <td>{{ $item->user->name }}</td>
                 <td>{{ $item->department->department_name }}</td>
@@ -493,11 +501,11 @@
                 <td>{{ $item->domicile }}</td>
               </tr>
             @endforeach
-            </tbody>
-          </table>
-        </div>
-        <div class="card-footer">
-          <a href="{{route('report.index')}}" class="btn btn-danger">Download Excel</a>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer">
+    <a href="{{route('report.index')}}" class="btn btn-danger">Download Excel</a>
         </div>
       </div>
     </div>-->
