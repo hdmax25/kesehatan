@@ -65,7 +65,7 @@
                   </span>
                   </div>
                   <div>
-                    <i class="fas fa-heartbeat bg-success"></i>
+                    <i class="fas fa-heartbeat bg-primary"></i>
                     <div class="timeline-item">
                       <span class="time"><i class="far fa-clock"></i> {{ \Carbon\Carbon::parse($item->created_at)->format('H:i:s') }}</span>
                       <h3 class="timeline-header"><a href="#">{{ $item->disease ? $item->disease->penyakit_name : "?" }}</a> di {{ $item->position ? $item->position : "?" }}</h3>
