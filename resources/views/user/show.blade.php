@@ -16,12 +16,12 @@
       <div class="card card-danger card-outline">
         <div class="card-body box-profile">
           <div class="text-center">
-            <img class="profile-user-img img-fluid img-circle" src="{{ asset('dist/img/avatar5.png') }}" alt="User profile picture">
+            <img class="profile-user-img img-fluid img-circle" src="{{ asset('dist/img/profile/'.$user->username.'.jpg') }}" alt="User profile picture">
           </div>
 
           <h3 class="profile-username text-center">{{ $user->name }}</h3>
 
-          <p class="text-muted text-center">{{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}</p>
+          <p class="text-muted text-center">{{ $user->department->department_name}}</p>
 
           <ul class="list-group list-group-unbordered mb-3">
             <li class="list-group-item">
