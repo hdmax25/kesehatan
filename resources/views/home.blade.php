@@ -491,7 +491,8 @@
               <h3 class="card-title">Berhasil</h3>
             </div>
             <div class="card-body">
-              Terimakasih telah mengisi data kesehatan. Jangan lupa besok ngisi lagi ya kak....
+              Terimakasih telah mengisi data kesehatan hari ini. Jangan lupa besok ngisi lagi ya kak..,
+              Jika ingin melihat data kesehatan yang sudah di input silakan klik tombol dibawah ini
             </div>
             <div class="card-footer">
               <a  href="{{ route('user.show', Auth::user()->id) }}" class="btn btn-danger">History</a>
