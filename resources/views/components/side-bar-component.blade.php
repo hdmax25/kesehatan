@@ -65,7 +65,7 @@
         </li>
         <li class="nav-item">
           <a href="{{ route('department.index') }}" class="nav-link {{ request()->is('department') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-home"></i>
+            <i class="nav-icon fa fa-building"></i>
             <p>
               Department
             </p>
@@ -73,7 +73,7 @@
         </li>
         <li class="nav-item">
           <a href="{{ route('penyakit.index') }}" class="nav-link {{ request()->is('penyakit') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-home"></i>
+            <i class="nav-icon fas fa-heartbeat"></i>
             <p>
               Kondisi
             </p>

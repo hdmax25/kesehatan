@@ -20,9 +20,9 @@ class ExportMode implements FromCollection
         'department' => 'Department',
         'phone' => 'Phone',
         'position' => 'Posisi',
-        'disease' => ' Kondisi/Penyakit',
-        'diseaseDescription' => 'Keluhan/detail',
-        'ktpaddress' => 'Alamat/ktpaddress',
+        'disease' => ' Kondisi',
+        'diseaseDescription' => 'Keluhan',
+        'ktpaddress' => 'Alamat',
         'domicile' => 'Domisili',
       ]
     ];
@@ -37,7 +37,7 @@ class ExportMode implements FromCollection
       $data[$id + 1]['date'] = $item->created_at;
       $data[$id + 1]['username'] = $item->user->username;
       $data[$id + 1]['name'] = $item->user->name;
-      $data[$id + 1]['department'] = $item->deparment ? $item->deparment->department_name : '';
+      $data[$id + 1]['department'] = $item->department->department_name;
       $data[$id + 1]['phone'] = $item->user->phone;
       $data[$id + 1]['position'] = $item->position;
       $data[$id + 1]['disease'] = $item->disease->penyakit_name;

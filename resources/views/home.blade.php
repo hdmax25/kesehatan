@@ -317,7 +317,6 @@
                         <tr>
                           <th>NIP</th>
                           <th>Nama</th>
-                          <th>Unit Kerja</th>
                           <th>Phone</th>
                         </tr>
                         </thead>
@@ -326,7 +325,6 @@
                           <tr>
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->department->department_name }}</td>
                             <td><a href="tel:{{$item->phone}}"><i class="fas fa-phone"></i></a></td>
                           </tr>
                         @endforeach
@@ -340,7 +338,6 @@
                           <th>Jam</th>
                           <th>NIP</th>
                           <th>Nama</th>
-                          <th>Unit Kerja</th>
                           <th>Phone</th>
                         </tr>
                         </thead>
@@ -350,7 +347,6 @@
                             <td>{{ \Carbon\Carbon::parse($item->created_at)->format('h:m') }}</td>
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->name }}</td>
-                            <td>{{ $item->department->department_name }}</td>
                             <td><a href="tel:{{$item->phone}}"><i class="fas fa-phone"></i></a></td>
                           </tr>
                         @endforeach
