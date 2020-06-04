@@ -205,36 +205,38 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-12">
-                <div class="card card-outline card-danger">
-                  <div class="card-header">
-                    <h3 class="card-title">Posisi anda saat ini</h3>
-                  </div>
-                  <div class="card-body">
-                    <div class="form-group row">
-                      <div class="custom-control custom-radio col-md-3">
-                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio1" name="position"
-                               value="Rumah" {{ old('position') == 'Rumah' ? 'checked' : '' }}>
-                        <label for="customRadio1" class="custom-control-label">Rumah</label>
-                      </div>
-                      <div class="custom-control custom-radio col-md-3">
-                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio2" name="position"
-                               value="Kantor" {{ old('position') == 'Kantor' ? 'checked' : '' }}>
-                        <label for="customRadio2" class="custom-control-label">Kantor</label>
-                      </div>
-                      <div class="custom-control custom-radio col-md-3">
-                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio3" name="position"
-                               value="Kost" {{ old('position') == 'Kost' ? 'checked' : '' }}>
-                        <label for="customRadio3" class="custom-control-label">Kost</label>
-                      </div>
-                      <div class="input-group col-md-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <input type="radio" name="position" value="0" {{ old('position') != 'Rumah' && old('position') != 'Kantor' && old('position') != 'Kost' ? 'checked' : '' }}>
-                          </span>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <h3 class="card-title">Posisi anda saat ini</h3>
+                    </div>
+                    <div class="card-body">
+                      <div class="form-group row">
+                        <div class="custom-control custom-radio col-md-3">
+                          <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio1" name="position"
+                                value="Rumah" {{ old('position') == 'Rumah' ? 'checked' : '' }}>
+                          <label for="customRadio1" class="custom-control-label">Rumah</label>
                         </div>
-                        <input type="text" class="form-control @error('positionDescription') is-invalid @enderror" name="positionDescription" placeholder="Lain-Lain..."
-                               value="{{ old('positionDescription') }}">
+                        <div class="custom-control custom-radio col-md-3">
+                          <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio2" name="position"
+                                value="Kantor" {{ old('position') == 'Kantor' ? 'checked' : '' }}>
+                          <label for="customRadio2" class="custom-control-label">Kantor</label>
+                        </div>
+                        <div class="custom-control custom-radio col-md-3">
+                          <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio3" name="position"
+                                value="Kost" {{ old('position') == 'Kost' ? 'checked' : '' }}>
+                          <label for="customRadio3" class="custom-control-label">Kost</label>
+                        </div>
+                        <div class="input-group col-md-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <input type="radio" name="position" value="0" {{ old('position') != 'Rumah' && old('position') != 'Kantor' && old('position') != 'Kost' ? 'checked' : '' }}>
+                            </span>
+                          </div>
+                          <input type="text" class="form-control @error('positionDescription') is-invalid @enderror" name="positionDescription" placeholder="Lain-Lain..."
+                                value="{{ old('positionDescription') }}">
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -425,36 +427,37 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-12">
-                <div class="card card-outline card-danger">
-                  <div class="card-header">
-                    <h3 class="card-title">Posisi anda saat ini</h3>
-                  </div>
-                  <div class="card-body">
-                    <div class="form-group row">
-                      <div class="custom-control custom-radio col-md-3">
-                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio1" name="position"
-                               value="Rumah" {{ old('position') == 'Rumah' ? 'checked' : '' }}>
-                        <label for="customRadio1" class="custom-control-label">Rumah</label>
-                      </div>
-                      <div class="custom-control custom-radio col-md-3">
-                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio2" name="position"
-                               value="Kantor" {{ old('position') == 'Kantor' ? 'checked' : '' }}>
-                        <label for="customRadio2" class="custom-control-label">Kantor</label>
-                      </div>
-                      <div class="custom-control custom-radio col-md-3">
-                        <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio3" name="position"
-                               value="Kost" {{ old('position') == 'Kost' ? 'checked' : '' }}>
-                        <label for="customRadio3" class="custom-control-label">Kost</label>
-                      </div>
-                      <div class="input-group col-md-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <input type="radio" name="position" value="0" {{ old('position') != 'Rumah' && old('position') != 'Kantor' && old('position') != 'Kost' ? 'checked' : '' }}>
-                          </span>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <h3 class="card-title">Posisi anda saat ini</h3>
+                    </div>
+                    <div class="card-body">
+                      <div class="form-group row">
+                        <div class="custom-control custom-radio col-md-3">
+                          <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio1" name="position"
+                                value="Rumah" {{ old('position') == 'Rumah' ? 'checked' : '' }}>
+                          <label for="customRadio1" class="custom-control-label">Rumah</label>
                         </div>
-                        <input type="text" class="form-control @error('positionDescription') is-invalid @enderror" name="positionDescription" placeholder="Lain-Lain..."
-                               value="{{ old('positionDescription') }}">
+                        <div class="custom-control custom-radio col-md-3">
+                          <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio2" name="position"
+                                value="Kantor" {{ old('position') == 'Kantor' ? 'checked' : '' }}>
+                          <label for="customRadio2" class="custom-control-label">Kantor</label>
+                        </div>
+                        <div class="custom-control custom-radio col-md-3">
+                          <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio3" name="position"
+                                value="Kost" {{ old('position') == 'Kost' ? 'checked' : '' }}>
+                          <label for="customRadio3" class="custom-control-label">Kost</label>
+                        </div>
+                        <div class="input-group col-md-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">
+                              <input type="radio" name="position" value="0" {{ old('position') != 'Rumah' && old('position') != 'Kantor' && old('position') != 'Kost' ? 'checked' : '' }}>
+                            </span>
+                          </div>
+                          <input type="text" class="form-control @error('positionDescription') is-invalid @enderror" name="positionDescription" placeholder="Lain-Lain..." value="{{ old('positionDescription') }}">
+                        </div>
                       </div>
                     </div>
                   </div>
