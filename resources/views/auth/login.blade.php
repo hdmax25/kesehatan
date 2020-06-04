@@ -9,7 +9,7 @@
   <!-- /.login-logo -->
   <div class="card elevation-2">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Login</p>
+      <p class="login-box-msg">Login dengan NIP</p>
       <form action="{{ route('login') }}" method="post">
         @csrf
         <div class="input-group mb-3">
@@ -42,7 +42,7 @@
         <div class="row">
           <div class="col-8"></div>
           <div class="col-4">
-            <button type="submit" class="btn btn-success btn-block">
+            <button type="submit" class="btn btn-danger btn-block">
               Login
             </button>
           </div>
