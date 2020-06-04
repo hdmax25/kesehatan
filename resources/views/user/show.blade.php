@@ -60,12 +60,12 @@
               <div class="timeline timeline-inverse">
                 @foreach($report as $item)
                   <div class="time-label">
-                  <span class="bg-success">
+                  <span class="bg-primary">
                     {{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}
                   </span>
                   </div>
                   <div>
-                    <i class="fas fa-heartbeat bg-primary"></i>
+                    <i class="fas fa-heartbeat bg-success"></i>
                     <div class="timeline-item">
                       <span class="time"><i class="far fa-clock"></i> {{ \Carbon\Carbon::parse($item->created_at)->format('H:i:s') }}</span>
                       <h3 class="timeline-header"><a href="#">{{ $item->disease ? $item->disease->penyakit_name : "?" }}</a> di {{ $item->position ? $item->position : "?" }}</h3>
