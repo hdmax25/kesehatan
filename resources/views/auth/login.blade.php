@@ -9,7 +9,7 @@
   <!-- /.login-logo -->
   <div class="card elevation-2">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Login dengan NIP</p>
+      <p class="login-box-msg">Montoring Kesehatan Pegawai</p>
       <form action="{{ route('login') }}" method="post">
         @csrf
         @error('username')
