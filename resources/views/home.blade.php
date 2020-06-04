@@ -113,6 +113,7 @@
                       <table id="sudah-t" class="table table-bordered table-striped text-center">
                         <thead>
                         <tr>
+                          <th>Jam</th>
                           <th>NIP</th>
                           <th>Nama</th>
                           <th>Unit Kerja</th>
@@ -122,6 +123,7 @@
                         <tbody>
                         @foreach($sudah as $item)
                           <tr>
+                            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('h:m') }}</td>
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->department->department_name }}</td>
@@ -335,6 +337,7 @@
                       <table id="sudah-t" class="table table-bordered table-striped text-center">
                         <thead>
                         <tr>
+                          <th>Jam</th>
                           <th>NIP</th>
                           <th>Nama</th>
                           <th>Unit Kerja</th>
@@ -344,6 +347,7 @@
                         <tbody>
                         @foreach($sudah as $item)
                           <tr>
+                            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('h:m') }}</td>
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->department->department_name }}</td>
