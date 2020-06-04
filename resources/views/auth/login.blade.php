@@ -2,14 +2,15 @@
 
 @section('content')
   <div class="login-logo">
+    <small>Monitoring Kesehatan Pegawai</small>
     <a href="{{ url('/') }}">
-      <img src="{{ asset('dist/img/logo.png') }}" class="login-logo" style="width: 250px;" alt="logo">
+      <img src="{{ asset('dist/img/logo.png') }}" class="login-logo" style="width: 300px;" alt="logo">
     </a>
   </div>
   <!-- /.login-logo -->
   <div class="card elevation-2">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Montoring Kesehatan Pegawai</p>
+      <p class="login-box-msg">Login dengan NIP</p>
       <form action="{{ route('login') }}" method="post">
         @csrf
         @error('username')
