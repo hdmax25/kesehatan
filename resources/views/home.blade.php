@@ -88,7 +88,7 @@
                 <div class="card-body">
                   <div class="tab-content">
                     <div class="tab-pane  table-responsive active" id="belum">
-                      <table id="belum-t" class="table table-bordered table-striped text-center">
+                      <table id="belum-t" class="table table-bordered table-striped">
                         <thead>
                         <tr>
                           <th>NIP</th>
@@ -110,7 +110,7 @@
                       </table>
                     </div>
                     <div class="tab-pane  table-responsive" id="sudah">
-                      <table id="sudah-t" class="table table-bordered table-striped text-center">
+                      <table id="sudah-t" class="table table-bordered table-striped">
                         <thead>
                         <tr>
                           <th>Jam</th>
@@ -312,7 +312,7 @@
                 <div class="card-body">
                   <div class="tab-content">
                     <div class="tab-pane  table-responsive active" id="belum">
-                      <table id="belum-t" class="table table-bordered table-striped text-center">
+                      <table id="belum-t" class="table table-bordered table-striped">
                         <thead>
                         <tr>
                           <th>NIP</th>
@@ -332,7 +332,7 @@
                       </table>
                     </div>
                     <div class="tab-pane  table-responsive" id="sudah">
-                      <table id="sudah-t" class="table table-bordered table-striped text-center">
+                      <table id="sudah-t" class="table table-bordered table-striped">
                         <thead>
                         <tr>
                           <th>Jam</th>

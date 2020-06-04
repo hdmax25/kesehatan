@@ -46,13 +46,13 @@
           <h3 class="card-title">Daftar Kondisi</h3>
         </div>
         <div class="card-body table-responsive">
-          <table id="report" class="table table-bordered table-striped text-center">
+          <table id="report" class="table table-bordered table-striped">
             <thead>
             <tr>
               <th style="width: 10px">id</th>
               <th>Kondisi</th>
               <th style="width: 10px">Edit</th>
-              <th style="width: 10px">Delete</th>
+              <!--  <th>Delete</th> -->
             </tr>
             </thead>
             <tbody>
@@ -65,13 +65,13 @@
                   <i class="fas fa-edit"></i>
                   </button>
                 </td>
-                <td>
+                <!-- <td>
                   <a href="{{ route('penyakit.destroy', $item->id) }}">
                     <button type="button" class="btn btn-danger btn-sm">
                       <i class="fas fa-trash-alt"></i>
                     </button>
                   </a>
-                </td>
+                </td>-->
               </tr>
               <div class="modal fade" id="modal-sm{{ $item->id }}">
                 <div class="modal-dialog modal-sm">

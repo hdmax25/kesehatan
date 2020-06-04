@@ -27,10 +27,10 @@
           <h3 class="card-title">Daftar User</h3>
         </div>
         <div class="card-body table-responsive">
-          <table id="report" class="table table-bordered table-striped text-center">
+          <table id="report" class="table table-bordered table-striped">
             <thead>
             <tr>
-              <th>Hak Akses</th>
+              <th>Role</th>
               <th>NIP</th>
               <th>Nama</th>
               <th>Department</th>
