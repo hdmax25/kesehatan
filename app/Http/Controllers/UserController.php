@@ -108,7 +108,6 @@ class UserController extends Controller
     $report = Report::where('id_user', $id)->orderBy('id', 'desc')->take(30)->get();
     $report->map(function ($item) {
       $item->disease = Penyakit::find($item->id_penyakit);
-
       return $item;
     });
 

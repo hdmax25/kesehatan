@@ -68,7 +68,7 @@
                     <i class="fas fa-heartbeat bg-success"></i>
                     <div class="timeline-item">
                       <span class="time"><i class="far fa-clock"></i> {{ \Carbon\Carbon::parse($item->created_at)->format('H:i:s') }}</span>
-                      <h3 class="timeline-header">{{ $item->disease ? $item->disease->penyakit_name : "?" }}</h3>
+                      <h3 class="timeline-header"><a href="#">{{ $item->disease ? $item->disease->penyakit_name : "?" }}</a> di {{ $item->position ? $item->position : "?" }}</h3>
                       <div class="timeline-body">
                         Keluhan {!! $item->deatail !!}
                       </div>

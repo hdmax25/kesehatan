@@ -68,7 +68,7 @@
       <b>Version</b> 0.0.7
     </div>
     <strong>Copyright &copy; 2020 <a href="{{ url('/') }}">{{ url('/') }}</a>.</strong> All rights
-    reserved. Created by <a href="{{ url('http://instagram.com/haripurnomoo') }}">HDmax25</a>.
+    reserved. <strong>Created by <a href="{{ url('http://instagram.com/haripurnomoo') }}">HDmax25</a>.</strong>
   </footer>
 
 </div>
