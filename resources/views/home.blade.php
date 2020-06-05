@@ -199,7 +199,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Domisili</label><small>(Tidak harus sesuai KTP)</small>
+                    <label>Domisili</label><small> (Tidak harus sesuai KTP)</small>
                     <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
                               placeholder="Enter ...">{{ old('domicile') ? old('domicile') : ($domicile ? $domicile->domicile : '')}}</textarea>
                   </div>
@@ -276,7 +276,7 @@
           <div class="row">
             <div class="col-md-4">
               <div class="info-box">
-                <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
+                <span class="info-box-icon bg-warning"><i class="fa fa-users"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Jumlah Pegawai</span>
                   <span class="info-box-number">{{ $sudah->count() + $belum->count() }}</span>
@@ -285,7 +285,7 @@
             </div>
             <div class="col-md-4">
               <div class="info-box">
-                <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
+                <span class="info-box-icon bg-success"><i class="fa fa-users"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Sudah Mengisi</span>
                   <span class="info-box-number">{{ $sudah->count() }}</span>
@@ -294,7 +294,7 @@
             </div>
             <div class="col-md-4">
               <div class="info-box">
-                <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
+                <span class="info-box-icon bg-danger"><i class="fa fa-users"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Belum Mengisi</span>
                   <span class="info-box-number">{{ $belum->count() }}</span>
