@@ -346,7 +346,7 @@
                         <tbody>
                         @foreach($sudah as $item)
                           <tr>
-                            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('h:m') }}</td>
+                            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('H:i:s') }}</td>
                             <td>{{ $item->username }}</td>
                             <td>{{ $item->name }}</td>
                             <td><a href="tel:{{$item->phone}}"><i class="fas fa-phone"></i></a></td>

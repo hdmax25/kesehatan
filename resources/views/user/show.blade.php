@@ -79,6 +79,12 @@
               <form class="form-horizontal" action="{{ route('user.updateProfile', $user->id) }}" method="post">
                 @csrf
                 <div class="form-group row">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile">Pilih Foto</label>
+                  </div>
+                </div>
+                <div class="form-group row">
                   <label for="name" class="col-sm-2 col-form-label">Nama</label>
                   <div class="col-sm-10">
                     <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="" value="{{ old('name') ? old('name') : $user->name }}">
