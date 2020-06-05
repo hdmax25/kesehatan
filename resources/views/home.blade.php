@@ -287,7 +287,7 @@
               <div class="info-box">
                 <span class="info-box-icon bg-success"><i class="fa fa-users"></i></span>
                 <div class="info-box-content">
-                  <span class="info-box-text">Sudah Mengisi</span>
+                  <span class="info-box-text">Pegawai yang sudah mengisi</span>
                   <span class="info-box-number">{{ $sudah->count() }}</span>
                 </div>
               </div>
@@ -296,7 +296,7 @@
               <div class="info-box">
                 <span class="info-box-icon bg-danger"><i class="fa fa-users"></i></span>
                 <div class="info-box-content">
-                  <span class="info-box-text">Belum Mengisi</span>
+                  <span class="info-box-text">Pegawai yang belum mengisi</span>
                   <span class="info-box-number">{{ $belum->count() }}</span>
                 </div>
               </div>
@@ -307,8 +307,8 @@
               <div class="card">
                 <div class="card-header p-2">
                   <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link active" href="#belum" data-toggle="tab">Belum</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#sudah" data-toggle="tab">Sudah</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#belum" data-toggle="tab">Cek yang belum</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sudah" data-toggle="tab">Cek yang sudah</a></li>
                   </ul>
                 </div><!-- /.card-header -->
                 <div class="card-body">
@@ -318,8 +318,8 @@
                         <thead>
                         <tr>
                           <th>NIP</th>
-                          <th>Nama</th>
-                          <th>Phone</th>
+                          <th>Nama Pegawai</th>
+                          <th>No Tlp. Pegawai</th>
                         </tr>
                         </thead>
                         <tbody>
