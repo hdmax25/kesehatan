@@ -199,7 +199,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Domisili</label><small> (Tidak harus sesuai KTP)</small>
+                    <label>Domisili </label><small>(Tidak harus sesuai KTP)</small>
                     <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
                               placeholder="Enter ...">{{ old('domicile') ? old('domicile') : ($domicile ? $domicile->domicile : '')}}</textarea>
                   </div>
@@ -421,7 +421,7 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Domisili</label>
+                    <label>Domisili </label><small>(Tidak harus sesuai KTP)</small>
                     <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
                               placeholder="Enter ...">{{ old('domicile') ? old('domicile') : ($domicile ? $domicile->domicile : '') }}</textarea>
                   </div>
@@ -488,19 +488,19 @@
         </div>
       </div>
     @else
-        <div class="col-md-12">
-          <div class="card card-outline card-danger">
-            <div class="card-header">
-              <h3 class="card-title">Berhasil</h3>
-            </div>
-            <div class="card-body">
-              Terimakasih telah mengisi data kesehatan hari ini. Besok jangan lupa ngisi lagi ya kak...
-            </div>
-            <div class="card-footer">
-              <a  href="{{ route('user.show', Auth::user()->id) }}" class="btn btn-danger">History</a>
-            </div>
-          </div>
+    <div class="col-md-12">
+      <div class="card card-outline card-danger">
+        <div class="card-header">
+          <h3 class="card-title">Berhasil</h3>
         </div>
+        <div class="card-body">
+          Terimakasih telah mengisi data kesehatan hari ini. Besok jangan lupa ngisi lagi ya kak...
+        </div>
+        <div class="card-footer">
+          <a  href="{{ route('user.show', Auth::user()->id) }}" class="btn btn-danger">History</a>
+        </div>
+      </div>
+    </div>
     @endif
     @enduser
   </div>
