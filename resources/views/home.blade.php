@@ -81,7 +81,7 @@
               <div class="card">
                 <div class="card-header p-2">
                   <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link-red active" href="#belum" data-toggle="tab">Belum</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#belum" data-toggle="tab">Belum</a></li>
                     <li class="nav-item"><a class="nav-link" href="#sudah" data-toggle="tab">Sudah</a></li>
                   </ul>
                 </div><!-- /.card-header -->

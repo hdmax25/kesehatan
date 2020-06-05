@@ -45,7 +45,7 @@
   }
 </style>
 
-<body class="hold-transition login-page" style="background-image : ;">
+<body class="hold-transition login-page">
 <div class="login-box">
   @yield('content')
 </div>
