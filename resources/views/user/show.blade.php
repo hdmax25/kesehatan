@@ -41,9 +41,9 @@
       <div class="card">
         <div class="card-header p-2">
           <ul class="nav nav-pills">
-            <li class="nav-item"><a class="nav-link {{ $errors->isEmpty() ? 'active' : '' }}" href="#timeline" data-toggle="tab">History</a></li>
+            <li class="nav-item"><a class="nav-link {{ $errors->isEmpty() ? 'active' : '' }}" href="#timeline" data-toggle="tab"><i class="far fa-clock"></i> History</a></li>
             @if ( \Illuminate\Support\Facades\Auth::user()->username == $user->username)
-              <li class="nav-item"><a class="nav-link {{ $errors->isEmpty() ? '' : 'active' }}" href="#settings" data-toggle="tab">Edit Profile</a></li>
+              <li class="nav-item"><a class="nav-link {{ $errors->isEmpty() ? '' : 'active' }}" href="#settings" data-toggle="tab"><i class="far fa-edit"></i> Edit Profile</a></li>
             @endif
           </ul>
         </div>

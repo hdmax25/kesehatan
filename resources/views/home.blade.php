@@ -497,7 +497,7 @@
           Terimakasih telah mengisi data kesehatan hari ini. Besok jangan lupa ngisi lagi ya kak...
         </div>
         <div class="card-footer">
-          <a  href="{{ route('user.show', Auth::user()->id) }}" class="btn btn-danger">History</a>
+          <a  href="{{ route('user.show', Auth::user()->id) }}" class="btn btn-danger"><i class="far fa-clock"></i> History</a>
         </div>
       </div>
     </div>
