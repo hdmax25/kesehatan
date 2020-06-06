@@ -330,7 +330,11 @@
                 <tr>
                   <td>{{ $item->username }}</td>
                   <td>{{ $item->name }}</td>
-                  <td><a href="tel:{{$item->phone}}" type="button" class="btn btn-primary btn-sm"><i class="fas fa-phone"></i></a></td>
+                  <td>
+                    <a href="tel:{{$item->phone}}" type="button" class="btn btn-primary btn-xs btn-block">
+                      <i class="fas fa-phone"></i>
+                    </a>
+                  </td>
                 </tr>
               @endforeach
               </tbody>
@@ -350,7 +354,7 @@
                 <th>Jam</th>
                 <th>NIP</th>
                 <th>Nama</th>
-                <th>Lihat</th>
+                <th>View</th>
               </tr>
               </thead>
               <tbody>
@@ -360,8 +364,8 @@
                   <td>{{ $item->username }}</td>
                   <td>{{ $item->name }}</td>
                   <td>
-                    <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-sm">
-                    <i class="fas fa-eye"></i>
+                    <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
+                      <i class="fas fa-eye"></i>
                     </a>
                   </td>
                 </tr>
