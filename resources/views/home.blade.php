@@ -39,100 +39,39 @@
 @endsection
 
 @section('content')
-  <div class="row">
-    @admin
-    <div class="col-md-12">
-      <div class="card card-outline card-danger">
-        <div class="card-header">
-          <h3 class="card-title">Data Kesehatan</h3>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="info-box">
-                <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Jumlah Pegawai</span>
-                  <span class="info-box-number">{{ $sudah->count() + $belum->count() }}</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="info-box">
-                <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Sudah Mengisi</span>
-                  <span class="info-box-number">{{ $sudah->count() }}</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="info-box">
-                <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Belum Mengisi</span>
-                  <span class="info-box-number">{{ $belum->count() }}</span>
-                </div>
-              </div>
-            </div>
+  @admin
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-outline card-danger">
+          <div class="card-header">
+            <h3 class="card-title">Data Kesehatan - {{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}</h3>
           </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header p-2">
-                  <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link active" href="#belum" data-toggle="tab">Belum</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#sudah" data-toggle="tab">Sudah</a></li>
-                  </ul>
-                </div><!-- /.card-header -->
-                <div class="card-body">
-                  <div class="tab-content">
-                    <div class="tab-pane  table-responsive active" id="belum">
-                      <table id="belum-t" class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                          <th>NIP</th>
-                          <th>Nama</th>
-                          <th>Unit Kerja</th>
-                          <th>Phone</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($belum as $item)
-                          <tr>
-                            <td>{{ $item->username }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->department->department_name }}</td>
-                            <td><a href="tel:{{$item->phone}}"><i class="fas fa-phone"></i></a></td>
-                          </tr>
-                        @endforeach
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class="tab-pane  table-responsive" id="sudah">
-                      <table id="sudah-t" class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                          <th>Jam</th>
-                          <th>NIP</th>
-                          <th>Nama</th>
-                          <th>Unit Kerja</th>
-                          <th>Phone</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($sudah as $item)
-                          <tr>
-                            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('h:m') }}</td>
-                            <td>{{ $item->username }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->department->department_name }}</td>
-                            <td><a href="tel:{{$item->phone}}"><i class="fas fa-phone"></i></a></td>
-                          </tr>
-                        @endforeach
-                        </tbody>
-                      </table>
-                    </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="info-box">
+                  <span class="info-box-icon bg-warning"><i class="fa fa-users"></i></span>
+                  <div class="info-box-content">
+                    <span class="info-box-text">Jumlah Pegawai</span>
+                    <span class="info-box-number">{{ $sudah->count() + $belum->count() }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="info-box">
+                  <span class="info-box-icon bg-danger"><i class="fa fa-users"></i></span>
+                  <div class="info-box-content">
+                    <span class="info-box-text">Pegawai yang belum mengisi</span>
+                    <span class="info-box-number">{{ $belum->count() }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="info-box">
+                  <span class="info-box-icon bg-success"><i class="fa fa-users"></i></span>
+                  <div class="info-box-content">
+                    <span class="info-box-text">Pegawai yang sudah mengisi</span>
+                    <span class="info-box-number">{{ $sudah->count() }}</span>
                   </div>
                 </div>
               </div>
@@ -141,9 +80,72 @@
         </div>
       </div>
     </div>
-    @endadmin
-    @kadiv
-    @if (!$todayCheck)
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card card-danger">
+          <div class="card-header">
+            <h3 class="card-title">Belum Mengisi</h3>
+          </div>
+          <div class="card-body">
+            <table id="belum-t" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>NIP</th>
+                <th>Nama Pegawai</th>
+                <th>Call</th>
+              </tr>
+              </thead>
+              <tbody>
+              @foreach($belum as $item)
+                <tr>
+                  <td>{{ $item->username }}</td>
+                  <td>{{ $item->name }}</td>
+                  <td><a href="tel:{{$item->phone}}"><i class="fas fa-phone"></i></a></td>
+                </tr>
+              @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card card-success">
+          <div class="card-header">
+            <h3 class="card-title">Sudah Mengisi</h3>
+          </div>
+          <div class="card-body">
+            <table id="sudah-t" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>Jam</th>
+                <th>NIP</th>
+                <th>Nama</th>
+                <th>Lihat</th>
+              </tr>
+              </thead>
+              <tbody>
+              @foreach($sudah as $item)
+                <tr>
+                  <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
+                  <td>{{ $item->username }}</td>
+                  <td>{{ $item->name }}</td>
+                  <td>
+                    <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-sm">
+                    <i class="fas fa-eye"></i>
+                    </a>
+                  </td>
+                </tr>
+              @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  @endadmin
+  @kadiv
+  @if (!$todayCheck)
+    <div class="row">
       <div class="col-md-12">
         <div class="card card-danger">
           <div class="card-header">
@@ -266,95 +268,40 @@
           </form>
         </div>
       </div>
-    @endif
-    <div class="col-md-12">
-      <div class="card card-outline card-danger">
-        <div class="card-header">
-          <h3 class="card-title">Data Kesehatan - {{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}</h3>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="info-box">
-                <span class="info-box-icon bg-warning"><i class="fa fa-users"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Jumlah Pegawai</span>
-                  <span class="info-box-number">{{ $sudah->count() + $belum->count() }}</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="info-box">
-                <span class="info-box-icon bg-success"><i class="fa fa-users"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Pegawai yang sudah mengisi</span>
-                  <span class="info-box-number">{{ $sudah->count() }}</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="info-box">
-                <span class="info-box-icon bg-danger"><i class="fa fa-users"></i></span>
-                <div class="info-box-content">
-                  <span class="info-box-text">Pegawai yang belum mengisi</span>
-                  <span class="info-box-number">{{ $belum->count() }}</span>
-                </div>
-              </div>
-            </div>
+    </div>
+  @else
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-outline card-danger">
+          <div class="card-header">
+            <h3 class="card-title">Data Kesehatan - {{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}</h3>
           </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header p-2">
-                  <ul class="nav nav-pills">
-                    <li class="nav-item"><a class="nav-link active" href="#belum" data-toggle="tab">Cek yang belum</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#sudah" data-toggle="tab">Cek yang sudah</a></li>
-                  </ul>
-                </div><!-- /.card-header -->
-                <div class="card-body">
-                  <div class="tab-content">
-                    <div class="tab-pane  table-responsive active" id="belum">
-                      <table id="belum-t" class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                          <th>NIP</th>
-                          <th>Nama Pegawai</th>
-                          <th>No Tlp. Pegawai</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($belum as $item)
-                          <tr>
-                            <td>{{ $item->username }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td><a href="tel:{{$item->phone}}"><i class="fas fa-phone"></i></a></td>
-                          </tr>
-                        @endforeach
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class="tab-pane  table-responsive" id="sudah">
-                      <table id="sudah-t" class="table table-bordered table-striped">
-                        <thead>
-                        <tr>
-                          <th>Jam</th>
-                          <th>NIP</th>
-                          <th>Nama</th>
-                          <th>Phone</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($sudah as $item)
-                          <tr>
-                            <td>{{ \Carbon\Carbon::parse($item->created_at)->format('H:i:s') }}</td>
-                            <td>{{ $item->username }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td><a href="tel:{{$item->phone}}"><i class="fas fa-phone"></i></a></td>
-                          </tr>
-                        @endforeach
-                        </tbody>
-                      </table>
-                    </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="info-box">
+                  <span class="info-box-icon bg-warning"><i class="fa fa-users"></i></span>
+                  <div class="info-box-content">
+                    <span class="info-box-text">Jumlah Pegawai</span>
+                    <span class="info-box-number">{{ $sudah->count() + $belum->count() }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="info-box">
+                  <span class="info-box-icon bg-danger"><i class="fa fa-users"></i></span>
+                  <div class="info-box-content">
+                    <span class="info-box-text">Pegawai yang belum mengisi</span>
+                    <span class="info-box-number">{{ $belum->count() }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="info-box">
+                  <span class="info-box-icon bg-success"><i class="fa fa-users"></i></span>
+                  <div class="info-box-content">
+                    <span class="info-box-text">Pegawai yang sudah mengisi</span>
+                    <span class="info-box-number">{{ $sudah->count() }}</span>
                   </div>
                 </div>
               </div>
@@ -363,9 +310,73 @@
         </div>
       </div>
     </div>
-    @endkadiv
-    @user
-    @if (!$todayCheck)
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card card-danger">
+          <div class="card-header">
+            <h3 class="card-title">Belum Mengisi</h3>
+          </div>
+          <div class="card-body">
+            <table id="belum-t" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>NIP</th>
+                <th>Nama Pegawai</th>
+                <th>Call</th>
+              </tr>
+              </thead>
+              <tbody>
+              @foreach($belum as $item)
+                <tr>
+                  <td>{{ $item->username }}</td>
+                  <td>{{ $item->name }}</td>
+                  <td><a href="tel:{{$item->phone}}"><i class="fas fa-phone"></i></a></td>
+                </tr>
+              @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card card-success">
+          <div class="card-header">
+            <h3 class="card-title">Sudah Mengisi</h3>
+          </div>
+          <div class="card-body">
+            <table id="sudah-t" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>Jam</th>
+                <th>NIP</th>
+                <th>Nama</th>
+                <th>Lihat</th>
+              </tr>
+              </thead>
+              <tbody>
+              @foreach($sudah as $item)
+                <tr>
+                  <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
+                  <td>{{ $item->username }}</td>
+                  <td>{{ $item->name }}</td>
+                  <td>
+                    <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-sm">
+                    <i class="fas fa-eye"></i>
+                    </a>
+                  </td>
+                </tr>
+              @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  @endif
+  @endkadiv
+  @user
+  @if (!$todayCheck)
+    <div class="row">
       <div class="col-md-12">
         <div class="card card-danger">
           <div class="card-header">
@@ -423,7 +434,7 @@
                   <div class="form-group">
                     <label>Domisili </label><small>(Tidak harus sesuai KTP)</small>
                     <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
-                              placeholder="Enter ...">{{ old('domicile') ? old('domicile') : ($domicile ? $domicile->domicile : '') }}</textarea>
+                              placeholder="Enter ...">{{ old('domicile') ? old('domicile') : ($domicile ? $domicile->domicile : '')}}</textarea>
                   </div>
                 </div>
               </div>
@@ -456,7 +467,8 @@
                               <input type="radio" name="position" value="0" {{ old('position') != 'Rumah' && old('position') != 'Kantor' && old('position') != 'Kost' ? 'checked' : '' }}>
                             </span>
                           </div>
-                          <input type="text" class="form-control @error('positionDescription') is-invalid @enderror" name="positionDescription" placeholder="Lain-Lain..." value="{{ old('positionDescription') }}">
+                          <input type="text" class="form-control @error('positionDescription') is-invalid @enderror" name="positionDescription" placeholder="Lain-Lain..."
+                                value="{{ old('positionDescription') }}">
                         </div>
                       </div>
                     </div>
@@ -487,22 +499,25 @@
           </form>
         </div>
       </div>
-    @else
-    <div class="col-md-12">
-      <div class="card card-outline card-danger">
-        <div class="card-header">
-          <h3 class="card-title">Berhasil</h3>
-        </div>
-        <div class="card-body">
-          Terimakasih telah mengisi data kesehatan hari ini. Besok jangan lupa ngisi lagi ya kak...
-        </div>
-        <div class="card-footer">
-          <a  href="{{ route('user.show', Auth::user()->id) }}" class="btn btn-danger"><i class="far fa-clock"></i> History</a>
+    </div>
+  @else
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-outline card-danger">
+          <div class="card-header">
+            <h3 class="card-title">Berhasil</h3>
+          </div>
+          <div class="card-body">
+            Terimakasih telah mengisi data kesehatan hari ini. Besok jangan lupa ngisi lagi ya kak...
+          </div>
+          <div class="card-footer">
+            <a  href="{{ route('user.show', Auth::user()->id) }}" class="btn btn-danger"><i class="far fa-clock"></i> History</a>
+          </div>
         </div>
       </div>
     </div>
-    @endif
-    @enduser
+  @endif
+  @enduser
   </div>
 @endsection
 
