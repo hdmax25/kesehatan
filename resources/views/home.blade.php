@@ -330,7 +330,7 @@
                 <tr>
                   <td>{{ $item->username }}</td>
                   <td>{{ $item->name }}</td>
-                  <td><a href="tel:{{$item->phone}}"><i class="fas fa-phone"></i></a></td>
+                  <td><a href="tel:{{$item->phone}}" type="button" class="btn btn-primary btn-sm"><i class="fas fa-phone"></i></a></td>
                 </tr>
               @endforeach
               </tbody>
