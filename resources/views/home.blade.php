@@ -56,7 +56,7 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="info-box">
-                  <span class="info-box-icon bg-warning"><i class="fa fa-calendar"></i></span>
+                  <span class="info-box-icon bg-primary"><i class="fa fa-calendar"></i></span>
                   <div class="info-box-content">
                     <span class="info-box-text">Tanggal</span>
                     <span class="info-box-number">{{ \Carbon\Carbon::now()->format('d-m-Y') }}</span>
