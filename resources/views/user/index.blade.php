@@ -36,7 +36,7 @@
               <th>Department</th>
               <th>Phone</th>
               <th>Alamat</th>
-              <th>Lihat</th>
+              <th>View</th>
               <th>Edit</th>
             </tr>
             </thead>
@@ -56,12 +56,12 @@
               <td>{{ $item->phone }}</td>
               <td>{{ $item->ktpaddress }}</td>
               <td>
-                <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-sm">
+                <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-sm btn-block">
                   <i class="fas fa-eye"></i>
                 </a>
               </td>
               <td>
-                <a href="{{ route('user.edit', $item->id) }}" type="button" class="btn btn-primary btn-sm">
+                <a href="{{ route('user.edit', $item->id) }}" type="button" class="btn btn-primary btn-sm btn-block">
                   <i class="fas fa-edit"></i>
                 </a>
               </td>

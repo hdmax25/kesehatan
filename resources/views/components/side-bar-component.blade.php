@@ -14,7 +14,7 @@
         <img src="{{ asset('dist/img/profile/'.Auth::user()->username.'.jpg') }}" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="{{ route('user.show', Auth::user()->id) }}" class="d-block">{{ \Illuminate\Support\Facades\Auth::user()->name }}</a>
+        <a href="{{ route('user.show', Auth::user()->id) }}" class="d-block text-wrap">{{ \Illuminate\Support\Facades\Auth::user()->name }}</a>
       </div>
     </div>
 
