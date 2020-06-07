@@ -54,7 +54,16 @@
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-3">
+                <div class="info-box">
+                  <span class="info-box-icon bg-warning"><i class="fa fa-calendar"></i></span>
+                  <div class="info-box-content">
+                    <span class="info-box-text">Tanggal</span>
+                    <span class="info-box-number">{{ \Carbon\Carbon::now()->format('d-m-Y') }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
                 <div class="info-box">
                   <span class="info-box-icon bg-warning"><i class="fa fa-users"></i></span>
                   <div class="info-box-content">
@@ -63,7 +72,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="info-box">
                   <span class="info-box-icon bg-danger"><i class="fa fa-users"></i></span>
                   <div class="info-box-content">
@@ -72,7 +81,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="info-box">
                   <span class="info-box-icon bg-success"><i class="fa fa-users"></i></span>
                   <div class="info-box-content">
