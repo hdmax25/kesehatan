@@ -46,7 +46,7 @@
           <div class="card-header">
             <h3 class="card-title">Data Kesehatan - 
               @if (Auth::user()->role == 1)
-                PT. INKA Multi Solusi
+                PT <strong>INKA</strong> <i>Multi Solusi</i>
               @else
                 {{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}
               @endif
