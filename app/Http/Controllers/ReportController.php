@@ -131,11 +131,4 @@ class ReportController extends Controller
   {
     //
   }
-
-  public function exportAll(): View
-  {
-    return view('exports.invoices', [
-      'invoices' => Invoice::all()
-    ]);
-  }
 }

@@ -35,15 +35,17 @@
             @endif
           </a>
         </li>
+        @if (Auth::user()->role !== 3)
+          <li class="nav-item">
+            <a href="{{ route('report.index') }}" class="nav-link {{ request()->is('report') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-file-excel"></i>
+              <p>
+                Report
+              </p>
+            </a>
+          </li>
+        @endif
         @admin
-        <li class="nav-item">
-          <a href="{{ route('report.index') }}" class="nav-link {{ request()->is('report') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-file-excel"></i>
-            <p>
-              Report
-            </p>
-          </a>
-        </li>
         <li class="nav-item has-treeview {{ request()->is(['user', 'user/create']) ? 'menu-open' : '' }}">
           <a href="#" class="nav-link {{ request()->is(['user', 'user/create']) ? 'active' : '' }}">
             <i class="nav-icon fas fa-user"></i>
