@@ -27,10 +27,16 @@ class HomeController extends Controller
     $this->middleware('auth');
   }
 
+  public function exportkadiv()
+  {
+    return Excel::download(new ExportMode, 'report.xlsx');
+  }
+
   public function export()
   {
     return Excel::download(new ExportMode, 'report.xlsx');
   }
+  
 
   /**
    * Show the application dashboard.

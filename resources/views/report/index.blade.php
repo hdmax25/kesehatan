@@ -6,7 +6,7 @@
   <div class="col-md-12">
     <div class="card card-outline card-danger">
       <div class="card-header">
-          <h3 class="card-title">
+          <h3 class="card-title">Download Excel</h3>
       </div>
       <form action="{{ route('findSDM') }}" method="post">
         @csrf
