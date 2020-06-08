@@ -6,9 +6,10 @@ use App\model\Departement;
 use App\model\Penyakit;
 use App\model\Report;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 
-class ExportMode implements FromCollection
+class ExportModeKadiv implements FromCollection
 {
   public function collection()
   {

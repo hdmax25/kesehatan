@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\FromCollection\ExportMode;
+use App\Http\FromCollection\ExportModeKadiv;
 use App\model\Departement;
 use App\model\Penyakit;
 use App\model\Report;
@@ -34,7 +35,7 @@ class HomeController extends Controller
 
   public function export()
   {
-    return Excel::download(new ExportMode, 'report.xlsx');
+    return Excel::download(new ExportModeKadiv, 'report.xlsx');
   }
   
 

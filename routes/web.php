@@ -25,6 +25,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/export', 'HomeController@export')->name('export');
+Route::get('/exportkadiv', 'HomeController@export')->name('exportkadiv');
 Route::post('/home/sdm', 'HomeController@findSDM')->name('findSDM');
 Route::post('/home/devise', 'HomeController@findDevise')->name('findDevise');
 
@@ -60,6 +61,4 @@ Route::group(['prefix' => 'report', 'as' => 'report.'], static function () {
   Route::get('/edit/{id}', 'ReportController@edit')->name('edit')->middleware('auth', 'role:1');
   Route::post('/update/{id}', 'ReportController@update')->name('update')->middleware('auth', 'role:1');
   Route::get('/destroy/{id}', 'ReportController@destroy')->name('destroy')->middleware('auth', 'role:1');
-  Route::get('/export/all', 'ReportController@exportAll')->name('exportAll')->middleware('auth', 'role:1|2');
-  Route::get('/exportkadiv/all', 'ReportController@exportAll')->name('exportkadivAll')->middleware('auth', 'role:1|2');
 });
