@@ -13,28 +13,30 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-6">
-              <div class="form-group">
-                <label for="department">Department</label>
-                <select id="department" name="department" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" required>
-                  @foreach($department as $item)
-                    <option value="{{ $item->id }}">{{ $item->department_name }}</option>
-                  @endforeach
-                </select>
-              </div>
-            </div>
-            <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="reservation">Tanggal</label>
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="far fa-calendar-alt"></i>
-                        </span>
-                      </div>
-                      <input type="text" class="form-control float-right" name="date" id="reservation">
+                <div class="form-group">
+                  <label for="reservation">Tanggal</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="far fa-calendar-alt"></i>
+                      </span>
                     </div>
+                    <input type="text" class="form-control float-right" name="date" id="reservation">
                   </div>
                 </div>
+              </div>
+            @admin
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="department">Department</label>
+                  <select id="department" name="department" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" required>
+                    @foreach($department as $item)
+                      <option value="{{ $item->id }}">{{ $item->department_name }}</option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+            @endadmin
           </div>
         </div>
         <div class="card-footer">
