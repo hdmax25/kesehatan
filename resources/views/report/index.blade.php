@@ -12,7 +12,7 @@
         @csrf
         <div class="card-body">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-{{ Auth::user()->role == 1 ? '6' : '12' }}">
                 <div class="form-group">
                   <label for="reservation">Tanggal</label>
                   <div class="input-group">
@@ -111,6 +111,14 @@
   <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
   <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
   <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+
+   <!-- Select2 -->
+   <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+
+  <!-- daterange picker -->
+  <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
+  <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+
   <script>
     $(function () {
       //Date range picker
