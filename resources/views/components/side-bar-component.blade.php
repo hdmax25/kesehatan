@@ -80,7 +80,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('export') }}" class="nav-link {{ request()->is('export') ? 'active' : '' }}">
+          <a href="{{ route('report.index') }}" class="nav-link {{ request()->is('report') ? 'active' : '' }}">
             <i class="nav-icon fas fa-file-excel"></i>
             <p>
               Report Excel

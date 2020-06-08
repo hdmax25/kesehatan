@@ -2,75 +2,53 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="col-md-12">
-      <div class="card card-outline card-danger">
-        <form action="{{ route('findSDM') }}" method="post">
-          @csrf
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="department">Department</label>
-                  <select id="department" name="department" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" required>
-                    @foreach($department as $item)
-                      <option value="{{ $item->id }}">{{ $item->department_name }}</option>
-                    @endforeach
-                  </select>
-                </div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card card-outline card-danger">
+      <div class="card-header">
+          <h3 class="card-title">
+      </div>
+      <form action="{{ route('findSDM') }}" method="post">
+        @csrf
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="department">Department</label>
+                <select id="department" name="department" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" required>
+                  @foreach($department as $item)
+                    <option value="{{ $item->id }}">{{ $item->department_name }}</option>
+                  @endforeach
+                </select>
               </div>
             </div>
-          </div>
-          <div class="card-footer">
-            <button type="submit" class="btn btn-danger">Find</button>
-          </div>
-        </form>
-      </div>
-    </div>
-<div class="col-md-6">
-    <div class="form-group">
-        <label for="reservation">Tanggal</label>
-        <div class="input-group">
-        <div class="input-group-prepend">
-            <span class="input-group-text">
-            <i class="far fa-calendar-alt"></i>
-            </span>
-        </div>
-        <input type="text" class="form-control float-right" name="date" id="reservation">
-    </div>
-</div>
-</div>
-<div class="col-md-12">
-      <div class="card card-outline card-danger">
-        <form action="{{ route('findDevise') }}" method="post">
-          @csrf
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label for="reservation">Tanggal</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="far fa-calendar-alt"></i>
-                      </span>
+            <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="reservation">Tanggal</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="far fa-calendar-alt"></i>
+                        </span>
+                      </div>
+                      <input type="text" class="form-control float-right" name="date" id="reservation">
                     </div>
-                    <input type="text" class="form-control float-right" name="date" id="reservation">
                   </div>
                 </div>
-              </div>
-            </div>
           </div>
-          <div class="card-footer">
-            <button type="submit" class="btn btn-danger">Find</button>
-          </div>
-        </form>
-      </div>
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-danger">Download</button>
+        </div>
+      </form>
     </div>
-<div class="row">
+  </div>
+</div>
+<!-- <div class="row">
     <div class="col-md-12">
       <div class="card card-outline card-danger">
         <div class="card-header">
-        <button onclick="exportTableToExcel('tblData', 'Data-Kesehatan')" class="btn btn-block btn-danger">Export Table Data To Excel File</button>
+          <h3 class="card-title">Data Keshetan</h3>
         </div>
         <div class="card-body table-responsive p-0">
             <table id="tblData" class="table table-hover table-head-fixed text-wrap">
@@ -106,7 +84,7 @@
                 </tbody>
             </table>
     </div>
-</div>
+</div>-->
 @endsection
 
 @section('css')
@@ -131,36 +109,38 @@
   <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
   <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
   <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-<script>
-function exportTableToExcel(tableID, filename = ''){
-    var downloadLink;
-    var dataType = 'application/vnd.ms-excel';
-    var tableSelect = document.getElementById(tableID);
-    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
-    
-    // Specify file name
-    filename = filename?filename+'.xls':'excel_data.xls';
-    
-    // Create download link element
-    downloadLink = document.createElement("a");
-    
-    document.body.appendChild(downloadLink);
-    
-    if(navigator.msSaveOrOpenBlob){
-        var blob = new Blob(['\ufeff', tableHTML], {
-            type: dataType
-        });
-        navigator.msSaveOrOpenBlob( blob, filename);
-    }else{
-        // Create a link to the file
-        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-    
-        // Setting the file name
-        downloadLink.download = filename;
-        
-        //triggering the function
-        downloadLink.click();
-    }
-}
-</script>
+  <script>
+    $(function () {
+      //Date range picker
+      $('#reservation').daterangepicker({
+        locale: {
+          format: 'DD/MM/YYYY'
+        }
+      });
+
+      $('#sudah-t').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": true,
+        "responsive": true,
+      });
+
+      $('#belum-t').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": true,
+        "responsive": true,
+      });
+
+      //Initialize Select2 Elements
+      $('.select2').select2({width: 'resolve'});
+      
+    });
+  </script>
 @endsection

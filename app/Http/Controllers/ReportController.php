@@ -27,7 +27,7 @@ class ReportController extends Controller
   {
     if (Auth::user()->role == 1) {
     $department = Departement::where('delete', 0)->get();
-      $report = Report::orderBy('id', 'desc')->whereDate('created_at', Carbon::now())->get();
+      $report = Report::orderBy('id', 'desc')->get();
       $report->map(function ($item) {
         $item->user = User::find($item->id_user);
         $item->department = Departement::find($item->id_department);
