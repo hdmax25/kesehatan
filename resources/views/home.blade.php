@@ -348,13 +348,13 @@
   <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
 
   <script>
+    @if (\Carbon\Carbon::now() < \Carbon\Carbon::parse("13:00:00"))
     $(function () {
-          @if (\Carbon\Carbon::now() < \Carbon\Carbon::parse("13:00:00"))
       let remaining = new Date();
       let target = "13";
       if (remaining.getHours() > target) {
         let view = document.getElementById("checkedToday");
-        view.innerHTML = "awww";
+        view.innerHTML = "";
       }
 
       setInterval(function () {
@@ -365,8 +365,10 @@
           view.innerHTML = "";
         }
       }, 1000);
-      @endif
+    })
+    @endif
 
+    $(function () {
       //Date range picker
       $('#reservation').daterangepicker({
         locale: {
