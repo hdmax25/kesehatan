@@ -7,7 +7,7 @@
         <div class="card-header">
           <h3 class="card-title">Setting Tanggal</h3>
         </div>
-        <form action="{{ route('report.findSDM') }}" method="post">
+        <form action="{{ route('report.findSDM') }}" method="POST">
           @csrf
           <div class="card-body">
             <div class="row">
@@ -29,7 +29,7 @@
                 <div class="form-group">
                   <label for="department">Department</label>
                   <select id="department" name="department" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" required>
-                    <option value="0">All</option>
+                    <option value="0" {{ $setDepartment == 'x' ? 'selected' :'' }}>All</option>
                     @foreach($department as $item)
                       <option value="{{ $item->id }}" {{ $setDepartment == $item->id ? 'selected' :'' }}>{{ $item->department_name }}</option>
                     @endforeach
@@ -108,6 +108,9 @@
         <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
         <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
 
+        <!-- Toastr -->
+        <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
+
         <script>
           $(function () {
             //Date range picker
@@ -130,6 +133,14 @@
 
             //Initialize Select2 Elements
             $('.select2').select2({width: 'resolve'});
+
+            @error('date')
+            toastr.warning('{{ $message }}')
+            @enderror
+
+            @error('department')
+            toastr.warning('{{ $message }}')
+            @enderror
 
           });
         </script>
