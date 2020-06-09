@@ -26,36 +26,67 @@ class ReportController extends Controller
   public function index()
   {
     $data = array();
+    $dateStart = Carbon::now()->subDays(7);
+    $dateEnd = Carbon::now();
+    $amountDate = $dateEnd->diffInDays($dateStart);
     if (Auth::user()->role == 1) {
-    $department = Departement::where('delete', 0)->get();
-      $report = Report::orderBy('id', 'desc')->get();
-      $report->map(function ($item) {
-        $item->user = User::find($item->id_user);
-        $item->department = Departement::find($item->id_department);
-        $item->penyakit = Penyakit::find($item->id_penyakit);
+      $department = Departement::where('delete', 0)->get();
+      $report = Report::orderBy('id', 'desc')->get()->groupBy(function ($item) {
+        return $item->id_user;
+      })->map(function ($item) use ($amountDate) {
+        $dataSickList = 0;
+        $dataAbsent = 0;
+        foreach ($item as $subItem) {
+          if ($subItem->id_penyakit != 1) {
+            $dataSickList++;
+          }
+          $dataAbsent++;
+
+          $item->user = User::find($subItem->id_user);
+          $item->department = Departement::find($subItem->id_department);
+        }
+        $item->absent = $amountDate - $dataAbsent;
+        $item->sick = $dataSickList;
         return $item;
       });
 
       $data = [
         'report' => $report,
-        'department' => $department
+        'department' => $department,
+        'setDepartment' => 1,
+        'dateStart' => $dateStart->format('d-m-Y'),
+        'dateEnd' => $dateEnd->format('d-m-Y'),
       ];
     } elseif (Auth::user()->role == 2) {
-      $department = Departement::where('delete', 0)->get();
-        $report = Report::orderBy('id', 'desc')->get();
-        $report->map(function ($item) {
-          $item->user = User::find($item->id_user);
-          $item->department = Departement::find($item->id_department);
-          $item->penyakit = Penyakit::find($item->id_penyakit);
-          return $item;
-        });
-  
-        $data = [
-          'report' => $report,
-          'department' => $department
-        ];
-      }
-      return view('report.index', $data);
+      $department = Departement::where('id', Auth::user()->id_department)->get();
+      $report = Report::where('id_department', Auth::user()->id_department)->orderBy('id', 'desc')->get()->groupBy(function ($item) {
+        return $item->id_user;
+      })->map(function ($item) use ($amountDate) {
+        $dataSickList = 0;
+        $dataAbsent = 0;
+        foreach ($item as $subItem) {
+          if ($subItem->id_penyakit != 1) {
+            $dataSickList++;
+          }
+          $dataAbsent++;
+
+          $item->user = User::find($subItem->id_user);
+          $item->department = Departement::find($subItem->id_department);
+        }
+        $item->absent = $amountDate - $dataAbsent;
+        $item->sick = $dataSickList;
+        return $item;
+      });
+
+      $data = [
+        'report' => $report,
+        'department' => $department,
+        'setDepartment' => Auth::user()->id_department,
+        'dateStart' => $dateStart->format('d-m-Y'),
+        'dateEnd' => $dateEnd->format('d-m-Y'),
+      ];
+    }
+    return view('report.index', $data);
   }
 
   /**
@@ -71,19 +102,34 @@ class ReportController extends Controller
     ]);
 
     $date = explode(' - ', $request->date);
-    $dateStart = Carbon::parse($date[0] . ' 00:00:00')->format('Y-m-d H:i:s');
-    $dateEnd = Carbon::parse($date[1] . '23:59:59')->format('Y-m-d H:i:s');
-    $report = Report::orderBy('id', 'desc')->where('id_department', $request->department)->whereBetween('created_at', [$dateStart, $dateEnd])->get();
-    $report->map(function ($item) {
-      $item->user = User::find($item->id_user);
-      $item->department = Departement::find($item->id_department);
-      $item->penyakit = Penyakit::find($item->id_penyakit);
+    $dateStart = Carbon::parse($date[0] . ' 00:00:00');
+    $dateEnd = Carbon::parse($date[1] . ' 23:59:59');
+    $amountDate = $dateEnd->diffInDays($dateStart);
+    $report = Report::orderBy('id', 'desc')->where('id_department', $request->department)->whereBetween('created_at', [$dateStart->format('Y-m-d H:i:s'), $dateEnd->format('Y-m-d H:i:s')])->get()->groupBy(function ($item) {
+      return $item->id_user;
+    })->map(function ($item) use ($amountDate) {
+      $dataSickList = 0;
+      $dataAbsent = 0;
+      foreach ($item as $subItem) {
+        if ($subItem->id_penyakit != 1) {
+          $dataSickList++;
+        }
+        $dataAbsent++;
+
+        $item->user = User::find($subItem->id_user);
+        $item->department = Departement::find($subItem->id_department);
+      }
+      $item->absent = $amountDate - $dataAbsent;
+      $item->sick = $dataSickList;
       return $item;
     });
 
     $data = [
       'report' => $report,
-      'department' => Departement::where('delete', 0)->get()
+      'department' => Departement::where('delete', 0)->get(),
+      'setDepartment' => $request->department,
+      'dateStart' => $dateStart->format('d-m-Y'),
+      'dateEnd' => $dateEnd->format('d-m-Y'),
     ];
     return view('report.index', $data);
   }
@@ -98,23 +144,36 @@ class ReportController extends Controller
     $this->validate($request, [
       'date' => 'required|string',
     ]);
-    $validateToday = Report::where('id_user', Auth::user()->id)->whereDate('created_at', Carbon::now())->count();
     $disease = Penyakit::where('delete', 0)->get();
     $date = explode(' - ', $request->date);
-    $dateStart = Carbon::parse($date[0] . ' 00:00:00')->format('Y-m-d H:i:s');
-    $dateEnd = Carbon::parse($date[1] . '23:59:59')->format('Y-m-d H:i:s');
-    $report = Report::orderBy('id', 'desc')->whereBetween('created_at', [$dateStart, $dateEnd])->get();
-    $report->map(function ($item) {
-      $item->user = User::find($item->id_user);
-      $item->department = Departement::find($item->id_department);
-      $item->penyakit = Penyakit::find($item->id_penyakit);
+    $dateStart = Carbon::parse($date[0] . ' 00:00:00');
+    $dateEnd = Carbon::parse($date[1] . ' 23:59:59');
+    $amountDate = $dateEnd->diffInDays($dateStart);
+    $report = Report::orderBy('id', 'desc')->whereBetween('created_at', [$dateStart->format('Y-m-d H:i:s'), $dateEnd->format('Y-m-d H:i:s')])->get()->groupBy(function ($item) {
+      return $item->id_user;
+    })->map(function ($item) use ($amountDate) {
+      $dataSickList = 0;
+      $dataAbsent = 0;
+      foreach ($item as $subItem) {
+        if ($subItem->id_penyakit != 1) {
+          $dataSickList++;
+        }
+        $dataAbsent++;
+
+        $item->user = User::find($subItem->id_user);
+        $item->department = Departement::find($subItem->id_department);
+      }
+      $item->absent = $amountDate - $dataAbsent;
+      $item->sick = $dataSickList;
       return $item;
     });
 
     $data = [
       'report' => $report,
       'disease' => $disease,
-      'todayCheck' => $validateToday
+      'setDepartment' => Auth::user()->id_department,
+      'dateStart' => $dateStart->format('d-m-Y'),
+      'dateEnd' => $dateEnd->format('d-m-Y'),
     ];
     return view('report.index', $data);
   }
