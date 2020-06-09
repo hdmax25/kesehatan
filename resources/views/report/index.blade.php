@@ -5,7 +5,7 @@
     <div class="col-md-12">
       <div class="card card-outline card-danger">
         <div class="card-header">
-          <h3 class="card-title">Download Excel</h3>
+          <h3 class="card-title">Setting Tanggal</h3>
         </div>
         <form action="{{ route('report.findSDM') }}" method="post">
           @csrf
@@ -29,6 +29,7 @@
                 <div class="form-group">
                   <label for="department">Department</label>
                   <select id="department" name="department" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" required>
+                    <option value="0">All</option>
                     @foreach($department as $item)
                       <option value="{{ $item->id }}" {{ $setDepartment == $item->id ? 'selected' :'' }}>{{ $item->department_name }}</option>
                     @endforeach
