@@ -14,17 +14,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Contracts\View\View;
+use Illuminate\View\View;
 
 class ReportController extends Controller
 {
   /**
    * Display a listing of the resource.
    *
-   * @return Application|Factory|Response|\Illuminate\View\View
+   * @return Application|Factory|Response|View
    */
   public function index()
   {
+    $data = array();
     if (Auth::user()->role == 1) {
     $department = Departement::where('delete', 0)->get();
       $report = Report::orderBy('id', 'desc')->get();
@@ -55,6 +56,67 @@ class ReportController extends Controller
         ];
       }
       return view('report.index', $data);
+  }
+
+  /**
+   * @param Request $request
+   * @return Application|Factory|View
+   * @throws ValidationException
+   */
+  public function findSDM(Request $request)
+  {
+    $this->validate($request, [
+      'date' => 'required|string',
+      'department' => 'required|numeric|exists:departements,id',
+    ]);
+
+    $date = explode(' - ', $request->date);
+    $dateStart = Carbon::parse($date[0] . ' 00:00:00')->format('Y-m-d H:i:s');
+    $dateEnd = Carbon::parse($date[1] . '23:59:59')->format('Y-m-d H:i:s');
+    $report = Report::orderBy('id', 'desc')->where('id_department', $request->department)->whereBetween('created_at', [$dateStart, $dateEnd])->get();
+    $report->map(function ($item) {
+      $item->user = User::find($item->id_user);
+      $item->department = Departement::find($item->id_department);
+      $item->penyakit = Penyakit::find($item->id_penyakit);
+      return $item;
+    });
+
+    $data = [
+      'report' => $report,
+      'department' => Departement::where('delete', 0)->get()
+    ];
+    return view('report.index', $data);
+  }
+
+  /**
+   * @param Request $request
+   * @return Application|Factory|View
+   * @throws ValidationException
+   */
+  public function findDevise(Request $request)
+  {
+    $this->validate($request, [
+      'date' => 'required|string',
+    ]);
+    $validateToday = Report::where('id_user', Auth::user()->id)->whereDate('created_at', Carbon::now())->count();
+    $disease = Penyakit::where('delete', 0)->get();
+    $date = explode(' - ', $request->date);
+    $dateStart = Carbon::parse($date[0] . ' 00:00:00')->format('Y-m-d H:i:s');
+    $dateEnd = Carbon::parse($date[1] . '23:59:59')->format('Y-m-d H:i:s');
+    $report = Report::orderBy('id', 'desc')->whereBetween('created_at', [$dateStart, $dateEnd])->get();
+    $report->map(function ($item) {
+      $item->user = User::find($item->id_user);
+      $item->department = Departement::find($item->id_department);
+      $item->penyakit = Penyakit::find($item->id_penyakit);
+      return $item;
+    });
+
+    $data = [
+      'report' => $report,
+      'disease' => $disease,
+      'todayCheck' => $validateToday
+    ];
+    return view('report.index', $data);
   }
 
   /**

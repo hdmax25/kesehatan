@@ -26,8 +26,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/export', 'HomeController@export')->name('export');
 Route::get('/exportkadiv', 'HomeController@export')->name('exportkadiv');
-Route::post('/home/sdm', 'HomeController@findSDM')->name('findSDM');
-Route::post('/home/devise', 'HomeController@findDevise')->name('findDevise');
 
 Route::group(['prefix' => 'user', 'as' => 'user.'], static function () {
   Route::get('/', 'UserController@index')->name('index')->middleware('auth', 'role:1');
@@ -56,6 +54,8 @@ Route::group(['prefix' => 'department', 'as' => 'department.'], static function 
 
 Route::group(['prefix' => 'report', 'as' => 'report.'], static function () {
   Route::get('/', 'ReportController@index')->name('index')->middleware('auth', 'role:1|2');
+  Route::post('/sdm', 'ReportController@findSDM')->name('findSDM')->middleware('auth', 'role:1|2');
+  Route::post('/devise', 'ReportController@findDevise')->name('findDevise')->middleware('auth', 'role:1|2');
   Route::post('/store', 'ReportController@store')->name('store')->middleware('auth', 'role:2|3');
   Route::get('/show/{id}', 'ReportController@show')->name('show')->middleware('auth');
   Route::get('/edit/{id}', 'ReportController@edit')->name('edit')->middleware('auth', 'role:1');

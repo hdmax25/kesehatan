@@ -8,7 +8,7 @@
       <div class="card-header">
           <h3 class="card-title">Download Excel</h3>
       </div>
-      <form action="{{ route('findSDM') }}" method="post">
+      <form action="{{ route('report.findSDM') }}" method="post">
         @csrf
         <div class="card-body">
           <div class="row">
