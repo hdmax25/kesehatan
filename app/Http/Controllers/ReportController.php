@@ -40,7 +40,7 @@ class ReportController extends Controller
         'department' => $department
       ];
     } elseif (Auth::user()->role == 2) {
-      $department = Departement::where('delete', 0, )->get();
+      $department = Departement::where('delete', 0)->get();
         $report = Report::orderBy('id', 'desc')->get();
         $report->map(function ($item) {
           $item->user = User::find($item->id_user);
@@ -76,6 +76,10 @@ class ReportController extends Controller
    */
   public function store(Request $request)
   {
+    if (Carbon::now() > Carbon::parse("13:00:00")) {
+      return redirect()->back()->with(['message' => 'Input Anda Sudah Melewati Jam 1 siang']);
+    }
+
     $this->validate($request, [
       'disease' => 'required|string|exists:penyakits,id',
       'domicile' => 'required|string|max:191',
