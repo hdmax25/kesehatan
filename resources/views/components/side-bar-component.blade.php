@@ -45,6 +45,25 @@
             </a>
           </li>
         @endif
+        @if (Auth::user()->role == 1)
+          <li class="nav-item">
+            <a href="{{ route('export') }}" class="nav-link {{ request()->is('export') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-file-excel"></i>
+              <p>
+                Report Excel
+              </p>
+            </a>
+          </li>
+        @elseif (Auth::user()->role == 2)
+          <li class="nav-item">
+            <a href="{{ route('exportkadiv') }}" class="nav-link {{ request()->is('export') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-file-excel"></i>
+              <p>
+                Report Excel
+              </p>
+            </a>
+          </li>
+        @endif
         @admin
         <li class="nav-item has-treeview {{ request()->is(['user', 'user/create']) ? 'menu-open' : '' }}">
           <a href="#" class="nav-link {{ request()->is(['user', 'user/create']) ? 'active' : '' }}">

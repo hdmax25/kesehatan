@@ -40,53 +40,42 @@
           </div>
         </div>
         <div class="card-footer">
-          <button type="submit" class="btn btn-danger">Download</button>
+          <button type="submit" class="btn btn-danger">Find</button>
         </div>
       </form>
     </div>
   </div>
 </div>
-<!-- <div class="row">
+<div class="row">
     <div class="col-md-12">
       <div class="card card-outline card-danger">
         <div class="card-header">
           <h3 class="card-title">Data Keshetan</h3>
         </div>
-        <div class="card-body table-responsive p-0">
-            <table id="tblData" class="table table-hover table-head-fixed text-wrap">
+        <div class="card-body">
+            <table id="report" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>Tanggal</th>
                         <th>NIP</th>
                         <th>Nama</th>
                         <th>Department</th>
-                        <th>Phone</th>
-                        <th>Posisi</th>
-                        <th>Kondisi</th>
-                        <th>Keluhan</th>
-                        <th>Alamat</th>
-                        <th>Domisili</th>
-                    </tr>
+                        <th>Tidak Mengisi</th>
+                        <th>Sakit</th>
                 </thead>
                 <tbody>
                 @foreach($report as $item)
                     <tr>
-                    <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y h:m') }}</td>
                     <td>{{ $item->user->username }}</td>
                     <td>{{ $item->user->name }}</td>
                     <td>{{ $item->department->department_name }}</td>
-                    <td>'{{ $item->user->phone }}</td>
-                    <td>{{ $item->position }}</td>
-                    <td>{{ $item->penyakit->penyakit_name }}</td>
-                    <td>{{ $item->deatail }}</td>
-                    <td>{{ $item->user->ktpaddress }}</td>
-                    <td>{{ $item->domicile }}</td>
+                    <td>2</td>
+                    <td>1</td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
     </div>
-</div>-->
+</div>
 @endsection
 
 @section('css')
@@ -128,17 +117,7 @@
         }
       });
 
-      $('#sudah-t').DataTable({
-        "paging": true,
-        "lengthChange": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": true,
-        "responsive": true,
-      });
-
-      $('#belum-t').DataTable({
+      $('#report').DataTable({
         "paging": true,
         "lengthChange": true,
         "searching": true,

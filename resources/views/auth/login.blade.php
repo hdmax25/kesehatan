@@ -56,7 +56,15 @@
           </div>
         </div>
       </form>
-
+      <div class="social-auth-links text-center mb-3">
+        <p>- Tidak bisa login -</p>
+        <a href="#" class="btn btn-block btn-primary">
+          <i class="fa fa-book mr-2"></i> Baca Panduan
+        </a>
+        <a href="{{ url('https://wa.me/6285655615383') }}" class="btn btn-block btn-success">
+          <i class="fab fa-whatsapp mr-2"></i> Hubungi Admin
+        </a>
+      </div>
     </div>
   </div>
 @endsection
