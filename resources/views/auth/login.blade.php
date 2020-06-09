@@ -58,7 +58,7 @@
       </form>
       <div class="social-auth-links text-center mb-3">
         <p>- Tidak bisa login -</p>
-        <a href="#" class="btn btn-block btn-primary">
+        <a href="https://docs.google.com/document/d/e/2PACX-1vSvYNZ7I3wv04R8JadMADkzrmaUWhe50I3KbX3nJxd7VXtFpkI8Z4up340hHU-Q-0w7Gb9gcrrY1xPX/pub" target="_blank" class="btn btn-block btn-primary">
           <i class="fa fa-book mr-2"></i> Baca Panduan
         </a>
         <a href="{{ url('https://wa.me/6285655615383') }}" class="btn btn-block btn-success">
