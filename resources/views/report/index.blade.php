@@ -112,6 +112,7 @@
           $(function () {
             //Date range picker
             $('#reservation').daterangepicker({
+              todayHighlight: true,
               locale: {
                 format: 'DD-MM-YYYY'
               }
