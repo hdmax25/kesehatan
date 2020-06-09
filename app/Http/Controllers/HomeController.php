@@ -2,21 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\FromCollection\ExportMode;
-use App\Http\FromCollection\ExportModeKadiv;
 use App\model\Departement;
 use App\model\Penyakit;
 use App\model\Report;
 use App\User;
 use Carbon\Carbon;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
-use Illuminate\View\View;
-use Maatwebsite\Excel\Facades\Excel;
 
 class HomeController extends Controller
 {
@@ -26,16 +18,6 @@ class HomeController extends Controller
   public function __construct()
   {
     $this->middleware('auth');
-  }
-
-  public function exportkadiv()
-  {
-    return Excel::download(new ExportMode, 'report.xlsx');
-  }
-
-  public function export()
-  {
-    return Excel::download(new ExportModeKadiv, 'report.xlsx');
   }
   
 

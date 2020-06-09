@@ -47,7 +47,7 @@
         @endif
         @if (Auth::user()->role == 1)
           <li class="nav-item">
-            <a href="{{ route('export') }}" class="nav-link {{ request()->is('export') ? 'active' : '' }}">
+            <a href="{{ route('report.export') }}" class="nav-link {{ request()->is('export') ? 'active' : '' }}">
               <i class="nav-icon fas fa-file-excel"></i>
               <p>
                 Report Excel
@@ -56,7 +56,7 @@
           </li>
         @elseif (Auth::user()->role == 2)
           <li class="nav-item">
-            <a href="{{ route('exportkadiv') }}" class="nav-link {{ request()->is('export') ? 'active' : '' }}">
+            <a href="{{ route('report.exportkadiv') }}" class="nav-link {{ request()->is('exportkadiv') ? 'active' : '' }}">
               <i class="nav-icon fas fa-file-excel"></i>
               <p>
                 Report Excel

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\FromCollection\ExportMode;
 use App\model\Departement;
 use App\model\Penyakit;
 use App\model\Report;
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ReportController extends Controller
 {
@@ -53,7 +56,7 @@ class ReportController extends Controller
       $data = [
         'report' => $report,
         'department' => $department,
-        'setDepartment' => 1,
+        'setDepartment' => 0,
         'dateStart' => $dateStart->format('d-m-Y'),
         'dateEnd' => $dateEnd->format('d-m-Y'),
       ];
@@ -98,31 +101,54 @@ class ReportController extends Controller
   {
     $this->validate($request, [
       'date' => 'required|string',
-      'department' => 'required|numeric|exists:departements,id',
     ]);
 
     $date = explode(' - ', $request->date);
     $dateStart = Carbon::parse($date[0] . ' 00:00:00');
     $dateEnd = Carbon::parse($date[1] . ' 23:59:59');
     $amountDate = $dateEnd->diffInDays($dateStart);
-    $report = Report::orderBy('id', 'desc')->where('id_department', $request->department)->whereBetween('created_at', [$dateStart->format('Y-m-d H:i:s'), $dateEnd->format('Y-m-d H:i:s')])->get()->groupBy(function ($item) {
-      return $item->id_user;
-    })->map(function ($item) use ($amountDate) {
-      $dataSickList = 0;
-      $dataAbsent = 0;
-      foreach ($item as $subItem) {
-        if ($subItem->id_penyakit != 1) {
-          $dataSickList++;
-        }
-        $dataAbsent++;
+    if ($request->department != 0) {
+      $this->validate($request, [
+        'department' => 'required|numeric|exists:departements,id',
+      ]);
+      $report = Report::orderBy('id', 'desc')->where('id_department', $request->department)->whereBetween('created_at', [$dateStart->format('Y-m-d H:i:s'), $dateEnd->format('Y-m-d H:i:s')])->get()->groupBy(function ($item) {
+        return $item->id_user;
+      })->map(function ($item) use ($amountDate) {
+        $dataSickList = 0;
+        $dataAbsent = 0;
+        foreach ($item as $subItem) {
+          if ($subItem->id_penyakit != 1) {
+            $dataSickList++;
+          }
+          $dataAbsent++;
 
-        $item->user = User::find($subItem->id_user);
-        $item->department = Departement::find($subItem->id_department);
-      }
-      $item->absent = $amountDate - $dataAbsent;
-      $item->sick = $dataSickList;
-      return $item;
-    });
+          $item->user = User::find($subItem->id_user);
+          $item->department = Departement::find($subItem->id_department);
+        }
+        $item->absent = $amountDate - $dataAbsent;
+        $item->sick = $dataSickList;
+        return $item;
+      });
+    } else {
+      $report = Report::orderBy('id', 'desc')->whereBetween('created_at', [$dateStart->format('Y-m-d H:i:s'), $dateEnd->format('Y-m-d H:i:s')])->get()->groupBy(function ($item) {
+        return $item->id_user;
+      })->map(function ($item) use ($amountDate) {
+        $dataSickList = 0;
+        $dataAbsent = 0;
+        foreach ($item as $subItem) {
+          if ($subItem->id_penyakit != 1) {
+            $dataSickList++;
+          }
+          $dataAbsent++;
+
+          $item->user = User::find($subItem->id_user);
+          $item->department = Departement::find($subItem->id_department);
+        }
+        $item->absent = $amountDate - $dataAbsent;
+        $item->sick = $dataSickList;
+        return $item;
+      });
+    }
 
     $data = [
       'report' => $report,
@@ -179,16 +205,6 @@ class ReportController extends Controller
   }
 
   /**
-   * Show the form for creating a new resource.
-   *
-   * @return Response
-   */
-  public function create()
-  {
-    //
-  }
-
-  /**
    * Store a newly created resource in storage.
    *
    * @param Request $request
@@ -227,47 +243,88 @@ class ReportController extends Controller
   }
 
   /**
-   * Display the specified resource.
-   *
-   * @param Report $report
-   * @return void
+   * @return BinaryFileResponse
    */
-  public function show(Report $report)
+  public function exportkadiv(): BinaryFileResponse
   {
-    //
+    $data = [
+      0 => [
+        'date' => 'Tanggal',
+        'username' => 'NIP',
+        'name' => 'Nama',
+        'department' => 'Department',
+        'phone' => 'Phone',
+        'position' => 'Posisi',
+        'disease' => ' Kondisi',
+        'diseaseDescription' => 'Keluhan',
+        'ktpaddress' => 'Alamat',
+        'domicile' => 'Domisili',
+      ]
+    ];
+    $report = Report::where('id_department', Auth::user()->id_department)->get();
+    $report->map(function ($item) {
+      $item->user = User::find($item->id_user);
+      $item->department = Departement::find($item->id_department);
+      $item->disease = Penyakit::find($item->id_penyakit);
+    });
+
+    foreach ($report as $id => $item) {
+      $data[$id + 1]['date'] = $item->created_at;
+      $data[$id + 1]['username'] = $item->user->username;
+      $data[$id + 1]['name'] = $item->user->name;
+      $data[$id + 1]['department'] = $item->department->department_name;
+      $data[$id + 1]['phone'] = $item->user->phone;
+      $data[$id + 1]['position'] = $item->position;
+      $data[$id + 1]['disease'] = $item->disease->penyakit_name;
+      $data[$id + 1]['diseaseDescription'] = $item->deatail;
+      $data[$id + 1]['ktpaddress'] = $item->user->ktpaddress;
+      $data[$id + 1]['domicile'] = $item->domicile;
+    }
+
+    $exportMode = new ExportMode($data);
+    return Excel::download($exportMode, 'report.xlsx');
   }
 
   /**
-   * Show the form for editing the specified resource.
-   *
-   * @param Report $report
-   * @return void
+   * @return BinaryFileResponse
    */
-  public function edit(Report $report)
+  public function export(): BinaryFileResponse
   {
-    //
-  }
+    $data = [
+      0 => [
+        'date' => 'Tanggal',
+        'username' => 'NIP',
+        'name' => 'Nama',
+        'department' => 'Department',
+        'phone' => 'Phone',
+        'position' => 'Posisi',
+        'disease' => ' Kondisi',
+        'diseaseDescription' => 'Keluhan',
+        'ktpaddress' => 'Alamat',
+        'domicile' => 'Domisili',
+      ]
+    ];
+    $report = Report::all();
+    $report->map(function ($item) {
+      $item->user = User::find($item->id_user);
+      $item->department = Departement::find($item->id_department);
+      $item->disease = Penyakit::find($item->id_penyakit);
+    });
 
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param Request $request
-   * @param Report $report
-   * @return void
-   */
-  public function update(Request $request, Report $report)
-  {
-    //
-  }
+    foreach ($report as $id => $item) {
+      $data[$id + 1]['date'] = $item->created_at;
+      $data[$id + 1]['username'] = $item->user->username;
+      $data[$id + 1]['name'] = $item->user->name;
+      $data[$id + 1]['department'] = $item->department->department_name;
+      $data[$id + 1]['phone'] = $item->user->phone;
+      $data[$id + 1]['position'] = $item->position;
+      $data[$id + 1]['disease'] = $item->disease->penyakit_name;
+      $data[$id + 1]['diseaseDescription'] = $item->deatail;
+      $data[$id + 1]['ktpaddress'] = $item->user->ktpaddress;
+      $data[$id + 1]['domicile'] = $item->domicile;
+    }
 
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param $id
-   * @return void
-   */
-  public function destroy($id)
-  {
-    //
+    $exportMode = new ExportMode($data);
+    return Excel::download($exportMode, 'report.xlsx');
   }
 }
