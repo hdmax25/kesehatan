@@ -54,7 +54,7 @@
                   <div class="row">
                     <div class="col-md-3">
                       <div class="info-box">
-                        <span class="info-box-icon bg-primary"><i class="far fa-user"></i></span>
+                        <span class="info-box-icon bg-primary"><i class="fa fa-address-card"></i></span>
                         <div class="info-box-content">
                           <span class="info-box-text">NIP</span>
                           <span class="info-box-number">{{ Auth::user()->username }}</span>
@@ -129,9 +129,9 @@
                             </div>
                             <div class="input-group col-md-3">
                               <div class="input-group-prepend">
-                            <span class="input-group-text">
-                              <input type="radio" name="position" value="0" {{ old('position') != 'Rumah' && old('position') != 'Kantor' && old('position') != 'Kost' ? 'checked' : '' }}>
-                            </span>
+                                <span class="input-group-text">
+                                  <input type="radio" name="position" value="0" {{ old('position') != 'Rumah' && old('position') != 'Kantor' && old('position') != 'Kost' ? 'checked' : '' }}>
+                                </span>
                               </div>
                               <input type="text" class="form-control @error('positionDescription') is-invalid @enderror" name="positionDescription" placeholder="Lain-Lain..."
                                      value="{{ old('positionDescription') }}">
