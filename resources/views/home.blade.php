@@ -250,8 +250,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
-        <div class="card card-danger">
+      <div class="col-md-12">
+        <div class="card card-danger card-outline">
           <div class="card-header">
             <h3 class="card-title">Belum Mengisi</h3>
           </div>
@@ -261,6 +261,9 @@
               <tr>
                 <th>NIP</th>
                 <th>Nama Pegawai</th>
+                @admin
+                  <th>Department</th>
+                @endadmin
                 <th>Call</th>
               </tr>
               </thead>
@@ -269,6 +272,9 @@
                 <tr>
                   <td>{{ $item->username }}</td>
                   <td>{{ $item->name }}</td>
+                  @admin
+                    <td>{{ $item->department ? $item->department->department_name : '' }}</td>
+                  @endadmin
                   <td>
                     <a href="tel:{{$item->phone}}" type="button" class="btn btn-danger btn-xs btn-block">
                       <i class="fas fa-phone"></i>
@@ -281,8 +287,10 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="card card-success">
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-success card-outline">
           <div class="card-header">
             <h3 class="card-title">Sudah Mengisi</h3>
           </div>

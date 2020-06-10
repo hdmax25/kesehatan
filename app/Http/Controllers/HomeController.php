@@ -30,14 +30,17 @@ class HomeController extends Controller
   {
     if (Auth::user()->role == 1) {
       $department = Departement::where('delete', 0)->get();
+      $disease = Penyakit::where('delete', 0)->get();
       $report = User::where('role', '!=', 1)->get();
       $report->map(function ($item) {
         $item->department = Departement::find($item->id_department);
+        $item->disease = Penyakit::find($item->id_penyakit);
         $item->absenes = Report::where('id_user', $item->id)->whereDate('created_at', Carbon::now())->first();
       });
 
       $data = [
         'department' => $department,
+        'disease' => $disease,
         'sudah' => $report->whereNotNull('absenes'),
         'belum' => $report->whereNull('absenes')
       ];
