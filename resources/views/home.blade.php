@@ -44,7 +44,7 @@
       @if (\Carbon\Carbon::now() < \Carbon\Carbon::parse("13:00:00"))
         <div class="row">
           <div id="checkedToday" class="col-md-12">
-            <div class="card card-danger">
+            <div class="card card-danger card-outline">
               <div class="card-header">
                 <h3 class="card-title">Data Kesehatan Tanggal {{ \Carbon\Carbon::now()->format('d-m-Y') }}</h3>
               </div>
@@ -54,7 +54,7 @@
                   <div class="row">
                     <div class="col-md-3">
                       <div class="info-box">
-                        <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
+                        <span class="info-box-icon bg-primary"><i class="far fa-user"></i></span>
                         <div class="info-box-content">
                           <span class="info-box-text">NIP</span>
                           <span class="info-box-number">{{ Auth::user()->username }}</span>
@@ -72,7 +72,7 @@
                     </div>
                     <div class="col-md-3">
                       <div class="info-box">
-                        <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
+                        <span class="info-box-icon bg-warning"><i class="fa fa-building"></i></span>
                         <div class="info-box-content">
                           <span class="info-box-text">Departement</span>
                           <span class="info-box-number">{{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}</span>
@@ -81,7 +81,7 @@
                     </div>
                     <div class="col-md-3">
                       <div class="info-box">
-                        <span class="info-box-icon bg-danger"><i class="fa fa-phone"></i></span>
+                        <span class="info-box-icon bg-success"><i class="fa fa-phone"></i></span>
                         <div class="info-box-content">
                           <span class="info-box-text">Phone</span>
                           <span class="info-box-number">{{ Auth::user()->phone }}</span>
@@ -100,7 +100,7 @@
                       <div class="form-group">
                         <label>Domisili </label><small>(Tidak harus sesuai KTP)</small>
                         <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
-                                  placeholder="Enter ...">{{ old('domicile') ? old('domicile') : ($domicile ? $domicile->domicile : '')}}</textarea>
+                                  placeholder="Masukkan domisili">{{ old('domicile') ? old('domicile') : ($domicile ? $domicile->domicile : '')}}</textarea>
                       </div>
                     </div>
                   </div>

@@ -61,6 +61,7 @@
               <th>Department</th>
               <th>Tidak Mengisi</th>
               <th>Sakit</th>
+              <th>View</th>
             </thead>
             <tbody>
             @foreach($report as $item)
@@ -68,8 +69,13 @@
                 <td>{{ $item->user->username }}</td>
                 <td>{{ $item->user->name }}</td>
                 <td>{{ $item->department->department_name }}</td>
-                <td>{{ $item->absent }}</td>
+                <td>{{ $item->absent+1 }}</td>
                 <td>{{ $item->sick }}</td>
+                <td>
+                  <a href="{{ route('user.show', $item->user->id) }}" type="button" class="btn btn-primary btn-sm btn-block">
+                    <i class="fas fa-eye"></i>
+                  </a>
+                </td>
               </tr>
             @endforeach
             </tbody>
