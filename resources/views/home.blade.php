@@ -193,7 +193,7 @@
       @enduser
     @endif
   @endif
-  @if (Auth::user()->role == 1)
+  @if (Auth::user()->role !== 3)
     <div class="row">
       <div class="col-md-12">
         <div class="card card-outline card-danger">
@@ -249,82 +249,80 @@
         </div>
       </div>
     </div>
-    @kadiv
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card card-danger card-outline">
-            <div class="card-header">
-              <h3 class="card-title">Belum Mengisi</h3>
-            </div>
-            <div class="card-body">
-              <table id="belum-t" class="table table-bordered table-striped">
-                <thead>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-danger card-outline">
+          <div class="card-header">
+            <h3 class="card-title">Belum Mengisi</h3>
+          </div>
+          <div class="card-body">
+            <table id="belum-t" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>NIP</th>
+                <th>Nama Pegawai</th>
+                @admin
+                  <th>Department</th>
+                @endadmin
+                <th>Call</th>
+              </tr>
+              </thead>
+              <tbody>
+              @foreach($belum as $item)
                 <tr>
-                  <th>NIP</th>
-                  <th>Nama Pegawai</th>
+                  <td>{{ $item->username }}</td>
+                  <td>{{ $item->name }}</td>
                   @admin
-                    <th>Department</th>
+                    <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                   @endadmin
-                  <th>Call</th>
+                  <td>
+                    <a href="tel:{{$item->phone}}" type="button" class="btn btn-danger btn-xs btn-block">
+                      <i class="fas fa-phone"></i>
+                    </a>
+                  </td>
                 </tr>
-                </thead>
-                <tbody>
-                @foreach($belum as $item)
-                  <tr>
-                    <td>{{ $item->username }}</td>
-                    <td>{{ $item->name }}</td>
-                    @admin
-                      <td>{{ $item->department ? $item->department->department_name : '' }}</td>
-                    @endadmin
-                    <td>
-                      <a href="tel:{{$item->phone}}" type="button" class="btn btn-danger btn-xs btn-block">
-                        <i class="fas fa-phone"></i>
-                      </a>
-                    </td>
-                  </tr>
-                @endforeach
-                </tbody>
-              </table>
-            </div>
+              @endforeach
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card card-success card-outline">
-            <div class="card-header">
-              <h3 class="card-title">Sudah Mengisi</h3>
-            </div>
-            <div class="card-body">
-              <table id="sudah-t" class="table table-bordered table-striped">
-                <thead>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-success card-outline">
+          <div class="card-header">
+            <h3 class="card-title">Sudah Mengisi</h3>
+          </div>
+          <div class="card-body">
+            <table id="sudah-t" class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>Jam</th>
+                <th>NIP</th>
+                <th>Nama</th>
+                <th>View</th>
+              </tr>
+              </thead>
+              <tbody>
+              @foreach($sudah as $item)
                 <tr>
-                  <th>Jam</th>
-                  <th>NIP</th>
-                  <th>Nama</th>
-                  <th>View</th>
+                  <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
+                  <td>{{ $item->username }}</td>
+                  <td>{{ $item->name }}</td>
+                  <td>
+                    <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
+                      <i class="fas fa-eye"></i>
+                    </a>
+                  </td>
                 </tr>
-                </thead>
-                <tbody>
-                @foreach($sudah as $item)
-                  <tr>
-                    <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
-                    <td>{{ $item->username }}</td>
-                    <td>{{ $item->name }}</td>
-                    <td>
-                      <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
-                        <i class="fas fa-eye"></i>
-                      </a>
-                    </td>
-                  </tr>
-                @endforeach
-                </tbody>
-              </table>
-            </div>
+              @endforeach
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
-    @endkadiv
+    </div>
     <div class="row">
       <div class="col-md-6">
         <div class="card card-success card-outline">
