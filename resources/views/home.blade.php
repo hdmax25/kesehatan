@@ -22,14 +22,18 @@
     <div class="row mb-2">
       <div class="col-sm-6">
         <h1>
-          Home
+          @if (Auth::user()->role == 1)
+            PT <strong>INKA</strong> <i>Multi Solusi</i>
+          @else
+            {{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}
+          @endif
         </h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item">
+          <li class="breadcrumb-item"> 
             <a href="#">
-              Home
+              {{ \Carbon\Carbon::now()->format('l, d F Y') }}
             </a>
           </li>
         </ol>
@@ -198,49 +202,78 @@
       <div class="col-md-12">
         <div class="card card-outline card-danger">
           <div class="card-header">
-            <h3 class="card-title">Data Kesehatan -
-              @if (Auth::user()->role == 1)
-                PT <strong>INKA</strong> <i>Multi Solusi</i>
-              @else
-                {{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}
-              @endif
-            </h3>
+            <h3 class="card-title">Data Kesehatan</h3>
+              <div class="card-tools">
+                <span class="badge badge-danger">Jumlah Pegawai {{$sudah->count()+$belum->count()}}</span>
+             </div>
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-md-3">
-                <div class="info-box">
-                  <span class="info-box-icon bg-primary"><i class="fa fa-calendar"></i></span>
+              <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box bg-info">
+                  <span class="info-box-icon"><i class="fa fa-users"></i></span>
+
                   <div class="info-box-content">
-                    <span class="info-box-text">Tanggal</span>
-                    <span class="info-box-number">{{ \Carbon\Carbon::now()->format('d-m-Y') }}</span>
+                    <span class="info-box-text">Sudah Lapor</span>
+                    <span class="info-box-number">{{$sudah->count()}}</span>
+
+                    <div class="progress">
+                      <div class="progress-bar" style="width: {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
+                    </div>
+                    <span class="progress-description">
+                    {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
+                    </span>
                   </div>
                 </div>
               </div>
-              <div class="col-md-3">
-                <div class="info-box">
-                  <span class="info-box-icon bg-warning"><i class="fa fa-users"></i></span>
+              <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box bg-danger">
+                  <span class="info-box-icon"><i class="fa fa-users"></i></span>
+
                   <div class="info-box-content">
-                    <span class="info-box-text">Jumlah Pegawai</span>
-                    <span class="info-box-number">{{ $sudah->count() + $belum->count() }}</span>
+                    <span class="info-box-text">Belum  Lapor</span>
+                    <span class="info-box-number">{{$belum->count()}}</span>
+
+                    <div class="progress">
+                      <div class="progress-bar" style="width: {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
+                    </div>
+                    <span class="progress-description">
+                    {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
+                    </span>
                   </div>
                 </div>
               </div>
-              <div class="col-md-3">
-                <div class="info-box">
-                  <span class="info-box-icon bg-danger"><i class="fa fa-users"></i></span>
+              <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box bg-success">
+                  <span class="info-box-icon"><i class="fas fa-heartbeat"></i></span>
+
                   <div class="info-box-content">
-                    <span class="info-box-text">Belum mengisi</span>
-                    <span class="info-box-number">{{ $belum->count() }}</span>
+                    <span class="info-box-text">Sehat</span>
+                    <span class="info-box-number">{{$sudah->count()}}</span>
+
+                    <div class="progress">
+                      <div class="progress-bar" style="width: {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
+                    </div>
+                    <span class="progress-description">
+                    {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
+                    </span>
                   </div>
                 </div>
               </div>
-              <div class="col-md-3">
-                <div class="info-box">
-                  <span class="info-box-icon bg-success"><i class="fa fa-users"></i></span>
+              <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box bg-warning">
+                  <span class="info-box-icon"><i class="fas fa-heartbeat"></i></span>
+
                   <div class="info-box-content">
-                    <span class="info-box-text">Sudah mengisi</span>
-                    <span class="info-box-number">{{ $sudah->count() }}</span>
+                    <span class="info-box-text">Sakit</span>
+                    <span class="info-box-number">{{$belum->count()}}</span>
+
+                    <div class="progress">
+                      <div class="progress-bar" style="width: {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
+                    </div>
+                    <span class="progress-description">
+                    {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
+                    </span>
                   </div>
                 </div>
               </div>
@@ -325,186 +358,16 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <div class="card card-success card-outline">
-          <div class="card-header">
-            <h3 class="card-title">Pegawai yang melaporkan kesehatan</h3>
-          </div>
-          <div class="card-body">
-            <table id="sudah-t" class="table table-bordered table-striped">
-              <thead>
-              <tr>
-                <th>Department</th>
-                <th>Jumlah Pegawai</th>
-                <th>Yang Melapor</th>
-                <th>(%) Pengisian</th>
-              </tr>
-              </thead>
-              <tbody>
-              @foreach($sudah as $item)
-                <tr>
-                  <td>{{ $item->department ? $item->department->department_name : '' }}</td>
-                  <td>100</td>
-                  <td>10</td>
-                  <td>10%</td>
-                </tr>
-              @endforeach
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card card-success">
-          <div class="card-header">
-            <h3 class="card-title">Bar Chart</h3>
-          </div>
-          <div class="card-body">
-            <div class="chart">
-              <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-            </div>
-          </div>
-          <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card card-success">
-          <div class="card-header">
-            <h3 class="card-title">Bar Chart</h3>
-          </div>
-          <div class="card-body">
-            <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-              <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 487px;" width="487" height="250" class="chartjs-render-monitor"></canvas>
-            </div>
-          </div>
-          <!-- /.card-body -->
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card card-success card-outline">
-          <div class="card-header">
-            <h3 class="card-title">Laporan Kesehatan</h3>
-          </div>
-          <div class="card-body">
-            <table id="sudah-t" class="table table-bordered table-striped">
-              <thead>
-              <tr>
-                <th>Department</th>
-                <th>Sehat</th>
-                <th>Tidak sehat</th>
-                <th>(%) Kesehatan</th>
-              </tr>
-              </thead>
-              <tbody>
-              @foreach($sudah as $item)
-                <tr>
-                  <td>{{ $item->department ? $item->department->department_name : '' }}</td>
-                  <td>100</td>
-                  <td>10</td>
-                  <td>10%</td>
-                </tr>
-              @endforeach
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card card-success card-outline">
-          <div class="card-header">
-            <h3 class="card-title">Laporan Keluhan yang dialami</h3>
-          </div>
-          <div class="card-body">
-            <table id="sudah-t" class="table table-bordered table-striped">
-              <thead>
-              <tr>
-                <th>Keluhan</th>
-                <th>Jumlah</th>
-              </tr>
-              </thead>
-              <tbody>
-              @foreach($sudah as $item)
-                <tr>
-                  <td>Batuk</td>
-                  <td>10</td>
-                </tr>
-              @endforeach
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
         <div class="card card-danger">
-          <div class="card-header">
-            <h3 class="card-title">Donut Chart</h3>
-          </div>
-          <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-            <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 487px;" width="487" height="250" class="chartjs-render-monitor"></canvas>
-          </div>
-          <!-- /.card-body -->
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card card-success card-outline">
-          <div class="card-header">
-            <h3 class="card-title">Lokasi Hari ini</h3>
-          </div>
-          <div class="card-body">
-            <table id="sudah-t" class="table table-bordered table-striped">
-              <thead>
-              <tr>
-                <th>Department</th>
-                <th>Rumah</th>
-                <th>Non Rumah</th>
-              </tr>
-              </thead>
-              <tbody>
-              @foreach($sudah as $item)
-                <tr>
-                  <td>Department</td>
-                  <td>10</td>
-                  <td>10</td>
-                </tr>
-              @endforeach
-              </tbody>
-            </table>
+            <div class="card-header">
+              <h3 class="card-title">Donut Chart</h3>
+            </div>
+            <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+              <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 487px;" width="487" height="250" class="chartjs-render-monitor"></canvas>
+            </div>
+            <!-- /.card-body -->
           </div>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card card-success card-outline">
-          <div class="card-header">
-            <h3 class="card-title">Lokasi Hari ini</h3>
-          </div>
-          <div class="card-body">
-            <table id="sudah-t" class="table table-bordered table-striped">
-              <thead>
-              <tr>
-                <th>Lokasi</th>
-                <th>Jumlah</th>
-              </tr>
-              </thead>
-              <tbody>
-              @foreach($sudah as $item)
-                <tr>
-                  <td>Kantor</td>
-                  <td>10</td>
-                </tr>
-              @endforeach
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
     </div>
   @endif
 @endsection
@@ -542,191 +405,8 @@
   <!-- Toastr -->
   <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
 
-  <!-- jQuery -->
-  <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-  <!-- Bootstrap 4 -->
-  <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <!-- ChartJS -->
   <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
-  <!-- AdminLTE App -->
-  <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
-  <!-- AdminLTE for demo purposes -->
-  <script src="{{ asset('dist/js/demo.js') }}"></script>
-
-  <script>
-    $(function () {
-    var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
-
-    var areaChartData = {
-      labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-          label               : 'Digital Goods',
-          backgroundColor     : 'rgba(60,141,188,0.9)',
-          borderColor         : 'rgba(60,141,188,0.8)',
-          pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [28, 48, 40, 19, 86, 27, 90]
-        },
-        {
-          label               : 'Electronics',
-          backgroundColor     : 'rgba(210, 214, 222, 1)',
-          borderColor         : 'rgba(210, 214, 222, 1)',
-          pointRadius         : false,
-          pointColor          : 'rgba(210, 214, 222, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [65, 59, 80, 81, 56, 55, 40]
-        },
-      ]
-    }
-
-    var areaChartOptions = {
-      maintainAspectRatio : false,
-      responsive : true,
-      legend: {
-        display: false
-      },
-      scales: {
-        xAxes: [{
-          gridLines : {
-            display : false,
-          }
-        }],
-        yAxes: [{
-          gridLines : {
-            display : false,
-          }
-        }]
-      }
-    }
-
-    // This will get the first returned node in the jQuery collection.
-    var areaChart       = new Chart(areaChartCanvas, { 
-      type: 'line',
-      data: areaChartData, 
-      options: areaChartOptions
-    })
-
-    //-------------
-    //- LINE CHART -
-    //--------------
-    var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
-    var lineChartOptions = jQuery.extend(true, {}, areaChartOptions)
-    var lineChartData = jQuery.extend(true, {}, areaChartData)
-    lineChartData.datasets[0].fill = false;
-    lineChartData.datasets[1].fill = false;
-    lineChartOptions.datasetFill = false
-
-    var lineChart = new Chart(lineChartCanvas, { 
-      type: 'line',
-      data: lineChartData, 
-      options: lineChartOptions
-    })
-
-    //-------------
-    //- DONUT CHART -
-    //-------------
-    // Get context with jQuery - using jQuery's .get() method.
-    var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-    var donutData        = {
-      labels: [
-          'Chrome', 
-          'IE',
-          'FireFox', 
-          'Safari', 
-          'Opera', 
-          'Navigator', 
-      ],
-      datasets: [
-        {
-          data: [700,500,400,600,300,100],
-          backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
-        }
-      ]
-    }
-    var donutOptions     = {
-      maintainAspectRatio : false,
-      responsive : true,
-    }
-    //Create pie or douhnut chart
-    // You can switch between pie and douhnut using the method below.
-    var donutChart = new Chart(donutChartCanvas, {
-      type: 'doughnut',
-      data: donutData,
-      options: donutOptions      
-    })
-
-    //-------------
-    //- PIE CHART -
-    //-------------
-    // Get context with jQuery - using jQuery's .get() method.
-    var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-    var pieData        = donutData;
-    var pieOptions     = {
-      maintainAspectRatio : false,
-      responsive : true,
-    }
-    //Create pie or douhnut chart
-    // You can switch between pie and douhnut using the method below.
-    var pieChart = new Chart(pieChartCanvas, {
-      type: 'pie',
-      data: pieData,
-      options: pieOptions      
-    })
-
-    //-------------
-    //- BAR CHART -
-    //-------------
-    var barChartCanvas = $('#barChart').get(0).getContext('2d')
-    var barChartData = jQuery.extend(true, {}, areaChartData)
-    var temp0 = areaChartData.datasets[0]
-    var temp1 = areaChartData.datasets[1]
-    barChartData.datasets[0] = temp1
-    barChartData.datasets[1] = temp0
-
-    var barChartOptions = {
-      responsive              : true,
-      maintainAspectRatio     : false,
-      datasetFill             : false
-    }
-
-    var barChart = new Chart(barChartCanvas, {
-      type: 'bar', 
-      data: barChartData,
-      options: barChartOptions
-    })
-
-    //---------------------
-    //- STACKED BAR CHART -
-    //---------------------
-    var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
-    var stackedBarChartData = jQuery.extend(true, {}, barChartData)
-
-    var stackedBarChartOptions = {
-      responsive              : true,
-      maintainAspectRatio     : false,
-      scales: {
-        xAxes: [{
-          stacked: true,
-        }],
-        yAxes: [{
-          stacked: true
-        }]
-      }
-    }
-
-    var stackedBarChart = new Chart(stackedBarChartCanvas, {
-      type: 'bar', 
-      data: stackedBarChartData,
-      options: stackedBarChartOptions
-    })
-   })
-</script>
 
   <script>
     @if (\Carbon\Carbon::now() < \Carbon\Carbon::parse("13:00:00"))
@@ -748,6 +428,8 @@
       }, 1000);
     })
     @endif
+
+
 
     $(function () {
       //Date range picker
@@ -785,34 +467,246 @@
       @endif
     });
   </script>
+  @kadiv
+  <script>
+    $(function () {
+      @error('domicile')
+      toastr.warning('{{ $message }}')
+      @enderror
 
-  @if (Auth::user()->role !== 1)
-    <script>
-      $(function () {
-        @error('domicile')
-        toastr.warning('{{ $message }}')
-        @enderror
+      @error('position')
+      toastr.warning('{{ $message }}')
+      @enderror
 
-        @error('position')
-        toastr.warning('{{ $message }}')
-        @enderror
+      @error('positionDescription')
+      toastr.warning('{{ $message }}')
+      @enderror
 
-        @error('positionDescription')
-        toastr.warning('{{ $message }}')
-        @enderror
+      @error('disease')
+      toastr.warning('{{ $message }}')
+      @enderror
 
-        @error('disease')
-        toastr.warning('{{ $message }}')
-        @enderror
+      @error('description')
+      toastr.warning('{{ $message }}')
+      @enderror
 
-        @error('description')
-        toastr.warning('{{ $message }}')
-        @enderror
+      @error('check')
+      toastr.warning('{{ $message }}')
+      @enderror
+    });
+  </script>
+  @endkadiv
+  @user
+  <script>
+    $(function () {
+      @error('domicile')
+      toastr.warning('{{ $message }}')
+      @enderror
 
-        @error('check')
-        toastr.warning('{{ $message }}')
-        @enderror
-      });
-    </script>
-  @endif
+      @error('position')
+      toastr.warning('{{ $message }}')
+      @enderror
+
+      @error('positionDescription')
+      toastr.warning('{{ $message }}')
+      @enderror
+
+      @error('disease')
+      toastr.warning('{{ $message }}')
+      @enderror
+
+      @error('description')
+      toastr.warning('{{ $message }}')
+      @enderror
+
+      @error('check')
+      toastr.warning('{{ $message }}')
+      @enderror
+    });
+  </script>
+  @enduser
+  <script>
+    $(function () {
+      /* ChartJS
+      * -------
+      * Here we will create a few charts using ChartJS
+      */
+
+      //--------------
+      //- AREA CHART -
+      //--------------
+
+      // Get context with jQuery - using jQuery's .get() method.
+      var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
+
+      var areaChartData = {
+        labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [
+          {
+            label               : 'Digital Goods',
+            backgroundColor     : 'rgba(60,141,188,0.9)',
+            borderColor         : 'rgba(60,141,188,0.8)',
+            pointRadius          : false,
+            pointColor          : '#3b8bba',
+            pointStrokeColor    : 'rgba(60,141,188,1)',
+            pointHighlightFill  : '#fff',
+            pointHighlightStroke: 'rgba(60,141,188,1)',
+            data                : [28, 48, 40, 19, 86, 27, 90]
+          },
+          {
+            label               : 'Electronics',
+            backgroundColor     : 'rgba(210, 214, 222, 1)',
+            borderColor         : 'rgba(210, 214, 222, 1)',
+            pointRadius         : false,
+            pointColor          : 'rgba(210, 214, 222, 1)',
+            pointStrokeColor    : '#c1c7d1',
+            pointHighlightFill  : '#fff',
+            pointHighlightStroke: 'rgba(220,220,220,1)',
+            data                : [65, 59, 80, 81, 56, 55, 40]
+          },
+        ]
+      }
+
+      var areaChartOptions = {
+        maintainAspectRatio : false,
+        responsive : true,
+        legend: {
+          display: false
+        },
+        scales: {
+          xAxes: [{
+            gridLines : {
+              display : false,
+            }
+          }],
+          yAxes: [{
+            gridLines : {
+              display : false,
+            }
+          }]
+        }
+      }
+
+      // This will get the first returned node in the jQuery collection.
+      var areaChart       = new Chart(areaChartCanvas, { 
+        type: 'line',
+        data: areaChartData, 
+        options: areaChartOptions
+      })
+
+      //-------------
+      //- LINE CHART -
+      //--------------
+      var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
+      var lineChartOptions = jQuery.extend(true, {}, areaChartOptions)
+      var lineChartData = jQuery.extend(true, {}, areaChartData)
+      lineChartData.datasets[0].fill = false;
+      lineChartData.datasets[1].fill = false;
+      lineChartOptions.datasetFill = false
+
+      var lineChart = new Chart(lineChartCanvas, { 
+        type: 'line',
+        data: lineChartData, 
+        options: lineChartOptions
+      })
+
+      //-------------
+      //- DONUT CHART -
+      //-------------
+      // Get context with jQuery - using jQuery's .get() method.
+      var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+      var donutData        = {
+        labels: [
+            'Chrome', 
+            'IE',
+            'FireFox', 
+            'Safari', 
+            'Opera', 
+            'Navigator', 
+        ],
+        datasets: [
+          {
+            data: [700,500,400,600,300,100],
+            backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+          }
+        ]
+      }
+      var donutOptions     = {
+        maintainAspectRatio : false,
+        responsive : true,
+      }
+      //Create pie or douhnut chart
+      // You can switch between pie and douhnut using the method below.
+      var donutChart = new Chart(donutChartCanvas, {
+        type: 'doughnut',
+        data: donutData,
+        options: donutOptions      
+      })
+
+      //-------------
+      //- PIE CHART -
+      //-------------
+      // Get context with jQuery - using jQuery's .get() method.
+      var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+      var pieData        = donutData;
+      var pieOptions     = {
+        maintainAspectRatio : false,
+        responsive : true,
+      }
+      //Create pie or douhnut chart
+      // You can switch between pie and douhnut using the method below.
+      var pieChart = new Chart(pieChartCanvas, {
+        type: 'pie',
+        data: pieData,
+        options: pieOptions      
+      })
+
+      //-------------
+      //- BAR CHART -
+      //-------------
+      var barChartCanvas = $('#barChart').get(0).getContext('2d')
+      var barChartData = jQuery.extend(true, {}, areaChartData)
+      var temp0 = areaChartData.datasets[0]
+      var temp1 = areaChartData.datasets[1]
+      barChartData.datasets[0] = temp1
+      barChartData.datasets[1] = temp0
+
+      var barChartOptions = {
+        responsive              : true,
+        maintainAspectRatio     : false,
+        datasetFill             : false
+      }
+
+      var barChart = new Chart(barChartCanvas, {
+        type: 'bar', 
+        data: barChartData,
+        options: barChartOptions
+      })
+
+      //---------------------
+      //- STACKED BAR CHART -
+      //---------------------
+      var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
+      var stackedBarChartData = jQuery.extend(true, {}, barChartData)
+
+      var stackedBarChartOptions = {
+        responsive              : true,
+        maintainAspectRatio     : false,
+        scales: {
+          xAxes: [{
+            stacked: true,
+          }],
+          yAxes: [{
+            stacked: true
+          }]
+        }
+      }
+
+      var stackedBarChart = new Chart(stackedBarChartCanvas, {
+        type: 'bar', 
+        data: stackedBarChartData,
+        options: stackedBarChartOptions
+      })
+    })
+  </script>
 @endsection
