@@ -213,7 +213,7 @@ class ReportController extends Controller
    */
   public function store(Request $request)
   {
-    if (Carbon::now() > Carbon::parse("13:00:00")) {
+    if (Carbon::now() > Carbon::parse("23:00:00")) {
       return redirect()->back()->with(['message' => 'Input Anda Sudah Melewati Jam 1 siang']);
     }
 
@@ -231,6 +231,9 @@ class ReportController extends Controller
     $report->id_department = Auth::user()->id_department;
     $report->id_penyakit = $request->disease;
     if ($request->position == '0') {
+      $this->validate($request, [
+        'positionDescription' => 'required|string|max:191',
+      ]);
       $report->position = $request->positionDescription;
     } else {
       $report->position = $request->position;

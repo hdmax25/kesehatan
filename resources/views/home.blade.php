@@ -31,7 +31,7 @@
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"> 
+          <li class="breadcrumb-item">
             <a href="#">
               {{ \Carbon\Carbon::now()->format('l, d F Y') }}
             </a>
@@ -45,7 +45,7 @@
 @section('content')
   @if (Auth::user()->role !== 1)
     @if (!$todayCheck)
-      @if (\Carbon\Carbon::now() < \Carbon\Carbon::parse("13:00:00"))
+      @if (\Carbon\Carbon::now() < \Carbon\Carbon::parse("23:00:00"))
         <div class="row">
           <div id="checkedToday" class="col-md-12">
             <div class="card card-danger card-outline">
@@ -174,7 +174,7 @@
         <div class="alert alert-danger alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
           <h5><i class="icon fas fa-info"></i> Alert!</h5>
-            Pengisian data monitoring kesehatan pegawai telah ditutup
+          Pengisian data monitoring kesehatan pegawai telah ditutup
         </div>
       @endif
     @else
@@ -203,9 +203,9 @@
         <div class="card card-outline card-danger">
           <div class="card-header">
             <h3 class="card-title">Data Kesehatan</h3>
-              <div class="card-tools">
-                <span class="badge badge-danger">Jumlah Pegawai {{$sudah->count()+$belum->count()}}</span>
-             </div>
+            <div class="card-tools">
+              <span class="badge badge-danger">Jumlah Pegawai {{$sudah->count()+$belum->count()}}</span>
+            </div>
           </div>
           <div class="card-body">
             <div class="row">
@@ -249,13 +249,13 @@
 
                   <div class="info-box-content">
                     <span class="info-box-text">Sehat</span>
-                    <span class="info-box-number">{{$sudah->count()}}</span>
+                    <span class="info-box-number">{{ $sehat }}</span>
 
                     <div class="progress">
-                      <div class="progress-bar" style="width: {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
+                      <div class="progress-bar" style="width: {{ round(($sehat / $sudah->count()) * 100, 1) }}%"></div>
                     </div>
                     <span class="progress-description">
-                    {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
+                    {{ round(($sehat / $sudah->count()) * 100, 1) }}% Pegawai
                     </span>
                   </div>
                 </div>
@@ -266,13 +266,13 @@
 
                   <div class="info-box-content">
                     <span class="info-box-text">Sakit</span>
-                    <span class="info-box-number">{{$belum->count()}}</span>
+                    <span class="info-box-number">{{ $sakit }}</span>
 
                     <div class="progress">
-                      <div class="progress-bar" style="width: {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
+                      <div class="progress-bar" style="width: {{ round(($sakit / $sudah->count()) * 100, 1) }}%"></div>
                     </div>
                     <span class="progress-description">
-                    {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
+                    {{ round(($sakit / $sudah->count()) * 100, 1) }}% Pegawai
                     </span>
                   </div>
                 </div>
@@ -281,21 +281,53 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card card-danger card-outline">
+      <div class="col-md-6">
+        <div class="card card-danger">
           <div class="card-header">
-            <h3 class="card-title">Belum Mengisi</h3>
+            <h3 class="card-title">Donut Chart</h3>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+            </div>
           </div>
           <div class="card-body">
-            <table id="belum-t" class="table table-bordered table-striped">
+            <canvas id="pieChartGroupPenyakit" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card card-danger">
+          <div class="card-header">
+            <h3 class="card-title">Donut Chart</h3>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+            </div>
+          </div>
+          <div class="card-body">
+            <canvas id="pieChartGroupSehat" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="card card-danger card-outline collapsed-card">
+          <div class="card-header">
+            <h3 class="card-title">Belum Mengisi</h3>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body table-responsive">
+            <table id="belumT" class="table table-bordered table-striped" style="width: 100%">
               <thead>
               <tr>
                 <th>NIP</th>
                 <th>Nama Pegawai</th>
                 @admin
-                  <th>Department</th>
+                <th>Department</th>
                 @endadmin
                 <th>Call</th>
               </tr>
@@ -306,7 +338,7 @@
                   <td>{{ $item->username }}</td>
                   <td>{{ $item->name }}</td>
                   @admin
-                    <td>{{ $item->department ? $item->department->department_name : '' }}</td>
+                  <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                   @endadmin
                   <td>
                     <a href="tel:{{$item->phone}}" type="button" class="btn btn-danger btn-xs btn-block">
@@ -320,15 +352,17 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
       <div class="col-md-12">
-        <div class="card card-success card-outline">
+        <div class="card card-success card-outline collapsed-card">
           <div class="card-header">
             <h3 class="card-title">Sudah Mengisi</h3>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+              </button>
+            </div>
           </div>
           <div class="card-body">
-            <table id="sudah-t" class="table table-bordered table-striped">
+            <table id="sudahT" class="table table-bordered table-striped" style="width: 100%">
               <thead>
               <tr>
                 <th>Jam</th>
@@ -355,19 +389,43 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card card-danger">
-            <div class="card-header">
-              <h3 class="card-title">Donut Chart</h3>
+      <div class="col-md-12">
+        <div class="card card-success">
+          <div class="card-header">
+            <h3 class="card-title">Bar Chart</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
             </div>
-            <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-              <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 487px;" width="487" height="250" class="chartjs-render-monitor"></canvas>
+          </div>
+          <div class="card-body">
+            <div class="chart">
+              <canvas id="kymk" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
             </div>
-            <!-- /.card-body -->
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      @foreach($groupDepartment as $id => $item)
+        <div class="col-md-4">
+          <div class="card card-danger collapsed-card">
+            <div class="card-header">
+              <h3 class="card-title">{{ $item->departmentName }}</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+              </div>
+            </div>
+            <div class="card-body">
+              <canvas id="pieChart{{$id}}" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+            </div>
+          </div>
+        </div>
+      @endforeach
     </div>
   @endif
 @endsection
@@ -412,7 +470,7 @@
     @if (\Carbon\Carbon::now() < \Carbon\Carbon::parse("13:00:00"))
     $(function () {
       let remaining = new Date();
-      let target = "13";
+      let target = "23";
       if (remaining.getHours() > target) {
         let view = document.getElementById("checkedToday");
         view.innerHTML = '';
@@ -429,8 +487,6 @@
     })
     @endif
 
-
-
     $(function () {
       //Date range picker
       $('#reservation').daterangepicker({
@@ -439,7 +495,7 @@
         }
       });
 
-      $('#sudah-t').DataTable({
+      $('#sudahT').DataTable({
         "paging": true,
         "lengthChange": true,
         "searching": true,
@@ -449,7 +505,7 @@
         "responsive": true,
       });
 
-      $('#belum-t').DataTable({
+      $('#belumT').DataTable({
         "paging": true,
         "lengthChange": true,
         "searching": true,
@@ -525,188 +581,159 @@
     });
   </script>
   @enduser
+
   <script>
     $(function () {
-      /* ChartJS
-      * -------
-      * Here we will create a few charts using ChartJS
-      */
-
-      //--------------
-      //- AREA CHART -
-      //--------------
-
-      // Get context with jQuery - using jQuery's .get() method.
-      var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
-
-      var areaChartData = {
-        labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [
-          {
-            label               : 'Digital Goods',
-            backgroundColor     : 'rgba(60,141,188,0.9)',
-            borderColor         : 'rgba(60,141,188,0.8)',
-            pointRadius          : false,
-            pointColor          : '#3b8bba',
-            pointStrokeColor    : 'rgba(60,141,188,1)',
-            pointHighlightFill  : '#fff',
-            pointHighlightStroke: 'rgba(60,141,188,1)',
-            data                : [28, 48, 40, 19, 86, 27, 90]
-          },
-          {
-            label               : 'Electronics',
-            backgroundColor     : 'rgba(210, 214, 222, 1)',
-            borderColor         : 'rgba(210, 214, 222, 1)',
-            pointRadius         : false,
-            pointColor          : 'rgba(210, 214, 222, 1)',
-            pointStrokeColor    : '#c1c7d1',
-            pointHighlightFill  : '#fff',
-            pointHighlightStroke: 'rgba(220,220,220,1)',
-            data                : [65, 59, 80, 81, 56, 55, 40]
-          },
-        ]
+      var pieOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
       }
-
-      var areaChartOptions = {
-        maintainAspectRatio : false,
-        responsive : true,
-        legend: {
-          display: false
-        },
-        scales: {
-          xAxes: [{
-            gridLines : {
-              display : false,
+          @foreach($groupDepartment as $id => $item)
+      var donutData{{$id}} = {
+          labels: [
+            'Belum Absen',
+            'Sudah Absen',
+          ],
+          datasets: [
+            {
+              data: [{{ $item->notAbsens }}, {{ $item->absens }}],
+              backgroundColor: ['#3c8dbc', '#00a65a'],
             }
-          }],
-          yAxes: [{
-            gridLines : {
-              display : false,
-            }
-          }]
+          ]
         }
-      }
-
-      // This will get the first returned node in the jQuery collection.
-      var areaChart       = new Chart(areaChartCanvas, { 
-        type: 'line',
-        data: areaChartData, 
-        options: areaChartOptions
-      })
-
-      //-------------
-      //- LINE CHART -
-      //--------------
-      var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
-      var lineChartOptions = jQuery.extend(true, {}, areaChartOptions)
-      var lineChartData = jQuery.extend(true, {}, areaChartData)
-      lineChartData.datasets[0].fill = false;
-      lineChartData.datasets[1].fill = false;
-      lineChartOptions.datasetFill = false
-
-      var lineChart = new Chart(lineChartCanvas, { 
-        type: 'line',
-        data: lineChartData, 
-        options: lineChartOptions
-      })
-
-      //-------------
-      //- DONUT CHART -
-      //-------------
-      // Get context with jQuery - using jQuery's .get() method.
-      var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-      var donutData        = {
-        labels: [
-            'Chrome', 
-            'IE',
-            'FireFox', 
-            'Safari', 
-            'Opera', 
-            'Navigator', 
-        ],
-        datasets: [
-          {
-            data: [700,500,400,600,300,100],
-            backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
-          }
-        ]
-      }
-      var donutOptions     = {
-        maintainAspectRatio : false,
-        responsive : true,
-      }
-      //Create pie or douhnut chart
-      // You can switch between pie and douhnut using the method below.
-      var donutChart = new Chart(donutChartCanvas, {
-        type: 'doughnut',
-        data: donutData,
-        options: donutOptions      
-      })
-
       //-------------
       //- PIE CHART -
       //-------------
-      // Get context with jQuery - using jQuery's .get() method.
-      var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-      var pieData        = donutData;
-      var pieOptions     = {
-        maintainAspectRatio : false,
-        responsive : true,
-      }
-      //Create pie or douhnut chart
-      // You can switch between pie and douhnut using the method below.
-      var pieChart = new Chart(pieChartCanvas, {
+      var pieChartCanvas{{$id}} = $('#pieChart{{$id}}').get(0).getContext('2d')
+      var pieData{{$id}} = donutData{{$id}};
+      new Chart(pieChartCanvas{{$id}}, {
         type: 'pie',
-        data: pieData,
-        options: pieOptions      
+        data: pieData{{$id}},
+        options: pieOptions
       })
-
+      @endforeach
+    })
+    $(function () {
+      let dataGroupDepartment = {
+        labels: [
+          @foreach($groupDepartment as $id => $item)
+            '{{ $item->departmentName }}',
+          @endforeach
+        ],
+        datasets: [
+          {
+            label: 'Jumlah Pegawai',
+            backgroundColor: 'rgba(60,141,188,0.9)',
+            borderColor: 'rgba(60,141,188,0.8)',
+            pointRadius: false,
+            pointColor: '#3b8bba',
+            pointStrokeColor: 'rgba(60,141,188,1)',
+            pointHighlightFill: '#fff',
+            pointHighlightStroke: 'rgba(60,141,188,1)',
+            data: [
+              @foreach($groupDepartment as $id => $item)
+              {{ $item->totalUser }},
+              @endforeach
+            ]
+          },
+          {
+            label: 'Sudah Absen',
+            backgroundColor: 'rgba(210, 214, 222, 1)',
+            borderColor: 'rgba(210, 214, 222, 1)',
+            pointRadius: false,
+            pointColor: 'rgba(210, 214, 222, 1)',
+            pointStrokeColor: '#c1c7d1',
+            pointHighlightFill: '#fff',
+            pointHighlightStroke: 'rgba(220,220,220,1)',
+            data: [
+              @foreach($groupDepartment as $id => $item)
+              {{ $item->absens }},
+              @endforeach
+            ]
+          },
+        ]
+      }
       //-------------
       //- BAR CHART -
       //-------------
-      var barChartCanvas = $('#barChart').get(0).getContext('2d')
-      var barChartData = jQuery.extend(true, {}, areaChartData)
-      var temp0 = areaChartData.datasets[0]
-      var temp1 = areaChartData.datasets[1]
-      barChartData.datasets[0] = temp1
-      barChartData.datasets[1] = temp0
+      let barChartCanvas = $('#kymk').get(0).getContext('2d')
+      let barChartData = jQuery.extend(true, {}, dataGroupDepartment)
+      barChartData.datasets[0] = dataGroupDepartment.datasets[0]
+      barChartData.datasets[1] = dataGroupDepartment.datasets[1]
 
-      var barChartOptions = {
-        responsive              : true,
-        maintainAspectRatio     : false,
-        datasetFill             : false
+      let barChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        datasetFill: false
       }
 
-      var barChart = new Chart(barChartCanvas, {
-        type: 'bar', 
+      new Chart(barChartCanvas, {
+        type: 'bar',
         data: barChartData,
         options: barChartOptions
       })
+    });
+  </script>
 
-      //---------------------
-      //- STACKED BAR CHART -
-      //---------------------
-      var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
-      var stackedBarChartData = jQuery.extend(true, {}, barChartData)
-
-      var stackedBarChartOptions = {
-        responsive              : true,
-        maintainAspectRatio     : false,
-        scales: {
-          xAxes: [{
-            stacked: true,
-          }],
-          yAxes: [{
-            stacked: true
-          }]
-        }
+  <script>
+    $(function () {
+      let pieOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
       }
 
-      var stackedBarChart = new Chart(stackedBarChartCanvas, {
-        type: 'bar', 
-        data: stackedBarChartData,
-        options: stackedBarChartOptions
+      let donutDataGroupSehat = {
+        labels: [
+          'Sehat',
+          'Sakit'
+        ],
+        datasets: [
+          {
+            data: [
+              {{ $sehat }}, {{ $sakit }}
+            ],
+            backgroundColor: ['#00a65a', '#f39c12', '#f56954', '#00c0ef', '#3c8dbc', '#d2d6de'],
+          }
+        ]
+      }
+      //-------------
+      //- PIE CHART -
+      //-------------
+      let pieChartCanvasGroupSehat = $('#pieChartGroupSehat').get(0).getContext('2d');
+      new Chart(pieChartCanvasGroupSehat, {
+        type: 'doughnut',
+        data: donutDataGroupSehat,
+        options: pieOptions
       })
-    })
+
+      //==============================================================================
+
+      let donutDataGroupPenyakit = {
+        labels: [
+          @foreach($dataSakit as $id => $item)
+            '{{ $id }}',
+          @endforeach
+        ],
+        datasets: [
+          {
+            data: [
+              @foreach($dataSakit as $id => $item)
+              {{ $item }},
+              @endforeach
+            ],
+            backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+          }
+        ]
+      }
+      //-------------
+      //- PIE CHART -
+      //-------------
+      let pieChartCanvasGroupPenyakit = $('#pieChartGroupPenyakit').get(0).getContext('2d');
+      new Chart(pieChartCanvasGroupPenyakit, {
+        type: 'pie',
+        data: donutDataGroupPenyakit,
+        options: pieOptions
+      })
+    });
   </script>
 @endsection
