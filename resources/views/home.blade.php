@@ -302,7 +302,7 @@
         </div>
       </div>
       <div class="col-md-12">
-        <div class="card card-success">
+        <div class="card card-primary card-outline">
           <div class="card-header">
             <h3 class="card-title">Dapartment</h3>
           </div>
@@ -318,7 +318,7 @@
           <div class="card-header">
             <h3 class="card-title">Data Department</h3>
             <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+              <button type="button" class="btn btn-tool bg-light" data-card-widget="collapse"><i class="fas fa-plus"></i>
               </button>
             </div>
           </div>
