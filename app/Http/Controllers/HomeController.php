@@ -97,7 +97,6 @@ class HomeController extends Controller
         'sudah' => $report->whereNotNull('absenes'),
         'belum' => $report->whereNull('absenes')
       ];
-      dump($data);
       return view('home', $data);
     } else if (Auth::user()->role == 2) {
       $validateToday = Report::where('id_user', Auth::user()->id)->whereDate('created_at', Carbon::now())->count();

@@ -408,25 +408,6 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      @foreach($groupDepartment as $id => $item)
-        <div class="col-md-4">
-          <div class="card card-danger collapsed-card">
-            <div class="card-header">
-              <h3 class="card-title">{{ $item->departmentName }}</h3>
-
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i></button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-              </div>
-            </div>
-            <div class="card-body">
-              <canvas id="pieChart{{$id}}" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-            </div>
-          </div>
-        </div>
-      @endforeach
-    </div>
   @endif
 @endsection
 
@@ -581,7 +562,8 @@
     });
   </script>
   @enduser
-
+  
+  @admin
   <script>
     $(function () {
       var pieOptions = {
@@ -736,4 +718,5 @@
       })
     });
   </script>
+  @endadmin
 @endsection
