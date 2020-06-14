@@ -197,7 +197,7 @@
       @enduser
     @endif
   @endif
-  @if (Auth::user()->role !== 3)
+  @if (Auth::user()->role == 1)
     <div class="row">
       <div class="col-md-12">
         <div class="card card-outline card-danger">
@@ -209,6 +209,23 @@
           </div>
           <div class="card-body">
             <div class="row">
+             <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box bg-danger">
+                  <span class="info-box-icon"><i class="fa fa-users"></i></span>
+
+                  <div class="info-box-content">
+                    <span class="info-box-text">Belum  Lapor</span>
+                    <span class="info-box-number">{{$belum->count()}}</span>
+
+                    <div class="progress">
+                      <div class="progress-bar" style="width: {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
+                    </div>
+                    <span class="progress-description">
+                    {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
+                    </span>
+                  </div>
+                </div>
+              </div>
               <div class="col-md-3 col-sm-6 col-12">
                 <div class="info-box bg-info">
                   <span class="info-box-icon"><i class="fa fa-users"></i></span>
@@ -222,23 +239,6 @@
                     </div>
                     <span class="progress-description">
                     {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6 col-12">
-                <div class="info-box bg-danger">
-                  <span class="info-box-icon"><i class="fa fa-users"></i></span>
-
-                  <div class="info-box-content">
-                    <span class="info-box-text">Belum  Lapor</span>
-                    <span class="info-box-number">{{$belum->count()}}</span>
-
-                    <div class="progress">
-                      <div class="progress-bar" style="width: {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
-                    </div>
-                    <span class="progress-description">
-                    {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
                     </span>
                   </div>
                 </div>
@@ -282,37 +282,72 @@
         </div>
       </div>
       <div class="col-md-6">
-        <div class="card card-danger">
+        <div class="card card-success card-outline">
           <div class="card-header">
-            <h3 class="card-title">Donut Chart</h3>
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-            </div>
-          </div>
-          <div class="card-body">
-            <canvas id="pieChartGroupPenyakit" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="card card-danger">
-          <div class="card-header">
-            <h3 class="card-title">Donut Chart</h3>
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-            </div>
+            <h3 class="card-title">Kesehatan</h3>
           </div>
           <div class="card-body">
             <canvas id="pieChartGroupSehat" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
           </div>
         </div>
       </div>
+      <div class="col-md-6">
+        <div class="card card-danger card-outline">
+          <div class="card-header">
+            <h3 class="card-title">Keluhan</h3>
+          </div>
+          <div class="card-body">
+            <canvas id="pieChartGroupPenyakit" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+          </div>
+        </div>
+      </div>
       <div class="col-md-12">
-        <div class="card card-danger card-outline collapsed-card">
+        <div class="card card-success">
+          <div class="card-header">
+            <h3 class="card-title">Dapartment</h3>
+          </div>
+          <div class="card-body">
+            <div class="chart">
+              <canvas id="kymk" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="card card-success collapsed-card">
+          <div class="card-header">
+            <h3 class="card-title">Data Department</h3>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <table id="sudahT" class="table table-bordered table-striped" style="width: 100%">
+              <thead>
+              <tr>
+                <th>Dapartment</th>
+                <th>Sehat</th>
+                <th>Sakit</th>
+              </tr>
+              </thead>
+              <tbody>
+              @foreach($dataDepartment as $item)
+                <tr>
+                  <td>{{$item->departmentName}}</td>
+                  <td>{{ $item->sehat }}</td>
+                  <td>{{ $item->sakit }}</td>
+              @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  @elseif (Auth::user()->role == 2)
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-danger collapsed-card">
           <div class="card-header">
             <h3 class="card-title">Belum Mengisi</h3>
             <div class="card-tools">
@@ -353,7 +388,7 @@
         </div>
       </div>
       <div class="col-md-12">
-        <div class="card card-success card-outline collapsed-card">
+        <div class="card card-success collapsed-card">
           <div class="card-header">
             <h3 class="card-title">Sudah Mengisi</h3>
             <div class="card-tools">
@@ -389,26 +424,8 @@
           </div>
         </div>
       </div>
-      <div class="col-md-12">
-        <div class="card card-success">
-          <div class="card-header">
-            <h3 class="card-title">Bar Chart</h3>
-
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="chart">
-              <canvas id="kymk" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  @endif
+    @endif
 @endsection
 
 @section('css')
@@ -619,7 +636,7 @@
             ]
           },
           {
-            label: 'Sudah Absen',
+            label: 'Sudah Lapor',
             backgroundColor: 'rgba(210, 214, 222, 1)',
             borderColor: 'rgba(210, 214, 222, 1)',
             pointRadius: false,
