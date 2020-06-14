@@ -197,7 +197,7 @@
       @enduser
     @endif
   @endif
-  @if (Auth::user()->role == 1)
+  @if (Auth::user()->role !== 3)
     <div class="row">
       <div class="col-md-12">
         <div class="card card-outline card-danger">
@@ -344,7 +344,6 @@
         </div>
       </div>
     </div>
-  @elseif (Auth::user()->role == 2)
     <div class="row">
       <div class="col-md-12">
         <div class="card card-danger collapsed-card">
@@ -425,7 +424,6 @@
         </div>
       </div>
     </div>
-    @endif
 @endsection
 
 @section('css')
