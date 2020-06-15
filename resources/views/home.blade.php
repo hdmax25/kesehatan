@@ -353,7 +353,7 @@
             </div>
           </div>
           <div class="card-body">
-            <table id="sudahT" class="table table-bordered table-striped" style="width: 100%">
+            <table id="kesehatan" class="table table-bordered table-striped" style="width: 100%">
               <thead>
               <tr>
                 <th>Dapartment</th>
@@ -533,6 +533,16 @@
       });
 
       $('#belumT').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": true,
+        "responsive": true,
+      });
+
+      $('#kesehatan').DataTable({
         "paging": true,
         "lengthChange": true,
         "searching": true,
