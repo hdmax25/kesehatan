@@ -318,7 +318,37 @@
           <div class="card-header">
             <h3 class="card-title">Data Department</h3>
             <div class="card-tools">
-              <button type="button" class="btn btn-tool bg-light" data-card-widget="collapse"><i class="fas fa-plus"></i>
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <table id="sudahT" class="table table-bordered table-striped" style="width: 100%">
+              <thead>
+              <tr>
+                <th>Dapartment</th>
+                <th>Jumlah</th>
+                <th>Lapor</th>
+              </tr>
+              </thead>
+              <tbody>
+              @foreach($groupDepartment as $item)
+                <tr>
+                  <td>{{$item->departmentName}}</td>
+                  <td>{{ $item->totalUser }}</td>
+                  <td>{{ $item->absens }}</td>
+              @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="card card-success collapsed-card">
+          <div class="card-header">
+            <h3 class="card-title">Data Department</h3>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
               </button>
             </div>
           </div>
