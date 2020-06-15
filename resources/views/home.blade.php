@@ -393,7 +393,7 @@
               <tbody>
               @foreach($dataSakit as $item)
                 <tr>
-                  <td>{{id}}</td>
+                  <td>{{ $id }}</td>
                   <td>{{ $item }}</td>
               @endforeach
               </tbody>
