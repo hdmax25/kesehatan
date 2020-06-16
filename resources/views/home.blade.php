@@ -402,7 +402,7 @@
         </div>
       </div>
     </div>
-  @elseif (Auth::user()->role !== 3)
+  @elseif (Auth::user()->role == 2)
     <div class="row">
       <div class="col-md-12">
         <div class="card card-danger collapsed-card">
