@@ -3,7 +3,7 @@
   <a href="#" class="brand-link navbar-danger">
     <img src="{{ asset('dist/img/logo2.png') }}"
          alt="AdminLTE Logo"
-         class="brand-image img-square elevation-3"
+         class="brand-image img-round elevation-1"
          style="opacity: .8">
     <span class="brand-text font-weight-light">IMS</span>
   </a>
