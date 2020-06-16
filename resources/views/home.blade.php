@@ -393,7 +393,7 @@
                 <th>NIP</th>
                 <th>Nama Pegawai</th>
                 @admin
-                <th>Department</th>
+                  <th>Department</th>
                 @endadmin
                 <th>Call</th>
               </tr>
@@ -404,7 +404,7 @@
                   <td>{{ $item->username }}</td>
                   <td>{{ $item->name }}</td>
                   @admin
-                  <td>{{ $item->department ? $item->department->department_name : '' }}</td>
+                    <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                   @endadmin
                   <td>
                     <a href="tel:{{$item->phone}}" type="button" class="btn btn-danger btn-xs btn-block">
@@ -434,6 +434,7 @@
                 <th>Jam</th>
                 <th>NIP</th>
                 <th>Nama</th>
+                <th>Kondisi</th>
                 @admin
                   <th>Department</th>
                 @endadmin
@@ -446,6 +447,7 @@
                   <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
                   <td>{{ $item->username }}</td>
                   <td>{{ $item->name }}</td>
+                  <td>{{ $item->disease }}</td>
                   @admin
                     <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                   @endadmin
