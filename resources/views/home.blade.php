@@ -434,6 +434,9 @@
                 <th>Jam</th>
                 <th>NIP</th>
                 <th>Nama</th>
+                @admin
+                  <th>Department</th>
+                @endadmin
                 <th>View</th>
               </tr>
               </thead>
@@ -443,6 +446,9 @@
                   <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
                   <td>{{ $item->username }}</td>
                   <td>{{ $item->name }}</td>
+                  @admin
+                    <td>{{ $item->department ? $item->department->department_name : '' }}</td>
+                  @endadmin
                   <td>
                     <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
                       <i class="fas fa-eye"></i>
