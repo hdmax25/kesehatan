@@ -380,7 +380,7 @@
       <div class="col-md-12">
         <div class="card card-danger collapsed-card">
           <div class="card-header">
-            <h3 class="card-title">Belum Mengisi</h3>
+            <h3 class="card-title">Belum Lapor</h3>
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
               </button>
@@ -421,7 +421,7 @@
       <div class="col-md-12">
         <div class="card card-success collapsed-card">
           <div class="card-header">
-            <h3 class="card-title">Sudah Mengisi</h3>
+            <h3 class="card-title">Sudah Sudah Lapor</h3>
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
               </button>
