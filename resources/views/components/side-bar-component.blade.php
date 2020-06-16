@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-danger elevation-4">
   <!-- Brand Logo -->
   <a href="#" class="brand-link navbar-danger">
-    <img src="{{ asset('dist/img/logo.jpg') }}"
+    <img src="{{ asset('dist/img/logo2.png') }}"
          alt="AdminLTE Logo"
          class="brand-image img-square elevation-3"
          style="opacity: .8">
