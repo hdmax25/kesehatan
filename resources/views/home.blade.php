@@ -374,8 +374,12 @@
         </div>
       </div>
     </div>
+<<<<<<< HEAD
   @endif
   @if (Auth::user()->role !== 3)
+=======
+  @elseif (Auth::user()->role == 2)
+>>>>>>> parent of a442428... Update home.blade.php
     <div class="row">
       <div class="col-md-12">
         <div class="card card-danger collapsed-card">
@@ -434,7 +438,6 @@
                 <th>Jam</th>
                 <th>NIP</th>
                 <th>Nama</th>
-                <th>Kondisi</th>
                 @admin
                   <th>Department</th>
                 @endadmin
@@ -447,7 +450,6 @@
                   <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
                   <td>{{ $item->username }}</td>
                   <td>{{ $item->name }}</td>
-                  <td>{{ $item->penyakit ? $item->penyakit->penyakit_name }}</td>
                   @admin
                     <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                   @endadmin
