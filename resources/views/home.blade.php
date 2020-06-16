@@ -197,7 +197,7 @@
       @enduser
     @endif
   @endif
-  @if (Auth::user()->role == 1)
+  @if (Auth::user()->role !== 3)
     <div class="row">
       <div class="col-md-12">
         <div class="card card-outline card-danger">
@@ -373,8 +373,35 @@
           </div>
         </div>
       </div>
+      <div class="col-md-12">
+        <div class="card card-danger collapsed-card">
+          <div class="card-header">
+            <h3 class="card-title">Keluhan</h3>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <table id="keluhan" class="table table-bordered table-striped" style="width: 100%">
+              <thead>
+              <tr>
+                <th>Keluhan</th>
+                <th>Jumlah</th>
+              </tr>
+              </thead>
+              <tbody>
+              @foreach($dataSakit as $item)
+                <tr>
+                  <td>{{ $id }}</td>
+                  <td>{{ $item }}</td>
+              @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
-  @elseif (Auth::user()->role == 2)
     <div class="row">
       <div class="col-md-12">
         <div class="card card-danger collapsed-card">
