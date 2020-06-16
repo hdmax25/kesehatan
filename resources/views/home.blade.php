@@ -314,7 +314,7 @@
         </div>
       </div>
       <div class="col-md-12">
-        <div class="card card-success collapsed-card">
+        <div class="card card-primary collapsed-card">
           <div class="card-header">
             <h3 class="card-title">Laporan Department</h3>
             <div class="card-tools">
