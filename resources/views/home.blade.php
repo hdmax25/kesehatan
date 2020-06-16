@@ -374,12 +374,8 @@
         </div>
       </div>
     </div>
-<<<<<<< HEAD
   @endif
   @if (Auth::user()->role !== 3)
-=======
-  @elseif (Auth::user()->role == 2)
->>>>>>> parent of a442428... Update home.blade.php
     <div class="row">
       <div class="col-md-12">
         <div class="card card-danger collapsed-card">
