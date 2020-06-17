@@ -38,11 +38,8 @@
   .select2-selection__arrow {
     margin: 10px;
   }
-  ul.nav.nav-pills a.nav-link.active {
-    style="background-color: red !important;
-    }
 </style>
-<body class="sidebar-mini layout-fixed layout-navbar-fixed">
+<body class="sidebar-mini layout-fixed layout-navbar-fixed text-sm">
 <div id="app" class="wrapper">
   <!-- header -->
   <x-HeaderBarComponent/>
