@@ -204,6 +204,7 @@
           <div class="card-header">
             <h3 class="card-title">Data Kesehatan</h3>
             <div class="card-tools">
+              <span class="badge badge-danger">Jumlah Pegawai {{ $sudah->count()+$belum->count() }}</span>
             </div>
           </div>
           <div class="card-body">
@@ -237,7 +238,7 @@
                       <div class="progress-bar" style="width: {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
                     </div>
                     <span class="progress-description">
-                    {{ $sudah ? round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
+                    {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
                     </span>
                   </div>
                 </div>
