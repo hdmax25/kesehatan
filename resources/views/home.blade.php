@@ -204,7 +204,11 @@
           <div class="card-header">
             <h3 class="card-title">Data Kesehatan</h3>
             <div class="card-tools">
+<<<<<<< HEAD
               <span class="badge badge-danger">Jumlah Pegawai {{ $sudah->count()+$belum->count() }}</span>
+=======
+              <span class="badge badge-danger">Jumlah Pegawai {{$sudah->count()+$belum->count()}}</span>
+>>>>>>> parent of b80e960... Update home.blade.php
             </div>
           </div>
           <div class="card-body">
@@ -218,10 +222,10 @@
                     <span class="info-box-number">{{$belum->count()}}</span>
 
                     <div class="progress">
-                      <div class="progress-bar" style="width: {{ $belum ? round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
+                      <div class="progress-bar" style="width: {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
                     </div>
                     <span class="progress-description">
-                    {{ $belum ? round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
+                    {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
                     </span>
                   </div>
                 </div>
