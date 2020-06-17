@@ -204,11 +204,7 @@
           <div class="card-header">
             <h3 class="card-title">Data Kesehatan</h3>
             <div class="card-tools">
-<<<<<<< HEAD
-              <span class="badge badge-danger">Jumlah Pegawai {{ $sudah->count()+$belum->count() }}</span>
-=======
               <span class="badge badge-danger">Jumlah Pegawai {{$sudah->count()+$belum->count()}}</span>
->>>>>>> parent of b80e960... Update home.blade.php
             </div>
           </div>
           <div class="card-body">
