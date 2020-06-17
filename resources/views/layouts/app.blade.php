@@ -39,7 +39,7 @@
     margin: 10px;
   }
 </style>
-<body class="sidebar-mini layout-fixed layout-navbar-fixed text-sm">
+<body class="sidebar-mini layout-fixed layout-navbar-fixed">
 <div id="app" class="wrapper">
   <!-- header -->
   <x-HeaderBarComponent/>
