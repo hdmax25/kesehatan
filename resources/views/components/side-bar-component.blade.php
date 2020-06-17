@@ -96,7 +96,7 @@
           <a href="{{ route('department.index') }}" class="nav-link {{ request()->is('department') ? 'active' : '' }}">
             <i class="nav-icon fa fa-building"></i>
             <p>
-              Department
+              Divisi
             </p>
           </a>
         </li>

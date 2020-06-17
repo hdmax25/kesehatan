@@ -33,7 +33,7 @@
               <th>Role</th>
               <th>NIP</th>
               <th>Nama</th>
-              <th>Department</th>
+              <th>Divisi</th>
               <th>Phone</th>
               <th>Alamat</th>
               <th>View</th>

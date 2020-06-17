@@ -31,8 +31,8 @@
           @csrf
           <div class="card-body">
             <div class="form-group">
-              <label for="exampleInputEmail1">Unit Kerja Divisi/Department</label>
-              <input type="text" class="form-control @error('department_name') is-invalid @enderror" placeholder="Department" name="department_name" value="{{ old('department_name') }}">
+              <label for="exampleInputEmail1">Unit Kerja Divisi/Divisi</label>
+              <input type="text" class="form-control @error('department_name') is-invalid @enderror" placeholder="Divisi" name="department_name" value="{{ old('department_name') }}">
             </div>
           </div>
           <div class="card-footer">
@@ -51,7 +51,7 @@
             <thead>
             <tr>
               <th style="width: 10px">#</th>
-              <th>Department</th>
+              <th>Divisi</th>
               <th style="width: 10px">Edit</th>
                <!-- <th>Delete</th>-->
             </tr>
@@ -78,7 +78,7 @@
                 <div class="modal-dialog modal-sm">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h4 class="modal-title">Edit Department</h4>
+                      <h4 class="modal-title">Edit Divisi</h4>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                       </button>
@@ -87,8 +87,8 @@
                       @csrf
                       <div class="modal-body">
                         <div class="form-group">
-                          <label for="exampleInputEmail1">Unit Kerja Divisi/Department</label>
-                          <input type="text" class="form-control" placeholder="Department" name="department_name" value="{{ $item->department_name }}">
+                          <label for="exampleInputEmail1">Unit Kerja Divisi/Divisi</label>
+                          <input type="text" class="form-control" placeholder="Divisi" name="department_name" value="{{ $item->department_name }}">
                         </div>
                       </div>
                       <div class="modal-footer justify-content-between">

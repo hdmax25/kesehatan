@@ -50,7 +50,7 @@
               <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="" value="{{ old('name') }}">
             </div>
             <div class="form-group">
-              <label for="department">Unit Kerja</label>
+              <label for="department">Divisi</label>
               <select id="department" name="department" class="form-control @error('department') is-invalid @enderror select2 select2-danger" data-dropdown-css-class="select2-danger" required>
                 @foreach($department as $item)
                   <option value="{{ $item->id }}" {{ old('role') == $item->id ? 'selected' : '' }}>{{ $item->department_name }}</option>

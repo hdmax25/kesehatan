@@ -46,7 +46,7 @@
               @admin
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="department">Department</label>
+                  <label for="department">Divisi</label>
                   <select id="department" name="department" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" required>
                     <option value="0" {{ $setDepartment == 'x' ? 'selected' :'' }}>All</option>
                     @foreach($department as $item)
@@ -77,7 +77,7 @@
             <tr>
               <th>NIP</th>
               <th>Nama</th>
-              <th>Department</th>
+              <th>Divisi</th>
               <th>Tidak Mengisi</th>
               <th>Sakit</th>
               <th>View</th>
