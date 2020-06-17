@@ -204,7 +204,7 @@
           <div class="card-header">
             <h3 class="card-title">Data Kesehatan</h3>
             <div class="card-tools">
-              <span class="badge badge-danger">Jumlah Pegawai {{$sudah ? $sudah->count()+$belum->count()}}</span>
+              <span class="badge badge-danger">Jumlah Pegawai {{ $sudah ? $sudah->count()+$belum->count() }}</span>
             </div>
           </div>
           <div class="card-body">
