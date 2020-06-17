@@ -4,14 +4,14 @@
   <div class="row mb-2">
     <div class="col-sm-6">
       <h1>
-        Home
+        Kondisi
       </h1>
     </div>
     <div class="col-sm-6">
       <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item">
           <a href="#">
-            Home
+            Kondisi
           </a>
         </li>
       </ol>
@@ -31,7 +31,7 @@
           <div class="card-body">
             <div class="form-group">
               <label for="exampleInputEmail1">Kondisi</label>
-              <input type="text" class="form-control @error('penyakit_name') is-invalid @enderror" id="penyakit_name" name="penyakit_name" placeholder="penyakit">
+              <input type="text" class="form-control @error('penyakit_name') is-invalid @enderror" id="penyakit_name" name="penyakit_name" placeholder="Kondisi">
             </div>
           </div>
           <div class="card-footer">
