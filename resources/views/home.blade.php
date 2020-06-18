@@ -197,14 +197,25 @@
       @enduser
     @endif
   @endif
-  @if (Auth::user()->role == 1)
+  @if (Auth::user()->role !== 3)
     <div class="row">
       <div class="col-md-12">
         <div class="card card-outline card-danger">
           <div class="card-header">
-            <h3 class="card-title">Data Kesehatan</h3>
+            <h3 class="card-title">Data Kesehatan - 
+              @if (Auth::user()->role == 1)
+                PT INKA Multi Solusi
+              @else
+                Divisi {{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}
+              @endif
+            </h3>
             <div class="card-tools">
-              <span class="badge badge-danger">Jumlah Pegawai {{$sudah->count()+$belum->count()}}</span>
+              <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                  <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate">
+                  <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                  </div>
+              </div>
             </div>
           </div>
           <div class="card-body">
@@ -281,6 +292,10 @@
           </div>
         </div>
       </div>
+    </div>
+  @endif
+  @admin
+    <div class="row">
       <div class="col-md-6">
         <div class="card card-success card-outline">
           <div class="card-header">
@@ -374,7 +389,7 @@
         </div>
       </div>
     </div>
-  @endif
+  @endadmin
   @if (Auth::user()->role !== 3)
     <div class="row">
       <div class="col-md-12">
@@ -528,6 +543,11 @@
         locale: {
           format: 'DD/MM/YYYY'
         }
+      });
+      
+      //Date range picker
+      $('#reservationdate').datetimepicker({
+        format: 'L'
       });
 
       $('#sudahT').DataTable({
