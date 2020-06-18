@@ -21,9 +21,9 @@
   @else
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>
+        <h1>Data Kesehatan -
           @if (Auth::user()->role == 1)
-            PT <strong>INKA</strong> <i>Multi Solusi</i>
+            PT INKA Multi Solusi
           @else
             {{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}
           @endif
@@ -47,6 +47,44 @@
     @if (!$todayCheck)
       @if (\Carbon\Carbon::now() < \Carbon\Carbon::parse("23:00:00"))
         <div class="row">
+          <div class="col-md-3">
+            <div class="info-box">
+              <span class="info-box-icon bg-primary"><i class="fa fa-address-card"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-text">NIP</span>
+                <span class="info-box-number">{{ Auth::user()->username }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="info-box">
+              <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-text">Nama</span>
+                <span class="info-box-number">{{ Auth::user()->name }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="info-box">
+              <span class="info-box-icon bg-warning"><i class="fa fa-building"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-text">Departement</span>
+                <span class="info-box-number">{{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="info-box">
+              <span class="info-box-icon bg-success"><i class="fa fa-phone"></i></span>
+              <div class="info-box-content">
+                <span class="info-box-text">Phone</span>
+                <span class="info-box-number">{{ Auth::user()->phone }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
           <div id="checkedToday" class="col-md-12">
             <div class="card card-danger card-outline">
               <div class="card-header">
@@ -55,44 +93,6 @@
               <form action="{{ route('report.store') }}" method="post">
                 @csrf
                 <div class="card-body">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <div class="info-box">
-                        <span class="info-box-icon bg-primary"><i class="fa fa-address-card"></i></span>
-                        <div class="info-box-content">
-                          <span class="info-box-text">NIP</span>
-                          <span class="info-box-number">{{ Auth::user()->username }}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="info-box">
-                        <span class="info-box-icon bg-danger"><i class="far fa-user"></i></span>
-                        <div class="info-box-content">
-                          <span class="info-box-text">Nama</span>
-                          <span class="info-box-number">{{ Auth::user()->name }}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="info-box">
-                        <span class="info-box-icon bg-warning"><i class="fa fa-building"></i></span>
-                        <div class="info-box-content">
-                          <span class="info-box-text">Departement</span>
-                          <span class="info-box-number">{{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="info-box">
-                        <span class="info-box-icon bg-success"><i class="fa fa-phone"></i></span>
-                        <div class="info-box-content">
-                          <span class="info-box-text">Phone</span>
-                          <span class="info-box-number">{{ Auth::user()->phone }}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
@@ -199,25 +199,6 @@
   @endif
   @if (Auth::user()->role !== 3)
     <div class="row">
-      <div class="col-md-12">
-        <div class="card card-outline card-danger">
-          <div class="card-header">
-            <h3 class="card-title">Data Kesehatan
-              @if (Auth::user()->role == 2)
-                - Divisi {{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}
-              @endif
-            </h3>
-            <div class="card-tools">
-              <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                  <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate">
-                  <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                  </div>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="row">
               <div class="col-md-3 col-sm-6 col-12">
                 <div class="info-box bg-primary">
                   <span class="info-box-icon"><i class="fa fa-users"></i></span>
@@ -286,10 +267,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   @endif
   @admin
@@ -542,11 +519,6 @@
           format: 'DD/MM/YYYY'
         }
       });
-      
-      //Date range picker
-      $('#reservationdate').datetimepicker({
-        format: 'L'
-      });
 
       $('#sudahT').DataTable({
         "paging": true,
@@ -600,6 +572,8 @@
 
       //Initialize Select2 Elements
       $('.select2').select2({width: 'resolve'});
+
+      
 
       @if (\Session::has('message'))
       toastr.success('{{ \Session::get('message') }}')
