@@ -202,11 +202,9 @@
       <div class="col-md-12">
         <div class="card card-outline card-danger">
           <div class="card-header">
-            <h3 class="card-title">Data Kesehatan - 
-              @if (Auth::user()->role == 1)
-                PT INKA Multi Solusi
-              @else
-                Divisi {{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}
+            <h3 class="card-title">Data Kesehatan
+              @if (Auth::user()->role == 2)
+                - Divisi {{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}
               @endif
             </h3>
             <div class="card-tools">
@@ -220,7 +218,24 @@
           </div>
           <div class="card-body">
             <div class="row">
-             <div class="col-md-3 col-sm-6 col-12">
+              <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box bg-primary">
+                  <span class="info-box-icon"><i class="fa fa-users"></i></span>
+
+                  <div class="info-box-content">
+                    <span class="info-box-text">Jumlah Pegawai</span>
+                    <span class="info-box-number">{{$belum->count() + $sudah->count()}}</span>
+
+                    <div class="progress">
+                      <div class="progress-bar" style="width: {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
+                    </div>
+                    <span class="progress-description">
+                    {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}% Sudah Lapor
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-12">
                 <div class="info-box bg-danger">
                   <span class="info-box-icon"><i class="fa fa-users"></i></span>
 
@@ -233,23 +248,6 @@
                     </div>
                     <span class="progress-description">
                     {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6 col-12">
-                <div class="info-box bg-info">
-                  <span class="info-box-icon"><i class="fa fa-users"></i></span>
-
-                  <div class="info-box-content">
-                    <span class="info-box-text">Sudah Lapor</span>
-                    <span class="info-box-number">{{$sudah->count()}}</span>
-
-                    <div class="progress">
-                      <div class="progress-bar" style="width: {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
-                    </div>
-                    <span class="progress-description">
-                    {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
                     </span>
                   </div>
                 </div>
