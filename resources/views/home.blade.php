@@ -69,7 +69,7 @@
             <div class="info-box">
               <span class="info-box-icon bg-warning"><i class="fa fa-building"></i></span>
               <div class="info-box-content">
-                <span class="info-box-text">Departement</span>
+                <span class="info-box-text">Divisi</span>
                 <span class="info-box-number">{{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}</span>
               </div>
             </div>
