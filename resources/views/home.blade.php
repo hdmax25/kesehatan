@@ -483,7 +483,9 @@
                   @admin
                   <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                   @endadmin
-                  <th>Kondisi</th>
+                  <td>
+                    <b>{{ $item->disease->penyakit_name }}</b>
+                  </td>
                   <td>
                     <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
                       <i class="fas fa-eye"></i>
