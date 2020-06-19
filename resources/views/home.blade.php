@@ -431,7 +431,7 @@
               </tr>
               </thead>
               <tbody>
-              @foreach($sudah->where('status', 1) as $item)
+              @foreach($sudah->where('id_penyakit', 1) as $item)
                 <tr>
                   <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
                   <td>{{ $item->username }}</td>
@@ -475,7 +475,7 @@
               </tr>
               </thead>
               <tbody>
-              @foreach($sudah->where('status', '!=', 1) as $item)
+              @foreach($sudah->where('id_penyakit', '!=', 1) as $item)
                 <tr>
                   <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
                   <td>{{ $item->username }}</td>
