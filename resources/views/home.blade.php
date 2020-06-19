@@ -199,74 +199,74 @@
   @endif
   @if (Auth::user()->role !== 3)
     <div class="row">
-              <div class="col-md-3 col-sm-6 col-12">
-                <div class="info-box bg-primary">
-                  <span class="info-box-icon"><i class="fa fa-users"></i></span>
+      <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box bg-primary">
+          <span class="info-box-icon"><i class="fa fa-users"></i></span>
 
-                  <div class="info-box-content">
-                    <span class="info-box-text">Jumlah Pegawai</span>
-                    <span class="info-box-number">{{$belum->count() + $sudah->count()}}</span>
+          <div class="info-box-content">
+            <span class="info-box-text">Jumlah Pegawai</span>
+            <span class="info-box-number">{{$belum->count() + $sudah->count()}}</span>
 
-                    <div class="progress">
-                      <div class="progress-bar" style="width: {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
-                    </div>
-                    <span class="progress-description">
-                    {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}% Sudah Lapor
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6 col-12">
-                <div class="info-box bg-danger">
-                  <span class="info-box-icon"><i class="fa fa-users"></i></span>
+            <div class="progress">
+              <div class="progress-bar" style="width: {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
+            </div>
+            <span class="progress-description">
+            {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}% Sudah Lapor
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box bg-danger">
+          <span class="info-box-icon"><i class="fa fa-users"></i></span>
 
-                  <div class="info-box-content">
-                    <span class="info-box-text">Belum  Lapor</span>
-                    <span class="info-box-number">{{$belum->count()}}</span>
+          <div class="info-box-content">
+            <span class="info-box-text">Belum  Lapor</span>
+            <span class="info-box-number">{{$belum->count()}}</span>
 
-                    <div class="progress">
-                      <div class="progress-bar" style="width: {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
-                    </div>
-                    <span class="progress-description">
-                    {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6 col-12">
-                <div class="info-box bg-success">
-                  <span class="info-box-icon"><i class="fas fa-heartbeat"></i></span>
+            <div class="progress">
+              <div class="progress-bar" style="width: {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
+            </div>
+            <span class="progress-description">
+            {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box bg-success">
+          <span class="info-box-icon"><i class="fas fa-heartbeat"></i></span>
 
-                  <div class="info-box-content">
-                    <span class="info-box-text">Sehat</span>
-                    <span class="info-box-number">{{ $sehat }}</span>
+          <div class="info-box-content">
+            <span class="info-box-text">Sehat</span>
+            <span class="info-box-number">{{ $sehat }}</span>
 
-                    <div class="progress">
-                      <div class="progress-bar" style="width: {{ $sehat ? round(($sehat / $sudah->count()) * 100, 1) : $sehat }}%"></div>
-                    </div>
-                    <span class="progress-description">
-                    {{ $sehat ? round(($sehat / $sudah->count()) * 100, 1) : $sehat }}% Pegawai
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6 col-12">
-                <div class="info-box bg-warning">
-                  <span class="info-box-icon"><i class="fas fa-heartbeat"></i></span>
+            <div class="progress">
+              <div class="progress-bar" style="width: {{ $sehat ? round(($sehat / $sudah->count()) * 100, 1) : $sehat }}%"></div>
+            </div>
+            <span class="progress-description">
+            {{ $sehat ? round(($sehat / $sudah->count()) * 100, 1) : $sehat }}% Pegawai
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box bg-warning">
+          <span class="info-box-icon"><i class="fas fa-heartbeat"></i></span>
 
-                  <div class="info-box-content">
-                    <span class="info-box-text">Sakit</span>
-                    <span class="info-box-number">{{ $sakit }}</span>
+          <div class="info-box-content">
+            <span class="info-box-text">Sakit</span>
+            <span class="info-box-number">{{ $sakit }}</span>
 
-                    <div class="progress">
-                      <div class="progress-bar" style="width: {{ $sakit ?  round(($sakit / $sudah->count()) * 100, 1) : $sakit }}%"></div>
-                    </div>
-                    <span class="progress-description">
-                    {{ $sakit ?  round(($sakit / $sudah->count()) * 100, 1) : $sakit }}% Pegawai
-                    </span>
-                  </div>
-                </div>
-              </div>
+            <div class="progress">
+              <div class="progress-bar" style="width: {{ $sakit ?  round(($sakit / $sudah->count()) * 100, 1) : $sakit }}%"></div>
+            </div>
+            <span class="progress-description">
+            {{ $sakit ?  round(($sakit / $sudah->count()) * 100, 1) : $sakit }}% Pegawai
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   @endif
   @admin
@@ -298,7 +298,7 @@
           </div>
           <div class="card-body">
             <div class="chart">
-              <canvas id="kymk" style="min-height: 250px; height: 300px; max-height: 300px; max-width: 100%;"></canvas>
+              <canvas id="kymk" style="min-height: 400px; height: 400px; max-height: 300px; max-width: 100%;"></canvas>
             </div>
           </div>
         </div>
