@@ -837,7 +837,7 @@
               {{ $item }},
               @endforeach
             ],
-            backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de', '#51ff0d'],
+            backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de', '#51ff0d', '#ffff00', '#00008b', '#ff0000'],
           }
         ]
       }
