@@ -295,6 +295,10 @@
       <div class="card card-primary card-outline">
         <div class="card-header">
           <h3 class="card-title">Divisi</h3>
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+            </button>
+          </div>
         </div>
         <div class="card-body">
           <div class="chart">
@@ -309,8 +313,6 @@
           <h3 class="card-title">Laporan Divisi</h3>
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
             </button>
           </div>
         </div>
