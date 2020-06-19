@@ -67,8 +67,8 @@
     <div class="float-right d-none d-sm-block">
       <b>Version</b> 0.0.7
     </div>
-    <strong>Copyright &copy; 2020 <a href="{{ url('/') }}">{{ url('/') }}</a>.</strong> All rights
-    reserved. <strong>Created by <a href="{{ url('http://instagram.com/haripurnomoo') }}">HDmax25</a>.</strong>
+    <strong>Copyright &copy; 2020 <a href="{{ url('http://inkamultisolusi.co.id') }}">INKA Multi Solusi</a>.</strong> All rights
+    reserved. <strong>Created by <a href="{{ url('http://instagram.com/haripurnomoo') }}">HDMAX25</a>.</strong>
   </footer>
 
 </div>
