@@ -55,7 +55,7 @@ class HomeController extends Controller
         $item->notAbsens = 0;
         foreach ($item as $subItem) {
           $item->totalUser++;
-          $subItem->absenes = Report::whereDate('created_at', Carbon::now())->where('id_user', $subItem->id)->orderBy('id', 'desc')->first();
+          $subItem->absenes = Report::where('id_user', $subItem->id)->whereDate('created_at', Carbon::now())->orderBy('id', 'desc')->first();
           if ($subItem->absenes) {
             $item->absens++;
           } else {
