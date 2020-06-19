@@ -5,7 +5,7 @@
          alt="AdminLTE Logo"
          class="brand-image img-circle elevation-1"
          style="opacity: .8">
-    <span class="brand-text font-weight-light">IMS</span>
+    <span class="brand-text font-weight-light"><strong>INKA</strong> Multi Solusi</span>
   </a>
 
   <div class="sidebar">

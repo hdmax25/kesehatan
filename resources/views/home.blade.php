@@ -486,9 +486,7 @@
                     @admin
                     <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                     @endadmin
-                    <td>
-                      <b>{{ $item->disease->penyakit_name }}</b>
-                    </td>
+                    <td>{{ $item->disease->penyakit_name }}</td>
                     <td>
                       <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
                         <i class="fas fa-eye"></i>
@@ -809,7 +807,7 @@
               {{ $item }},
               @endforeach
             ],
-            backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+            backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de', '#51ff0d', '#ffff00', '#00008b', '#ff0000'],
           }
         ]
       }
