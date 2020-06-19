@@ -411,14 +411,14 @@
       <div class="col-md-12">
         <div class="card card-success collapsed-card">
           <div class="card-header">
-            <h3 class="card-title">Sudah Lapor</h3>
+            <h3 class="card-title">Sudah Lapor Sehat</h3>
             <div class="card-tools">
               <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
               </button>
             </div>
           </div>
           <div class="card-body">
-            <table id="sudahT" class="table table-bordered table-striped" style="width: 100%">
+            <table id="sudahSehat" class="table table-bordered table-striped" style="width: 100%">
               <thead>
               <tr>
                 <th>Jam</th>
@@ -439,6 +439,51 @@
                   @admin
                     <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                   @endadmin
+                  <td>
+                    <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
+                      <i class="fas fa-eye"></i>
+                    </a>
+                  </td>
+                </tr>
+              @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="card card-warning collapsed-card">
+          <div class="card-header">
+            <h3 class="card-title">Sudah Lapor Sakit</h3>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <table id="sudahSakit" class="table table-bordered table-striped" style="width: 100%">
+              <thead>
+              <tr>
+                <th>Jam</th>
+                <th>NIP</th>
+                <th>Nama</th>
+                @admin
+                  <th>Divisi</th>
+                @endadmin
+                <th>Kondisi</th>
+                <th>View</th>
+              </tr>
+              </thead>
+              <tbody>
+              @foreach($sudah as $item)
+                <tr>
+                  <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
+                  <td>{{ $item->username }}</td>
+                  <td>{{ $item->name }}</td>
+                  @admin
+                    <td>{{ $item->department ? $item->department->department_name : '' }}</td>
+                  @endadmin
+                  <th>Kondisi</th>
                   <td>
                     <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
                       <i class="fas fa-eye"></i>
@@ -520,7 +565,17 @@
         }
       });
 
-      $('#sudahT').DataTable({
+      $('#sudahSehat').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": true,
+        "responsive": true,
+      });
+
+      $('#sudahSakit').DataTable({
         "paging": true,
         "lengthChange": true,
         "searching": true,
