@@ -302,7 +302,7 @@
         </div>
         <div class="card-body">
           <div class="chart">
-            <canvas id="kymk" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas>
+            <canvas id="kymk" style="min-height: 300px; height: 400px; max-height: 300px; max-width: 100%;"></canvas>
           </div>
         </div>
       </div>
