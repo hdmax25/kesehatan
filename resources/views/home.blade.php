@@ -270,100 +270,100 @@
     </div>
   @endif
   @admin
-    <div class="row">
-      <div class="col-md-6">
-        <div class="card card-success card-outline">
-          <div class="card-header">
-            <h3 class="card-title">Kesehatan</h3>
-          </div>
-          <div class="card-body">
-            <canvas id="pieChartGroupSehat" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-          </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card card-success card-outline">
+        <div class="card-header">
+          <h3 class="card-title">Kesehatan</h3>
+        </div>
+        <div class="card-body">
+          <canvas id="pieChartGroupSehat" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="card card-danger card-outline">
-          <div class="card-header">
-            <h3 class="card-title">Keluhan</h3>
-          </div>
-          <div class="card-body">
-            <canvas id="pieChartGroupPenyakit" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-          </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card card-danger card-outline">
+        <div class="card-header">
+          <h3 class="card-title">Keluhan</h3>
+        </div>
+        <div class="card-body">
+          <canvas id="pieChartGroupPenyakit" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
         </div>
       </div>
-      <div class="col-md-12">
-        <div class="card card-primary card-outline">
-          <div class="card-header">
-            <h3 class="card-title">Divisi</h3>
-          </div>
-          <div class="card-body">
-            <div class="chart">
-              <canvas id="kymk" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas>
-            </div>
-          </div>
+    </div>
+    <div class="col-md-12">
+      <div class="card card-primary card-outline">
+        <div class="card-header">
+          <h3 class="card-title">Divisi</h3>
         </div>
-      </div>
-      <div class="col-md-12">
-        <div class="card card-primary collapsed-card">
-          <div class="card-header">
-            <h3 class="card-title">Laporan Divisi</h3>
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
-              </button>
-            </div>
-          </div>
-          <div class="card-body">
-            <table id="reportdep" class="table table-bordered table-striped" style="width: 100%">
-              <thead>
-              <tr>
-                <th>Dapartment</th>
-                <th>Jumlah</th>
-                <th>Lapor</th>
-              </tr>
-              </thead>
-              <tbody>
-              @foreach($groupDepartment as $item)
-                <tr>
-                  <td>{{$item->departmentName}}</td>
-                  <td>{{ $item->totalUser }}</td>
-                  <td>{{ $item->absens }}</td>
-              @endforeach
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-12">
-        <div class="card card-warning collapsed-card">
-          <div class="card-header">
-            <h3 class="card-title">Kesehatan Divisi</h3>
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
-              </button>
-            </div>
-          </div>
-          <div class="card-body">
-            <table id="kesehatan" class="table table-bordered table-striped" style="width: 100%">
-              <thead>
-              <tr>
-                <th>Dapartment</th>
-                <th>Sehat</th>
-                <th>Sakit</th>
-              </tr>
-              </thead>
-              <tbody>
-              @foreach($dataDepartment as $item)
-                <tr>
-                  <td>{{$item->departmentName}}</td>
-                  <td>{{ $item->sehat }}</td>
-                  <td>{{ $item->sakit }}</td>
-              @endforeach
-              </tbody>
-            </table>
+        <div class="card-body">
+          <div class="chart">
+            <canvas id="kymk" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 100%;"></canvas>
           </div>
         </div>
       </div>
     </div>
+    <div class="col-md-12">
+      <div class="card card-primary collapsed-card">
+        <div class="card-header">
+          <h3 class="card-title">Laporan Divisi</h3>
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <table id="reportdep" class="table table-bordered table-striped" style="width: 100%">
+            <thead>
+            <tr>
+              <th>Dapartment</th>
+              <th>Jumlah</th>
+              <th>Lapor</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($groupDepartment as $item)
+              <tr>
+                <td>{{$item->departmentName}}</td>
+                <td>{{ $item->totalUser }}</td>
+                <td>{{ $item->absens }}</td>
+            @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="card card-warning collapsed-card">
+        <div class="card-header">
+          <h3 class="card-title">Kesehatan Divisi</h3>
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <table id="kesehatan" class="table table-bordered table-striped" style="width: 100%">
+            <thead>
+            <tr>
+              <th>Dapartment</th>
+              <th>Sehat</th>
+              <th>Sakit</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($dataDepartment as $item)
+              <tr>
+                <td>{{$item->departmentName}}</td>
+                <td>{{ $item->sehat }}</td>
+                <td>{{ $item->sakit }}</td>
+            @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
   @endadmin
   @if (Auth::user()->role !== 3)
     <div class="row">
@@ -383,7 +383,7 @@
                 <th>NIP</th>
                 <th>Nama Pegawai</th>
                 @admin
-                  <th>Divisi</th>
+                <th>Divisi</th>
                 @endadmin
                 <th>Call</th>
               </tr>
@@ -394,7 +394,7 @@
                   <td>{{ $item->username }}</td>
                   <td>{{ $item->name }}</td>
                   @admin
-                    <td>{{ $item->department ? $item->department->department_name : '' }}</td>
+                  <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                   @endadmin
                   <td>
                     <a href="tel:{{$item->phone}}" type="button" class="btn btn-danger btn-xs btn-block">
@@ -425,19 +425,19 @@
                 <th>NIP</th>
                 <th>Nama</th>
                 @admin
-                  <th>Divisi</th>
+                <th>Divisi</th>
                 @endadmin
                 <th>View</th>
               </tr>
               </thead>
               <tbody>
-              @foreach($sudah as $item)
+              @foreach($sudah->where('status', 1) as $item)
                 <tr>
                   <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
                   <td>{{ $item->username }}</td>
                   <td>{{ $item->name }}</td>
                   @admin
-                    <td>{{ $item->department ? $item->department->department_name : '' }}</td>
+                  <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                   @endadmin
                   <td>
                     <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
@@ -468,20 +468,20 @@
                 <th>NIP</th>
                 <th>Nama</th>
                 @admin
-                  <th>Divisi</th>
+                <th>Divisi</th>
                 @endadmin
                 <th>Kondisi</th>
                 <th>View</th>
               </tr>
               </thead>
               <tbody>
-              @foreach($sudah as $item)
+              @foreach($sudah->where('status', '!=', 1) as $item)
                 <tr>
                   <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
                   <td>{{ $item->username }}</td>
                   <td>{{ $item->name }}</td>
                   @admin
-                    <td>{{ $item->department ? $item->department->department_name : '' }}</td>
+                  <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                   @endadmin
                   <th>Kondisi</th>
                   <td>
@@ -628,7 +628,6 @@
       //Initialize Select2 Elements
       $('.select2').select2({width: 'resolve'});
 
-      
 
       @if (\Session::has('message'))
       toastr.success('{{ \Session::get('message') }}')
@@ -693,7 +692,7 @@
     });
   </script>
   @enduser
-  
+
   @admin
   <script>
     $(function () {
@@ -831,7 +830,7 @@
           {
             data: [
               @foreach($dataSakit as $id => $item)
-                {{ $item }},
+              {{ $item }},
               @endforeach
             ],
             backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
