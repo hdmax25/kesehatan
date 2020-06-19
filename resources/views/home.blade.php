@@ -702,36 +702,6 @@
   @admin
   <script>
     $(function () {
-      var pieOptions = {
-        maintainAspectRatio: false,
-        responsive: true,
-      }
-          @foreach($groupDepartment as $id => $item)
-      var donutData{{$id}} = {
-          labels: [
-            'Belum Absen',
-            'Sudah Absen',
-          ],
-          datasets: [
-            {
-              data: [{{ $item->notAbsens }}, {{ $item->absens }}],
-              backgroundColor: ['#3c8dbc', '#00a65a'],
-            }
-          ]
-        }
-      //-------------
-      //- PIE CHART -
-      //-------------
-      var pieChartCanvas{{$id}} = $('#pieChart{{$id}}').get(0).getContext('2d')
-      var pieData{{$id}} = donutData{{$id}};
-      new Chart(pieChartCanvas{{$id}}, {
-        type: 'pie',
-        data: pieData{{$id}},
-        options: pieOptions
-      })
-      @endforeach
-    })
-    $(function () {
       let dataGroupDepartment = {
         labels: [
           @foreach($groupDepartment as $id => $item)
