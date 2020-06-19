@@ -37,8 +37,12 @@ class HomeController extends Controller
       $report = User::where('role', '!=', 1)->get();
       $report->map(function ($item) {
         $item->department = Departement::find($item->id_department);
-        $item->disease = Penyakit::find($item->id_penyakit);
         $item->absenes = Report::whereDate('created_at', Carbon::now())->where('id_user', $item->id)->orderBy('id', 'desc')->first();
+        if ($item->absenes) {
+          $item->disease = Penyakit::find($item->absenes->id_penyakit);
+        } else {
+          $item->disease = null;
+        }
         return $item;
       });
 
