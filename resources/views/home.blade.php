@@ -431,20 +431,22 @@
               </tr>
               </thead>
               <tbody>
-              @foreach($sudah->where('id_penyakit', 1) as $item)
-                <tr>
-                  <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
-                  <td>{{ $item->username }}</td>
-                  <td>{{ $item->name }}</td>
-                  @admin
-                  <td>{{ $item->department ? $item->department->department_name : '' }}</td>
-                  @endadmin
-                  <td>
-                    <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
-                      <i class="fas fa-eye"></i>
-                    </a>
-                  </td>
-                </tr>
+              @foreach($sudah as $item)
+                @if($item->absenes->id_penyakit == 1)
+                  <tr>
+                    <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
+                    <td>{{ $item->username }}</td>
+                    <td>{{ $item->name }}</td>
+                    @admin
+                    <td>{{ $item->department ? $item->department->department_name : '' }}</td>
+                    @endadmin
+                    <td>
+                      <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
+                        <i class="fas fa-eye"></i>
+                      </a>
+                    </td>
+                  </tr>
+                @endif
               @endforeach
               </tbody>
             </table>
@@ -475,23 +477,25 @@
               </tr>
               </thead>
               <tbody>
-              @foreach($sudah->where('id_penyakit', '!=', 1) as $item)
-                <tr>
-                  <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
-                  <td>{{ $item->username }}</td>
-                  <td>{{ $item->name }}</td>
-                  @admin
-                  <td>{{ $item->department ? $item->department->department_name : '' }}</td>
-                  @endadmin
-                  <td>
-                    <b>{{ $item->disease->penyakit_name }}</b>
-                  </td>
-                  <td>
-                    <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
-                      <i class="fas fa-eye"></i>
-                    </a>
-                  </td>
-                </tr>
+              @foreach($sudah as $item)
+                @if($item->absenes->id_penyakit != 1)
+                  <tr>
+                    <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
+                    <td>{{ $item->username }}</td>
+                    <td>{{ $item->name }}</td>
+                    @admin
+                    <td>{{ $item->department ? $item->department->department_name : '' }}</td>
+                    @endadmin
+                    <td>
+                      <b>{{ $item->disease->penyakit_name }}</b>
+                    </td>
+                    <td>
+                      <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
+                        <i class="fas fa-eye"></i>
+                      </a>
+                    </td>
+                  </tr>
+                @endif
               @endforeach
               </tbody>
             </table>
