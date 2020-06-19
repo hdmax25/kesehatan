@@ -389,7 +389,7 @@
                 @admin
                 <th>Divisi</th>
                 @endadmin
-                <th>Call</th>
+                <th>Send</th>
               </tr>
               </thead>
               <tbody>
@@ -401,7 +401,7 @@
                   <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                   @endadmin
                   <td>
-                    <a href="https://api.whatsapp.com/send?phone={{$item->phone}}&text=Segera%20laporkan%20kondisi%20kesehatan%20anda%20ke%20https://covid19.inkamultisolusi.co.id&source=&data=&app_absent=" type="button" class="btn btn-success btn-xs btn-block">
+                    <a href="https://api.whatsapp.com/send?phone={{$item->phone}}&text=Segera%20laporkan%20kondisi%20kesehatan%20anda%20ke%20https://covid19.inkamultisolusi.co.id&source=&data=&app_absent=" type="button" class="btn btn-success btn-block">
                     <i class="fab fa-whatsapp"></i>
                     </a>
                   </td>
