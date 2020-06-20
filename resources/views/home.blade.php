@@ -407,7 +407,7 @@
                     </a>
                   </td>
                   <td>
-                    <a href="tel:{{$item->phone}}" type="button" class="btn btn-danger btn-sm btn-block">
+                    <a href="tel:{{$item->phone}}" type="button" class="btn btn-danger btn-block">
                       <i class="fa fa-phone"></i>
                     </a>
                   </td>
