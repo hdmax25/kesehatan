@@ -389,7 +389,8 @@
                 @admin
                 <th>Divisi</th>
                 @endadmin
-                <th>Send</th>
+                <th>WA</th>
+                <th>Call</th>
               </tr>
               </thead>
               <tbody>
@@ -402,7 +403,12 @@
                   @endadmin
                   <td>
                     <a href="https://api.whatsapp.com/send?phone={{$item->phone}}&text=Segera%20laporkan%20kondisi%20kesehatan%20anda%20ke%20https://covid19.inkamultisolusi.co.id&source=&data=&app_absent=" type="button" class="btn btn-success btn-block">
-                    <i class="fab fa-whatsapp"></i>
+                      <i class="fab fa-whatsapp"></i>
+                    </a>
+                  </td>
+                  <td>
+                    <a href="tel:{{$item->phone}}" type="button" class="btn btn-danger btn-sm btn-block">
+                      <i class="fa fa-phone"></i>
                     </a>
                   </td>
                 </tr>
