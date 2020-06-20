@@ -83,7 +83,7 @@ class HomeController extends Controller
 
       foreach ($report->whereNotNull('absenes') as $item) {
         if ($item->absenes->id_penyakit != 1) {
-          $dataSakit[Penyakit::find($item->absenes->id_penyakit)->penyakit_name] = $item->absenes->where('id_penyakit', $item->absenes->id_penyakit)->count();
+          $dataSakit[Penyakit::find($item->absenes->id_penyakit)->penyakit_name] = $item->absenes->whereDate('created_at', Carbon::now())->where('id_penyakit', $item->absenes->id_penyakit)->count();
           $sakit++;
         } else {
           $sehat++;
