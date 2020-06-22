@@ -173,7 +173,7 @@
       @else
         <div class="alert alert-danger alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-          <h5><i class="icon fas fa-info"></i> Alert!</h5>
+          <h5><i class="icon fas fa-info"></i> Perhatian!</h5>
           Pengisian data monitoring kesehatan pegawai telah ditutup
         </div>
       @endif
