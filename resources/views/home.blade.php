@@ -155,7 +155,7 @@
                   </div>
                   <div class="form-group">
                     <label for="description">Jika terdapat keluhan, silahkan jelaskan gejala/keluhan yang anda alami saat ini </label>
-                    <input type="text" class="form-control @error('description') is-invalid @enderror" id="description" name="description" placeholder="Tidak Ada" value="{{ old('description') }}">
+                    <input type="text" class="form-control @error('description') is-invalid @enderror" id="description" name="description" placeholder="Keluhan" value="{{ old('description') }}">
                   </div>
                   <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="check" name="check">
