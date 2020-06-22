@@ -213,7 +213,7 @@ class ReportController extends Controller
    */
   public function store(Request $request)
   {
-    if (Carbon::now() > Carbon::parse("23:00:00")) {
+    if (Carbon::now() > Carbon::parse("10:00:00")) {
       return redirect()->back()->with(['message' => 'Input Anda Sudah Melewati Jam 1 siang']);
     }
 
