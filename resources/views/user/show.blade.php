@@ -45,6 +45,7 @@
             @if ( \Illuminate\Support\Facades\Auth::user()->username == $user->username)
               <li class="nav-item"><a class="nav-link {{ $errors->isEmpty() ? '' : 'active' }}" href="#settings" data-toggle="tab"><i class="far fa-edit"></i> Edit Profile</a></li>
             @endif
+            <li class="nav-item"><a class="nav-link {{ $errors->isEmpty() ? 'active' : '' }}" href="#foto" data-toggle="tab"><i class="far fa-image"></i> Edit Foto</a></li>
           </ul>
         </div>
         <div class="card-body">
