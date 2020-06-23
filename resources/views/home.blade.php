@@ -305,7 +305,7 @@
             <canvas id="kymk" style="min-height: 300px; height: 300px; max-height: 100%; max-width: 100%;"></canvas>
           </div>
         </div>
-        <div class="card-footer">
+        <div class="card-footer no-print">
           <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#laporan">
             More Info
           </button>
@@ -393,7 +393,7 @@
                 </tbody>
               </table>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer no-print">
               <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
             </div>
         </div>
