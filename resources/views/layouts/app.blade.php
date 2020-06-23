@@ -38,6 +38,14 @@
   .select2-selection__arrow {
     margin: 10px;
   }
+  .modal-xl{
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .modal-content{
+    border-radius: 0;
+  }
 
   .modal-open .modal {
     padding-right: 0px !important;

@@ -217,54 +217,220 @@
         </div>
       </div>
       <div class="col-md-3 col-sm-6 col-12">
-        <div class="info-box bg-danger">
-          <span class="info-box-icon"><i class="fa fa-users"></i></span>
+        <a href="#" data-toggle="modal" data-target="#belum-lapor">
+          <div class="info-box bg-danger">
+            <span class="info-box-icon"><i class="fa fa-users"></i></span>
 
-          <div class="info-box-content">
-            <span class="info-box-text">Belum  Lapor</span>
-            <span class="info-box-number">{{$belum->count()}}</span>
+            <div class="info-box-content">
+              <span class="info-box-text">Belum  Lapor</span>
+              <span class="info-box-number">{{$belum->count()}}</span>
 
-            <div class="progress">
-              <div class="progress-bar" style="width: {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
+              <div class="progress">
+                <div class="progress-bar" style="width: {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
+              </div>
+              <span class="progress-description">
+              {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
+              </span>
             </div>
-            <span class="progress-description">
-            {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
-            </span>
           </div>
+        </a>
+        <div class="modal fade" id="belum-lapor">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Kesehatan Divisi</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <table id="belumT" class="table table-bordered table-striped" style="width: 100%">
+                  <thead>
+                    <tr>
+                      <th>NIP</th>
+                      <th>Nama Pegawai</th>
+                      @admin
+                      <th>Divisi</th>
+                      @endadmin
+                      <th>WA</th>
+                      <th>Call</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  @foreach($belum as $item)
+                    <tr>
+                      <td>{{ $item->username }}</td>
+                      <td>{{ $item->name }}</td>
+                      @admin
+                      <td>{{ $item->department ? $item->department->department_name : '' }}</td>
+                      @endadmin
+                      <td>
+                        <a href="https://api.whatsapp.com/send?phone={{$item->phone}}&text=Segera%20laporkan%20kondisi%20kesehatan%20anda%20ke%20https://covid19.inkamultisolusi.co.id&source=&data=&app_absent=" type="button" class="btn btn-success btn-block">
+                          <i class="fab fa-whatsapp"></i>
+                        </a>
+                      </td>
+                      <td>
+                        <a href="tel:{{$item->phone}}" type="button" class="btn btn-danger btn-block">
+                          <i class="fa fa-phone"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  @endforeach
+                  </tbody>
+                </table>
+              </div>
+              <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
         </div>
       </div>
       <div class="col-md-3 col-sm-6 col-12">
-        <div class="info-box bg-success">
-          <span class="info-box-icon"><i class="fas fa-heartbeat"></i></span>
+        <a href="#" data-toggle="modal" data-target="#sudah-sehat">
+          <div class="info-box bg-success">
+            <span class="info-box-icon"><i class="fas fa-heartbeat"></i></span>
 
-          <div class="info-box-content">
-            <span class="info-box-text">Sehat</span>
-            <span class="info-box-number">{{ $sehat }}</span>
+            <div class="info-box-content">
+              <span class="info-box-text">Sehat</span>
+              <span class="info-box-number">{{ $sehat }}</span>
 
-            <div class="progress">
-              <div class="progress-bar" style="width: {{ $sehat ? round(($sehat / $sudah->count()) * 100, 1) : $sehat }}%"></div>
+              <div class="progress">
+                <div class="progress-bar" style="width: {{ $sehat ? round(($sehat / $sudah->count()) * 100, 1) : $sehat }}%"></div>
+              </div>
+              <span class="progress-description">
+              {{ $sehat ? round(($sehat / $sudah->count()) * 100, 1) : $sehat }}% Pegawai
+              </span>
             </div>
-            <span class="progress-description">
-            {{ $sehat ? round(($sehat / $sudah->count()) * 100, 1) : $sehat }}% Pegawai
-            </span>
           </div>
+        </a>
+        <div class="modal fade" id="sudah-sehat">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Pegawai Sehat</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <table id="sudahSehat" class="table table-bordered table-striped" style="width: 100%">
+                  <thead>
+                  <tr>
+                    <th>Jam</th>
+                    <th>NIP</th>
+                    <th>Nama</th>
+                    @admin
+                    <th>Divisi</th>
+                    @endadmin
+                    <th>View</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  @foreach($sudah as $item)
+                    @if($item->absenes->id_penyakit == 1)
+                      <tr>
+                        <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
+                        <td>{{ $item->username }}</td>
+                        <td>{{ $item->name }}</td>
+                        @admin
+                        <td>{{ $item->department ? $item->department->department_name : '' }}</td>
+                        @endadmin
+                        <td>
+                          <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
+                            <i class="fas fa-eye"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    @endif
+                  @endforeach
+                  </tbody>
+                </table>
+              </div>
+              <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
         </div>
       </div>
       <div class="col-md-3 col-sm-6 col-12">
-        <div class="info-box bg-warning">
-          <span class="info-box-icon"><i class="fas fa-heartbeat"></i></span>
+        <a href="#" data-toggle="modal" data-target="#sudah-sakit">
+          <div class="info-box bg-warning">
+            <span class="info-box-icon"><i class="fas fa-heartbeat"></i></span>
 
-          <div class="info-box-content">
-            <span class="info-box-text">Sakit</span>
-            <span class="info-box-number">{{ $sakit }}</span>
+            <div class="info-box-content">
+              <span class="info-box-text">Sakit</span>
+              <span class="info-box-number">{{ $sakit }}</span>
 
-            <div class="progress">
-              <div class="progress-bar" style="width: {{ $sakit ?  round(($sakit / $sudah->count()) * 100, 1) : $sakit }}%"></div>
+              <div class="progress">
+                <div class="progress-bar" style="width: {{ $sakit ?  round(($sakit / $sudah->count()) * 100, 1) : $sakit }}%"></div>
+              </div>
+              <span class="progress-description">
+              {{ $sakit ?  round(($sakit / $sudah->count()) * 100, 1) : $sakit }}% Pegawai
+              </span>
             </div>
-            <span class="progress-description">
-            {{ $sakit ?  round(($sakit / $sudah->count()) * 100, 1) : $sakit }}% Pegawai
-            </span>
           </div>
+        </a>
+        <div class="modal fade" id="sudah-sakit">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Pegawai Sakit</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <table id="sudahSakit" class="table table-bordered table-striped" style="width: 100%">
+                  <thead>
+                  <tr>
+                    <th>Jam</th>
+                    <th>NIP</th>
+                    <th>Nama</th>
+                    @admin
+                    <th>Divisi</th>
+                    @endadmin
+                    <th>Kondisi</th>
+                    <th>View</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  @foreach($sudah as $item)
+                    @if($item->absenes->id_penyakit != 1)
+                      <tr>
+                        <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
+                        <td>{{ $item->username }}</td>
+                        <td>{{ $item->name }}</td>
+                        @admin
+                        <td>{{ $item->department ? $item->department->department_name : '' }}</td>
+                        @endadmin
+                        <td>{{ $item->disease->penyakit_name }}</td>
+                        <td>
+                          <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
+                            <i class="fas fa-eye"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    @endif
+                  @endforeach
+                  </tbody>
+                </table>
+              </div>
+              <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
         </div>
       </div>
     </div>
@@ -317,17 +483,17 @@
             <div class="modal-header">
               <h4 class="modal-title">Laporan Divisi</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
+                <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
               <table id="reportdep" class="table table-bordered table-striped" style="width: 100%">
                 <thead>
-                <tr>
-                  <th>Dapartment</th>
-                  <th>Jumlah</th>
-                  <th>Lapor</th>
-                </tr>
+                  <tr>
+                    <th>Dapartment</th>
+                    <th>Jumlah</th>
+                    <th>Lapor</th>
+                  </tr>
                 </thead>
                 <tbody>
                 @foreach($groupDepartment as $item)
@@ -339,10 +505,14 @@
                 </tbody>
               </table>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
             </div>
+          </div>
+          <!-- /.modal-content -->
         </div>
+        <!-- /.modal-dialog -->
       </div>
     </div>
     <div class="col-md-12">
@@ -371,7 +541,7 @@
             <div class="modal-header">
               <h4 class="modal-title">Kesehatan Divisi</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
+                <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
@@ -393,157 +563,18 @@
                 </tbody>
               </table>
             </div>
-            <div class="modal-footer no-print">
-              <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
             </div>
+          </div>
+          <!-- /.modal-content -->
         </div>
+        <!-- /.modal-dialog -->
       </div>
     </div>
   </div>
   @endadmin
-  @if (Auth::user()->role !== 3)
-    <div class="row no-print">
-      <div class="col-md-12">
-        <div class="card card-danger collapsed-card">
-          <div class="card-header">
-            <h3 class="card-title">Belum Lapor</h3>
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
-              </button>
-            </div>
-          </div>
-          <div class="card-body table-responsive">
-            <table id="belumT" class="table table-bordered table-striped" style="width: 100%">
-              <thead>
-              <tr>
-                <th>NIP</th>
-                <th>Nama Pegawai</th>
-                @admin
-                <th>Divisi</th>
-                @endadmin
-                <th>WA</th>
-                <th>Call</th>
-              </tr>
-              </thead>
-              <tbody>
-              @foreach($belum as $item)
-                <tr>
-                  <td>{{ $item->username }}</td>
-                  <td>{{ $item->name }}</td>
-                  @admin
-                  <td>{{ $item->department ? $item->department->department_name : '' }}</td>
-                  @endadmin
-                  <td>
-                    <a href="https://api.whatsapp.com/send?phone={{$item->phone}}&text=Segera%20laporkan%20kondisi%20kesehatan%20anda%20ke%20https://covid19.inkamultisolusi.co.id&source=&data=&app_absent=" type="button" class="btn btn-success btn-block">
-                      <i class="fab fa-whatsapp"></i>
-                    </a>
-                  </td>
-                  <td>
-                    <a href="tel:{{$item->phone}}" type="button" class="btn btn-danger btn-block">
-                      <i class="fa fa-phone"></i>
-                    </a>
-                  </td>
-                </tr>
-              @endforeach
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-12">
-        <div class="card card-success collapsed-card">
-          <div class="card-header">
-            <h3 class="card-title">Sudah Lapor Sehat</h3>
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
-              </button>
-            </div>
-          </div>
-          <div class="card-body">
-            <table id="sudahSehat" class="table table-bordered table-striped" style="width: 100%">
-              <thead>
-              <tr>
-                <th>Jam</th>
-                <th>NIP</th>
-                <th>Nama</th>
-                @admin
-                <th>Divisi</th>
-                @endadmin
-                <th>View</th>
-              </tr>
-              </thead>
-              <tbody>
-              @foreach($sudah as $item)
-                @if($item->absenes->id_penyakit == 1)
-                  <tr>
-                    <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
-                    <td>{{ $item->username }}</td>
-                    <td>{{ $item->name }}</td>
-                    @admin
-                    <td>{{ $item->department ? $item->department->department_name : '' }}</td>
-                    @endadmin
-                    <td>
-                      <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
-                        <i class="fas fa-eye"></i>
-                      </a>
-                    </td>
-                  </tr>
-                @endif
-              @endforeach
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-12">
-        <div class="card card-warning collapsed-card">
-          <div class="card-header">
-            <h3 class="card-title">Sudah Lapor Sakit</h3>
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
-              </button>
-            </div>
-          </div>
-          <div class="card-body">
-            <table id="sudahSakit" class="table table-bordered table-striped" style="width: 100%">
-              <thead>
-              <tr>
-                <th>Jam</th>
-                <th>NIP</th>
-                <th>Nama</th>
-                @admin
-                <th>Divisi</th>
-                @endadmin
-                <th>Kondisi</th>
-                <th>View</th>
-              </tr>
-              </thead>
-              <tbody>
-              @foreach($sudah as $item)
-                @if($item->absenes->id_penyakit != 1)
-                  <tr>
-                    <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
-                    <td>{{ $item->username }}</td>
-                    <td>{{ $item->name }}</td>
-                    @admin
-                    <td>{{ $item->department ? $item->department->department_name : '' }}</td>
-                    @endadmin
-                    <td>{{ $item->disease->penyakit_name }}</td>
-                    <td>
-                      <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
-                        <i class="fas fa-eye"></i>
-                      </a>
-                    </td>
-                  </tr>
-                @endif
-              @endforeach
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  @endif
 @endsection
 
 @section('css')
