@@ -280,7 +280,7 @@
                 </table>
               </div>
               <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
               </div>
             </div>
             <!-- /.modal-content -->
@@ -350,7 +350,7 @@
                 </table>
               </div>
               <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
               </div>
             </div>
             <!-- /.modal-content -->
@@ -422,8 +422,7 @@
                 </table>
               </div>
               <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
               </div>
             </div>
             <!-- /.modal-content -->
@@ -504,7 +503,7 @@
               </table>
             </div>
             <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -526,7 +525,7 @@
             <canvas id="kd" style="min-height: 300px; height: 400px; max-height: 300px; max-width: 100%;"></canvas>
           </div>
         </div>
-        <div class="card-footer">
+        <div class="card-footer no-print">
           <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#kesehatan-div">
             More Info
           </button>
@@ -561,7 +560,7 @@
               </table>
             </div>
             <div class="modal-footer justify-content-between">
-              <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
           </div>
           <!-- /.modal-content -->
