@@ -40,10 +40,13 @@
   }
   .modal-xl{
     max-width: 100%;
+    height: 100%;
     margin: 0;
   }
 
   .modal-content{
+    min-height: 100%;
+    height: auto;
     border-radius: 0;
   }
 

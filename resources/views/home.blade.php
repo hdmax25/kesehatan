@@ -265,7 +265,7 @@
                       <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                       @endadmin
                       <td>
-                        <a href="https://api.whatsapp.com/send?phone={{$item->phone}}&text=Segera%20laporkan%20kondisi%20kesehatan%20anda%20ke%20https://covid19.inkamultisolusi.co.id&source=&data=&app_absent=" type="button" class="btn btn-success btn-block">
+                        <a href="https://api.whatsapp.com/send?phone={{$item->phone}}&text=Segera%20laporkan%20kondisi%20kesehatan%20anda%20klik%20https://covid19.inkamultisolusi.co.id&source=&data=&app_absent=" type="button" class="btn btn-success btn-block">
                           <i class="fab fa-whatsapp"></i>
                         </a>
                       </td>
@@ -279,7 +279,7 @@
                   </tbody>
                 </table>
               </div>
-              <div class="modal-footer justify-content-between">
+              <div class="modal-footer float-right">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
               </div>
             </div>
@@ -349,7 +349,7 @@
                   </tbody>
                 </table>
               </div>
-              <div class="modal-footer justify-content-between">
+              <div class="modal-footer float-right">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
               </div>
             </div>
@@ -421,7 +421,7 @@
                   </tbody>
                 </table>
               </div>
-              <div class="modal-footer justify-content-between">
+              <div class="modal-footer float-right">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
               </div>
             </div>
@@ -502,7 +502,7 @@
                 </tbody>
               </table>
             </div>
-            <div class="modal-footer justify-content-between">
+            <div class="modal-footer float-right">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
           </div>
@@ -559,7 +559,7 @@
                 </tbody>
               </table>
             </div>
-            <div class="modal-footer justify-content-between">
+            <div class="modal-footer float-right">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
           </div>
