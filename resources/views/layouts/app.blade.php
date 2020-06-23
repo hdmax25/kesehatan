@@ -38,7 +38,11 @@
   .select2-selection__arrow {
     margin: 10px;
   }
-</style>
+
+  .modal-open .modal {
+    padding-right: 0px !important;
+  }
+  </style>
 <body class="sidebar-mini layout-fixed layout-navbar-fixed">
 <div id="app" class="wrapper">
   <!-- header -->

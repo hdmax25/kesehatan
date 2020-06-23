@@ -294,7 +294,7 @@
     <div class="col-md-12">
       <div class="card card-primary card-outline">
         <div class="card-header">
-          <h3 class="card-title">Divisi</h3>
+          <h3 class="card-title">Laporan Divisi</h3>
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
             </button>
@@ -302,75 +302,107 @@
         </div>
         <div class="card-body">
           <div class="chart">
-            <canvas id="kymk" style="min-height: 300px; height: 400px; max-height: 300px; max-width: 100%;"></canvas>
+            <canvas id="kymk" style="min-height: 300px; height: 300px; max-height: 100%; max-width: 100%;"></canvas>
           </div>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#laporan">
+            More Info
+          </button>
+        </div>
+      </div>
+      <div class="modal fade" id="laporan">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Laporan Divisi</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <table id="reportdep" class="table table-bordered table-striped" style="width: 100%">
+                <thead>
+                <tr>
+                  <th>Dapartment</th>
+                  <th>Jumlah</th>
+                  <th>Lapor</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($groupDepartment as $item)
+                  <tr>
+                    <td>{{$item->departmentName}}</td>
+                    <td>{{ $item->totalUser }}</td>
+                    <td>{{ $item->absens }}</td>
+                @endforeach
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
+            </div>
         </div>
       </div>
     </div>
     <div class="col-md-12">
-      <div class="card card-primary collapsed-card">
-        <div class="card-header">
-          <h3 class="card-title">Laporan Divisi</h3>
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
-            </button>
-          </div>
-        </div>
-        <div class="card-body">
-          <table id="reportdep" class="table table-bordered table-striped" style="width: 100%">
-            <thead>
-            <tr>
-              <th>Dapartment</th>
-              <th>Jumlah</th>
-              <th>Lapor</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($groupDepartment as $item)
-              <tr>
-                <td>{{$item->departmentName}}</td>
-                <td>{{ $item->totalUser }}</td>
-                <td>{{ $item->absens }}</td>
-            @endforeach
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <div class="card card-warning collapsed-card">
+      <div class="card card-primary card-outline">
         <div class="card-header">
           <h3 class="card-title">Kesehatan Divisi</h3>
           <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-plus"></i>
+            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
             </button>
           </div>
         </div>
         <div class="card-body">
-          <table id="kesehatan" class="table table-bordered table-striped" style="width: 100%">
-            <thead>
-            <tr>
-              <th>Dapartment</th>
-              <th>Sehat</th>
-              <th>Sakit</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($dataDepartment as $item)
-              <tr>
-                <td>{{$item->departmentName}}</td>
-                <td>{{ $item->sehat }}</td>
-                <td>{{ $item->sakit }}</td>
-            @endforeach
-            </tbody>
-          </table>
+          <div class="chart">
+            <canvas id="kd" style="min-height: 300px; height: 400px; max-height: 300px; max-width: 100%;"></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#kesehatan-div">
+            More Info
+          </button>
+        </div>
+      </div>
+      <div class="modal fade" id="kesehatan-div">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Kesehatan Divisi</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <table id="kesehatan" class="table table-bordered table-striped" style="width: 100%">
+                <thead>
+                <tr>
+                  <th>Dapartment</th>
+                  <th>Sehat</th>
+                  <th>Sakit</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($dataDepartment as $item)
+                  <tr>
+                    <td>{{$item->departmentName}}</td>
+                    <td>{{ $item->sehat }}</td>
+                    <td>{{ $item->sakit }}</td>
+                @endforeach
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
+            </div>
         </div>
       </div>
     </div>
   </div>
   @endadmin
   @if (Auth::user()->role !== 3)
-    <div class="row">
+    <div class="row no-print">
       <div class="col-md-12">
         <div class="card card-danger collapsed-card">
           <div class="card-header">
@@ -610,21 +642,21 @@
       });
 
       $('#reportdep').DataTable({
-        "paging": true,
+        "paging": false,
         "lengthChange": true,
-        "searching": true,
+        "searching": false,
         "ordering": true,
-        "info": true,
+        "info": false,
         "autoWidth": true,
         "responsive": true,
       });
 
       $('#kesehatan').DataTable({
-        "paging": true,
+        "paging": false,
         "lengthChange": true,
-        "searching": true,
+        "searching": false,
         "ordering": true,
-        "info": true,
+        "info": false,
         "autoWidth": true,
         "responsive": true,
       });
@@ -770,6 +802,68 @@
       })
     });
   </script>
+  <script>
+    $(function () {
+      let dataDepartment = {
+        labels: [
+          @foreach($dataDepartment as $id => $item)
+            '{{ $item->departmentName }}',
+          @endforeach
+        ],
+        datasets: [
+          {
+            label: 'Sehat',
+            backgroundColor: 'rgba(0, 230, 64, 1)',
+            borderColor: 'rgba(60,141,188,0.8)',
+            pointRadius: false,
+            pointColor: '#3b8bba',
+            pointStrokeColor: 'rgba(60,141,188,1)',
+            pointHighlightFill: '#fff',
+            pointHighlightStroke: 'rgba(60,141,188,1)',
+            data: [
+              @foreach($dataDepartment as $id => $item)
+              {{ $item->sehat }},
+              @endforeach
+            ]
+          },
+          {
+            label: 'Sakit',
+            backgroundColor: 'rgba(247, 202, 24, 1)',
+            borderColor: 'rgba(247, 202, 24, 1)',
+            pointRadius: false,
+            pointColor: 'rgba(247, 202, 24, 1)',
+            pointStrokeColor: '#c1c7d1',
+            pointHighlightFill: '#fff',
+            pointHighlightStroke: 'rgba(220,220,220,1)',
+            data: [
+              @foreach($dataDepartment as $id => $item)
+              {{ $item->sakit }},
+              @endforeach
+            ]
+          },
+        ]
+      }
+      //-------------
+      //- BAR CHART -
+      //-------------
+      let barChartCanvas = $('#kd').get(0).getContext('2d')
+      let barChartData = jQuery.extend(true, {}, dataDepartment)
+      barChartData.datasets[0] = dataDepartment.datasets[0]
+      barChartData.datasets[1] = dataDepartment.datasets[1]
+
+      let barChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        datasetFill: false
+      }
+
+      new Chart(barChartCanvas, {
+        type: 'bar',
+        data: barChartData,
+        options: barChartOptions
+      })
+    });
+  </script>
 
   <script>
     $(function () {
@@ -793,7 +887,7 @@
         ]
       }
       //-------------
-      //- PIE CHART -
+      //- Doughnut CHART -
       //-------------
       let pieChartCanvasGroupSehat = $('#pieChartGroupSehat').get(0).getContext('2d');
       new Chart(pieChartCanvasGroupSehat, {

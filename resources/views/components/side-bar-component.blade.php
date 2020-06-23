@@ -48,8 +48,8 @@
               <li class="nav-item">
                 <a href="{{ route('report.index') }}" class="nav-link {{ request()->is('report') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-file"></i>
-                  </p>
-                  Report
+                  <p>
+                    Report
                   </p>
                 </a>
               </li>
