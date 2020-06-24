@@ -44,7 +44,6 @@
             <li class="nav-item"><a class="nav-link {{ $errors->isEmpty() ? 'active' : '' }}" href="#timeline" data-toggle="tab"><i class="far fa-clock"></i> History</a></li>
             @if ( \Illuminate\Support\Facades\Auth::user()->username == $user->username)
               <li class="nav-item"><a class="nav-link {{ $errors->isEmpty() ? '' : 'active' }}" href="#settings" data-toggle="tab"><i class="far fa-edit"></i> Edit Profile</a></li>
-              <li class="nav-item"><a class="nav-link {{ $errors->isEmpty() ? '' : 'active' }}" href="#image" data-toggle="tab"><i class="fa fa-image"></i> Edit Foto</a></li>
             @endif
           </ul>
         </div>
@@ -79,6 +78,24 @@
             <div class="tab-pane {{ $errors->isEmpty() ? '' : 'active' }}" id="settings">
               <form class="form-horizontal" action="{{ route('user.updateProfile', $user->id) }}" method="post">
                 @csrf
+                <div class="form-group row">
+                  <div class="col-sm-12 text-center">
+                    <img class="profile-user-img img-fluid img-circle" src="http://127.0.0.1:8000/dist/img/avatar5.png" alt="User profile picture">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="name" class="col-sm-2 col-form-label">Foto</label>
+                  <div class="input-group col-sm-10">
+                    <div class="col-sm-10">
+                      <input type="file" class="custom-file-input" id="exampleInputFile">
+                      <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                    </div>
+                    <div class="input-group-append">
+                      <span class="input-group-text" id="">Upload</span>
+                    </div>
+                    <small>Abaikan jika tidak diubah</small>
+                  </div>
+                </div>
                 <div class="form-group row">
                   <label for="name" class="col-sm-2 col-form-label">Nama</label>
                   <div class="col-sm-10">
@@ -119,23 +136,6 @@
                 <div class="form-group row">
                   <div class="offset-sm-2 col-sm-10">
                     <button type="submit" class="btn btn-danger">Submit</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div class="tab-pane {{ $errors->isEmpty() ? '' : 'active' }}" id="image">
-              <form class="form-horizontal" action="{{ route('user.updateProfile', $user->id) }}" method="post">
-                @csrf
-                <div class="form-group row">
-                  <div class="col-sm-8 text-center">
-                    <img class="profile-user-img img-fluid img-circle" src="http://127.0.0.1:8000/dist/img/avatar5.png" alt="User profile picture">
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="customFile">
-                      <label class="custom-file-label" for="customFile">Pilih Foto</label>
-                    </div>
-                    <button type="submit" class="btn btn-danger btn-block">Submit</button>
                   </div>
                 </div>
               </form>
