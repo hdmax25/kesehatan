@@ -26,7 +26,7 @@
         <div class="card-header">
           <h3 class="card-title">Setting Tanggal</h3>
         </div>
-        <form action="{{ route('report.findSDM') }}" method="POST">
+        <form action="{{ Auth::user()->role == 1 ? route('report.findSDM') : route('report.findDevise') }}" method="POST">
           @csrf
           <div class="card-body">
             <div class="row">
