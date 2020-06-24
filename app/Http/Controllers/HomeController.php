@@ -103,15 +103,33 @@ class HomeController extends Controller
       ];
       return view('home', $data);
     } else if (Auth::user()->role == 2) {
+      $sehat = 0;
+      $sakit = 0;
+      $dataSakit = array();
       $validateToday = Report::where('id_user', Auth::user()->id)->whereDate('created_at', Carbon::now())->count();
       $disease = Penyakit::where('delete', 0)->get();
       $report = User::where('role', '!=', 1)->where('id_department', Auth::user()->id_department)->get();
       $report->map(function ($item) {
         $item->department = Departement::find($item->id_department);
         $item->absenes = Report::where('id_user', $item->id)->whereDate('created_at', Carbon::now())->first();
+        if ($item->absenes) {
+          $item->disease = Penyakit::find($item->absenes->id_penyakit);
+        } else {
+          $item->disease = null;
+        }
+        return $item;
       });
 
       $domicile = Report::where('id_user', Auth::user()->id)->orderBy('id', 'desc')->first();
+
+      foreach ($report->whereNotNull('absenes') as $item) {
+        if ($item->absenes->id_penyakit != 1) {
+          $dataSakit[Penyakit::find($item->absenes->id_penyakit)->penyakit_name] = $item->absenes->whereDate('created_at', Carbon::now())->where('id_penyakit', $item->absenes->id_penyakit)->count();
+          $sakit++;
+        } else {
+          $sehat++;
+        }
+      }
 
       $data = [
         'domicile' => $domicile,
