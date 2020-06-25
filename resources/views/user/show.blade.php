@@ -93,7 +93,7 @@
                     <div class="input-group-append">
                       <button type="submit" class="input-group-text">Upload</button>
                     </div>
-                    <small>Abaikan jika tidak diubah</small>
+                    <small>Max. 2Mb, disarankan srasio 1:1 Abaikan jika tidak diubah</small>
                   </div>
                 </div>
               </form>
