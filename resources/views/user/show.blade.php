@@ -76,26 +76,29 @@
               </div>
             </div>
             <div class="tab-pane {{ $errors->isEmpty() ? '' : 'active' }}" id="settings">
-              <form class="form-horizontal" action="{{ route('user.updateProfile', $user->id) }}" method="post">
+              <form action="{{ route('user.updateImage') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group row">
                   <div class="col-sm-12 text-center">
-                    <img class="profile-user-img img-fluid img-circle" src="http://127.0.0.1:8000/dist/img/avatar5.png" alt="User profile picture">
+                    <img id="imageView" class="profile-user-img img-fluid img-circle" src="{{ asset('dist/img/avatar5.png') }}" style="width: 100px;height: 100px;" alt="User profile picture">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="name" class="col-sm-2 col-form-label">Foto</label>
                   <div class="input-group col-sm-10">
                     <div class="col-sm-10">
-                      <input type="file" class="custom-file-input" id="exampleInputFile">
-                      <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                      <input type="file" class="custom-file-input @error('image') is-invalid @enderror" name="image" id="image">
+                      <label class="custom-file-label" for="image">Choose file</label>
                     </div>
                     <div class="input-group-append">
-                      <span class="input-group-text" id="">Upload</span>
+                      <button type="submit" class="input-group-text">Upload</button>
                     </div>
                     <small>Abaikan jika tidak diubah</small>
                   </div>
                 </div>
+              </form>
+              <form class="form-horizontal" action="{{ route('user.updateProfile', $user->id) }}" method="post">
+                @csrf
                 <div class="form-group row">
                   <label for="name" class="col-sm-2 col-form-label">Nama</label>
                   <div class="col-sm-10">
@@ -153,6 +156,8 @@
 @endsection
 
 @section('js')
+  <!-- bs-custom-file-input -->
+  <script src="{{ asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
   <!-- Toastr -->
   <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
 
@@ -178,10 +183,31 @@
       toastr.warning('{{ $message }}')
       @enderror
 
+      @error('image')
+      toastr.warning('{{ $message }}')
+      @enderror
+
       @if (\Session::has('message'))
       toastr.success('{{ \Session::get('message') }}')
       @endif
 
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+          let reader = new FileReader();
+
+          reader.onload = function (e) {
+            $('#imageView').attr('src', e.target.result);
+          }
+
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+
+      $("#image").change(function () {
+        readURL(this);
+        let fileName = $(this).val();
+        $(this).next('.custom-file-label').html(fileName);
+      });
     });
   </script>
 @endsection

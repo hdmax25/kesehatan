@@ -12,9 +12,13 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
+use mysql_xdevapi\Exception;
 
 class UserController extends Controller
 {
@@ -220,10 +224,35 @@ class UserController extends Controller
   }
 
   /**
+   * @param Request $request
+   * @return RedirectResponse
+   * @throws ValidationException
+   */
+  public function updateImage(Request $request): RedirectResponse
+  {
+    $this->validate($request, [
+      'image' => 'required|mimes:jpeg,png,jpg',
+    ]);
+
+    $user = Auth::user();
+    try {
+      File::delete('dist/img/user/' . $user->username . '.png');
+      $imageName = $user->name . '.png';
+    } catch (Exception $e) {
+      $imageName = $user->name . '.png';
+    }
+    //iki ojo bok hapus sek lek pomo butuh
+    //$imageName = $user->name . '.' . $request->image->extension();
+    $request->image->move('dist/img/user/', $imageName);
+
+    return redirect()->back();
+  }
+
+  /**
    * Remove the specified resource from storage.
    *
-   * @param Departement $departement
-   * @return Response
+   * @param $id
+   * @return void
    */
   public function destroy($id)
   {
