@@ -36,7 +36,8 @@ class User extends Authenticatable
     'role',
     'id_department',
     'phone',
-    'ktpaddress'
+    'ktpaddress',
+    'image'
   ];
 
   /**

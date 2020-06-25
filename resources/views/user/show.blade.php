@@ -76,7 +76,7 @@
               </div>
             </div>
             <div class="tab-pane {{ $errors->isEmpty() ? '' : 'active' }}" id="settings">
-              <form action="{{ route('user.updateImage') }}" method="post" enctype="multipart/form-data">
+              <form action="{{ route('user.updateImage', $user->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group row">
                   <div class="col-sm-12 text-center">

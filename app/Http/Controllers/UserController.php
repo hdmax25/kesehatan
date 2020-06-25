@@ -228,7 +228,7 @@ class UserController extends Controller
    * @return RedirectResponse
    * @throws ValidationException
    */
-  public function updateImage(Request $request): RedirectResponse
+  public function updateImage(Request $request, $id): RedirectResponse
   {
     $this->validate($request, [
       'image' => 'required|mimes:jpeg,png,jpg',
@@ -236,14 +236,17 @@ class UserController extends Controller
 
     $user = Auth::user();
     try {
-      File::delete('dist/img/user/' . $user->username . '.png');
-      $imageName = $user->name . '.png';
+      File::delete('dist/img/user/' . $user->username . '.jpg');
+      $imageName = $user->username . '.jpg';
     } catch (Exception $e) {
-      $imageName = $user->name . '.png';
+      $imageName = $user->username . '.jpg';
     }
     //iki ojo bok hapus sek lek pomo butuh
     //$imageName = $user->name . '.' . $request->image->extension();
     $request->image->move('dist/img/user/', $imageName);
+    $images = User::find($id);
+    $images->image = $request->$user->username . '.jpg';
+    $images->save();
 
     return redirect()->back();
   }

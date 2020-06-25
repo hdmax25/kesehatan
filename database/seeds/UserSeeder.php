@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
       'id_department' => '22',
       'phone' => '0',
       'ktpaddress' => 'Madiun',
+      'image' => '',
     ]);
 
     DB::table('users')->insert([
@@ -32,6 +33,7 @@ class UserSeeder extends Seeder
       'id_department' => '22',
       'phone' => '0',
       'ktpaddress' => 'Madiun',
+      'image' => '',
     ]);
 
     DB::table('users')->insert([
@@ -42,6 +44,7 @@ class UserSeeder extends Seeder
       'id_department' => '22',
       'phone' => '02',
       'ktpaddress' => 'Madiun',
+      'image' => '',
     ]);
   }
 }

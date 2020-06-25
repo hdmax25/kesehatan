@@ -33,7 +33,7 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], static function () {
   Route::get('/edit/{id}', 'UserController@edit')->name('edit')->middleware('auth', 'role:1');
   Route::post('/update/{id}', 'UserController@update')->name('update')->middleware('auth', 'role:1');
   Route::post('/profile/update/{id}', 'UserController@updateProfile')->name('updateProfile')->middleware('auth');
-  Route::post('/image/update', 'UserController@updateImage')->name('updateImage')->middleware('auth');
+  Route::post('/image/update/{id}', 'UserController@updateImage')->name('updateImage')->middleware('auth');
   Route::get('/destroy/{id}', 'UserController@destroy')->name('destroy')->middleware('auth', 'role:1');
 });
 
