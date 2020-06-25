@@ -231,22 +231,19 @@ class UserController extends Controller
   public function updateImage(Request $request, $id): RedirectResponse
   {
     $this->validate($request, [
-      'image' => 'required|mimes:jpeg,png,jpg',
+      'image' => 'required|mimes:jpeg,png,jpg,JPEG,PNG,JPG|max:2000' //max:2000 iki dadine 2MB,
     ]);
 
     $user = Auth::user();
     try {
-      File::delete('dist/img/user/' . $user->username . '.jpg');
-      $imageName = $user->username . '.jpg';
+      File::delete('dist/img/user/' . $user->username . '.png');
+      $imageName = $user->username . '.' . $request->image->extension();
     } catch (Exception $e) {
-      $imageName = $user->username . '.jpg';
+      $imageName = $user->username . '.' . $request->image->extension();
     }
-    //iki ojo bok hapus sek lek pomo butuh
-    //$imageName = $user->name . '.' . $request->image->extension();
     $request->image->move('dist/img/user/', $imageName);
-    $images = User::find($id);
-    $images->image = $request->$user->username . '.jpg';
-    $images->save();
+    $user->image = $imageName;
+    $user->save();
 
     return redirect()->back();
   }

@@ -16,7 +16,7 @@
       <div class="card card-danger card-outline">
         <div class="card-body box-profile">
           <div class="text-center">
-            <img class="profile-user-img img-fluid img-circle" src="{{ asset('dist/img/avatar5.png') }}" alt="User profile picture">
+            <img class="profile-user-img img-fluid img-circle" src="{{ Auth::user()->image ? asset('dist/img/user/'.Auth::user()->image) : asset('dist/img/avatar5.png') }}" alt="User profile picture">
           </div>
 
           <h3 class="profile-username text-center">{{ $user->name }}</h3>
@@ -80,7 +80,7 @@
                 @csrf
                 <div class="form-group row">
                   <div class="col-sm-12 text-center">
-                    <img id="imageView" class="profile-user-img img-fluid img-circle" src="{{ asset('dist/img/avatar5.png') }}" style="width: 100px;height: 100px;" alt="User profile picture">
+                    <img id="imageView" class="profile-user-img img-fluid img-circle" src="{{ Auth::user()->image ? asset('dist/img/user/'.Auth::user()->image) : asset('dist/img/avatar5.png') }}" alt="User profile picture">
                   </div>
                 </div>
                 <div class="form-group row">
