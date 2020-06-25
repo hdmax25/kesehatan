@@ -43,7 +43,7 @@
         <div class="row">
         <div class="col-8">
             <div class="icheck-danger">
-              <input type="checkbox" id="remember">
+              <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
               <label for="remember">
                 Remember Me
               </label>

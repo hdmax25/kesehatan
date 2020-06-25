@@ -217,7 +217,7 @@
         </div>
       </div>
       <div class="col-md-3 col-sm-6 col-12">
-        <a href="#" data-toggle="modal" data-target="#belum-lapor">
+        <a href="#" title="Click for details" data-toggle="modal" data-target="#belum-lapor">
           <div class="info-box bg-danger">
             <span class="info-box-icon"><i class="fa fa-users"></i></span>
 
@@ -289,7 +289,7 @@
         </div>
       </div>
       <div class="col-md-3 col-sm-6 col-12">
-        <a href="#" data-toggle="modal" data-target="#sudah-sehat">
+        <a href="#" title="Click for details" data-toggle="modal" data-target="#sudah-sehat">
           <div class="info-box bg-success">
             <span class="info-box-icon"><i class="fas fa-heartbeat"></i></span>
 
@@ -359,7 +359,7 @@
         </div>
       </div>
       <div class="col-md-3 col-sm-6 col-12">
-        <a href="#" data-toggle="modal" data-target="#sudah-sakit">
+        <a href="#" title="Click for details" data-toggle="modal" data-target="#sudah-sakit">
           <div class="info-box bg-warning">
             <span class="info-box-icon"><i class="fas fa-heartbeat"></i></span>
 
@@ -490,6 +490,7 @@
                     <th>Dapartment</th>
                     <th>Jumlah</th>
                     <th>Lapor</th>
+                    <th>%</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -498,6 +499,7 @@
                     <td>{{$item->departmentName}}</td>
                     <td>{{ $item->totalUser }}</td>
                     <td>{{ $item->absens }}</td>
+                    <td>{{ round($item->absens/$item->totalUser*100,1) }}%</td>
                 @endforeach
                 </tbody>
               </table>
