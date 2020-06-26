@@ -79,13 +79,12 @@
               <form action="{{ route('user.updateImage', $user->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group row">
-                  <div class="col-sm-12 text-center">
+                  <div class="col-sm-2 text-center">
                     <img id="imageView" class="profile-user-img img-fluid img-circle" src="{{ Auth::user()->image ? asset('dist/img/user/'.Auth::user()->image) : asset('dist/img/avatar5.png') }}" alt="User profile picture">
                   </div>
-                </div>
-                <div class="form-group row">
-                  <label for="name" class="col-sm-2 col-form-label">Foto</label>
                   <div class="col-sm-10">
+                    <label for="name">Foto</label>
+                    <small>Max. 2Mb, Disarankan rasio 1:1</small>
                     <div class="input-group">
                       <div class="custom-file">
                         <input type="file" class="custom-file-input @error('image') is-invalid @enderror" name="image" id="image" accept="image/*">
