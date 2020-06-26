@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use mysql_xdevapi\Exception;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class UserController extends Controller
 {
@@ -231,12 +232,12 @@ class UserController extends Controller
   public function updateImage(Request $request, $id): RedirectResponse
   {
     $this->validate($request, [
-      'image' => 'required|mimes:jpeg,png,jpg,JPEG,PNG,JPG|max:5120' //max:5120iki dadine 5 MB,
+      'image' => 'required|mimes:jpeg,png,jpg,JPEG,PNG,JPG|max:5120'
     ]);
 
     $user = Auth::user();
     try {
-      File::delete('dist/img/user/' . $user->username . '.png');
+      File::delete('dist/img/user/' . $user->image);
       $imageName = $user->username . '.' . $request->image->extension();
     } catch (Exception $e) {
       $imageName = $user->username . '.' . $request->image->extension();

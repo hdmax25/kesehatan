@@ -85,15 +85,16 @@
                 </div>
                 <div class="form-group row">
                   <label for="name" class="col-sm-2 col-form-label">Foto</label>
-                  <div class="input-group col-sm-10">
-                    <div class="col-sm-10">
-                      <input type="file" class="custom-file-input @error('image') is-invalid @enderror" name="image" id="image">
-                      <label class="custom-file-label" for="image">Choose file</label>
+                  <div class="col-sm-10">
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input @error('image') is-invalid @enderror" name="image" id="image" accept="image/*">
+                        <label class="custom-file-label" for="image">Choose file</label>
+                      </div>
+                      <div class="input-group-append">
+                        <button type="submit" class="input-group-text">Upload</button>
+                      </div>
                     </div>
-                    <div class="input-group-append">
-                      <button type="submit" class="input-group-text">Upload</button>
-                    </div>
-                    <small>Max. 2Mb, disarankan srasio 1:1 Abaikan jika tidak diubah</small>
                   </div>
                 </div>
               </form>
