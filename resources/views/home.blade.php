@@ -298,10 +298,10 @@
               <span class="info-box-number">{{ $sehat }}</span>
 
               <div class="progress">
-                <div class="progress-bar" style="width: {{ $sehat ? round(($sehat / ($belum->count() + $sudah->count())) * 100, 1) : $sehat }}%"></div>
+                <div class="progress-bar" style="width: {{ $sehat ? round(($sehat / $sudah->count()) * 100, 1) : $sehat }}%"></div>
               </div>
               <span class="progress-description">
-              {{ $sehat ? round(($sehat / ($belum->count() + $sudah->count())) * 100, 1) : $sehat }}% Pegawai
+              {{ $sehat ? round(($sehat / $sudah->count()) * 100, 1) : $sehat }}% Pegawai
               </span>
             </div>
           </div>
@@ -368,10 +368,10 @@
               <span class="info-box-number">{{ $sakit }}</span>
 
               <div class="progress">
-                <div class="progress-bar" style="width: {{ $sakit ?  round(($sakit / ($belum->count() + $sudah->count())) * 100, 1) : $sakit }}%"></div>
+                <div class="progress-bar" style="width: {{ $sakit ?  round(($sakit / $sudah->count()) * 100, 1) : $sakit }}%"></div>
               </div>
               <span class="progress-description">
-              {{ $sakit ?  round(($sakit / ($belum->count() + $sudah->count())) * 100, 1) : $sakit }}% Pegawai
+              {{ $sakit ?  round(($sakit / $sudah->count()) * 100, 1) : $sakit }}% Pegawai
               </span>
             </div>
           </div>
