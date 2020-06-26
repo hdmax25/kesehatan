@@ -54,6 +54,7 @@ Route::group(['prefix' => 'department', 'as' => 'department.'], static function 
 Route::group(['prefix' => 'report', 'as' => 'report.'], static function () {
   Route::get('/', 'ReportController@index')->name('index')->middleware('auth', 'role:1|2');
   Route::get('/export', 'ReportController@export')->name('export')->middleware('auth', 'role:1|2');
+  Route::get('/daily', 'ReportController@daily')->name('daily')->middleware('auth', 'role:1');
   Route::get('/exportkadiv', 'ReportController@exportkadiv')->name('exportkadiv')->middleware('auth', 'role:2');
   Route::post('/sdm', 'ReportController@findSDM')->name('findSDM')->middleware('auth', 'role:1|2');
   Route::post('/devise', 'ReportController@findDevise')->name('findDevise')->middleware('auth', 'role:1|2');
