@@ -31,13 +31,13 @@
             <thead>
             <tr>
               <th>Role</th>
-              <th>Foto</th>
+              <th class="no-print">Foto</th>
               <th>NIP</th>
               <th>Nama</th>
               <th>Divisi</th>
               <th>Phone</th>
               <th>Alamat</th>
-              <th>Edit</th>
+              <th class="no-print">Edit</th>
             </tr>
             </thead>
             <tbody>
@@ -50,7 +50,7 @@
               @else
               <td>User</td>
             @endif
-              <td>
+              <td class="no-print">
                 <img src="{{ $item->image ? asset('dist/img/user/'.$item->image) : asset('dist/img/avatar5.png') }}" class="profile-user-img img-circle">
               </td>
               <td>
@@ -60,7 +60,7 @@
               <td>{{ $item->department ? $item->department->department_name : '' }}</td>
               <td>{{ $item->phone }}</td>
               <td>{{ $item->ktpaddress }}</td>
-              <td>
+              <td class="no-print">
                 <a href="{{ route('user.edit', $item->id) }}" type="button" class="btn btn-primary btn-sm btn-block">
                   <i class="fas fa-edit"></i>
                 </a>
