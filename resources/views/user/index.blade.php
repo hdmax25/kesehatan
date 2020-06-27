@@ -31,12 +31,12 @@
             <thead>
             <tr>
               <th>Role</th>
+              <th>Foto</th>
               <th>NIP</th>
               <th>Nama</th>
               <th>Divisi</th>
               <th>Phone</th>
               <th>Alamat</th>
-              <th>View</th>
               <th>Edit</th>
             </tr>
             </thead>
@@ -50,16 +50,16 @@
               @else
               <td>User</td>
             @endif
-              <td>{{ $item->username }}</td>
+              <td>
+                <img src="{{ $item->image ? asset('dist/img/user/'.$item->image) : asset('dist/img/avatar5.png') }}" class="profile-user-img img-circle">
+              </td>
+              <td>
+                <a href="{{ route('user.show', $item->id) }}">{{ $item->username }}</a>
+              </td>
               <td>{{ $item->name }}</td>
               <td>{{ $item->department ? $item->department->department_name : '' }}</td>
               <td>{{ $item->phone }}</td>
               <td>{{ $item->ktpaddress }}</td>
-              <td>
-                <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-sm btn-block">
-                  <i class="fas fa-eye"></i>
-                </a>
-              </td>
               <td>
                 <a href="{{ route('user.edit', $item->id) }}" type="button" class="btn btn-primary btn-sm btn-block">
                   <i class="fas fa-edit"></i>
