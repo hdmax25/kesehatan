@@ -31,7 +31,6 @@
             <thead>
             <tr>
               <th>Role</th>
-              <th class="no-print">Foto</th>
               <th>NIP</th>
               <th>Nama</th>
               <th>Divisi</th>
@@ -50,9 +49,6 @@
               @else
               <td>User</td>
             @endif
-              <td class="no-print">
-                <img src="{{ $item->image ? asset('dist/img/user/'.$item->image) : asset('dist/img/avatar5.png') }}" class="profile-user-img img-circle">
-              </td>
               <td>
                 <a href="{{ route('user.show', $item->id) }}">{{ $item->username }}</a>
               </td>
