@@ -33,6 +33,9 @@
             <li class="list-group-item">
               <b>Alamat</b> <a class="float-right">{{ $user->ktpaddress }}</a>
             </li>
+            <li class="list-group-item">
+              <b>Domisili</b> <a class="float-right">{{ $domicile->domicile }}</a>
+            </li>
           </ul>
         </div>
       </div>

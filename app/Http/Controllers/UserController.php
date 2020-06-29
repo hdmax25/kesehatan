@@ -115,8 +115,10 @@ class UserController extends Controller
       $item->disease = Penyakit::find($item->id_penyakit);
       return $item;
     });
+    $domicile = Report::where('id_user', Auth::user()->id)->orderBy('id', 'desc')->first();
 
     $data = [
+      'domicile' => $domicile,
       'user' => $user,
       'report' => $report
     ];
