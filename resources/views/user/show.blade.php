@@ -33,9 +33,11 @@
             <li class="list-group-item">
               <b>Alamat</b> <a class="float-right">{{ $user->ktpaddress }}</a>
             </li>
+            @if ($user->ktpaddress !== $domicile->domicile)
             <li class="list-group-item">
               <b>Domisili</b> <a class="float-right">{{ old('domicile') ? old('domicile') : ($domicile ? $domicile->domicile : '')}}</a>
             </li>
+            @endif
           </ul>
         </div>
       </div>
