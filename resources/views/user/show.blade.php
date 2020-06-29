@@ -35,7 +35,7 @@
             </li>
             @if ($user->ktpaddress !== ($domicile ? $domicile->domicile : ''))
             <li class="list-group-item">
-              <b>Domisili</b> <a class="float-right">{{ $domicile ? $domicile->domicile : '' }}</a>
+              <b>Domisili</b> <a class="float-right">{{ $domicile ? $domicile->domicile : 'Belum di isi' }}</a>
             </li>
             @endif
           </ul>
