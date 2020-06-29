@@ -33,9 +33,9 @@
             <li class="list-group-item">
               <b>Alamat</b> <a class="float-right">{{ $user->ktpaddress }}</a>
             </li>
-            @if ($user->ktpaddress !== $domicile->domicile)
+            @if ($user->ktpaddress !== ($domicile ? $domicile->domicile : ''))
             <li class="list-group-item">
-              <b>Domisili</b> <a class="float-right">{{ old('domicile') ? old('domicile') : ($domicile ? $domicile->domicile : '')}}</a>
+              <b>Domisili</b> <a class="float-right">{{ $domicile ? $domicile->domicile : '' }}</a>
             </li>
             @endif
           </ul>
@@ -107,13 +107,13 @@
                 <div class="form-group row">
                   <label for="name" class="col-sm-2 col-form-label">Nama</label>
                   <div class="col-sm-10">
-                    <small>Awali dengan 62</small>
                     <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="" value="{{ old('name') ? old('name') : $user->name }}">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="phone" class="col-sm-2 col-form-label">Phone</label>
                   <div class="col-sm-10">
+                    <small>Wajid diawali dengan 62</small>
                     <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" placeholder="" value="{{ old('phone') ? old('phone') : $user->phone }}">
                   </div>
                 </div>
