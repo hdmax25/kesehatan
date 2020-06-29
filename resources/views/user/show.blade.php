@@ -34,7 +34,7 @@
               <b>Alamat</b> <a class="float-right">{{ $user->ktpaddress }}</a>
             </li>
             <li class="list-group-item">
-              <b>Domisili</b> <a class="float-right">{{ $domicile->domicile }}</a>
+              <b>Domisili</b> <a class="float-right">{{ old('domicile') ? old('domicile') : ($domicile ? $domicile->domicile : '')}}</a>
             </li>
           </ul>
         </div>
