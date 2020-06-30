@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="card-body table-responsive p-0">
-          <table class="table table-head-fixed">
+          <table class="table table-head-fixed table-bordered table-sm table-striped">
             <thead>
               <tr>
                 <th>Divisi</th>
@@ -65,7 +65,7 @@
           </div>
         </div>
         <div class="card-body table-responsive p-0">
-          <table class="table table-head-fixed">
+          <table class="table table-head-fixed table-bordered table-sm table-striped">
             <thead>
               <tr>
                 <th>Divisi</th>
@@ -99,7 +99,7 @@
           </div>
         </div>
         <div class="card-body table-responsive p-0">
-          <table class="table table-head-fixed">
+          <table class="table table-head-fixed table-bordered table-sm table-striped">
             <thead>
               <tr>
                 <th>Keluhan</th>
@@ -122,39 +122,6 @@
     <div class="col-12">
       <div class="card card-success card-outline">
         <div class="card-header">
-          <h3 class="card-title">Pegawai Tidak Lapor</h3>
-          <div class="card-tools no-print">
-            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-          </div>
-        </div>
-        <div class="card-body table-responsive p-0">
-          <table class="table table-head-fixed">
-            <thead>
-              <tr>
-                <th>NIP</th>
-                <th>Nama Pegawai</th>
-                <th>Divisi</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($belum as $item)
-                <tr>
-                  <td>{{ $item->username }}</td>
-                  <td>{{ $item->name }}</td>
-                  <td>{{ $item->department ? $item->department->department_name : '' }}</td>
-                </tr>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
-        <!-- /.card-body -->
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="card card-success card-outline">
-        <div class="card-header">
           <h3 class="card-title">Pegawai Sakit</h3>
           <div class="card-tools no-print">
             <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
@@ -163,7 +130,7 @@
           </div>
         </div>
         <div class="card-body table-responsive p-0">
-          <table class="table table-head-fixed">
+          <table class="table table-head-fixed table-bordered table-sm table-striped">
             <thead>
               <tr>
                 <th>Jam</th>
@@ -194,6 +161,39 @@
                     </td>
                   </tr>
                 @endif
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="card card-success card-outline">
+        <div class="card-header">
+          <h3 class="card-title">Pegawai Tidak Lapor</h3>
+          <div class="card-tools no-print">
+            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+          </div>
+        </div>
+        <div class="card-body table-responsive p-0">
+          <table class="table table-head-fixed table-bordered table-sm table-striped">
+            <thead>
+              <tr>
+                <th>NIP</th>
+                <th>Nama Pegawai</th>
+                <th>Divisi</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($belum as $item)
+                <tr>
+                  <td>{{ $item->username }}</td>
+                  <td>{{ $item->name }}</td>
+                  <td>{{ $item->department ? $item->department->department_name : '' }}</td>
+                </tr>
               @endforeach
             </tbody>
           </table>
