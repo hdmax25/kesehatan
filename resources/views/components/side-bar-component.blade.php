@@ -54,6 +54,14 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{ route('report.daily') }}" class="nav-link {{ request()->is('report.daily') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-file"></i>
+                  <p>
+                    Daily
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{ route('report.export') }}" class="nav-link {{ request()->is('export') ? 'active' : '' }}">
                   <i class="nav-icon fas fa-file-excel"></i>
                   <p>
@@ -65,8 +73,8 @@
           </li>
         @endif
         @admin
-        <li class="nav-item has-treeview {{ request()->is(['user', 'user/create']) ? 'menu-open' : '' }}">
-          <a href="#" class="nav-link {{ request()->is(['user', 'user/create']) ? 'active' : '' }}">
+        <li class="nav-item has-treeview {{ request()->is(['user', 'user/*']) ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ request()->is(['user', 'user/*']) ? 'active' : '' }}">
             <i class="nav-icon fas fa-users"></i>
             <p>
               Pegawai
@@ -78,7 +86,7 @@
               <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('user') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
-                  Daftar User
+                  Daftar Pegawai
                 </p>
               </a>
             </li>
@@ -86,7 +94,7 @@
               <a href="{{ route('user.create') }}" class="nav-link {{ request()->is('user/create') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-user-plus"></i>
                 <p>
-                  Tambah User
+                  Tambah Pegawai
                 </p>
               </a>
             </li>

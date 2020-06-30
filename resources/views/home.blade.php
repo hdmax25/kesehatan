@@ -388,36 +388,36 @@
               <div class="modal-body">
                 <table id="sudahSakit" class="table table-bordered table-striped" style="width: 100%">
                   <thead>
-                  <tr>
-                    <th>Jam</th>
-                    <th>NIP</th>
-                    <th>Nama</th>
-                    @admin
-                    <th>Divisi</th>
-                    @endadmin
-                    <th>Kondisi</th>
-                    <th>View</th>
-                  </tr>
+                    <tr>
+                      <th>Jam</th>
+                      <th>NIP</th>
+                      <th>Nama</th>
+                      @admin
+                      <th>Divisi</th>
+                      @endadmin
+                      <th>Kondisi</th>
+                      <th>View</th>
+                    </tr>
                   </thead>
                   <tbody>
-                  @foreach($sudah as $item)
-                    @if($item->absenes->id_penyakit != 1)
-                      <tr>
-                        <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
-                        <td>{{ $item->username }}</td>
-                        <td>{{ $item->name }}</td>
-                        @admin
-                        <td>{{ $item->department ? $item->department->department_name : '' }}</td>
-                        @endadmin
-                        <td>{{ $item->disease->penyakit_name }}</td>
-                        <td>
-                          <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
-                            <i class="fas fa-eye"></i>
-                          </a>
-                        </td>
-                      </tr>
-                    @endif
-                  @endforeach
+                    @foreach($sudah as $item)
+                      @if($item->absenes->id_penyakit != 1)
+                        <tr>
+                          <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
+                          <td>{{ $item->username }}</td>
+                          <td>{{ $item->name }}</td>
+                          @admin
+                          <td>{{ $item->department ? $item->department->department_name : '' }}</td>
+                          @endadmin
+                          <td>{{ $item->disease->penyakit_name }}</td>
+                          <td>
+                            <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
+                              <i class="fas fa-eye"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      @endif
+                    @endforeach
                   </tbody>
                 </table>
               </div>
@@ -494,13 +494,13 @@
                   </tr>
                 </thead>
                 <tbody>
-                @foreach($groupDepartment as $item)
-                  <tr>
-                    <td>{{$item->departmentName}}</td>
-                    <td>{{ $item->totalUser }}</td>
-                    <td>{{ $item->absens }}</td>
-                    <td>{{ round($item->absens/$item->totalUser*100,1) }}%</td>
-                @endforeach
+                  @foreach($groupDepartment as $item)
+                    <tr>
+                      <td>{{$item->departmentName}}</td>
+                      <td>{{ $item->totalUser }}</td>
+                      <td>{{ $item->absens }}</td>
+                      <td>{{ round($item->absens/$item->totalUser*100,1) }}%</td>
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -545,19 +545,19 @@
             <div class="modal-body">
               <table id="kesehatan" class="table table-bordered table-striped" style="width: 100%">
                 <thead>
-                <tr>
-                  <th>Dapartment</th>
-                  <th>Sehat</th>
-                  <th>Sakit</th>
-                </tr>
+                  <tr>
+                    <th>Dapartment</th>
+                    <th>Sehat</th>
+                    <th>Sakit</th>
+                  </tr>
                 </thead>
                 <tbody>
-                @foreach($dataDepartment as $item)
-                  <tr>
-                    <td>{{$item->departmentName}}</td>
-                    <td>{{ $item->sehat }}</td>
-                    <td>{{ $item->sakit }}</td>
-                @endforeach
+                  @foreach($dataDepartment as $item)
+                    <tr>
+                      <td>{{$item->departmentName}}</td>
+                      <td>{{ $item->sehat }}</td>
+                      <td>{{ $item->sakit }}</td>
+                  @endforeach
                 </tbody>
               </table>
             </div>

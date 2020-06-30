@@ -20,392 +20,185 @@
 
 @section('content')
   <div class="row">
-    <div class="col-sm-12">
-      <div class="form-group">
-        <label>Date:</label>
-          <div class="input-group date" id="reservationdate" data-target-input="nearest">
-              <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate">
-              <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                  <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-              </div>
-          </div>
-      </div>
-    </div>
-    <div class="col-md-3 col-sm-6 col-12">
-      <div class="info-box bg-primary">
-        <span class="info-box-icon"><i class="fa fa-users"></i></span>
-
-        <div class="info-box-content">
-          <span class="info-box-text">Jumlah Pegawai</span>
-          <span class="info-box-number">{{$belum->count() + $sudah->count()}}</span>
-
-          <div class="progress">
-            <div class="progress-bar" style="width: {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
-          </div>
-          <span class="progress-description">
-          {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}% Sudah Lapor
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3 col-sm-6 col-12">
-      <div class="info-box bg-danger">
-        <span class="info-box-icon"><i class="fa fa-users"></i></span>
-
-        <div class="info-box-content">
-          <span class="info-box-text">Belum  Lapor</span>
-          <span class="info-box-number">{{$belum->count()}}</span>
-
-          <div class="progress">
-            <div class="progress-bar" style="width: {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
-          </div>
-          <span class="progress-description">
-          {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3 col-sm-6 col-12">
-      <a href="#" title="Click for details" data-toggle="modal" data-target="#sudah-sehat">
-        <div class="info-box bg-success">
-          <span class="info-box-icon"><i class="fas fa-heartbeat"></i></span>
-
-          <div class="info-box-content">
-            <span class="info-box-text">Sehat</span>
-            <span class="info-box-number">{{ $sehat }}</span>
-
-            <div class="progress">
-              <div class="progress-bar" style="width: {{ $sehat ? round(($sehat / $sudah->count()) * 100, 1) : $sehat }}%"></div>
-            </div>
-            <span class="progress-description">
-            {{ $sehat ? round(($sehat / $sudah->count()) * 100, 1) : $sehat }}% Pegawai
-            </span>
-          </div>
-        </div>
-      </a>
-      <div class="modal fade" id="sudah-sehat">
-        <div class="modal-dialog modal-xl">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Pegawai Sehat</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <table id="sudahSehat" class="table table-bordered table-striped" style="width: 100%">
-                <thead>
-                <tr>
-                  <th>Jam</th>
-                  <th>NIP</th>
-                  <th>Nama</th>
-                  @admin
-                  <th>Divisi</th>
-                  @endadmin
-                  <th>View</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($sudah as $item)
-                  @if($item->absenes->id_penyakit == 1)
-                    <tr>
-                      <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
-                      <td>{{ $item->username }}</td>
-                      <td>{{ $item->name }}</td>
-                      @admin
-                      <td>{{ $item->department ? $item->department->department_name : '' }}</td>
-                      @endadmin
-                      <td>
-                        <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
-                          <i class="fas fa-eye"></i>
-                        </a>
-                      </td>
-                    </tr>
-                  @endif
-                @endforeach
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer float-right">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-    </div>
-    <div class="col-md-3 col-sm-6 col-12">
-      <a href="#" title="Click for details" data-toggle="modal" data-target="#sudah-sakit">
-        <div class="info-box bg-warning">
-          <span class="info-box-icon"><i class="fas fa-heartbeat"></i></span>
-
-          <div class="info-box-content">
-            <span class="info-box-text">Sakit</span>
-            <span class="info-box-number">{{ $sakit }}</span>
-
-            <div class="progress">
-              <div class="progress-bar" style="width: {{ $sakit ?  round(($sakit / $sudah->count()) * 100, 1) : $sakit }}%"></div>
-            </div>
-            <span class="progress-description">
-            {{ $sakit ?  round(($sakit / $sudah->count()) * 100, 1) : $sakit }}% Pegawai
-            </span>
-          </div>
-        </div>
-      </a>
-      <div class="modal fade" id="sudah-sakit">
-        <div class="modal-dialog modal-xl">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Pegawai Sakit</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <table id="sudahSakit" class="table table-bordered table-striped" style="width: 100%">
-                <thead>
-                <tr>
-                  <th>Jam</th>
-                  <th>NIP</th>
-                  <th>Nama</th>
-                  @admin
-                  <th>Divisi</th>
-                  @endadmin
-                  <th>Kondisi</th>
-                  <th>View</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($sudah as $item)
-                  @if($item->absenes->id_penyakit != 1)
-                    <tr>
-                      <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
-                      <td>{{ $item->username }}</td>
-                      <td>{{ $item->name }}</td>
-                      @admin
-                      <td>{{ $item->department ? $item->department->department_name : '' }}</td>
-                      @endadmin
-                      <td>{{ $item->disease->penyakit_name }}</td>
-                      <td>
-                        <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
-                          <i class="fas fa-eye"></i>
-                        </a>
-                      </td>
-                    </tr>
-                  @endif
-                @endforeach
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer float-right">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
+    <div class="col-12">
       <div class="card card-success card-outline">
         <div class="card-header">
-          <h3 class="card-title">Kesehatan</h3>
-        </div>
-        <div class="card-body">
-          <canvas id="pieChartGroupSehat" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card card-danger card-outline">
-        <div class="card-header">
           <h3 class="card-title">Keluhan</h3>
+          <div class="card-tools no-print">
+            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+          </div>
         </div>
-        <div class="card-body">
-          <canvas id="pieChartGroupPenyakit" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+        <div class="card-body table-responsive p-0">
+          <table class="table table-head-fixed">
+            <thead>
+              <tr>
+                <th>Keluhan</th>
+                <th>Jumlah</th>
+              </tr>
+            </thead>
+            <tbody>
+            @foreach($dataSakit as $id => $item)
+              <tr>
+                <td>{{ $id }}</td>
+                <td>{{ $item }}</td>
+              </tr>
+            @endforeach
+            </tbody>
+          </table>
         </div>
+        <!-- /.card-body -->
       </div>
     </div>
-    <div class="col-md-12">
-      <div class="card card-primary card-outline">
+    <div class="col-12">
+      <div class="card card-success card-outline">
         <div class="card-header">
           <h3 class="card-title">Laporan Divisi</h3>
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
-            </button>
+          <div class="card-tools no-print">
+            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
           </div>
         </div>
-        <div class="card-body">
-          <div class="chart">
-            <canvas id="kymk" style="min-height: 300px; height: 300px; max-height: 100%; max-width: 100%;"></canvas>
-          </div>
-        </div>
-        <div class="card-footer no-print">
-          <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#laporan">
-            More Info
-          </button>
-        </div>
-      </div>
-      <div class="modal fade" id="laporan">
-        <div class="modal-dialog modal-xl">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Laporan Divisi</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <table id="reportdep" class="table table-bordered table-striped" style="width: 100%">
-                <thead>
-                  <tr>
-                    <th>Dapartment</th>
-                    <th>Jumlah</th>
-                    <th>Lapor</th>
-                    <th>%</th>
-                  </tr>
-                </thead>
-                <tbody>
-                @foreach($groupDepartment as $item)
-                  <tr>
-                    <td>{{$item->departmentName}}</td>
-                    <td>{{ $item->totalUser }}</td>
-                    <td>{{ $item->absens }}</td>
-                    <td>{{ round($item->absens/$item->totalUser*100,1) }}%</td>
-                @endforeach
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer float-right">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-    </div>
-    <div class="col-md-12">
-      <div class="card card-primary card-outline">
-        <div class="card-header">
-          <h3 class="card-title">Kesehatan Divisi</h3>
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
-            </button>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="chart">
-            <canvas id="kd" style="min-height: 300px; height: 400px; max-height: 300px; max-width: 100%;"></canvas>
-          </div>
-        </div>
-        <div class="card-footer no-print">
-          <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#kesehatan-div">
-            More Info
-          </button>
-        </div>
-      </div>
-      <div class="modal fade" id="kesehatan-div">
-        <div class="modal-dialog modal-xl">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title">Kesehatan Divisi</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <table id="kesehatan" class="table table-bordered table-striped" style="width: 100%">
-                <thead>
+        <div class="card-body table-responsive p-0">
+          <table class="table table-head-fixed">
+            <thead>
+              <tr>
+                <th>Divisi</th>
+                <th>Jumlah</th>
+                <th>Lapor</th>
+                <th>%</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($groupDepartment as $item)
                 <tr>
-                  <th>Dapartment</th>
-                  <th>Sehat</th>
-                  <th>Sakit</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($dataDepartment as $item)
-                  <tr>
-                    <td>{{$item->departmentName}}</td>
-                    <td>{{ $item->sehat }}</td>
-                    <td>{{ $item->sakit }}</td>
-                @endforeach
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer float-right">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-          <!-- /.modal-content -->
+                  <td>{{$item->departmentName}}</td>
+                  <td>{{ $item->totalUser }}</td>
+                  <td>{{ $item->absens }}</td>
+                  <td>{{ round($item->absens/$item->totalUser*100,1) }}%</td>
+              @endforeach
+            </tbody>
+          </table>
         </div>
-        <!-- /.modal-dialog -->
+        <!-- /.card-body -->
       </div>
     </div>
-    <div class="col-md-12">
-      <div class="card card-primary card-outline">
-        <div class="card-header">
-          <h3 class="card-title">Tidak Lapor</h3>
-        </div>
-        <div class="card-body">
-        <table id="belumT" class="table table-bordered table-striped" style="width: 100%">
-          <thead>
-            <tr>
-              <th>NIP</th>
-              <th>Nama Pegawai</th>
-              <th>Divisi</th>
-            </tr>
-          </thead>
-          <tbody>
-          @foreach($belum as $item)
-            <tr>
-              <td>{{ $item->username }}</td>
-              <td>{{ $item->name }}</td>
-              <td>{{ $item->department ? $item->department->department_name : '' }}</td>
-            </tr>
-          @endforeach
-          </tbody>
-        </table>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <div class="card card-primary card-outline">
-        <div class="card-header">
-          <h3 class="card-title">Sehat</h3>
-        </div>
-        <div class="card-body">
-        </div>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <div class="card card-primary card-outline">
-        <div class="card-header">
-          <h3 class="card-title">Sakit</h3>
-        </div>
-        <div class="card-body">
-        </div>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <div class="card card-primary card-outline">
-        <div class="card-header">
-          <h3 class="card-title">Tidak Lapor</h3>
-        </div>
-        <div class="card-body">
-        </div>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <div class="card card-primary card-outline">
+    <div class="col-12">
+      <div class="card card-success card-outline">
         <div class="card-header">
           <h3 class="card-title">Kesehatan Divisi</h3>
+          <div class="card-tools no-print">
+            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+          </div>
         </div>
-        <div class="card-body">
+        <div class="card-body table-responsive p-0">
+          <table class="table table-head-fixed">
+            <thead>
+              <tr>
+                <th>Divisi</th>
+                <th>Sehat</th>
+                <th>Sakit</th>
+                <th>Kesehatan</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($dataDepartment as $item)
+                <tr>
+                  <td>{{$item->departmentName}}</td>
+                  <td>{{ $item->sehat }}</td>
+                  <td>{{ $item->sakit }}</td>
+                  <td>{{ round($item->sehat/($item->sehat+$item->sakit)*100,1) }}</td>
+              @endforeach
+            </tbody>
+          </table>
         </div>
+        <!-- /.card-body -->
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="card card-success card-outline">
+        <div class="card-header">
+          <h3 class="card-title">Pegawai Tidak Lapor</h3>
+          <div class="card-tools no-print">
+            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+          </div>
+        </div>
+        <div class="card-body table-responsive p-0">
+          <table class="table table-head-fixed">
+            <thead>
+              <tr>
+                <th>NIP</th>
+                <th>Nama Pegawai</th>
+                <th>Divisi</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($belum as $item)
+                <tr>
+                  <td>{{ $item->username }}</td>
+                  <td>{{ $item->name }}</td>
+                  <td>{{ $item->department ? $item->department->department_name : '' }}</td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="card card-success card-outline">
+        <div class="card-header">
+          <h3 class="card-title">Pegawai Sakit</h3>
+          <div class="card-tools no-print">
+            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+          </div>
+        </div>
+        <div class="card-body table-responsive p-0">
+          <table class="table table-head-fixed">
+            <thead>
+              <tr>
+                <th>Jam</th>
+                <th>NIP</th>
+                <th>Nama</th>
+                @admin
+                <th>Divisi</th>
+                @endadmin
+                <th>Kondisi</th>
+                <th>View</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($sudah as $item)
+                @if($item->absenes->id_penyakit != 1)
+                  <tr>
+                    <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
+                    <td>{{ $item->username }}</td>
+                    <td>{{ $item->name }}</td>
+                    @admin
+                    <td>{{ $item->department ? $item->department->department_name : '' }}</td>
+                    @endadmin
+                    <td>{{ $item->disease->penyakit_name }}</td>
+                    <td>
+                      <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
+                        <i class="fas fa-eye"></i>
+                      </a>
+                    </td>
+                  </tr>
+                @endif
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
       </div>
     </div>
   </div>
@@ -500,7 +293,7 @@
         "paging": false,
         "lengthChange": true,
         "searching": false,
-        "ordering": true,
+        "ordering": false,
         "info": true,
         "autoWidth": true,
         "responsive": true,
