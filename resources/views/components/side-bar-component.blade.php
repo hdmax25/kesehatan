@@ -53,6 +53,7 @@
                   </p>
                 </a>
               </li>
+              @admin
               <li class="nav-item">
                 <a href="{{ route('report.daily') }}" class="nav-link {{ request()->is('report/daily') ? 'active' : '' }}">
                   <i class="nav-icon fas fa-file"></i>
@@ -61,6 +62,7 @@
                   </p>
                 </a>
               </li>
+              @endadmin
               <li class="nav-item">
                 <a href="{{ route('report.export') }}" class="nav-link {{ request()->is('export') ? 'active' : '' }}">
                   <i class="nav-icon fas fa-file-excel"></i>
