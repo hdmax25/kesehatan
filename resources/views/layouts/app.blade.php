@@ -59,7 +59,7 @@
     .pagebreak { page-break-before: always; } /* page-break-after works, as well */
   }
   </style>
-<body class="sidebar-mini layout-fixed layout-navbar-fixed">
+<body class="sidebar-mini layout-navbar-fixed">
 <div id="app" class="wrapper">
   <!-- header -->
   <x-HeaderBarComponent/>
