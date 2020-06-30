@@ -23,37 +23,6 @@
     <div class="col-12">
       <div class="card card-success card-outline">
         <div class="card-header">
-          <h3 class="card-title">Keluhan</h3>
-          <div class="card-tools no-print">
-            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-          </div>
-        </div>
-        <div class="card-body table-responsive p-0">
-          <table class="table table-head-fixed">
-            <thead>
-              <tr>
-                <th>Keluhan</th>
-                <th>Jumlah</th>
-              </tr>
-            </thead>
-            <tbody>
-            @foreach($dataSakit as $id => $item)
-              <tr>
-                <td>{{ $id }}</td>
-                <td>{{ $item }}</td>
-              </tr>
-            @endforeach
-            </tbody>
-          </table>
-        </div>
-        <!-- /.card-body -->
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="card card-success card-outline">
-        <div class="card-header">
           <h3 class="card-title">Laporan Divisi</h3>
           <div class="card-tools no-print">
             <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
@@ -68,16 +37,16 @@
                 <th>Divisi</th>
                 <th>Jumlah</th>
                 <th>Lapor</th>
-                <th>%</th>
+                <th>Laporan</th>
               </tr>
             </thead>
             <tbody>
               @foreach($groupDepartment as $item)
                 <tr>
                   <td>{{$item->departmentName}}</td>
-                  <td>{{ $item->totalUser }}</td>
-                  <td>{{ $item->absens }}</td>
-                  <td>{{ round($item->absens/$item->totalUser*100,1) }}%</td>
+                  <td class="text-right">{{ $item->totalUser }}</td>
+                  <td class="text-right">{{ $item->absens }}</td>
+                  <td class="text-right">{{ round($item->absens/$item->totalUser*100,1) }}%</td>
               @endforeach
             </tbody>
           </table>
@@ -109,10 +78,41 @@
               @foreach($dataDepartment as $item)
                 <tr>
                   <td>{{$item->departmentName}}</td>
-                  <td>{{ $item->sehat }}</td>
-                  <td>{{ $item->sakit }}</td>
-                  <td>{{ round($item->sehat/($item->sehat+$item->sakit)*100,1) }}</td>
+                  <td class="text-right">{{ $item->sehat }}</td>
+                  <td class="text-right">{{ $item->sakit }}</td>
+                  <td class="text-right">{{ round($item->sehat/($item->sehat+$item->sakit)*100,1) }}%</td>
               @endforeach
+            </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="card card-success card-outline">
+        <div class="card-header">
+          <h3 class="card-title">Keluhan</h3>
+          <div class="card-tools no-print">
+            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+          </div>
+        </div>
+        <div class="card-body table-responsive p-0">
+          <table class="table table-head-fixed">
+            <thead>
+              <tr>
+                <th>Keluhan</th>
+                <th>Jumlah</th>
+              </tr>
+            </thead>
+            <tbody>
+            @foreach($dataSakit as $id => $item)
+              <tr>
+                <td>{{ $id }}</td>
+                <td class="text-right">{{ $item }}</td>
+              </tr>
+            @endforeach
             </tbody>
           </table>
         </div>
