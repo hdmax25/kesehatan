@@ -113,15 +113,15 @@
                 <div class="form-group row">
                   <label for="phone" class="col-sm-2 col-form-label">Phone</label>
                   <div class="col-sm-10">
-                    <small>Wajid diawali dengan 62</small>
+                    <small>WajiB diawali dengan 62</small>
                     <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" placeholder="" value="{{ old('phone') ? old('phone') : $user->phone }}">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="password" class="col-sm-2 col-form-label">Pasword</label>
                   <div class="col-sm-10">
-                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="" value="{{ old('password') }}">
                     <small>Kosongi jika tidak diubah</small>
+                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="" value="{{ old('password') }}">
                   </div>
                 </div>
                 <div class="form-group row">
