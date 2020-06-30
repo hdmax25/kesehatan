@@ -36,8 +36,8 @@
           </a>
         </li>
         @if (Auth::user()->role !== 3)
-          <li class="nav-item has-treeview {{ request()->is(['report', 'export']) ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ request()->is('report') ? 'active' : '' }}">
+          <li class="nav-item has-treeview {{ request()->is(['report', 'report/*']) ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->is(['report', 'report/*']) ? 'active' : '' }}">
               <i class="nav-icon fa far fa-copy"></i>
               <p>
                 Report
@@ -54,7 +54,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('report.daily') }}" class="nav-link {{ request()->is('report.daily') ? 'active' : '' }}">
+                <a href="{{ route('report.daily') }}" class="nav-link {{ request()->is('report/daily') ? 'active' : '' }}">
                   <i class="nav-icon fas fa-file"></i>
                   <p>
                     Daily
@@ -83,7 +83,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('user') ? 'active' : '' }}">
+              <a href="{{ route('user.index') }}" class="nav-link {{ request()->is(['user', 'user/edit/*']) ? 'active' : '' }}">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   Daftar Pegawai
