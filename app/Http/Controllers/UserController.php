@@ -240,9 +240,9 @@ class UserController extends Controller
     $user = Auth::user();
     try {
       File::delete('dist/img/user/' . $user->image);
-      $imageName = $user->username . '.' . $request->image->extension();
+      $imageName = $user->username . '.' . 'jpeg';
     } catch (Exception $e) {
-      $imageName = $user->username . '.' . $request->image->extension();
+      $imageName = $user->username . '.' . 'jpeg';
     }
     $request->image->move('dist/img/user/', $imageName);
     $user->image = $imageName;
