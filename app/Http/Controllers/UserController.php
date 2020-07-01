@@ -234,7 +234,7 @@ class UserController extends Controller
   public function updateImage(Request $request, $id): RedirectResponse
   {
     $this->validate($request, [
-      'image' => 'required|mimes:jpeg,png,jpg,JPEG,PNG,JPG|max:5120'
+      'image' => 'required|mimes:jpeg,png,jpg,JPEG,PNG,JPG|max:2000'
     ]);
 
     $user = Auth::user();
