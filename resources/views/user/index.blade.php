@@ -33,6 +33,7 @@
               <th>Role</th>
               <th>NIP</th>
               <th>Nama</th>
+              <th>Jabatan</th>
               <th>Divisi</th>
               <th>Phone</th>
               <th>Alamat</th>
@@ -42,17 +43,18 @@
             <tbody>
             @foreach($user as $item)
             <tr>
-            @if ($item->role == 1)
-              <td>Admin</td>
-              @elseif ($item->role == 2)
-              <td>Kadiv</td>
-              @else
-              <td>User</td>
-            @endif
+              @if ($item->role == 1)
+                <td>Admin</td>
+                @elseif ($item->role == 2)
+                <td>Kadiv</td>
+                @else
+                <td>User</td>
+              @endif
               <td>
                 <a href="{{ route('user.show', $item->id) }}">{{ $item->username }}</a>
               </td>
               <td>{{ $item->name }}</td>
+              <td>{{ $item->job }}</td>
               <td>{{ $item->department ? $item->department->department_name : '' }}</td>
               <td>{{ $item->phone }}</td>
               <td>{{ $item->ktpaddress }}</td>

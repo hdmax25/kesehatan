@@ -81,6 +81,7 @@ class UserController extends Controller
       'username' => 'required|numeric|unique:users',
       'password' => 'required|string',
       'name' => 'required|string',
+      'job' => 'required|string',
       'phone' => 'required|numeric',
       'address' => 'required|string',
       'role' => 'required|numeric',
@@ -94,6 +95,7 @@ class UserController extends Controller
     $user->phone = $request->phone;
     $user->ktpaddress = $request->address;
     $user->role = $request->role;
+    $user->job = $request->job;
     $user->save();
 
     return redirect()->route('user.create')->with(['message' => 'input data berhasil']);
@@ -157,6 +159,7 @@ class UserController extends Controller
       'department' => 'required|numeric|exists:departements,id',
       'password' => 'nullable|string',
       'name' => 'required|string',
+      'job' => 'required|string',
       'phone' => 'required|numeric',
       'address' => 'required|string',
       'role' => 'required|numeric',
@@ -177,6 +180,7 @@ class UserController extends Controller
     $user->phone = $request->phone;
     $user->ktpaddress = $request->address;
     $user->role = $request->role;
+    $user->job = $request->job;
     $user->save();
 
     return redirect()->route('user.edit', $user->id)->with(['message' => 'Input data berhasil']);

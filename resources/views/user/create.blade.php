@@ -58,6 +58,18 @@
               </select>
             </div>
             <div class="form-group">
+              <label for="department">Jabatan</label>
+              <select id="department" name="job" class="form-control @error('job') is-invalid @enderror select2 select2-danger" data-dropdown-css-class="select2-danger" required>
+                <option value="Direksi" {{ old('job') == 'Direksi' ? 'selected' : '' }}>Direksi</option>
+                <option value="Kadiv" {{ old('job') == 'Kadiv' ? 'selected' : '' }}>Kadiv</option>
+                <option value="Kadep" {{ old('job') == 'Kadep' ? 'selected' : '' }}>Kadep</option>
+                <option value="Kabag" {{ old('job') == 'Kabag' ? 'selected' : '' }}>Kabag</option>
+                <option value="Kasubag" {{ old('job') == 'Kasubag' ? 'selected' : '' }}>Kasubag</option>
+                <option value="Staff" {{ old('job') == 'Staff' ? 'selected' : '' }}>Staff</option>
+                <option value="Operator" {{ old('job') == 'Operator' ? 'selected' : '' }}>Operator</option>
+              </select>
+            </div>
+            <div class="form-group">
               <label for="phone">Phone</label>
               <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" placeholder="" value="{{ old('phone') }}">
             </div>
@@ -140,6 +152,10 @@
       @enderror
 
       @error('department')
+      toastr.warning('{{ $message }}')
+      @enderror
+
+      @error('job')
       toastr.warning('{{ $message }}')
       @enderror
 

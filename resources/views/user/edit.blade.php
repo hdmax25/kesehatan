@@ -51,11 +51,23 @@
               <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="" value="{{ old('name') ? old('name') : $user->name }}">
             </div>
             <div class="form-group">
-              <label for="department">Unit Kerja</label>
+              <label for="department">Divisi</label>
               <select id="department" name="department" class="form-control @error('department') is-invalid @enderror select2 select2-danger" data-dropdown-css-class="select2-danger" required>
                 @foreach($department as $item)
                   <option value="{{ $item->id }}" {{ old('role') == $item->id || $user->id_department == $item->id ? 'selected' : '' }}>{{ $item->department_name }}</option>
                 @endforeach
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="department">Jabatan</label>
+              <select id="job" name="job" class="form-control @error('job') is-invalid @enderror select2 select2-danger" data-dropdown-css-class="select2-danger" required>
+                <option value="Direksi" {{ old('job') == 'Direksi' || $user->job == 'Direksi' ? 'selected' : '' }}>Direksi</option>
+                <option value="Kadiv" {{ old('job') == 'Kadiv' || $user->job == 'Kadiv' ? 'selected' : '' }}>Kadiv</option>
+                <option value="Kadep" {{ old('job') == 'Kadep' || $user->job == 'Kadep' ? 'selected' : '' }}>Kadep</option>
+                <option value="Kabag" {{ old('job') == 'Kabag' || $user->job == 'Kabag' ? 'selected' : '' }}>Kabag</option>
+                <option value="Kasubag" {{ old('job') == 'Kasubag' || $user->job == 'Kasubag' ? 'selected' : '' }}>Kasubag</option>
+                <option value="Staff" {{ old('job') == 'Staff' || $user->job == 'Staff' ? 'selected' : '' }}>Staff</option>
+                <option value="Operator" {{ old('job') == 'Operator' || $user->job == 'Operator' ? 'selected' : '' }}>Operator</option>
               </select>
             </div>
             <div class="form-group">
@@ -141,6 +153,10 @@
       @enderror
 
       @error('department')
+      toastr.warning('{{ $message }}')
+      @enderror
+
+      @error('job')
       toastr.warning('{{ $message }}')
       @enderror
 
