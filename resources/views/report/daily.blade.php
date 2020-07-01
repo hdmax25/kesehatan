@@ -136,6 +136,7 @@
                 <th>Jam</th>
                 <th>NIP</th>
                 <th>Nama</th>
+                <th>Jabatan</th>
                 <th>Divisi</th>
                 <th>Kondisi</th>
               </tr>
@@ -146,6 +147,7 @@
                   <tr>
                     <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
                     <td>{{ $item->username }}</td>
+                    <td>{{ $item->job }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                     <td>{{ $item->disease->penyakit_name }}</td>
@@ -174,6 +176,7 @@
               <tr>
                 <th>NIP</th>
                 <th>Nama Pegawai</th>
+                <th>Jabatan</th>
                 <th>Divisi</th>
               </tr>
             </thead>
@@ -182,6 +185,7 @@
                 <tr>
                   <td>{{ $item->username }}</td>
                   <td>{{ $item->name }}</td>
+                  <td>{{ $item->job }}</td>
                   <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                 </tr>
               @endforeach
