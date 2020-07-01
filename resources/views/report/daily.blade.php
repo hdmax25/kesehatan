@@ -234,7 +234,7 @@
     @if (\Carbon\Carbon::now() < \Carbon\Carbon::parse("13:00:00"))
     $(function () {
       let remaining = new Date();
-      let target = "23";
+      let target = "13";
       if (remaining.getHours() > target) {
         let view = document.getElementById("checkedToday");
         view.innerHTML = '';
@@ -242,7 +242,7 @@
 
       setInterval(function () {
         let remaining = new Date();
-        let target = "23";
+        let target = "13";
         if (remaining.getHours() > target) {
           let view = document.getElementById("checkedToday");
           view.innerHTML = "";

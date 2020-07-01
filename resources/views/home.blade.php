@@ -45,7 +45,7 @@
 @section('content')
   @if (Auth::user()->role !== 1)
     @if (!$todayCheck)
-      @if (\Carbon\Carbon::now() < \Carbon\Carbon::parse("23:00:00"))
+      @if (\Carbon\Carbon::now() < \Carbon\Carbon::parse("13:00:00"))
         <div class="row">
           <div class="col-md-3">
             <div class="info-box">
@@ -614,7 +614,7 @@
     @if (\Carbon\Carbon::now() < \Carbon\Carbon::parse("13:00:00"))
     $(function () {
       let remaining = new Date();
-      let target = "23";
+      let target = "13";
       if (remaining.getHours() > target) {
         let view = document.getElementById("checkedToday");
         view.innerHTML = '';
@@ -622,7 +622,7 @@
 
       setInterval(function () {
         let remaining = new Date();
-        let target = "23";
+        let target = "13";
         if (remaining.getHours() > target) {
           let view = document.getElementById("checkedToday");
           view.innerHTML = "";
