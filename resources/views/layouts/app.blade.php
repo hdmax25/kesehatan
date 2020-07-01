@@ -55,7 +55,7 @@
     padding-right: 0px !important;
   }
   </style>
-<body class="sidebar-mini layout-navbar-fixed">
+<body class="sidebar-mini">
 <div id="app" class="wrapper">
   <!-- header -->
   <x-HeaderBarComponent/>
