@@ -249,6 +249,7 @@
                     <tr>
                       <th>NIP</th>
                       <th>Nama Pegawai</th>
+                      <th>Jabatan</th>
                       @admin
                       <th>Divisi</th>
                       @endadmin
@@ -261,6 +262,7 @@
                     <tr>
                       <td>{{ $item->username }}</td>
                       <td>{{ $item->name }}</td>
+                      <td><{{ $item->job }}</td>
                       @admin
                       <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                       @endadmin
@@ -322,6 +324,7 @@
                     <th>Jam</th>
                     <th>NIP</th>
                     <th>Nama</th>
+                    <th>Jabatan</th>
                     @admin
                     <th>Divisi</th>
                     @endadmin
@@ -335,6 +338,7 @@
                         <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
                         <td>{{ $item->username }}</td>
                         <td>{{ $item->name }}</td>
+                        <td>{{ $item->job }}</td>
                         @admin
                         <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                         @endadmin
@@ -392,6 +396,7 @@
                       <th>Jam</th>
                       <th>NIP</th>
                       <th>Nama</th>
+                      <th>Jabatan</th>
                       @admin
                       <th>Divisi</th>
                       @endadmin
@@ -406,6 +411,7 @@
                           <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
                           <td>{{ $item->username }}</td>
                           <td>{{ $item->name }}</td>
+                          <td>{{ $item->job }}</td>
                           @admin
                           <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                           @endadmin
