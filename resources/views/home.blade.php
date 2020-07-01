@@ -262,7 +262,7 @@
                     <tr>
                       <td>{{ $item->username }}</td>
                       <td>{{ $item->name }}</td>
-                      <td><{{ $item->job }}</td>
+                      <td>{{ $item->job }}</td>
                       @admin
                       <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                       @endadmin
