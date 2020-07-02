@@ -60,14 +60,14 @@
             <div class="form-group">
               <label for="department">Jabatan</label>
               <select id="department" name="job" class="form-control @error('job') is-invalid @enderror select2 select2-danger" data-dropdown-css-class="select2-danger" required>
-                <option value="Sementara" {{ old('job') == 'Sementara' ? 'selected' : '' }}>Sementara</option>
-                <option value="Direksi" {{ old('job') == 'Direksi' ? 'selected' : '' }}>Direksi</option>
-                <option value="Kadiv" {{ old('job') == 'Kadiv' ? 'selected' : '' }}>Kadiv</option>
-                <option value="Kadep" {{ old('job') == 'Kadep' ? 'selected' : '' }}>Kadep</option>
-                <option value="Kabag" {{ old('job') == 'Kabag' ? 'selected' : '' }}>Kabag</option>
-                <option value="Kasubag" {{ old('job') == 'Kasubag' ? 'selected' : '' }}>Kasubag</option>
-                <option value="Staff" {{ old('job') == 'Staff' ? 'selected' : '' }}>Staff</option>
-                <option value="Operator" {{ old('job') == 'Operator' ? 'selected' : '' }}>Operator</option>
+                <option value="SEMENTARA" {{ old('job') == 'SEMENTARA' ? 'selected' : '' }}>SEMENTARA</option>
+                <option value="DIREKSI" {{ old('job') == 'DIREKSI' ? 'selected' : '' }}>DIREKSI</option>
+                <option value="KADIV" {{ old('job') == 'KADIV' ? 'selected' : '' }}>KADIV</option>
+                <option value="KADEP" {{ old('job') == 'KADEP' ? 'selected' : '' }}>KADEP</option>
+                <option value="KABAG" {{ old('job') == 'KABAG' ? 'selected' : '' }}>KABAG</option>
+                <option value="KASUBAG" {{ old('job') == 'KASUBAG' ? 'selected' : '' }}>KASUBAG</option>
+                <option value="STAFF" {{ old('job') == 'STAFF' ? 'selected' : '' }}>STAFF</option>
+                <option value="OPERATOR" {{ old('job') == 'OPERATOR' ? 'selected' : '' }}>OPERATOR</option>
               </select>
             </div>
             <div class="form-group">
