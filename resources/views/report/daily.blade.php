@@ -19,6 +19,32 @@
 @endsection
 
 @section('content')
+<div class="row">
+    <div class="col-12 table-responsive">
+      <table class="table table-striped table-sm table-bordered text-center">
+        <thead>
+          <tr class="table-primary">
+            <th colspan="5">Data Kesehatan - PT INKA Multi Solusi</th>
+          </tr>
+          <tr>
+            <th style="width: 20%;">Pegawai</th>
+            <th style="width: 20%;">Sudah Lapor</th>
+            <th style="width: 20%;">Belum Lapor</th>
+            <th style="width: 20%;">Sehat</th>
+            <th style="width: 20%;">Sakit</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td>{{ $belum->count() + $sudah->count() }}</td>
+              <td>{{ $sudah->count() }}</td>
+              <td>{{ $belum->count() }}</td>
+              <td>{{ $sehat }}</td>
+              <td>{{ $sakit }}</td>
+        </tbody>
+      </table>
+    </div>
+  </div>
   <div class="row">
     <div class="col-12 table-responsive">
       <table class="table table-striped table-sm table-bordered">

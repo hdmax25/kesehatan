@@ -215,7 +215,7 @@ class ReportController extends Controller
       $report = User::where('role', '!=', 1)->get();
       $report->map(function ($item) {
         $item->department = Departement::find($item->id_department);
-        $item->absenes = Report::whereDate('created_at', Carbon::now())->where('id_user', $item->id)->orderBy('id', 'desc')->first();
+        $item->absenes = Report::whereDate('created_at', Carbon::now())->where('id_user', $item->id)->orderBy('id_department', 'desc')->first();
         if ($item->absenes) {
           $item->disease = Penyakit::find($item->absenes->id_penyakit);
         } else {
@@ -233,7 +233,7 @@ class ReportController extends Controller
         $item->notAbsens = 0;
         foreach ($item as $subItem) {
           $item->totalUser++;
-          $subItem->absenes = Report::where('id_user', $subItem->id)->whereDate('created_at', Carbon::now())->orderBy('id', 'desc')->first();
+          $subItem->absenes = Report::where('id_user', $subItem->id)->whereDate('created_at', Carbon::now())->orderBy('id_department', 'desc')->first();
           if ($subItem->absenes) {
             $item->absens++;
           } else {
