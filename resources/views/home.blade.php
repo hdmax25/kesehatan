@@ -204,8 +204,8 @@
           <span class="info-box-icon"><i class="fa fa-users"></i></span>
 
           <div class="info-box-content">
-            <span class="info-box-text">Jumlah Pegawai</span>
-            <span class="info-box-number">{{$belum->count() + $sudah->count()}}</span>
+            <span class="info-box-text">Sudah Lapor</span>
+            <span class="info-box-number">{{$sudah->count()}}/{{$belum->count() + $sudah->count()}}</span>
 
             <div class="progress">
               <div class="progress-bar" style="width: {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
@@ -223,7 +223,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Belum  Lapor</span>
-              <span class="info-box-number">{{$belum->count()}}</span>
+              <span class="info-box-number">{{$belum->count()}}/{{$sudah->count()+$belum->count()}}</span>
 
               <div class="progress">
                 <div class="progress-bar" style="width: {{ round($belum->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
