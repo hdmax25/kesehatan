@@ -34,7 +34,7 @@ class HomeController extends Controller
     if (Auth::user()->role == 1) {
       $department = Departement::where('delete', 0)->get();
       $disease = Penyakit::where('delete', 0)->get();
-      $report = User::where('role', '!=', 1)->get();
+      $report = User::where('role', '!=', 1)->where('delete', 0)->get();
       $report->map(function ($item) {
         $item->department = Departement::find($item->id_department);
         $item->absenes = Report::whereDate('created_at', Carbon::now())->where('id_user', $item->id)->orderBy('id', 'desc')->first();
@@ -46,7 +46,7 @@ class HomeController extends Controller
         return $item;
       });
 
-      $groupDepartment = User::where('role', '!=', 1)->get()->groupBy(function ($item) {
+      $groupDepartment = User::where('role', '!=', 1)->where('delete', 0)->get()->groupBy(function ($item) {
         return $item->id_department;
       })->map(function ($item, $id) {
         $item->departmentName = Departement::find($id)->department_name;
@@ -108,7 +108,7 @@ class HomeController extends Controller
       $dataSakit = array();
       $validateToday = Report::where('id_user', Auth::user()->id)->whereDate('created_at', Carbon::now())->count();
       $disease = Penyakit::where('delete', 0)->get();
-      $report = User::where('role', '!=', 1)->where('id_department', Auth::user()->id_department)->get();
+      $report = User::where('role', '!=', 1)->where('delete', 0)->where('id_department', Auth::user()->id_department)->get();
       $report->map(function ($item) {
         $item->department = Departement::find($item->id_department);
         $item->absenes = Report::where('id_user', $item->id)->whereDate('created_at', Carbon::now())->first();

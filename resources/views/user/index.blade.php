@@ -37,7 +37,7 @@
               <th>Divisi</th>
               <th>Phone</th>
               <th>Alamat</th>
-              <th class="no-print">Edit</th>
+              <th><i class="fas fa-trash-alt"></i></th>
             </tr>
             </thead>
             <tbody>
@@ -51,19 +51,15 @@
                 <td>User</td>
               @endif
               <td>
-                <a href="{{ route('user.show', $item->id) }}">{{ $item->username }}</a>
+                <a href="{{ route('user.edit', $item->id) }}"><i class="fas fa-edit"></i>{{ $item->username }}</a>
               </td>
-              <td>{{ $item->name }}</td>
+              <td><a href="{{ route('user.show', $item->id) }}">{{ $item->name }}</a></td>
               <td>{{ $item->job }}</td>
               <td>{{ $item->department ? $item->department->department_name : '' }}</td>
               <td>{{ $item->phone }}</td>
               <td>{{ $item->ktpaddress }}</td>
-              <td class="no-print">
-                <a href="{{ route('user.edit', $item->id) }}" type="button" class="btn btn-primary btn-sm btn-block">
-                  <i class="fas fa-edit"></i>
-                </a>
-              </td>
-            </tr>
+              <td><a href="{{ route('user.destroy', $item->id) }}"><i class="fas fa-trash-alt"></i></a></td>
+              </tr>
             @endforeach
             </tbody>
           </table>

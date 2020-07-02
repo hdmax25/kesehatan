@@ -40,7 +40,7 @@ class UserController extends Controller
    */
   public function index()
   {
-    $user = User::all();
+    $user = User::where('delete', 0)->get();
     $user->map(function ($item) {
       $item->department = Departement::find($item->id_department);
     });
@@ -263,6 +263,10 @@ class UserController extends Controller
    */
   public function destroy($id)
   {
-    //
+    $user = User::find($id);
+    $user->delete = 1;
+    $user->save();
+
+    return redirect()->back();
   }
 }

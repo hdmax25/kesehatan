@@ -212,7 +212,7 @@ class ReportController extends Controller
     $dataSakit = array();
       $department = Departement::where('delete', 0)->get();
       $disease = Penyakit::where('delete', 0)->get();
-      $report = User::where('role', '!=', 1)->get();
+      $report = User::where('role', '!=', 1)->where('delete', 0)->get();
       $report->map(function ($item) {
         $item->department = Departement::find($item->id_department);
         $item->absenes = Report::whereDate('created_at', Carbon::now())->where('id_user', $item->id)->orderBy('id_department', 'desc')->first();
@@ -224,7 +224,7 @@ class ReportController extends Controller
         return $item;
       });
 
-      $groupDepartment = User::where('role', '!=', 1)->get()->groupBy(function ($item) {
+      $groupDepartment = User::where('role', '!=', 1)->where('delete', 0)->get()->groupBy(function ($item) {
         return $item->id_department;
       })->map(function ($item, $id) {
         $item->departmentName = Departement::find($id)->department_name;
