@@ -93,8 +93,8 @@
               <tr>
                 <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
                 <td>{{ $item->username }}</td>
-                <td>{{ $item->job }}</td>
                 <td>{{ $item->name }}</td>
+                <td>{{ $item->job }}</td>
                 <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                 <td>{{ $item->disease->penyakit_name }}</td>
               </tr>
