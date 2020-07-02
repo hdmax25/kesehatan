@@ -60,6 +60,7 @@
             <div class="form-group">
               <label for="department">Jabatan</label>
               <select id="department" name="job" class="form-control @error('job') is-invalid @enderror select2 select2-danger" data-dropdown-css-class="select2-danger" required>
+                <option value="Sementara" {{ old('job') == 'Sementara' ? 'selected' : '' }}>Sementara</option>
                 <option value="Direksi" {{ old('job') == 'Direksi' ? 'selected' : '' }}>Direksi</option>
                 <option value="Kadiv" {{ old('job') == 'Kadiv' ? 'selected' : '' }}>Kadiv</option>
                 <option value="Kadep" {{ old('job') == 'Kadep' ? 'selected' : '' }}>Kadep</option>
