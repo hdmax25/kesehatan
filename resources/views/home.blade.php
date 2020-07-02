@@ -297,7 +297,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Sehat</span>
-              <span class="info-box-number">{{ $sehat }}</span>
+              <span class="info-box-number">{{ $sehat }}/{{$sudah->count()}}</span>
 
               <div class="progress">
                 <div class="progress-bar" style="width: {{ $sehat ? round(($sehat / $sudah->count()) * 100, 1) : $sehat }}%"></div>
@@ -369,7 +369,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text">Sakit</span>
-              <span class="info-box-number">{{ $sakit }}</span>
+              <span class="info-box-number">{{ $sakit }}/{{$sudah->count()}}</span>
 
               <div class="progress">
                 <div class="progress-bar" style="width: {{ $sakit ?  round(($sakit / $sudah->count()) * 100, 1) : $sakit }}%"></div>
