@@ -107,7 +107,12 @@
                 <div class="form-group row">
                   <label for="name" class="col-sm-2 col-form-label">Nama</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="" value="{{ old('name') ? old('name') : $user->name }}">
+                    <small>Ganti nama silakan
+                      <a href="https://api.whatsapp.com/send?phone=628980028222&text=Tolong%20ganti%20nama%20saya%21%0ANIP%20%3A%20{{ $user->username }}%0ANama%20Lama%20%3A%20{{ $user->name }}%0ANama%20Baru%20%3A&source=&data=&app_absent=" class="btn btn-block btn-success">
+                        <i class="fab fa-whatsapp mr-2"></i> Hubungi Admin
+                      </a>
+                    </small>
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="" value="{{ old('name') ? old('name') : $user->name }}" disabled>
                   </div>
                 </div>
                 <div class="form-group row">
