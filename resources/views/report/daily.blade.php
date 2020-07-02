@@ -20,180 +20,138 @@
 
 @section('content')
   <div class="row">
-    <div class="col-12">
-      <div class="card card-danger card-outline">
-        <div class="card-header">
-          <h3 class="card-title">Laporan Divisi</h3>
-          <div class="card-tools no-print">
-            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-          </div>
-        </div>
-        <div class="card-body table-responsive p-0">
-          <table class="table table-head-fixed table-bordered table-sm table-striped">
-            <thead>
-              <tr>
-                <th>Divisi</th>
-                <th>Jumlah</th>
-                <th>Lapor</th>
-                <th>Laporan</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($groupDepartment as $item)
-                <tr>
-                  <td>{{$item->departmentName}}</td>
-                  <td class="text-right">{{ $item->totalUser }}</td>
-                  <td class="text-right">{{ $item->absens }}</td>
-                  <td class="text-right">{{ round($item->absens/$item->totalUser*100,1) }}%</td>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
-        <!-- /.card-body -->
-      </div>
+    <div class="col-12 table-responsive">
+      <table class="table table-striped table-sm table-bordered">
+        <thead class="text-center">
+          <tr class="table-primary">
+            <th colspan="4">Laporan Divisi</th>
+          </tr>
+          <tr>
+            <th>Divisi</th>
+            <th>Jumlah</th>
+            <th>Lapor</th>
+            <th>Laporan</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($groupDepartment as $item)
+            <tr>
+              <td>{{$item->departmentName}}</td>
+              <td class="text-right">{{ $item->totalUser }}</td>
+              <td class="text-right">{{ $item->absens }}</td>
+              <td class="text-right">{{ round($item->absens/$item->totalUser*100,1) }}%</td>
+          @endforeach
+        </tbody>
+      </table>
     </div>
-    <div class="col-12">
-      <div class="card card-danger card-outline">
-        <div class="card-header">
-          <h3 class="card-title">Kesehatan Divisi</h3>
-          <div class="card-tools no-print">
-            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-          </div>
-        </div>
-        <div class="card-body table-responsive p-0">
-          <table class="table table-head-fixed table-bordered table-sm table-striped">
-            <thead>
-              <tr>
-                <th>Divisi</th>
-                <th>Sehat</th>
-                <th>Sakit</th>
-                <th>Kesehatan</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($dataDepartment as $item)
-                <tr>
-                  <td>{{$item->departmentName}}</td>
-                  <td class="text-right">{{ $item->sehat }}</td>
-                  <td class="text-right">{{ $item->sakit }}</td>
-                  <td class="text-right">{{ round($item->sehat/($item->sehat+$item->sakit)*100,1) }}%</td>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
-        <!-- /.card-body -->
-      </div>
+  </div>
+  <div class="row">
+    <div class="col-12 table-responsive">
+      <table class="table table-striped table-sm table-bordered">
+        <thead class="text-center">
+          <tr class="table-success">
+            <th colspan="4">Kesehatan Divisi</th>
+          </tr>
+          <tr>
+            <th>Divisi</th>
+            <th>Sehat</th>
+            <th>Sakit</th>
+            <th>Kesehatan</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($dataDepartment as $item)
+            <tr>
+              <td>{{$item->departmentName}}</td>
+              <td class="text-right">{{ $item->sehat }}</td>
+              <td class="text-right">{{ $item->sakit }}</td>
+              <td class="text-right">{{ round($item->sehat/($item->sehat+$item->sakit)*100,1) }}%</td>
+          @endforeach
+        </tbody>
+      </table>
     </div>
-    <div class="col-12">
-      <div class="card card-danger card-outline">
-        <div class="card-header">
-          <h3 class="card-title">Keluhan</h3>
-          <div class="card-tools no-print">
-            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-          </div>
-        </div>
-        <div class="card-body table-responsive p-0">
-          <table class="table table-head-fixed table-bordered table-sm table-striped">
-            <thead>
+  </div>
+  <div class="row">
+    <div class="col-12 table-responsive">
+      <table class="table table-striped table-sm table-bordered">
+        <thead class="text-center">
+          <tr class="table-warning">
+            <th colspan="6">Pegawai Sakit</th>
+          </tr>
+          <tr>
+            <th>Jam</th>
+            <th>NIP</th>
+            <th>Nama</th>
+            <th>Jabatan</th>
+            <th>Divisi</th>
+            <th>Kondisi</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($sudah as $item)
+            @if($item->absenes->id_penyakit != 1)
               <tr>
-                <th>Keluhan</th>
-                <th>Jumlah</th>
+                <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
+                <td>{{ $item->username }}</td>
+                <td>{{ $item->job }}</td>
+                <td>{{ $item->name }}</td>
+                <td>{{ $item->department ? $item->department->department_name : '' }}</td>
+                <td>{{ $item->disease->penyakit_name }}</td>
               </tr>
-            </thead>
-            <tbody>
-            @foreach($dataSakit as $id => $item)
-              <tr>
-                <td>{{ $id }}</td>
-                <td class="text-right">{{ $item }}</td>
-              </tr>
-            @endforeach
-            </tbody>
-          </table>
-        </div>
-        <!-- /.card-body -->
-      </div>
+            @endif
+          @endforeach
+        </tbody>
+      </table>
     </div>
-    <div class="col-12">
-      <div class="card card-danger card-outline">
-        <div class="card-header">
-          <h3 class="card-title">Pegawai Sakit</h3>
-          <div class="card-tools no-print">
-            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-          </div>
-        </div>
-        <div class="card-body table-responsive p-0">
-          <table class="table table-head-fixed table-bordered table-sm table-striped">
-            <thead>
-              <tr>
-                <th>Jam</th>
-                <th>NIP</th>
-                <th>Nama</th>
-                <th>Jabatan</th>
-                <th>Divisi</th>
-                <th>Kondisi</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($sudah as $item)
-                @if($item->absenes->id_penyakit != 1)
-                  <tr>
-                    <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
-                    <td>{{ $item->username }}</td>
-                    <td>{{ $item->job }}</td>
-                    <td>{{ $item->name }}</td>
-                    <td>{{ $item->department ? $item->department->department_name : '' }}</td>
-                    <td>{{ $item->disease->penyakit_name }}</td>
-                  </tr>
-                @endif
-              @endforeach
-            </tbody>
-          </table>
-        </div>
-        <!-- /.card-body -->
-      </div>
+  </div>
+  <div class="row">
+    <div class="col-12 table-responsive">
+      <table class="table table-striped table-sm table-bordered">
+        <thead class="text-center">
+          <tr class="table-warning">
+            <th colspan="2">Keluhan</th>
+          </tr>
+          <tr>
+            <th>Keluhan</th>
+            <th>Jumlah</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($dataSakit as $id => $item)
+            <tr>
+              <td>{{ $id }}</td>
+              <td class="text-right">{{ $item }}</td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
     </div>
-    <div class="col-12">
-      <div class="card card-danger card-outline">
-        <div class="card-header">
-          <h3 class="card-title">Pegawai Tidak Lapor</h3>
-          <div class="card-tools no-print">
-            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-          </div>
-        </div>
-        <div class="card-body table-responsive p-0">
-          <table class="table table-head-fixed table-bordered table-sm table-striped">
-            <thead>
-              <tr>
-                <th>NIP</th>
-                <th>Nama Pegawai</th>
-                <th>Jabatan</th>
-                <th>Divisi</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($belum as $item)
-                <tr>
-                  <td>{{ $item->username }}</td>
-                  <td>{{ $item->name }}</td>
-                  <td>{{ $item->job }}</td>
-                  <td>{{ $item->department ? $item->department->department_name : '' }}</td>
-                </tr>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
-        <!-- /.card-body -->
-      </div>
+  </div>
+  <div class="row">
+    <div class="col-12 table-responsive">
+      <table class="table table-striped table-sm table-bordered">
+        <thead class="text-center">
+          <tr class="table-danger">
+            <th colspan="4">Pegawai Tidak Lapor</th>
+          </tr>
+          <tr>
+            <th>NIP</th>
+            <th>Nama Pegawai</th>
+            <th>Jabatan</th>
+            <th>Divisi</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($belum as $item)
+            <tr>
+              <td>{{ $item->username }}</td>
+              <td>{{ $item->name }}</td>
+              <td>{{ $item->job }}</td>
+              <td>{{ $item->department ? $item->department->department_name : '' }}</td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
     </div>
   </div>
 @endsection
