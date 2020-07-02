@@ -50,13 +50,14 @@
       <table class="table table-striped table-sm table-bordered">
         <thead class="text-center">
           <tr class="table-primary">
-            <th colspan="4">Laporan Divisi</th>
+            <th colspan="5">Laporan Divisi</th>
           </tr>
           <tr>
             <th>Divisi</th>
             <th>Jumlah</th>
             <th>Lapor</th>
-            <th>Laporan</th>
+            <th>Tidak Lapor</th>
+            <th>% Lapor</th>
           </tr>
         </thead>
         <tbody>
@@ -65,6 +66,7 @@
               <td>{{$item->departmentName}}</td>
               <td class="text-right">{{ $item->totalUser }}</td>
               <td class="text-right">{{ $item->absens }}</td>
+              <td class="text-right">{{ $item->totalUser-$item->absens }}</td>
               <td class="text-right">{{ round($item->absens/$item->totalUser*100,1) }}%</td>
           @endforeach
         </tbody>
