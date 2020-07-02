@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->integer('id_department');
             $table->string('phone');
             $table->string('ktpaddress');
+            $table->string('image');
+            $table->string('job');
             $table->rememberToken();
             $table->timestamps();
             $table->integer('delete')->default(0);
