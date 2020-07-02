@@ -29,7 +29,7 @@
           <tr>
             <th style="width: 20%;">Pegawai</th>
             <th style="width: 20%;">Sudah Lapor</th>
-            <th style="width: 20%;">Belum Lapor</th>
+            <th style="width: 20%;">Tidak Lapor</th>
             <th style="width: 20%;">Sehat</th>
             <th style="width: 20%;">Sakit</th>
           </tr>
@@ -155,7 +155,7 @@
   </div>
   <div class="row">
     <div class="col-12 table-responsive">
-      <table class="table table-striped table-sm table-bordered">
+      <table id="belumT" class="table table-striped table-sm table-bordered" style="width: 100%!important;">
         <thead class="text-center">
           <tr class="table-danger">
             <th colspan="4">Pegawai Tidak Lapor</th>
@@ -271,8 +271,8 @@
         "paging": false,
         "lengthChange": true,
         "searching": false,
-        "ordering": false,
-        "info": true,
+        "ordering": true,
+        "info": false,
         "autoWidth": true,
         "responsive": true,
       });
