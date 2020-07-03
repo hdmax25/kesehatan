@@ -107,19 +107,19 @@
                 <div class="form-group row">
                   <label for="name" class="col-sm-2 col-form-label">Nama</label>
                   <div class="col-sm-10">
-                    <small>Ganti nama silakan
+                    <small>Ganti nama silakan 
                       <a href="https://api.whatsapp.com/send?phone=628980028222&text=Tolong%20ganti%20nama%20saya%21%0ANIP%20%3A%20{{ $user->username }}%0ANama%20Lama%20%3A%20{{ $user->name }}%0ANama%20Baru%20%3A&source=&data=&app_absent=">
                         <i class="fab fa-whatsapp mr-2"></i>Hubungi Admin
                       </a>
                     </small>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="" value="{{ old('name') ? old('name') : $user->name }}" disabled>
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="" style="text-transform:uppercase" value="{{ old('name') ? old('name') : $user->name }}" disabled>
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="phone" class="col-sm-2 col-form-label">Phone</label>
                   <div class="col-sm-10">
-                    <small>WajiB diawali dengan 62</small>
-                    <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" placeholder="" value="{{ old('phone') ? old('phone') : $user->phone }}">
+                    <small>Wajib diawali dengan 62</small>
+                    <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" placeholder="" style="text-transform:uppercase" value="{{ old('phone') ? old('phone') : $user->phone }}">
                   </div>
                 </div>
                 <div class="form-group row">
@@ -132,7 +132,7 @@
                 <div class="form-group row">
                   <label for="address" class="col-sm-2 col-form-label">Alamat</label>
                   <div class="col-sm-10">
-                    <textarea class="form-control @error('address') is-invalid @enderror" name="address" id="address" placeholder="Alamat">{{ old('address') ? old('address') : $user->ktpaddress }}</textarea>
+                    <textarea class="form-control @error('address') is-invalid @enderror" name="address" id="address" placeholder="Alamat" style="text-transform:uppercase">{{ old('address') ? old('address') : $user->ktpaddress }}</textarea>
                   </div>
                 </div>
                 <div class="form-group row">

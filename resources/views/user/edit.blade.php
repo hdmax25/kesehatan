@@ -48,7 +48,7 @@
             </div>
             <div class="form-group">
               <label for="name">Nama</label>
-              <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="" value="{{ old('name') ? old('name') : $user->name }}">
+              <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="" style="text-transform:uppercase" value="{{ old('name') ? old('name') : $user->name }}">
             </div>
             <div class="form-group">
               <label for="department">Divisi</label>
@@ -77,7 +77,7 @@
             </div>
             <div class="form-group">
               <label for="address">Alamat KTP</label>
-              <input type="text" class="form-control @error('address') is-invalid @enderror" placeholder="" name="address" id="address" value="{{ old('address') ? old('address') : $user->ktpaddress }}">
+              <input type="text" class="form-control @error('address') is-invalid @enderror" placeholder="" style="text-transform:uppercase" name="address" id="address" value="{{ old('address') ? old('address') : $user->ktpaddress }}">
             </div>
           </div>
 

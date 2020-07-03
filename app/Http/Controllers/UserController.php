@@ -201,12 +201,6 @@ class UserController extends Controller
     ]);
 
     $user = User::find($id);
-    if ($user->name != $request->name) {
-      $this->validate($request, [
-        'name' => 'required|string',
-      ]);
-      $user->name = $request->name;
-    }
     if ($request->password) {
       $this->validate($request, [
         'password' => 'nullable|string',

@@ -19,10 +19,11 @@ class UserSeeder extends Seeder
       'password' => Hash::make('admin'),
       'username' => 'admin',
       'role' => '1',
-      'id_department' => '22',
+      'id_department' => '1',
       'phone' => '0',
       'ktpaddress' => 'Madiun',
       'image' => '',
+      'job'=> '',
     ]);
 
     DB::table('users')->insert([
@@ -30,10 +31,11 @@ class UserSeeder extends Seeder
       'password' => Hash::make('admind'),
       'username' => 'admind',
       'role' => '2',
-      'id_department' => '22',
+      'id_department' => '1',
       'phone' => '0',
       'ktpaddress' => 'Madiun',
       'image' => '',
+      'job'=> '',
     ]);
 
     DB::table('users')->insert([
@@ -41,10 +43,11 @@ class UserSeeder extends Seeder
       'password' => Hash::make('user'),
       'username' => 'user',
       'role' => '3',
-      'id_department' => '22',
+      'id_department' => '1',
       'phone' => '02',
       'ktpaddress' => 'Madiun',
       'image' => '',
+      'job'=> '',
     ]);
   }
 }
