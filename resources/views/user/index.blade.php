@@ -28,7 +28,7 @@
         </div>
         <div class="card-body table-responsive table-sm">
           <table id="report" class="table table-bordered table-striped">
-            <thead>
+            <thead class="text-center">
             <tr>
               <th>Role</th>
               <th>NIP</th>
@@ -58,7 +58,7 @@
               <td>{{ $item->department ? $item->department->department_name : '' }}</td>
               <td>{{ $item->phone }}</td>
               <td>{{ $item->ktpaddress }}</td>
-              <td><a class="btn btn-danger btn-block btn-sm" data-toggle="modal" data-target="#modal-sm{{ $item->id }}"><i class="fas fa-trash-alt"></i></a></td>
+              <td><button class="btn btn-danger btn-block btn-sm" data-toggle="modal" data-target="#modal-sm{{ $item->id }}"><i class="fas fa-trash-alt"></i></button></td>
               </tr>
               <div class="modal fade" id="modal-sm{{ $item->id }}">
                 <div class="modal-dialog modal-sm">
