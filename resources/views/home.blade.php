@@ -493,7 +493,7 @@
               <table id="reportdep" class="table table-bordered table-striped" style="width: 100%">
                 <thead>
                   <tr>
-                    <th>Dapartment</th>
+                    <th>Divisi</th>
                     <th>Jumlah</th>
                     <th>Lapor</th>
                     <th>%</th>

@@ -24,9 +24,9 @@
     <div class="col-md-12">
       <div class="card card-outline card-danger">
         <div class="card-header">
-          <h3 class="card-title">Daftar User</h3>
+          <h3 class="card-title">Daftar Pegawai</h3>
         </div>
-        <div class="card-body table-responsive">
+        <div class="card-body table-responsive table-sm">
           <table id="report" class="table table-bordered table-striped">
             <thead>
             <tr>
@@ -58,8 +58,27 @@
               <td>{{ $item->department ? $item->department->department_name : '' }}</td>
               <td>{{ $item->phone }}</td>
               <td>{{ $item->ktpaddress }}</td>
-              <td><a href="{{ route('user.destroy', $item->id) }}"><i class="fas fa-trash-alt"></i></a></td>
+              <td><a class="btn btn-danger btn-block btn-sm" data-toggle="modal" data-target="#modal-sm{{ $item->id }}"><i class="fas fa-trash-alt"></i></a></td>
               </tr>
+              <div class="modal fade" id="modal-sm{{ $item->id }}">
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Kick Pegawai!!</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Yakin {{ $item->name }} mau di Kick??
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                      <button type="button" class="btn btn-success" data-dismiss="modal">Gak Jadi</button>
+                      <a class="btn btn-danger" href="{{ route('user.destroy', $item->id) }}">Iya</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             @endforeach
             </tbody>
           </table>

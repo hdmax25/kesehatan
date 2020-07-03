@@ -35,6 +35,7 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], static function () {
   Route::post('/profile/update/{id}', 'UserController@updateProfile')->name('updateProfile')->middleware('auth');
   Route::post('/image/update/{id}', 'UserController@updateImage')->name('updateImage')->middleware('auth');
   Route::get('/destroy/{id}', 'UserController@destroy')->name('destroy')->middleware('auth', 'role:1');
+  Route::get('/absent/{id}', 'UserController@absent')->name('absent')->middleware('auth', 'role:2|3');
 });
 
 Route::group(['prefix' => 'penyakit', 'as' => 'penyakit.'], static function () {

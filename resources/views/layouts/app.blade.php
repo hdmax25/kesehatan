@@ -55,7 +55,7 @@
     padding-right: 0px !important;
   }
   </style>
-<body class="sidebar-mini">
+<body class="sidebar-mini" onload="startTime()">
 <div id="app" class="wrapper">
   <!-- header -->
   <x-HeaderBarComponent/>

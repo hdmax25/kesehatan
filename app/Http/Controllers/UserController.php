@@ -151,7 +151,7 @@ class UserController extends Controller
    * @param Request $request
    * @param $id
    * @return RedirectResponse|Response
-   * @throws ValidationException
+   * @throws ValidationsException
    */
   public function update(Request $request, $id)
   {
@@ -247,6 +247,26 @@ class UserController extends Controller
     $user->save();
 
     return redirect()->back();
+  }
+
+  public function absent($id)
+  {
+    $user = User::find($id);
+    $user->department = Departement::find($user->id_department);
+
+    $report = Report::where('id_user', $id)->orderBy('id', 'desc')->take(30)->get();
+    $report->map(function ($item) {
+      $item->disease = Penyakit::find($item->id_penyakit);
+      return $item;
+    });
+    $domicile = Report::where('id_user', $id)->orderBy('id', 'desc')->first();
+
+    $data = [
+      'domicile' => $domicile,
+      'user' => $user,
+      'report' => $report
+    ];
+    return view('user.absent', $data);
   }
 
   /**
