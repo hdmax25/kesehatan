@@ -35,7 +35,14 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], static function () {
   Route::post('/profile/update/{id}', 'UserController@updateProfile')->name('updateProfile')->middleware('auth');
   Route::post('/image/update/{id}', 'UserController@updateImage')->name('updateImage')->middleware('auth');
   Route::get('/destroy/{id}', 'UserController@destroy')->name('destroy')->middleware('auth', 'role:1');
-  Route::get('/absent/{id}', 'UserController@absent')->name('absent')->middleware('auth', 'role:2|3');
+});
+
+Route::group(['prefix' => 'absent', 'as' => 'absent.'], static function () {
+  Route::get('/', 'AbsentController@index')->name('index')->middleware('auth', 'role:2|3');
+  Route::get('/show/{id}', 'AbsentController@show')->name('show')->middleware('auth');
+  Route::post('/store', 'AbsentController@store')->name('store')->middleware('auth', 'role:2|3');
+  Route::post('/update/{id}', 'AbsentController@update')->name('update')->middleware('auth', 'role:2|3');
+  Route::get('/destroy/{id}', 'AbsentController@destroy')->name('destroy')->middleware('auth', 'role:2|3');
 });
 
 Route::group(['prefix' => 'penyakit', 'as' => 'penyakit.'], static function () {

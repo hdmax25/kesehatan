@@ -120,7 +120,7 @@
         </li>
         @endadmin
         <li class="nav-item">
-          <a href="{{ route('user.absent', Auth::user()->id) }}" class="nav-link {{ request()->is('user/absent*') ? 'active' : '' }}"> 
+          <a href="{{ route('absent.show', Auth::user()->id) }}" class="nav-link {{ request()->is('absent/show/*') ? 'active' : '' }}"> 
             <i class="nav-icon far fa-clock"></i>
             <p>
               Absent

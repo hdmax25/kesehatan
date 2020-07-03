@@ -6,6 +6,7 @@ use App\model\Departement;
 use App\model\Penyakit;
 use App\model\Report;
 use App\User;
+use App\Absent;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -247,26 +248,6 @@ class UserController extends Controller
     $user->save();
 
     return redirect()->back();
-  }
-
-  public function absent($id)
-  {
-    $user = User::find($id);
-    $user->department = Departement::find($user->id_department);
-
-    $report = Report::where('id_user', $id)->orderBy('id', 'desc')->take(30)->get();
-    $report->map(function ($item) {
-      $item->disease = Penyakit::find($item->id_penyakit);
-      return $item;
-    });
-    $domicile = Report::where('id_user', $id)->orderBy('id', 'desc')->first();
-
-    $data = [
-      'domicile' => $domicile,
-      'user' => $user,
-      'report' => $report
-    ];
-    return view('user.absent', $data);
   }
 
   /**
