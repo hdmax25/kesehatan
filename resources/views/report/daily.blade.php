@@ -122,7 +122,7 @@
                 <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
                 <td>{{ $item->username }}</td>
                 <td>{{ $item->name }}</td>
-                <td>{{ $item->job }}</td>
+                <td>{{ {{ $item->job ? $item->job : "SEMENTARA" }} }}</td>
                 <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                 <td>{{ $item->disease->penyakit_name }}</td>
               </tr>
@@ -157,7 +157,7 @@
   </div>
   <div class="row">
     <div class="col-12 table-responsive">
-      <table id="belumT" class="table table-striped table-sm table-bordered" style="width: 100%!important;">
+      <table class="table table-striped table-sm table-bordered" style="width: 100%!important;">
         <thead class="text-center">
           <tr class="table-danger">
             <th colspan="4">Pegawai Tidak Lapor</th>
@@ -174,7 +174,7 @@
             <tr>
               <td>{{ $item->username }}</td>
               <td>{{ $item->name }}</td>
-              <td>{{ $item->job }}</td>
+              <td>{{ $item->job ? $item->job : "SEMENTARA" }}</td>
               <td>{{ $item->department ? $item->department->department_name : '' }}</td>
             </tr>
           @endforeach
@@ -221,26 +221,6 @@
   <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
 
   <script>
-    @if (\Carbon\Carbon::now() < \Carbon\Carbon::parse("13:00:00"))
-    $(function () {
-      let remaining = new Date();
-      let target = "13";
-      if (remaining.getHours() > target) {
-        let view = document.getElementById("checkedToday");
-        view.innerHTML = '';
-      }
-
-      setInterval(function () {
-        let remaining = new Date();
-        let target = "13";
-        if (remaining.getHours() > target) {
-          let view = document.getElementById("checkedToday");
-          view.innerHTML = "";
-        }
-      }, 1000);
-    })
-    @endif
-
     $(function () {
       //Date range picker
       $('#reservation').daterangepicker({
@@ -308,200 +288,7 @@
         "autoWidth": true,
         "responsive": true,
       });
-
-      //Initialize Select2 Elements
-      $('.select2').select2({width: 'resolve'});
-
-
-      @if (\Session::has('message'))
-      toastr.success('{{ \Session::get('message') }}')
-      @endif
     });
   </script>
 
-  <script>
-    $(function () {
-      let dataGroupDepartment = {
-        labels: [
-          @foreach($groupDepartment as $id => $item)
-            '{{ $item->departmentName }}',
-          @endforeach
-        ],
-        datasets: [
-          {
-            label: 'Jumlah Pegawai',
-            backgroundColor: 'rgba(60,141,188,0.9)',
-            borderColor: 'rgba(60,141,188,0.8)',
-            pointRadius: false,
-            pointColor: '#3b8bba',
-            pointStrokeColor: 'rgba(60,141,188,1)',
-            pointHighlightFill: '#fff',
-            pointHighlightStroke: 'rgba(60,141,188,1)',
-            data: [
-              @foreach($groupDepartment as $id => $item)
-              {{ $item->totalUser }},
-              @endforeach
-            ]
-          },
-          {
-            label: 'Sudah Lapor',
-            backgroundColor: 'rgba(210, 214, 222, 1)',
-            borderColor: 'rgba(210, 214, 222, 1)',
-            pointRadius: false,
-            pointColor: 'rgba(210, 214, 222, 1)',
-            pointStrokeColor: '#c1c7d1',
-            pointHighlightFill: '#fff',
-            pointHighlightStroke: 'rgba(220,220,220,1)',
-            data: [
-              @foreach($groupDepartment as $id => $item)
-              {{ $item->absens }},
-              @endforeach
-            ]
-          },
-        ]
-      }
-      //-------------
-      //- BAR CHART -
-      //-------------
-      let barChartCanvas = $('#kymk').get(0).getContext('2d')
-      let barChartData = jQuery.extend(true, {}, dataGroupDepartment)
-      barChartData.datasets[0] = dataGroupDepartment.datasets[0]
-      barChartData.datasets[1] = dataGroupDepartment.datasets[1]
-
-      let barChartOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
-        datasetFill: false
-      }
-
-      new Chart(barChartCanvas, {
-        type: 'bar',
-        data: barChartData,
-        options: barChartOptions
-      })
-    });
-  </script>
-  <script>
-    $(function () {
-      let dataDepartment = {
-        labels: [
-          @foreach($dataDepartment as $id => $item)
-            '{{ $item->departmentName }}',
-          @endforeach
-        ],
-        datasets: [
-          {
-            label: 'Sehat',
-            backgroundColor: 'rgba(0, 230, 64, 1)',
-            borderColor: 'rgba(60,141,188,0.8)',
-            pointRadius: false,
-            pointColor: '#3b8bba',
-            pointStrokeColor: 'rgba(60,141,188,1)',
-            pointHighlightFill: '#fff',
-            pointHighlightStroke: 'rgba(60,141,188,1)',
-            data: [
-              @foreach($dataDepartment as $id => $item)
-              {{ $item->sehat }},
-              @endforeach
-            ]
-          },
-          {
-            label: 'Sakit',
-            backgroundColor: 'rgba(247, 202, 24, 1)',
-            borderColor: 'rgba(247, 202, 24, 1)',
-            pointRadius: false,
-            pointColor: 'rgba(247, 202, 24, 1)',
-            pointStrokeColor: '#c1c7d1',
-            pointHighlightFill: '#fff',
-            pointHighlightStroke: 'rgba(220,220,220,1)',
-            data: [
-              @foreach($dataDepartment as $id => $item)
-              {{ $item->sakit }},
-              @endforeach
-            ]
-          },
-        ]
-      }
-      //-------------
-      //- BAR CHART -
-      //-------------
-      let barChartCanvas = $('#kd').get(0).getContext('2d')
-      let barChartData = jQuery.extend(true, {}, dataDepartment)
-      barChartData.datasets[0] = dataDepartment.datasets[0]
-      barChartData.datasets[1] = dataDepartment.datasets[1]
-
-      let barChartOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
-        datasetFill: false
-      }
-
-      new Chart(barChartCanvas, {
-        type: 'bar',
-        data: barChartData,
-        options: barChartOptions
-      })
-    });
-  </script>
-  <script>
-    $(function () {
-      let pieOptions = {
-        maintainAspectRatio: false,
-        responsive: true,
-      }
-
-      let donutDataGroupSehat = {
-        labels: [
-          'Sehat',
-          'Sakit'
-        ],
-        datasets: [
-          {
-            data: [
-              {{ $sehat }}, {{ $sakit }}
-            ],
-            backgroundColor: ['#00a65a', '#f39c12', '#f56954', '#00c0ef', '#3c8dbc', '#d2d6de'],
-          }
-        ]
-      }
-      //-------------
-      //- Doughnut CHART -
-      //-------------
-      let pieChartCanvasGroupSehat = $('#pieChartGroupSehat').get(0).getContext('2d');
-      new Chart(pieChartCanvasGroupSehat, {
-        type: 'doughnut',
-        data: donutDataGroupSehat,
-        options: pieOptions
-      })
-
-      //==============================================================================
-
-      let donutDataGroupPenyakit = {
-        labels: [
-          @foreach($dataSakit as $id => $item)
-            '{{ $id }}',
-          @endforeach
-        ],
-        datasets: [
-          {
-            data: [
-              @foreach($dataSakit as $id => $item)
-              {{ $item }},
-              @endforeach
-            ],
-            backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de', '#51ff0d', '#ffff00', '#00008b', '#ff0000'],
-          }
-        ]
-      }
-      //-------------
-      //- PIE CHART -
-      //-------------
-      let pieChartCanvasGroupPenyakit = $('#pieChartGroupPenyakit').get(0).getContext('2d');
-      new Chart(pieChartCanvasGroupPenyakit, {
-        type: 'pie',
-        data: donutDataGroupPenyakit,
-        options: pieOptions
-      })
-    });
-  </script>
 @endsection
