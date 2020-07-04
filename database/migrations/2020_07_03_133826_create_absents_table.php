@@ -15,6 +15,8 @@ class CreateAbsentsTable extends Migration
     {
         Schema::create('absents', function (Blueprint $table) {
             $table->id();
+            $table->integer('id_user');
+            $table->integer('attend');
             $table->timestamps();
         });
     }

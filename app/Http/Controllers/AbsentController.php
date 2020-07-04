@@ -2,27 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\model\Absent;
+use App\User;
 use App\model\Departement;
 use App\model\Penyakit;
 use App\model\Report;
-use App\User;
-use App\model\Absent;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\RedirectResponse;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\ValidationException;
-use Illuminate\View\View;
-use mysql_xdevapi\Exception;
-use Intervention\Image\ImageManagerStatic as Image;
 
-class UserController extends Controller
+class AbsentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -52,7 +41,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $absent = new Absent();
+        $absent->id_user =  Auth::user()->id;
+        $absent->attend =  0;
+        $absent->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -65,18 +59,14 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->department = Departement::find($user->id_department);
-
-        $report = Report::where('id_user', $id)->orderBy('id', 'desc')->take(30)->get();
-        $report->map(function ($item) {
-        $item->disease = Penyakit::find($item->id_penyakit);
-        return $item;
-        });
-        $domicile = Report::where('id_user', $id)->orderBy('id', 'desc')->first();
-
+        $validateToday = Absent::where('id_user', Auth::user()->id)->whereDate('created_at', Carbon::now())->count();
+        $absent = Absent::where('id_user', $id)->orderBy('created_at', 'desc')->take(30)->get();
+        $absentToday = Absent::where('id_user', Auth::user()->id)->orderBy('id', 'desc')->first();
         $data = [
-        'domicile' => $domicile,
-        'user' => $user,
-        'report' => $report
+          'user' => $user,
+          'absent' => $absent,
+          'todayCheck' => $validateToday,
+          'absentToday' => $absentToday,
         ];
         return view('absent.show', $data);
     }
@@ -99,9 +89,13 @@ class UserController extends Controller
      * @param  \App\Absent  $absent
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Absent $absent)
+    public function update(Request $request, $id)
     {
-        //
+        $absent = Absent::find($id);
+        $absent->attend = 1;
+        $absent->save();
+
+        return redirect()->back();
     }
 
     /**

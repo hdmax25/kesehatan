@@ -48,7 +48,6 @@
   .modal-content{
     min-height: 100%;
     height: auto;
-    border-radius: 0;
   }
 
   .modal-open .modal {

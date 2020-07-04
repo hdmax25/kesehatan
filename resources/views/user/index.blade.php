@@ -4,7 +4,7 @@
   <div class="row mb-2">
     <div class="col-sm-6">
       <h1>
-        Daftar User
+        Daftar Pegawai
       </h1>
     </div>
     <div class="col-sm-6">

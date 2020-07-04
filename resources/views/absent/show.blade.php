@@ -22,15 +22,6 @@
             <li class="list-group-item">
               <b>NIP</b> <a class="float-right">{{ $user->username }}</a>
             </li>
-            <!-- <li class="list-group-item">
-              <b>Nama</b> <a class="float-right">{{ $user->name }}</a>
-            </li>
-            <li class="list-group-item">
-              <b>Jabatan</b> <a class="float-right">{{ $user->job }}</a>
-            </li>
-            <li class="list-group-item">
-              <b>Divisi</b> <a class="float-right">{{ $user->department->department_name}}</a>
-            </li> -->
             <li class="list-group-item">
               <b>Phone</b> <a class="float-right">{{ $user->phone }}</a>
             </li>
@@ -38,7 +29,55 @@
               <b>Jam</b> <a class="float-right" id="clock"></a>
             </li>
           </ul>
-          <a href="#" class="btn btn-danger btn-block"><b>Masuk</b></a>
+          @if (!$todayCheck)
+            <button type="submit" class="btn btn-danger btn-block" data-toggle="modal" data-target="#masuk"><b>Masuk</b></button></a>
+            <div class="modal fade" id="masuk">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Masuk</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                      Pastikan posisi anda di Kantor/Workshop
+                  </div>
+                  <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Tidak</button>
+                    <form action="{{ route('absent.store') }}" method="post">
+                      @csrf
+                      <button type="submit" class="btn btn-danger btn-block"><b>Ya</b></button></a>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          @else
+            @if ($absentToday->attend == 0)
+              <a href="#" class="btn btn-danger btn-block" data-toggle="modal" data-target="#pulang"><b>Pulang</b></a>
+              <div class="modal fade" id="pulang">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Pulang</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Lelah usai kerja, bersukurlah. Karena diluar sana banyak yang lelah mencari kerja</p>
+                      <p>Selamat pulang Kak, Hati2 dijalan!!</p>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                      <button type="button" class="btn btn-success" data-dismiss="modal">Gak Jadi</button>
+                      <a href="{{ route('absent.update', $absentToday->id) }}" class="btn btn-warning">Iya</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            @endif
+          @endif
         </div>
       </div>
     </div>
@@ -48,21 +87,24 @@
           <h3 class="card-title">Absensi</h3>
         </div>
         <div class="card-body table-responsive p-0">
-          <table class="table table-hover text-nowrap table-sm">
-            <thead class="text-center">
-
+          <table class="table table-hover text-nowrap table-sm text-center">
+            <thead>
               <tr>
                 <th>Tanggal</th>
-                <th>Jam Masuk</th>
-                <th>Jam Keluar</th>
+                <th>Masuk</th>
+                <th>Keluar</th>
               </tr>
             </thead>
             <tbody>
+              @foreach($absent as $item)
                 <tr>
-                  <td>#</td>
-                  <td>#</td>
-                  <td>#</td>
+                  <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y') }}</td>
+                  <td>{{ \Carbon\Carbon::parse($item->created_at)->format('H:i:s') }}</td>
+                  @if ($item->attend == 1)
+                  <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('H:i:s') }}</td>
+                  @endif
                 </tr>
+              @endforeach
             </tbody>
           </table>
         </div>
