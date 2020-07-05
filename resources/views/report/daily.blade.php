@@ -157,7 +157,7 @@
   </div>
   <div class="row">
     <div class="col-12 table-responsive">
-      <table id="belumT" class="table table-striped table-sm table-bordered" style="width: 100%!important;">
+      <table class="table table-striped table-sm table-bordered" style="width: 100%!important;">
         <thead class="text-center">
           <tr class="table-danger">
             <th colspan="4">Pegawai Tidak Lapor</th>
@@ -292,6 +292,6 @@
   </script>
   <script type="text/javascript"> 
     window.addEventListener("load", window.print());
-  </script>
+  </script> 
 
 @endsection
