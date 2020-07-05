@@ -29,80 +29,78 @@
               <b>Jam</b> <a class="float-right" id="clock"></a>
             </li>
           </ul>
-          @if (!$todayCheck)
-            <button type="submit" class="btn btn-danger btn-block" data-toggle="modal" data-target="#masuk"><b>Masuk</b></button></a>
-            <div class="modal fade" id="masuk">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title">Masuk</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">×</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                      Pastikan posisi anda di Kantor/Workshop
-                  </div>
-                  <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Tidak</button>
-                    <form action="{{ route('absent.store') }}" method="post">
-                      @csrf
-                      <button type="submit" class="btn btn-danger btn-block"><b>Ya</b></button></a>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          @else
-            @if ($absentToday->attend == 0)
-              <a href="#" class="btn btn-danger btn-block" data-toggle="modal" data-target="#pulang"><b>Pulang</b></a>
-              <div class="modal fade" id="pulang">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 class="modal-title">Pulang</h4>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <p>Lelah usai kerja, bersukurlah. Karena diluar sana banyak yang lelah mencari kerja</p>
-                      <p>Selamat pulang Kak, Hati2 dijalan!!</p>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                      <button type="button" class="btn btn-success" data-dismiss="modal">Gak Jadi</button>
-                      <a href="{{ route('absent.update', $absentToday->id) }}" class="btn btn-warning">Iya</a>
+            @if ($checkToday < 2)
+              @if ($check == 0 || $check % 2 == 0)
+                <a href="#" class="btn btn-danger btn-block" data-toggle="modal" data-target="#masuk"><b>Masuk</b></button></a>
+                <div class="modal fade" id="masuk">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Masuk</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          Pastikan posisi anda di Kantor/Workshop
+                      </div>
+                      <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Tidak</button>
+                        <form action="{{ route('absent.store') }}" method="post">
+                          @csrf
+                          <button type="submit" class="btn btn-danger btn-block"><b>Ya</b></button></a>
+                        </form>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              @else
+                <a href="#" class="btn btn-danger btn-block" data-toggle="modal" data-target="#pulang"><b>Pulang</b></a>
+                <div class="modal fade" id="pulang">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Pulang</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Lelah usai kerja, bersukurlah. Karena diluar sana banyak yang lelah mencari kerja</p>
+                        <p>Selamat pulang Kak, Hati2 dijalan!!</p>
+                      </div>
+                      <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Gak Jadi</button>
+                        <a href="{{ route('absent.update') }}" class="btn btn-warning">Iya</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              @endif
             @endif
-          @endif
         </div>
       </div>
     </div>
     <div class="col-md-9">
       <div class="card card-danger card-outline">
         <div class="card-header">
-          <h3 class="card-title">Absensi</h3>
+          <h3 class="card-title">Attendance logs</h3>
         </div>
         <div class="card-body table-responsive p-0">
-          <table class="table table-hover text-nowrap table-sm text-center">
+          <table class="table table-hover text-nowrap table-sm text-center table-striped">
             <thead>
               <tr>
-                <th>Tanggal</th>
-                <th>Masuk</th>
-                <th>Keluar</th>
+                <th>#<th>
+                <th>Logs</th>
+                <th>Date and Time</th>
               </tr>
             </thead>
             <tbody>
               @foreach($absent as $item)
                 <tr>
-                  <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y') }}</td>
-                  <td>{{ \Carbon\Carbon::parse($item->created_at)->format('H:i:s') }}</td>
-                  @if ($item->attend == 1)
-                  <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('H:i:s') }}</td>
-                  @endif
+                  <td>{{ $loop->index + 1 }}<td>
+                  <td>{{ $item->attend == 0 ? 'In' : 'Out' }}</td>
+                  <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
                 </tr>
               @endforeach
             </tbody>

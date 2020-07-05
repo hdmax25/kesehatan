@@ -60,13 +60,15 @@ class AbsentController extends Controller
     {
         $user = User::find($id);
         $user->department = Departement::find($user->id_department);
-        $validateToday = Absent::where('id_user', Auth::user()->id)->whereDate('created_at', Carbon::now())->count();
+        $checkToday = Absent::where('id_user', Auth::user()->id)->whereDate('created_at', Carbon::now())->count();
+        $check = Absent::where('id_user', Auth::user()->id)->count();
         $absent = Absent::where('id_user', $id)->orderBy('created_at', 'desc')->take(30)->get();
         $absentToday = Absent::where('id_user', Auth::user()->id)->orderBy('id', 'desc')->first();
         $data = [
           'user' => $user,
           'absent' => $absent,
-          'todayCheck' => $validateToday,
+          'checkToday' => $checkToday,
+          'check' => $check,
           'absentToday' => $absentToday,
         ];
         return view('absent.show', $data);
@@ -90,10 +92,15 @@ class AbsentController extends Controller
      * @param  \App\Absent  $absent
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $absent = Absent::find($id);
+        /*$absent = Absent::find($id);
         $absent->attend = 1;
+        $absent->save();*/
+        $absent = new Absent();
+        $absent->id_user =  Auth::user()->id;
+        $absent->username_user =  Auth::user()->username;
+        $absent->attend =  1;
         $absent->save();
 
         return redirect()->back();

@@ -75,66 +75,68 @@
           </li>
         @endif
         @admin
-        <li class="nav-item has-treeview {{ request()->is(['user', 'user/*']) ? 'menu-open' : '' }}">
-          <a href="#" class="nav-link {{ request()->is(['user', 'user/*']) ? 'active' : '' }}">
-            <i class="nav-icon fas fa-users"></i>
-            <p>
-              Pegawai
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="{{ route('user.index') }}" class="nav-link {{ request()->is(['user', 'user/edit/*']) ? 'active' : '' }}">
-                <i class="nav-icon fas fa-users"></i>
-                <p>
-                  Daftar Pegawai
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('user.create') }}" class="nav-link {{ request()->is('user/create') ? 'active' : '' }}">
-                <i class="nav-icon fas fa-user-plus"></i>
-                <p>
-                  Tambah Pegawai
-                </p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a href="{{ route('department.index') }}" class="nav-link {{ request()->is('department') ? 'active' : '' }}">
-            <i class="nav-icon fa fa-building"></i>
-            <p>
-              Divisi
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{{ route('penyakit.index') }}" class="nav-link {{ request()->is('penyakit') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-heartbeat"></i>
-            <p>
-              Kondisi
-            </p>
-          </a>
-        </li>
+          <li class="nav-item has-treeview {{ request()->is(['user', 'user/*']) ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->is(['user', 'user/*']) ? 'active' : '' }}">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Pegawai
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('user.index') }}" class="nav-link {{ request()->is(['user', 'user/edit/*']) ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>
+                    Daftar Pegawai
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('user.create') }}" class="nav-link {{ request()->is('user/create') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-user-plus"></i>
+                  <p>
+                    Tambah Pegawai
+                  </p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('department.index') }}" class="nav-link {{ request()->is('department') ? 'active' : '' }}">
+              <i class="nav-icon fa fa-building"></i>
+              <p>
+                Divisi
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('penyakit.index') }}" class="nav-link {{ request()->is('penyakit') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-heartbeat"></i>
+              <p>
+                Kondisi
+              </p>
+            </a>
+          </li>
         @endadmin
-        <li class="nav-item">
-          <a href="{{ route('absent.show', Auth::user()->id) }}" class="nav-link {{ request()->is('absent/show/*') ? 'active' : '' }}"> 
-            <i class="nav-icon far fa-clock"></i>
-            <p>
-              Absent
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{{ route('user.show', Auth::user()->id) }}" class="nav-link {{ request()->is('user/show*') ? 'active' : '' }}"> 
-            <i class="nav-icon fas fa-user"></i>
-            <p>
-              Profile
-            </p>
-          </a>
-        </li>
+        @if (Auth::user()->role !== 1)
+          <li class="nav-item">
+            <a href="{{ route('absent.show', Auth::user()->id) }}" class="nav-link {{ request()->is('absent/show/*') ? 'active' : '' }}"> 
+              <i class="nav-icon far fa-clock"></i>
+              <p>
+                Absent
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('user.show', Auth::user()->id) }}" class="nav-link {{ request()->is('user/show*') ? 'active' : '' }}"> 
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Profile
+              </p>
+            </a>
+          </li>
+        @endif
         <li class="nav-item">
           <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="nav-link">
             <i class="nav-icon fas fa-power-off"></i>
