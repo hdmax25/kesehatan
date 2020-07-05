@@ -87,7 +87,7 @@
           <h3 class="card-title">Attendance log</h3>
         </div>
         <div class="card-body table-responsive p-0">
-          <table class="table table-hover text-nowrap table-sm text-centera">
+          <table class="table table-hover text-nowrap table-sm text-center">
             <thead>
               <tr>
                 <th>#<th>
