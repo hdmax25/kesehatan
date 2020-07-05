@@ -43,6 +43,7 @@ class AbsentController extends Controller
     {
         $absent = new Absent();
         $absent->id_user =  Auth::user()->id;
+        $absent->username_user =  Auth::user()->username;
         $absent->attend =  0;
         $absent->save();
 
