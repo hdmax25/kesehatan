@@ -29,7 +29,7 @@
               <b>Jam</b> <a class="float-right" id="clock"></a>
             </li>
           </ul>
-            @if ($checkToday < 2)
+            @if ($checkToday < 3)
               @if ($check == 0 || $check % 2 == 0)
                 <a href="#" class="btn btn-danger btn-block" data-toggle="modal" data-target="#masuk"><b>Masuk</b></button></a>
                 <div class="modal fade" id="masuk">
