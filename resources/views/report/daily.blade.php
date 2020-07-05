@@ -163,19 +163,19 @@
             <th colspan="4">Pegawai Tidak Lapor</th>
           </tr>
           <tr>
+            <th>Divisi</th>
+            <th>Jabatan</th>
             <th>NIP</th>
             <th>Nama Pegawai</th>
-            <th>Jabatan</th>
-            <th>Divisi</th>
           </tr>
         </thead>
         <tbody>
           @foreach($belum as $item)
             <tr>
+              <td>{{ $item->department ? $item->department->department_name : '' }}</td>
+              <td>{{ $item->job ? $item->job : "SEMENTARA" }}</td>
               <td>{{ $item->username }}</td>
               <td>{{ $item->name }}</td>
-              <td>{{ $item->job ? $item->job : "SEMENTARA" }}</td>
-              <td>{{ $item->department ? $item->department->department_name : '' }}</td>
             </tr>
           @endforeach
         </tbody>
