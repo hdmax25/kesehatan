@@ -45,11 +45,11 @@
                           Pastikan posisi anda di Kantor/Workshop
                       </div>
                       <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Tidak</button>
                         <form action="{{ route('absent.store') }}" method="post">
                           @csrf
-                          <button type="submit" class="btn btn-danger btn-block"><b>Ya</b></button></a>
+                          <button type="submit" class="btn btn-success btn-block"><b>Ya</b></button></a>
                         </form>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
                       </div>
                     </div>
                   </div>
@@ -70,8 +70,8 @@
                         <p>Selamat pulang Kak, Hati2 dijalan!!</p>
                       </div>
                       <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">Gak Jadi</button>
-                        <a href="{{ route('absent.update') }}" class="btn btn-warning">Iya</a>
+                        <a href="{{ route('absent.update') }}" class="btn btn-success">Ya</a>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Tidak</button>
                       </div>
                     </div>
                   </div>
@@ -84,14 +84,14 @@
     <div class="col-md-9">
       <div class="card card-danger card-outline">
         <div class="card-header">
-          <h3 class="card-title">Attendance logs</h3>
+          <h3 class="card-title">Attendance log</h3>
         </div>
         <div class="card-body table-responsive p-0">
-          <table class="table table-hover text-nowrap table-sm text-center table-striped">
+          <table class="table table-hover text-nowrap table-sm text-centera">
             <thead>
               <tr>
                 <th>#<th>
-                <th>Logs</th>
+                <th>Log</th>
                 <th>Date and Time</th>
               </tr>
             </thead>
