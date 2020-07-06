@@ -125,6 +125,7 @@
               <i class="nav-icon far fa-clock"></i>
               <p>
                 Absent
+                <span class="right badge badge-warning">Testing</span>
               </p>
             </a>
           </li>
