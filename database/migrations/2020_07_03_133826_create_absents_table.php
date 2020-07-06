@@ -18,6 +18,8 @@ class CreateAbsentsTable extends Migration
             $table->integer('id_user');
             $table->integer('username_user');
             $table->integer('attend');
+            $table->string('lat');
+            $table->string('long');
             $table->timestamps();
         });
     }

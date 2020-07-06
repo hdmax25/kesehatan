@@ -41,13 +41,19 @@ class AbsentController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'lat' => 'required|string',
+            'long' => 'required|string',
+          ]);
         $absent = new Absent();
         $absent->id_user =  Auth::user()->id;
         $absent->username_user =  Auth::user()->username;
         $absent->attend =  0;
+        $absent->lat =  substr($request->lat,0,8);
+        $absent->long =  substr($request->long,0,8);
         $absent->save();
 
-        return redirect()->back();
+        return redirect()->back()->with(['message' => 'Absen berhasil']);
     }
 
     /**
@@ -94,16 +100,19 @@ class AbsentController extends Controller
      */
     public function update(Request $request)
     {
-        /*$absent = Absent::find($id);
-        $absent->attend = 1;
-        $absent->save();*/
+        $this->validate($request, [
+            'lat' => 'required|string',
+            'long' => 'required|string',
+          ]);
         $absent = new Absent();
         $absent->id_user =  Auth::user()->id;
         $absent->username_user =  Auth::user()->username;
         $absent->attend =  1;
+        $absent->lat =  substr($request->lat,0,8);
+        $absent->long =  substr($request->long,0,8);
         $absent->save();
 
-        return redirect()->back();
+        return redirect()->back()->with(['message' => 'Absen berhasil']);
     }
 
     /**
