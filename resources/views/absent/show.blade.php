@@ -12,6 +12,13 @@
 
 @section('content')
   <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-warning alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h5><i class="icon fas fa-exclamation-triangle"></i> Beta Testing!</h5>
+        Menu ini masih dalam tahap beta testing, silakan dicoba dulu!
+      </div>
+    </div>
     <div class="col-md-3">
       <div class="card card-danger card-outline">
         <div class="card-body box-profile">
