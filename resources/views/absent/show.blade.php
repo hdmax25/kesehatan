@@ -12,19 +12,14 @@
 
 @section('content')
   <div class="row">
-    <div class="col-md-6">
-      <div class="alert alert-warning alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <h5><i class="icon fas fa-exclamation-triangle"></i> Beta Testing!</h5>
-        Menu ini masih dalam tahap beta testing, silakan dicoba dulu!
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="alert alert-info alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <h5><i class="icon fas fa-info"></i> Izinkan Akses Lokasi</h5>
-        Mohon Izinkan akses lokasi
-      </div>
+    <div class="col-md-12">
+      <a id="xx" href="#" onclick="getLocation()">
+        <div class="alert alert-info alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <h5><i class="icon fas fa-info"></i> Izinkan Akses Lokasi</h5>
+          Mohon Izinkan akses lokasi
+        </div>
+      </a>
     </div>
     <div class="col-md-3">
       <div class="card card-danger card-outline">
@@ -178,8 +173,9 @@
     }
     
     function showPosition(position) {
-      x.innerHTML = position.coords.latitude.toFixed(3);
-      y.innerHTML = position.coords.longitude.toFixed(3);
+      x.innerHTML = position.coords.latitude.toFixed(4);
+      y.innerHTML = position.coords.longitude.toFixed(4);
+      document.getElementById("xx").classList.add("d-none");
     }
     
     function showError(error) {
