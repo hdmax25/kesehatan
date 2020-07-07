@@ -17,7 +17,7 @@
         <div class="alert alert-info alert-dismissible">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
           <h5><i class="icon fas fa-info"></i> Izinkan Akses Lokasi</h5>
-          Mohon Izinkan akses lokasi, Klik disini untuk mengizinkan akses lokasi
+          Mohon Izinkan akses lokasi
         </div>
       </a>
     </div>
