@@ -49,8 +49,8 @@ class AbsentController extends Controller
         $absent->id_user =  Auth::user()->id;
         $absent->username_user =  Auth::user()->username;
         $absent->attend =  0;
-        $absent->lat =  substr($request->lat,0,8);
-        $absent->long =  substr($request->long,0,8);
+        $absent->lat =  $request->lat;
+        $absent->long =  $request->long;
         $absent->save();
 
         return redirect()->back()->with(['message' => 'Absen berhasil']);
@@ -100,18 +100,23 @@ class AbsentController extends Controller
      */
     public function update(Request $request)
     {
-        $this->validate($request, [
-            'lat' => 'required|string',
-            'long' => 'required|string',
-          ]);
-        $absent = new Absent();
-        $absent->id_user =  Auth::user()->id;
-        $absent->username_user =  Auth::user()->username;
-        $absent->attend =  1;
-        $absent->lat =  substr($request->lat,0,8);
-        $absent->long =  substr($request->long,0,8);
-        $absent->save();
+        $absentToday = Absent::where('id_user', Auth::user()->id)->orderBy('id', 'desc')->first();
+        $dateStart = Carbon::now()->subDays(7);
+        if ($absentToday < aaa) {
 
+        } else{
+            $this->validate($request, [
+                'lat' => 'required|string',
+                'long' => 'required|string',
+            ]);
+            $absent = new Absent();
+            $absent->id_user =  Auth::user()->id;
+            $absent->username_user =  Auth::user()->username;
+            $absent->attend =  1;
+            $absent->lat =  $request->lat;
+            $absent->long =  $request->long;
+            $absent->save();
+        }
         return redirect()->back()->with(['message' => 'Absen berhasil']);
     }
 

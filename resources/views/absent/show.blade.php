@@ -163,7 +163,8 @@
       return i;
     }
   </script>
-  
+  78.750
+  122850
   <script>
     var x = document.getElementById("lat");
     var y = document.getElementById("long");
@@ -177,8 +178,8 @@
     }
     
     function showPosition(position) {
-      x.innerHTML = position.coords.latitude;
-      y.innerHTML = position.coords.longitude;
+      x.innerHTML = position.coords.latitude.toFixed(3);
+      y.innerHTML = position.coords.longitude.toFixed(3);
     }
     
     function showError(error) {
