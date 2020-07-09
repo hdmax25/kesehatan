@@ -118,6 +118,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('site.index') }}" class="nav-link {{ request()->is('site') ? 'active' : '' }}">
+              <i class="nav-icon fa fa-map-marker"></i>
+              <p>
+                Sites
+              </p>
+            </a>
+          </li>
         @endadmin
         @if (Auth::user()->role !== 1)
           <li class="nav-item">

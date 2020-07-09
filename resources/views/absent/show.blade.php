@@ -13,34 +13,72 @@
 @section('content')
   <div class="row">
     <div class="col-md-12">
-      <a id="xx" href="#" onclick="getLocation()">
-        <div class="alert alert-info alert-dismissible">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-          <h5><i class="icon fas fa-info"></i> Izinkan Akses Lokasi</h5>
-          Mohon Izinkan akses lokasi
+      <div id="location" class="alert alert-warning">
+        <h5><i class="icon fas fa-info"></i> Perhatian</h5>
+          <span id="xx"></span>
+          <br><a id="infoLocations" href="#"data-toggle="modal" data-target="#info"></a>
+      </div>
+      <div class="modal fade" id="info">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Site List</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <table class="table table-hover table-sm">
+                <thead>
+                  <tr>
+                    <th>#<th>
+                    <th>Name</th>
+                    <th>Posisi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach($sites as $item)
+                    <tr>
+                      <td>{{ $item->id }}<td>
+                      <td>{{ $item->name }}</td>
+                      <td>{{ $item->latitude.', '.$item->longitude }}</td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
+              Silakan berpindah ke lokasi yang ditentukan, lalu klik refresh
+            </div>
+            <div class="modal-footer justify-content-between">
+              <a href="{{ route('absent.show', Auth::user()->id) }}" class="btn btn-success">Refresh</a>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+          </div>
         </div>
-      </a>
+      </div>
     </div>
     <div class="col-md-3">
       <div class="card card-danger card-outline">
         <div class="card-body box-profile">
-          <h3 class="profile-username text-center">{{ $user->name }}</h3>
+          <h3 class="profile-username text-center">{{ Auth::user()->name }}</h3>
 
-          <p class="text-muted text-center">{{ $user->job }} {{ $user->department->department_name}}</p>
+          <p class="text-muted text-center">{{ Auth::user()->job }} {{ $user->department->department_name }}</p>
           <ul class="list-group list-group-unbordered mb-3">
             <li class="list-group-item">
-              <b>NIP</b> <a class="float-right">{{ $user->username }}</a>
+              <b>NIP</b> <a class="float-right">{{ Auth::user()->username }}</a>
             </li>
             <li class="list-group-item">
-              <b>Phone</b> <a class="float-right">{{ $user->phone }}</a>
+              <b>Date</b> <a class="float-right">{{ \Carbon\Carbon::now()->format('d-m-Y') }}</a>
             </li>
             <li class="list-group-item">
-              <b>Jam</b> <a class="float-right" id="clock"></a>
+              <b>Time</b> <a class="float-right" id="clock"></a>
+            </li>
+            <li id="locContainer" class="list-group-item">
+              <b>Location</b> <a class="float-right" id="loc"></a>
             </li>
           </ul>
             @if ($checkToday < 99)
               @if ($check == 0 || $check % 2 == 0)
-                <a href="#" onclick="getLocation()" class="btn btn-danger btn-block" data-toggle="modal" data-target="#masuk"><b>Masuk</b></button></a>
+                <a href="#" id="show" class="btn btn-danger btn-block" data-toggle="modal" data-target="#masuk"><b>Masuk</b></button></a>
                 <div class="modal fade" id="masuk">
                   <div class="modal-dialog">
                     <div class="modal-content">
@@ -53,9 +91,8 @@
                       <form action="{{ route('absent.store') }}" method="post">
                         @csrf
                         <div class="modal-body">
-                            <p>Pastikan posisi anda di Kantor/Workshop</p>
-                            <textarea class="d-none" id="lat" name="lat" style="display: none;" maxlength="8"></textarea>
-                            <textarea class="d-none" id="long" name="long" style="display: none;" maxlength="8"></textarea>
+                            <p>Selamat bekerja gaes...</p>
+                            <input id="site" name="location" value="" type="hidden">
                         </div>
                         <div class="modal-footer justify-content-between">
                           <button type="submit" class="btn btn-success">Ya</button>
@@ -66,7 +103,7 @@
                   </div>
                 </div>
               @else
-                <a href="#" class="btn btn-danger btn-block" onclick="getLocation()" data-toggle="modal" data-target="#pulang"><b>Pulang</b></a>
+                <a href="#" id="show" class="btn btn-danger btn-block" data-toggle="modal" data-target="#pulang"><b>Pulang</b></a>
                 <div class="modal fade" id="pulang">
                   <div class="modal-dialog">
                     <div class="modal-content">
@@ -81,8 +118,7 @@
                         <div class="modal-body">
                           <p>Lelah usai kerja, bersukurlah. Karena diluar sana banyak yang lelah mencari kerja</p>
                           <p>Selamat pulang Kak, Hati2 dijalan!!</p>
-                          <textarea class="d-none" id="lat" name="lat" maxlength="8"></textarea>
-                          <textarea class="d-none" id="long" name="long" maxlength="8"></textarea>
+                          <input id="site" name="location" value="xx" type="hidden">
                         </div>
                         <div class="modal-footer justify-content-between">
                           <button type="submit" class="btn btn-success">Ya</button>
@@ -118,7 +154,7 @@
                   <td>{{ $loop->index + 1 }}<td>
                   <td>{{ $item->attend == 0 ? 'In' : 'Out' }}</td>
                   <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
-                  <td><a href="{{ url('https://www.google.com/maps/@'.$item->lat.','.$item->long.',17z')}}" target="_blank">{{ $item->lat.','.$item->long}}</a><td>
+                  <td>{{ $item->site->name }}<td>
                 </tr>
               @endforeach
             </tbody>
@@ -158,48 +194,61 @@
       return i;
     }
   </script>
-  78.750
-  122850
-  <script>
-    var x = document.getElementById("lat");
-    var y = document.getElementById("long");
-    
+  
+  <script>    
     function getLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
       } else { 
-        x.innerHTML = "Geolocation is not supported by this browser.";
+        xx.innerHTML = "Geolocation is not supported by this browser.";
       }
     }
-    
+
     function showPosition(position) {
-      x.innerHTML = position.coords.latitude.toFixed(4);
-      y.innerHTML = position.coords.longitude.toFixed(4);
-      document.getElementById("xx").classList.add("d-none");
-    }
-    
-    function showError(error) {
-      switch(error.code) {
-        case error.PERMISSION_DENIED:
-          x.innerHTML = toastr.error('Anda tidak bisa absen karena tidak mengizinkan akses lokasi ')
-          break;
-        case error.POSITION_UNAVAILABLE:
-          x.innerHTML = toastr.warning('Location information is unavailable.')
-          break;
-        case error.TIMEOUT:
-          x.innerHTML = toastr.warning('The request to get user location timed out.')
-          break;
-        case error.UNKNOWN_ERROR:
-          x.innerHTML = toastr.warning('An unknown error occurred.')
-          break;
+      var x = position.coords.latitude.toFixed(3);
+      var y = position.coords.longitude.toFixed(3);
+      @foreach($sites as $item)
+        @if ($item->id == 1)
+          if (x == {{ $item->latitude }} && y == {{ $item->longitude }}) {
+            document.getElementById("location").classList.add("d-none"),
+            loc.innerHTML = "{{ $item->name }}",
+            document.getElementById("site").value = "{{ $item->id }}";
+          }
+        @else
+          else if (x == {{ $item->latitude }} && y == {{ $item->longitude }}) {
+            document.getElementById("location").classList.add("d-none"),
+            loc.innerHTML ="{{ $item->name }}",
+            document.getElementById("site").value = "{{ $item->id }}";
+          }
+        @endif
+      @endforeach
+      else {
+        xx.innerHTML = "Posisi anda tidak Di Kantor/Wokshop <br>Posisi saat ini : " + position.coords.latitude.toFixed(3) + ", " + position.coords.longitude.toFixed(3),
+        infoLocations.innerHTML = "Klik disini untuk melihat posisi absen",
+        document.getElementById("locContainer").classList.add("d-none"),
+        document.getElementById("show").classList.add("d-none");
       }
     }
+
+    function showError(error) {
+    switch(error.code) {
+    case error.PERMISSION_DENIED:
+      xx.innerHTML = "Anda tidak bisa absen karena tidak mengizikan akses lokasi."
+      break;
+    case error.POSITION_UNAVAILABLE:
+      xx.innerHTML = "Location information is unavailable."
+      break;
+    case error.TIMEOUT:
+      xx.innerHTML = "The request to get user location timed out."
+      break;
+    case error.UNKNOWN_ERROR:
+      xx.innerHTML = "An unknown error occurred."
+      break;
+      }
+    }
+
 
     $(function () {
-
-      @error('long')
-      toastr.error('Absen gagal karena anda tidak mengizinkan akses lokasi')
-      @enderror
 
       @if (\Session::has('message'))
       toastr.success('{{ \Session::get('message') }}')

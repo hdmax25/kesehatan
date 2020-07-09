@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAbsentsTable extends Migration
+class CreateSitesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateAbsentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('absents', function (Blueprint $table) {
+        Schema::create('sites', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_user');
-            $table->integer('username_user');
-            $table->integer('attend');
-            $table->integer('id_location');
+            $table->string('name');
+            $table->string('address');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->timestamps();
+            $table->integer('delete')->default(0);
         });
     }
 
@@ -30,6 +31,6 @@ class CreateAbsentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('absents');
+        Schema::dropIfExists('sites');
     }
 }

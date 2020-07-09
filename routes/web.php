@@ -45,6 +45,14 @@ Route::group(['prefix' => 'absent', 'as' => 'absent.'], static function () {
   Route::get('/destroy/{id}', 'AbsentController@destroy')->name('destroy')->middleware('auth', 'role:2|3');
 });
 
+Route::group(['prefix' => 'site', 'as' => 'site.'], static function () {
+  Route::get('/', 'SiteController@index')->name('index')->middleware('auth', 'role:1');
+  Route::get('/show/{id}', 'SiteController@show')->name('show')->middleware('auth', 'role:1');
+  Route::post('/store', 'SiteController@store')->name('store')->middleware('auth', 'role:1');
+  Route::post('/update/{id}', 'SiteController@update')->name('update')->middleware('auth', 'role:1');
+  Route::get('/destroy/{id}', 'SiteController@destroy')->name('destroy')->middleware('auth', 'role:1');
+});
+
 Route::group(['prefix' => 'penyakit', 'as' => 'penyakit.'], static function () {
   Route::get('/', 'PenyakitController@index')->name('index')->middleware('auth', 'role:1');
   Route::post('/store', 'PenyakitController@store')->name('store')->middleware('auth', 'role:1');
