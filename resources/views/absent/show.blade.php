@@ -72,6 +72,9 @@
             <li class="list-group-item">
               <b>Time</b> <a class="float-right" id="clock"></a>
             </li>
+            <li class="list-group-item">
+              <b>IP Address</b> <a class="float-right" id="dataIP"></a>
+            </li>
             <li id="locContainer" class="list-group-item">
               <b>Location</b> <a class="float-right" id="loc"></a>
             </li>
@@ -177,6 +180,11 @@
   <script src="{{ asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
   <!-- Toastr -->
   <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
+
+  <!-- IP Detect -->
+  <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+
+  <!-- Jam Online -->
   <script>
     function startTime() {
       var today = new Date();
@@ -195,6 +203,7 @@
     }
   </script>
   
+  <!-- Cari Lokasi -->
   <script>    
     function getLocation() {
       if (navigator.geolocation) {
@@ -247,6 +256,9 @@
       }
     }
 
+    $.getJSON("https://api.ipify.org?format=json", function(data) {
+            $("#dataIP").html(data.ip); 
+    });
 
     $(function () {
 
