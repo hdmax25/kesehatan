@@ -13,7 +13,7 @@
 @section('content')
   <div class="row">
     <div class="col-md-12">
-      <div id="location" class="alert alert-warning">
+      <div id="warning" class="alert alert-warning">
         <h5><i class="icon fas fa-info"></i> Perhatian</h5>
           <span id="xx"></span>
           <br><a id="infoLocations" href="#"data-toggle="modal" data-target="#info"></a>
@@ -41,12 +41,12 @@
                     <tr>
                       <td>{{ $item->id }}<td>
                       <td>{{ $item->name }}</td>
-                      <td>{{ $item->latitude.', '.$item->longitude }}</td>
+                      <td><a href="{{ url('https://www.google.com/maps/@'.$item->latitude.','.$item->longitude.',19z')}}" target="_blank">{{ $item->latitude.','.$item->longitude}}</a></td>
                     </tr>
                   @endforeach
                 </tbody>
               </table>
-              Silakan berpindah ke lokasi yang ditentukan dan menggunakan wifi kantor, lalu klik refresh
+              Silakan berpindah ke lokasi yang ditentukan, lalu klik refresh
             </div>
             <div class="modal-footer justify-content-between">
               <a href="{{ route('absent.show', Auth::user()->id) }}" class="btn btn-success">Refresh</a>
@@ -72,14 +72,11 @@
             <li class="list-group-item">
               <b>Time</b> <a class="float-right" id="clock"></a>
             </li>
-            <li class="list-group-item">
-              <b>IP Address</b> <a class="float-right" id="dataIP"></a>
-            </li>
             <li id="locContainer" class="list-group-item">
               <b>Location</b> <a class="float-right" id="loc"></a>
             </li>
           </ul>
-            @if ($checkToday < 99)
+            @if ($checkToday < 3)
               @if ($check == 0 || $check % 2 == 0)
                 <a href="#" id="show" class="btn btn-danger btn-block" data-toggle="modal" data-target="#masuk"><b>Masuk</b></button></a>
                 <div class="modal fade" id="masuk">
@@ -94,12 +91,15 @@
                       <form action="{{ route('absent.store') }}" method="post">
                         @csrf
                         <div class="modal-body">
-                            <p>Selamat bekerja gaes...</p>
-                            <input id="site" name="location" value="" type="hidden">
+                            <p>Awali setiap pekerjaan dengan Bismillah, semoga setiap tetesan keringatmu menjadi ibadah, dan senantiasa mendapat rezeki yang penuh dengan berkah.</p>
+                            <span class="d-none">
+                              <input id="site" name="location">
+                              <input id="ipaddress" name="ipaddress">
+                            </span>
                         </div>
                         <div class="modal-footer justify-content-between">
-                          <button type="submit" class="btn btn-success">Ya</button>
-                          <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
+                          <button type="submit" class="btn btn-success">Aamiin</button>
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
                         </div>
                       </form>
                     </div>
@@ -120,8 +120,11 @@
                         @csrf
                         <div class="modal-body">
                           <p>Lelah usai kerja, bersukurlah. Karena diluar sana banyak yang lelah mencari kerja</p>
-                          <p>Selamat pulang Kak, Hati2 dijalan!!</p>
-                          <input id="site" name="location" value="xx" type="hidden">
+                          <p>Selamat pulang, Hati2 dijalan!!</p>
+                          <span class="d-none">
+                            <input id="site" name="location">
+                            <input id="ipaddress" name="ipaddress">
+                          </span>
                         </div>
                         <div class="modal-footer justify-content-between">
                           <button type="submit" class="btn btn-success">Ya</button>
@@ -184,7 +187,7 @@
   <!-- IP Detect -->
   <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
 
-  <!-- Jam Online -->
+  <!-- Jam -->
   <script>
     function startTime() {
       var today = new Date();
@@ -217,19 +220,11 @@
       var x = position.coords.latitude.toFixed(3);
       var y = position.coords.longitude.toFixed(3);
       @foreach($sites as $item)
-        @if ($item->id == 1)
-          if (x == {{ $item->latitude }} && y == {{ $item->longitude }}) {
-            document.getElementById("location").classList.add("d-none"),
-            loc.innerHTML = "{{ $item->name }}",
-            document.getElementById("site").value = "{{ $item->id }}";
-          }
-        @else
-          else if (x == {{ $item->latitude }} && y == {{ $item->longitude }}) {
-            document.getElementById("location").classList.add("d-none"),
-            loc.innerHTML ="{{ $item->name }}",
-            document.getElementById("site").value = "{{ $item->id }}";
-          }
-        @endif
+        if (x == {{ $item->latitude }} && y == {{ $item->longitude }}) {
+          document.getElementById("warning").classList.add("d-none"),
+          loc.innerHTML = "{{ $item->name }}",
+          document.getElementById("site").value = "{{ $item->id }}";
+        }
       @endforeach
       else {
         xx.innerHTML = "Posisi anda tidak Di Kantor/Wokshop <br>Posisi saat ini : " + position.coords.latitude.toFixed(3) + ", " + position.coords.longitude.toFixed(3),
@@ -245,7 +240,7 @@
       xx.innerHTML = "Anda tidak bisa absen karena tidak mengizikan akses lokasi."
       break;
     case error.POSITION_UNAVAILABLE:
-      xx.innerHTML = "Location information is unavailable."
+      xx.innerHTML = "Informasi lokasi tidak tersedia."
       break;
     case error.TIMEOUT:
       xx.innerHTML = "The request to get user location timed out."
@@ -257,7 +252,7 @@
     }
 
     $.getJSON("https://api.ipify.org?format=json", function(data) {
-            $("#dataIP").html(data.ip); 
+            $("#ipaddress").val(data.ip); 
     });
 
     $(function () {

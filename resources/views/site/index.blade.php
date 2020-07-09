@@ -73,8 +73,7 @@
               <th style="width: 10px">ID</th>
               <th>Name</th>
               <th>Address</th>
-              <th>Latitude</th>
-              <th>Longitude</th>
+              <th>Location</th>
               <th style="width: 10px">Edit</th>
               <!--<th style="width: 10px">Delete</th>-->
             </tr>
@@ -85,8 +84,7 @@
                 <td>{{ $item->id }}</td>
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->address }}</td>
-                <td>{{ $item->latitude }}</td>
-                <td>{{ $item->longitude }}</td>
+                <td><a href="{{ url('https://www.google.com/maps/@'.$item->latitude.','.$item->longitude.',17z')}}" target="_blank">{{ $item->latitude.','.$item->longitude}}</a></td>
                 <td>
                   <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-l{{ $item->id }}">
                   <i class="fas fa-edit"></i>
