@@ -234,7 +234,7 @@
             </div>
           </div>
         </a>
-        <!--<div class="modal fade" id="belum-lapor">
+        <div class="modal fade" id="belum-lapor">
           <div class="modal-dialog modal-xl">
             <div class="modal-content">
               <div class="modal-header">
@@ -286,7 +286,7 @@
               </div>
             </div>
           </div>
-        </div>-->
+        </div>
       </div>
       <div class="col-md-3 col-sm-6 col-12">
         <a href="#" title="Click for details" data-toggle="modal" data-target="#sudah-sehat">
