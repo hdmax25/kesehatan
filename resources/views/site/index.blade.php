@@ -92,13 +92,13 @@
                   <i class="fas fa-edit"></i>
                   </button>
                 </td>
-                <td>
-                  <!--<a href="{{ route('site.destroy', $item->id) }}">
+                <!--<td>
+                  <a href="{{ route('site.destroy', $item->id) }}">
                     <button type="button" class="btn btn-danger btn-sm">
-                      <i class="fas fa-trash-alt"></i>-->
+                      <i class="fas fa-trash-alt"></i>
                     </button>
                   </a>
-                </td>
+                </td>-->
               </tr>
               <div class="modal fade" id="modal-l{{ $item->id }}">
                 <div class="modal-dialog modal-l">
