@@ -50,7 +50,7 @@
               </div>
               <div class="col-sm-2">
                 <div class="form-group">
-                  <button type="button" class="btn btn-danger btn-block" onclick="getLocation()">Get Location</button>
+                  <button type="button" class="btn btn-danger btn-block" onclick="getLocation()"><i class="nav-icon fa fa-map-marker"></i> Get Location</button>
                 </div>
               </div>
             </div>
@@ -76,7 +76,7 @@
               <th>Latitude</th>
               <th>Longitude</th>
               <th style="width: 10px">Edit</th>
-              <th style="width: 10px">Delete</th>
+              <!--<th style="width: 10px">Delete</th>-->
             </tr>
             </thead>
             <tbody>
@@ -93,9 +93,9 @@
                   </button>
                 </td>
                 <td>
-                  <a href="{{ route('site.destroy', $item->id) }}">
+                  <!--<a href="{{ route('site.destroy', $item->id) }}">
                     <button type="button" class="btn btn-danger btn-sm">
-                      <i class="fas fa-trash-alt"></i>
+                      <i class="fas fa-trash-alt"></i>-->
                     </button>
                   </a>
                 </td>
@@ -129,7 +129,7 @@
                           <input type="text" class="form-control @error('longitude') is-invalid @enderror" placeholder="Longitude" name="longitude" value="{{ $item->longitude }}">
                         </div>
                         <div class="form-group">
-                          <button type="button" class="btn btn-danger btn-block" onclick="getLocation()">Get Location</button>
+                          <button type="button" class="btn btn-danger btn-block" onclick="getLocation()"><i class="nav-icon fa fa-map-marker"></i> Get Location</button>
                         </div>
                       </div>
                       <div class="modal-footer justify-content-between">
