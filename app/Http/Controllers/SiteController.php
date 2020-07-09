@@ -50,8 +50,8 @@ class SiteController extends Controller
           $site = new Site();
           $site->name = $request->name;
           $site->address = $request->address;
-          $site->latitude = $request->latitude;
-          $site->longitude = $request->longitude;
+          $site->latitude = round($request->latitude,3);
+          $site->longitude = round($request->longitude,3);
           $site->save();
       
           return redirect()->back();
@@ -98,8 +98,8 @@ class SiteController extends Controller
           $site = Site::find($id);
           $site->name = $request->name;
           $site->address = $request->address;
-          $site->latitude = $request->latitude;
-          $site->longitude = $request->longitude;
+          $site->latitude = round($request->latitude,3);
+          $site->longitude = round($request->longitude,3);
           $site->save();
       
           return redirect()->back();
