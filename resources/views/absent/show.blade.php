@@ -46,7 +46,7 @@
                   @endforeach
                 </tbody>
               </table>
-              Silakan berpindah ke lokasi yang ditentukan, lalu klik refresh
+              Silakan berpindah ke lokasi yang ditentukan dan menggunakan wifi kantor, lalu klik refresh
             </div>
             <div class="modal-footer justify-content-between">
               <a href="{{ route('absent.show', Auth::user()->id) }}" class="btn btn-success">Refresh</a>
