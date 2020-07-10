@@ -15,39 +15,38 @@
     <div class="col-md-12">
       <div id="warning" class="alert alert-warning d-none">
         <h5><i class="icon fas fa-info"></i> Perhatian</h5>
-          <span id="xx"></span>
-          <br><a id="infoLocations" href="#"data-toggle="modal" data-target="#info"></a>
-          <br><a id="refresh" onclick="getLocation()" href="#"></a>
+        <span id="xx"></span>
+        <br><a id="infoLocations" href="#"data-toggle="modal" data-target="#info"></a>
+        <br><a id="refresh" onclick="getLocation()" href="#"></a>
       </div>
       <div class="modal fade" id="info">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Site List</h4>
+              <h4 class="modal-title">Daftar Lokasi</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">×</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body p-0">
               <table class="table table-hover table-sm">
                 <thead>
                   <tr>
                     <th>#<th>
-                    <th>Name</th>
                     <th>Posisi</th>
+                    <th>Koordinat</th>
                   </tr>
                 </thead>
                 <tbody>
                   @foreach($sites as $item)
                     <tr>
-                      <td>{{ $item->id }}<td>
+                      <td>{{ $loop->index + 1 }}<td>
                       <td>{{ $item->name }}</td>
                       <td><a href="{{ url('https://www.google.com/maps/@'.$item->latitude.','.$item->longitude.',19z')}}" target="_blank">{{ $item->latitude.','.$item->longitude}}</a></td>
                     </tr>
                   @endforeach
                 </tbody>
               </table>
-              Silakan berpindah ke lokasi yang ditentukan, lalu klik refresh
             </div>
             <div class="modal-footer justify-content-between">
               <button onclick="getLocation()" type="button" class="btn btn-success" data-dismiss="modal">Refresh</button>
@@ -79,7 +78,7 @@
           </ul>
             @if ($checkToday < 99)
               @if ($check == 0 || $check % 2 == 0)
-                <a href="#" id="show" class="btn btn-danger btn-block" data-toggle="modal" data-target="#masuk"><b>Masuk</b></button></a>
+                <a href="#" id="show" class="btn btn-danger btn-block d-none" data-toggle="modal" data-target="#masuk"><b>Masuk</b></button></a>
                 <div class="modal fade" id="masuk">
                   <div class="modal-dialog">
                     <div class="modal-content">
@@ -108,7 +107,7 @@
                   </div>
                 </div>
               @else
-                <a href="#" id="show" class="btn btn-danger btn-block" data-toggle="modal" data-target="#pulang"><b>Pulang</b></a>
+                <a href="#" id="show" class="btn btn-danger btn-block d-none" data-toggle="modal" data-target="#pulang"><b>Pulang</b></a>
                 <div class="modal fade" id="pulang">
                   <div class="modal-dialog">
                     <div class="modal-content">
@@ -222,18 +221,18 @@
     function showPosition(position) {
       var x = position.coords.latitude.toFixed(3);
       var y = position.coords.longitude.toFixed(3);
-      @foreach($sites as $item) {{ $item->id == 1 ? 'if' : 'else if'}} (x == {{ $item->latitude }} && y == {{ $item->longitude }}) {
+      @foreach($sites as $item) {{ $item->id == $firstSite ? 'if' : 'else if'}} (x == {{ $item->latitude }} && y == {{ $item->longitude }}) {
           document.getElementById("loading").classList.add("d-none"),
           loc.innerHTML = "{{ $item->name }}",
+          document.getElementById("show").classList.remove("d-none"),
           document.getElementById("site").value = "{{ $item->id }}";
         } @endforeach else {
-        xx.innerHTML = "Posisi anda tidak Di Kantor/Wokshop <br>Posisi saat ini : " + position.coords.latitude.toFixed(3) + ", " + position.coords.longitude.toFixed(3),
+        xx.innerHTML = "Posisi anda tidak Di Kantor/Wokshop <br>Posisi saat ini : " + position.coords.latitude + ", " + position.coords.longitude,
         infoLocations.innerHTML = "Daftar Lokasi",
         toastr.warning('Posisi belum tepat'),
         refresh.innerHTML = "Refresh",
         document.getElementById("warning").classList.remove("d-none"),
-        document.getElementById("locContainer").classList.add("d-none"),
-        document.getElementById("show").classList.add("d-none");
+        document.getElementById("locContainer").classList.add("d-none");
       }
     }
 

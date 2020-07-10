@@ -75,13 +75,12 @@
               <th>Address</th>
               <th>Location</th>
               <th style="width: 10px">Edit</th>
-              <!--<th style="width: 10px">Delete</th>-->
-            </tr>
+              <th style="width: 10px">Delete</th>
             </thead>
             <tbody>
             @foreach($sites as $item)
               <tr>
-                <td>{{ $item->id }}</td>
+                <td>{{ $loop->index + 1 }}</td>
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->address }}</td>
                 <td><a href="{{ url('https://www.google.com/maps/@'.$item->latitude.','.$item->longitude.',17z')}}" target="_blank">{{ $item->latitude.','.$item->longitude}}</a></td>
@@ -90,13 +89,13 @@
                   <i class="fas fa-edit"></i>
                   </button>
                 </td>
-                <!--<td>
+                <td>
                   <a href="{{ route('site.destroy', $item->id) }}">
                     <button type="button" class="btn btn-danger btn-sm">
                       <i class="fas fa-trash-alt"></i>
                     </button>
                   </a>
-                </td>-->
+                </td>
               </tr>
               <div class="modal fade" id="modal-l{{ $item->id }}">
                 <div class="modal-dialog modal-l">

@@ -38,11 +38,11 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], static function () {
 });
 
 Route::group(['prefix' => 'absent', 'as' => 'absent.'], static function () {
-  Route::get('/', 'AbsentController@index')->name('index')->middleware('auth', 'role:2|3');
+  Route::get('/', 'AbsentController@index')->name('index')->middleware('auth');
   Route::get('/show/{id}', 'AbsentController@show')->name('show')->middleware('auth');
-  Route::post('/store', 'AbsentController@store')->name('store')->middleware('auth', 'role:2|3');
-  Route::post('/update', 'AbsentController@update')->name('update')->middleware('auth', 'role:2|3');
-  Route::get('/destroy/{id}', 'AbsentController@destroy')->name('destroy')->middleware('auth', 'role:2|3');
+  Route::post('/store', 'AbsentController@store')->name('store')->middleware('auth');
+  Route::post('/update', 'AbsentController@update')->name('update')->middleware('auth');
+  Route::get('/destroy/{id}', 'AbsentController@destroy')->name('destroy')->middleware('auth');
 });
 
 Route::group(['prefix' => 'site', 'as' => 'site.'], static function () {

@@ -111,8 +111,12 @@ class SiteController extends Controller
      * @param  \App\Site  $site
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Site $site)
+    public function destroy($id)
     {
-        //
+        $site = Site::find($id);
+        $site->delete = 1;
+        $site->save();
+
+    return redirect()->back();
     }
 }

@@ -77,6 +77,7 @@ class AbsentController extends Controller
         $absentToday = Absent::where('id_user', Auth::user()->id)->orderBy('id', 'desc')->first();
 
         $sites = Site::where('delete', 0)->get();
+        $firstSite = Site::where('delete', 0)->min('id');
 
         $data = [
           'user' => $user,
@@ -85,6 +86,7 @@ class AbsentController extends Controller
           'check' => $check,
           'absentToday' => $absentToday,
           'sites' => $sites,
+          'firstSite' => $firstSite,
         ];
         return view('absent.show', $data);
     }
