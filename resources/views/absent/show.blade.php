@@ -16,8 +16,8 @@
       <div id="warning" class="alert alert-warning d-none">
         <h5><i class="icon fas fa-info"></i> Perhatian</h5>
         <span id="xx"></span>
-        <br><a id="infoLocations" href="#"data-toggle="modal" data-target="#info"></a>
-        <br><a id="refresh" onclick="getLocation()" href="#"></a>
+        <br><a id="infoLocations" href="#"data-toggle="modal" data-target="#info"></a> 
+        <a id="refresh" onclick="getLocation()" href="#"></a>
       </div>
       <div class="modal fade" id="info">
         <div class="modal-dialog">
@@ -32,7 +32,6 @@
               <table class="table table-hover table-sm">
                 <thead>
                   <tr>
-                    <th>#<th>
                     <th>Posisi</th>
                     <th>Koordinat</th>
                   </tr>
@@ -40,7 +39,6 @@
                 <tbody>
                   @foreach($sites as $item)
                     <tr>
-                      <td>{{ $loop->index + 1 }}<td>
                       <td>{{ $item->name }}</td>
                       <td><a href="{{ url('https://www.google.com/maps/@'.$item->latitude.','.$item->longitude.',19z')}}" target="_blank">{{ $item->latitude.','.$item->longitude}}</a></td>
                     </tr>
@@ -147,10 +145,9 @@
           <h3 class="card-title">Attendance log</h3>
         </div>
         <div class="card-body table-responsive p-0">
-          <table class="table table-hover table-sm text-center">
+          <table class="table table-hover table-sm table-nowarp">
             <thead>
               <tr>
-                <th>#<th>
                 <th>Log</th>
                 <th>Date and Time</th>
                 <th>Location</th>
@@ -159,9 +156,8 @@
             <tbody>
               @foreach($absent as $item)
                 <tr>
-                  <td>{{ $loop->index + 1 }}<td>
                   <td>{{ $item->attend == 0 ? 'In' : 'Out' }}</td>
-                  <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i:s') }}</td>
+                  <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i') }}</td>
                   <td>{{ $item->site->name }}<td>
                 </tr>
               @endforeach
@@ -222,10 +218,11 @@
       var x = position.coords.latitude.toFixed(3);
       var y = position.coords.longitude.toFixed(3);
       @foreach($sites as $item) {{ $item->id == $firstSite ? 'if' : 'else if'}} (x == {{ $item->latitude }} && y == {{ $item->longitude }}) {
-          document.getElementById("loading").classList.add("d-none"),
+          document.getElementById("warning").classList.add("d-none"),
           loc.innerHTML = "{{ $item->name }}",
           document.getElementById("show").classList.remove("d-none"),
-          document.getElementById("site").value = "{{ $item->id }}";
+          document.getElementById("site").value = "{{ $item->id }}",
+          document.getElementById("loading").classList.add("d-none");
         } @endforeach else {
         xx.innerHTML = "Posisi anda tidak Di Kantor/Workshop <br>Posisi saat ini : " + x + ", " + y,
         infoLocations.innerHTML = "Daftar Lokasi",

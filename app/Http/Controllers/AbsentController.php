@@ -52,7 +52,7 @@ class AbsentController extends Controller
         $absent->id_location =  $request->location;
         $absent->save();
         
-        return redirect()->back()->with(['message' => 'Absen berhasil']);
+        return redirect()->back()->with(['message' => 'Berhasil']);
     }
 
     /**
@@ -121,7 +121,7 @@ class AbsentController extends Controller
         $absent->id_location =  $request->location;
         $absent->save();
         
-        return redirect()->back()->with(['message' => 'Absen berhasil']);
+        return redirect()->back()->with(['message' => 'Berhasil']);
     }
 
     /**
