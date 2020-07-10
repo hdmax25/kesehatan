@@ -4,7 +4,7 @@
   <div class="row mb-2">
     <div class="col-sm-6">
       <h1>
-        Absent
+        Present
       </h1>
     </div>
   </div>
@@ -17,6 +17,7 @@
         <h5><i class="icon fas fa-info"></i> Perhatian</h5>
           <span id="xx"></span>
           <br><a id="infoLocations" href="#"data-toggle="modal" data-target="#info"></a>
+          <br><a id="refresh" href="#"></a>
       </div>
       <div class="modal fade" id="info">
         <div class="modal-dialog">
@@ -49,7 +50,7 @@
               Silakan berpindah ke lokasi yang ditentukan, lalu klik refresh
             </div>
             <div class="modal-footer justify-content-between">
-              <a href="{{ route('absent.show', Auth::user()->id) }}" class="btn btn-success">Refresh</a>
+              <button onclick="getLocation()" type="button" class="btn btn-success" data-dismiss="modal">Refresh</button>
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
           </div>
@@ -236,7 +237,8 @@
       @endforeach
       else {
         xx.innerHTML = "Posisi anda tidak Di Kantor/Wokshop <br>Posisi saat ini : " + position.coords.latitude.toFixed(3) + ", " + position.coords.longitude.toFixed(3),
-        infoLocations.innerHTML = "Klik disini untuk melihat posisi absen",
+        infoLocations.innerHTML = "Daftar Lokasi",
+        refresh.innerHTML = "Refresh",
         document.getElementById("locContainer").classList.add("d-none"),
         document.getElementById("show").classList.add("d-none");
       }
