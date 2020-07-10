@@ -220,11 +220,19 @@
       var x = position.coords.latitude.toFixed(3);
       var y = position.coords.longitude.toFixed(3);
       @foreach($sites as $item)
+        @if ($item->id == 1)
         if (x == {{ $item->latitude }} && y == {{ $item->longitude }}) {
           document.getElementById("warning").classList.add("d-none"),
           loc.innerHTML = "{{ $item->name }}",
           document.getElementById("site").value = "{{ $item->id }}";
         }
+        @else
+        else if (x == {{ $item->latitude }} && y == {{ $item->longitude }}) {
+          document.getElementById("warning").classList.add("d-none"),
+          loc.innerHTML = "{{ $item->name }}",
+          document.getElementById("site").value = "{{ $item->id }}";
+        }
+        @endif
       @endforeach
       else {
         xx.innerHTML = "Posisi anda tidak Di Kantor/Wokshop <br>Posisi saat ini : " + position.coords.latitude.toFixed(3) + ", " + position.coords.longitude.toFixed(3),
