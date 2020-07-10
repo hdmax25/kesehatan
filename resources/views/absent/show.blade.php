@@ -76,7 +76,7 @@
               <b>Location</b> <a class="float-right" id="loc"></a>
             </li>
           </ul>
-            @if ($checkToday < 3)
+            @if ($checkToday < 99)
               @if ($check == 0 || $check % 2 == 0)
                 <a href="#" id="show" class="btn btn-danger btn-block" data-toggle="modal" data-target="#masuk"><b>Masuk</b></button></a>
                 <div class="modal fade" id="masuk">
