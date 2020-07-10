@@ -17,7 +17,7 @@
         <h5><i class="icon fas fa-info"></i> Perhatian</h5>
           <span id="xx"></span>
           <br><a id="infoLocations" href="#"data-toggle="modal" data-target="#info"></a>
-          <br><a id="refresh" href="#"></a>
+          <br><a id="refresh" onclick="getLocation()" href="#"></a>
       </div>
       <div class="modal fade" id="info">
         <div class="modal-dialog">
@@ -239,6 +239,7 @@
       else {
         xx.innerHTML = "Posisi anda tidak Di Kantor/Wokshop <br>Posisi saat ini : " + position.coords.latitude.toFixed(3) + ", " + position.coords.longitude.toFixed(3),
         infoLocations.innerHTML = "Daftar Lokasi",
+        toastr.warning('Posisi belum tepat'),
         refresh.innerHTML = "Refresh",
         document.getElementById("locContainer").classList.add("d-none"),
         document.getElementById("show").classList.add("d-none");
