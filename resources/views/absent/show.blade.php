@@ -92,14 +92,15 @@
                       <form action="{{ route('absent.store') }}" method="post">
                         @csrf
                         <div class="modal-body">
-                            <p>Awali setiap pekerjaan dengan Bismillah, semoga setiap tetesan keringatmu menjadi ibadah, dan senantiasa mendapat rezeki yang penuh dengan berkah.</p>
+                            Selamat bekerja Kak..
+                            <br>Semoga harimu menyenangkan
                             <span class="d-none">
                               <input id="site" name="location">
                               <input id="ipaddress" name="ipaddress">
                             </span>
                         </div>
                         <div class="modal-footer justify-content-between">
-                          <button type="submit" class="btn btn-success">Aamiin</button>
+                          <button type="submit" class="btn btn-success">Ya</button>
                           <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
                         </div>
                       </form>
