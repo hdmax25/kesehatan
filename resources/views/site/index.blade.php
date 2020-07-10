@@ -66,7 +66,7 @@
         <div class="card-header">
           <h3 class="card-title">Site List</h3>
         </div>
-        <div class="card-body table-responsive">
+        <div class="card-body table-responsive table-sm">
           <table id="report" class="table table-bordered table-striped">
             <thead>
             <tr>
@@ -168,7 +168,7 @@
   <script>
     $(function () {
       $('#report').DataTable({
-        "paging": true,
+        "paging": false,
         "lengthChange": true,
         "searching": true,
         "ordering": true,

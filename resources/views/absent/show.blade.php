@@ -227,7 +227,7 @@
           document.getElementById("show").classList.remove("d-none"),
           document.getElementById("site").value = "{{ $item->id }}";
         } @endforeach else {
-        xx.innerHTML = "Posisi anda tidak Di Kantor/Wokshop <br>Posisi saat ini : " + position.coords.latitude + ", " + position.coords.longitude,
+        xx.innerHTML = "Posisi anda tidak Di Kantor/Workshop <br>Posisi saat ini : " + x + ", " + y,
         infoLocations.innerHTML = "Daftar Lokasi",
         toastr.warning('Posisi belum tepat'),
         refresh.innerHTML = "Refresh",
