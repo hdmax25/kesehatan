@@ -13,7 +13,7 @@
 @section('content')
   <div class="row">
     <div class="col-md-12">
-      <div id="warning" class="alert alert-warning">
+      <div id="warning" class="alert alert-warning d-none">
         <h5><i class="icon fas fa-info"></i> Perhatian</h5>
           <span id="xx"></span>
           <br><a id="infoLocations" href="#"data-toggle="modal" data-target="#info"></a>
@@ -139,6 +139,7 @@
               @endif
             @endif
         </div>
+        <div id="loading" class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>
       </div>
     </div>
     <div class="col-md-9">
@@ -221,26 +222,16 @@
     function showPosition(position) {
       var x = position.coords.latitude.toFixed(3);
       var y = position.coords.longitude.toFixed(3);
-      @foreach($sites as $item)
-        @if ($item->id == 1)
-        if (x == {{ $item->latitude }} && y == {{ $item->longitude }}) {
-          document.getElementById("warning").classList.add("d-none"),
+      @foreach($sites as $item) {{ $item->id == 1 ? 'if' : 'else if'}} (x == {{ $item->latitude }} && y == {{ $item->longitude }}) {
+          document.getElementById("loading").classList.add("d-none"),
           loc.innerHTML = "{{ $item->name }}",
           document.getElementById("site").value = "{{ $item->id }}";
-        }
-        @else
-        else if (x == {{ $item->latitude }} && y == {{ $item->longitude }}) {
-          document.getElementById("warning").classList.add("d-none"),
-          loc.innerHTML = "{{ $item->name }}",
-          document.getElementById("site").value = "{{ $item->id }}";
-        }
-        @endif
-      @endforeach
-      else {
+        } @endforeach else {
         xx.innerHTML = "Posisi anda tidak Di Kantor/Wokshop <br>Posisi saat ini : " + position.coords.latitude.toFixed(3) + ", " + position.coords.longitude.toFixed(3),
         infoLocations.innerHTML = "Daftar Lokasi",
         toastr.warning('Posisi belum tepat'),
         refresh.innerHTML = "Refresh",
+        document.getElementById("warning").classList.remove("d-none"),
         document.getElementById("locContainer").classList.add("d-none"),
         document.getElementById("show").classList.add("d-none");
       }
@@ -249,15 +240,19 @@
     function showError(error) {
     switch(error.code) {
     case error.PERMISSION_DENIED:
+      document.getElementById("warning").classList.remove("d-none"),
       xx.innerHTML = "Anda tidak bisa absen karena tidak mengizikan akses lokasi."
       break;
     case error.POSITION_UNAVAILABLE:
+      document.getElementById("warning").classList.remove("d-none"),
       xx.innerHTML = "Informasi lokasi tidak tersedia."
       break;
     case error.TIMEOUT:
+    document.getElementById("warning").classList.remove("d-none"),
       xx.innerHTML = "The request to get user location timed out."
       break;
     case error.UNKNOWN_ERROR:
+      document.getElementById("warning").classList.remove("d-none"),
       xx.innerHTML = "An unknown error occurred."
       break;
       }
