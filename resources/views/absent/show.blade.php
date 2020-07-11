@@ -232,7 +232,7 @@
         xx.innerHTML = "Posisi anda tidak pada lokasi yang ditentukan <br>Posisi saat ini : " + x + ", " + y,
         infoLocations.innerHTML = "Daftar Lokasi",
         toastr.warning('Posisi belum tepat'),
-        refresh.innerHTML = "Refresh",
+        refresh.innerHTML = "Perbarui Lokasi",
         document.getElementById("warning").classList.remove("d-none"),
         document.getElementById("locContainer").classList.add("d-none");
       }
