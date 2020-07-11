@@ -30,7 +30,7 @@ class ReportController extends Controller
   public function index()
   {
     $data = array();
-    $dateStart = Carbon::now()->subDays(7);
+    $dateStart = Carbon::now()->subDays(2);
     $dateEnd = Carbon::now();
     $amountDate = $dateEnd->diffInDays($dateStart);
     if (Auth::user()->role == 1) {
