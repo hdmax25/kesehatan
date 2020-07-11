@@ -229,7 +229,7 @@
           document.getElementById("site").value = "{{ $item->id }}",
           document.getElementById("loading").classList.add("d-none");
         } @endforeach else {
-        xx.innerHTML = "Posisi anda tidak Di Kantor/Workshop <br>Posisi saat ini : " + x + ", " + y,
+        xx.innerHTML = "Posisi anda tidak pada lokasi yang ditentukan <br>Posisi saat ini : " + x + ", " + y,
         infoLocations.innerHTML = "Daftar Lokasi",
         toastr.warning('Posisi belum tepat'),
         refresh.innerHTML = "Refresh",
