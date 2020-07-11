@@ -16,8 +16,13 @@
       <div id="warning" class="alert alert-warning d-none">
         <h5><i class="icon fas fa-info"></i> Perhatian</h5>
         <span id="xx"></span>
-        <br><a id="infoLocations" href="#"data-toggle="modal" data-target="#info"></a> 
-        <a id="refresh" onclick="getLocation()" href="#"></a>
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" id="infoLocations" href="#"data-toggle="modal" data-target="#info"></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="refresh" onclick="getLocation()" href="#"></a>
+          </li>
       </div>
       <div class="modal fade" id="info">
         <div class="modal-dialog">
