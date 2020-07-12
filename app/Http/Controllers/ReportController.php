@@ -231,29 +231,20 @@ class ReportController extends Controller
         $item->totalUser = 0;
         $item->absens = 0;
         $item->notAbsens = 0;
+        $item->sehat = 0;
+        $item->sakit = 0;
         foreach ($item as $subItem) {
           $item->totalUser++;
           $subItem->absenes = Report::where('id_user', $subItem->id)->whereDate('created_at', Carbon::now())->orderBy('id_department', 'desc')->first();
           if ($subItem->absenes) {
             $item->absens++;
+            if ($subItem->absenes->id_penyakit == 1) {
+              ++$item->sehat;
+            } else {
+              ++$item->sakit;
+            }
           } else {
             $item->notAbsens++;
-          }
-        }
-        return $item;
-      });
-
-      $dataDepartment = Report::whereDate('created_at', Carbon::now())->get()->groupBy(function ($item) {
-        return $item->id_department;
-      })->map(function ($item, $id) {
-        $item->departmentName = Departement::find($id)->department_name;
-        $item->sehat = 0;
-        $item->sakit = 0;
-        foreach ($item as $subItem) {
-          if ($subItem->id_penyakit == 1) {
-            ++$item->sehat;
-          } else {
-            ++$item->sakit;
           }
         }
         return $item;
@@ -270,7 +261,6 @@ class ReportController extends Controller
 
       $data = [
         'groupDepartment' => $groupDepartment,
-        'dataDepartment' => $dataDepartment,
         'department' => $department,
         'disease' => $disease,
         'sehat' => $sehat,

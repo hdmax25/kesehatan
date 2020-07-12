@@ -88,7 +88,7 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($dataDepartment as $item)
+          @foreach($groupDepartment as $item)
             <tr>
               <td>{{$item->departmentName}}</td>
               <td class="text-right">{{ $item->sehat }}</td>

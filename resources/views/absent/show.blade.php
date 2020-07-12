@@ -229,11 +229,11 @@
           document.getElementById("site").value = "{{ $item->id }}",
           document.getElementById("loading").classList.add("d-none");
         } @endforeach else {
-        xx.innerHTML = "Posisi anda tidak pada lokasi yang ditentukan <br>Posisi saat ini : " + x + ", " + y,
-        infoLocations.innerHTML = "Daftar Lokasi",
-        toastr.warning('Posisi belum tepat'),
-        refresh.innerHTML = "Perbarui Lokasi",
-        document.getElementById("warning").classList.remove("d-none"),
+        xx.innerHTML = "Posisi anda tidak pada lokasi yang ditentukan <br>Posisi saat ini : " + x + ", " + y;
+        infoLocations.innerHTML = "Daftar Lokasi";
+        toastr.warning('Posisi belum tepat');
+        refresh.innerHTML = "Perbarui Lokasi";
+        document.getElementById("warning").classList.remove("d-none");
         document.getElementById("locContainer").classList.add("d-none");
       }
     }
