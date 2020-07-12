@@ -57,7 +57,7 @@
             <th>Jumlah</th>
             <th>Lapor</th>
             <th>Tidak Lapor</th>
-            {{-- <th>% Lapor</th> --}}
+            <th>% Lapor</th>
           </tr>
         </thead>
         <tbody>
@@ -67,7 +67,7 @@
               <td class="text-right">{{ $item->totalUser }}</td>
               <td class="text-right">{{ $item->absens }}</td>
               <td class="text-right">{{ $item->totalUser-$item->absens }}</td>
-              {{-- <td class="text-right">{{ $item->absens ? round($item->absens / $item->totalUser * 100 ,1) }}%</td> --}}
+              <td class="text-right">{{ $item->totalUser == 0 ? 0 : round($item->absens / $item->totalUser * 100 ,1) }}%</td>
           @endforeach
         </tbody>
       </table>
@@ -93,7 +93,7 @@
               <td>{{$item->departmentName}}</td>
               <td class="text-right">{{ $item->sehat }}</td>
               <td class="text-right">{{ $item->sakit }}</td>
-              {{-- <td class="text-right">{{ round($item->sehat/($item->sehat+$item->sakit)*100,1) }}%</td> --}}
+              <td class="text-right">{{ $item->sehat+$item->sakit == 0 ? 0 : round($item->sehat/($item->sehat+$item->sakit)*100,1) }}%</td>
           @endforeach
         </tbody>
       </table>
