@@ -67,7 +67,7 @@
               <td class="text-right">{{ $item->totalUser }}</td>
               <td class="text-right">{{ $item->absens }}</td>
               <td class="text-right">{{ $item->totalUser-$item->absens }}</td>
-              <td class="text-right">{{ round($item->absens/$item->totalUser*100,1) }}%</td>
+              <td class="text-right">{{ $item->absens ? round($item->absens/$item->totalUser*100,1) }}%</td>
           @endforeach
         </tbody>
       </table>
