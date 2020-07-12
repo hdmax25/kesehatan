@@ -84,7 +84,7 @@
             <th>Divisi</th>
             <th>Sehat</th>
             <th>Sakit</th>
-            <th>Kesehatan</th>
+            {{-- <th>Kesehatan</th> --}}
           </tr>
         </thead>
         <tbody>
@@ -93,7 +93,7 @@
               <td>{{$item->departmentName}}</td>
               <td class="text-right">{{ $item->sehat }}</td>
               <td class="text-right">{{ $item->sakit }}</td>
-              <td class="text-right">{{ round($item->sehat/($item->sehat+$item->sakit)*100,1) }}%</td>
+              {{-- <td class="text-right">{{ round($item->sehat/($item->sehat+$item->sakit)*100,1) }}%</td> --}}
           @endforeach
         </tbody>
       </table>
