@@ -70,7 +70,8 @@
               <span class="info-box-icon bg-warning"><i class="fa fa-building"></i></span>
               <div class="info-box-content">
                 <span class="info-box-text">Divisi</span>
-                <span class="info-box-number">{{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}</span>
+                <span
+                    class="info-box-number">{{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}</span>
               </div>
             </div>
           </div>
@@ -97,7 +98,8 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Alamat Sesuai KTP</label>
-                        <textarea class="form-control" name="address" rows="3" placeholder="Enter ..." readonly>{{ Auth::user()->ktpaddress  }}</textarea>
+                        <textarea class="form-control" name="address" rows="3" placeholder="Enter ..."
+                                  readonly>{{ Auth::user()->ktpaddress  }}</textarea>
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -117,17 +119,20 @@
                         <div class="card-body">
                           <div class="form-group row">
                             <div class="custom-control custom-radio col-md-3">
-                              <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio1" name="position"
+                              <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio1"
+                                     name="position"
                                      value="Rumah" {{ old('position') == 'Rumah' ? 'checked' : '' }}>
                               <label for="customRadio1" class="custom-control-label">Rumah</label>
                             </div>
                             <div class="custom-control custom-radio col-md-3">
-                              <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio2" name="position"
+                              <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio2"
+                                     name="position"
                                      value="Kantor" {{ old('position') == 'Kantor' ? 'checked' : '' }}>
                               <label for="customRadio2" class="custom-control-label">Kantor</label>
                             </div>
                             <div class="custom-control custom-radio col-md-3">
-                              <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio3" name="position"
+                              <input class="custom-control-input @error('position') is-invalid @enderror" type="radio" id="customRadio3"
+                                     name="position"
                                      value="Kost" {{ old('position') == 'Kost' ? 'checked' : '' }}>
                               <label for="customRadio3" class="custom-control-label">Kost</label>
                             </div>
@@ -137,7 +142,8 @@
                                   <input type="radio" name="position" value="0" {{ old('position') != 'Rumah' && old('position') != 'Kantor' && old('position') != 'Kost' ? 'checked' : '' }}>
                                 </span>
                               </div>
-                              <input type="text" class="form-control @error('positionDescription') is-invalid @enderror" name="positionDescription" placeholder="Lain-Lain..."
+                              <input type="text" class="form-control @error('positionDescription') is-invalid @enderror"
+                                     name="positionDescription" placeholder="Lain-Lain..."
                                      value="{{ old('positionDescription') }}">
                             </div>
                           </div>
@@ -147,19 +153,23 @@
                   </div>
                   <div class="form-group">
                     <label for="disease">Bagaimana Kondisi anda saat ini?</label>
-                    <select id="disease" name="disease" class="form-control @error('disease') is-invalid @enderror select2 select2-danger" data-dropdown-css-class="select2-danger" required>
+                    <select id="disease" name="disease" class="form-control @error('disease') is-invalid @enderror select2 select2-danger"
+                            data-dropdown-css-class="select2-danger" required>
                       @foreach($disease as $item)
-                        <option value="{{ $item->id }}" {{ old('disease') == $item->id ? 'selected' : '' }}>{{ $item->penyakit_name }}</option>
+                        <option
+                            value="{{ $item->id }}" {{ old('disease') == $item->id ? 'selected' : '' }}>{{ $item->penyakit_name }}</option>
                       @endforeach
                     </select>
                   </div>
                   <div class="form-group">
                     <label for="description">Jika terdapat keluhan, silahkan jelaskan gejala/keluhan yang anda alami saat ini </label>
-                    <input type="text" class="form-control @error('description') is-invalid @enderror" id="description" name="description" placeholder="Keluhan" value="{{ old('description') }}">
+                    <input type="text" class="form-control @error('description') is-invalid @enderror" id="description" name="description"
+                           placeholder="Keluhan" value="{{ old('description') }}">
                   </div>
                   <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="check" name="check">
-                    <label class="form-check-label @error('description') text-danger @enderror" for="check">Data ini saya buat dengan sebenar - benarnya dan dapat dipertanggungjawabkan</label>
+                    <label class="form-check-label @error('description') text-danger @enderror" for="check">Data ini saya buat dengan
+                      sebenar - benarnya dan dapat dipertanggungjawabkan</label>
                   </div>
                 </div>
 
@@ -246,16 +256,16 @@
               <div class="modal-body">
                 <table id="belumT" class="table table-bordered table-striped" style="width: 100%">
                   <thead>
-                    <tr>
-                      <th>NIP</th>
-                      <th>Nama Pegawai</th>
-                      <th>Jabatan</th>
-                      @admin
-                      <th>Divisi</th>
-                      @endadmin
-                      <th>WA</th>
-                      <th>Call</th>
-                    </tr>
+                  <tr>
+                    <th>NIP</th>
+                    <th>Nama Pegawai</th>
+                    <th>Jabatan</th>
+                    @admin
+                    <th>Divisi</th>
+                    @endadmin
+                    <th>WA</th>
+                    <th>Call</th>
+                  </tr>
                   </thead>
                   <tbody>
                   @foreach($belum as $item)
@@ -267,7 +277,8 @@
                       <td>{{ $item->department ? $item->department->department_name : '' }}</td>
                       @endadmin
                       <td>
-                        <a href="https://api.whatsapp.com/send?phone={{$item->phone}}&text=Segera%20laporkan%20kondisi%20kesehatan%20anda%20klik%20{{ url('/') }}&source=&data=&app_absent=" type="button" class="btn btn-success btn-block">
+                        <a href="https://api.whatsapp.com/send?phone={{$item->phone}}&text=Segera%20laporkan%20kondisi%20kesehatan%20anda%20klik%20{{ url('/') }}&source=&data=&app_absent="
+                           type="button" class="btn btn-success btn-block">
                           <i class="fab fa-whatsapp"></i>
                         </a>
                       </td>
@@ -390,38 +401,38 @@
               <div class="modal-body">
                 <table id="sudahSakit" class="table table-bordered table-striped" style="width: 100%">
                   <thead>
-                    <tr>
-                      <th>Jam</th>
-                      <th>NIP</th>
-                      <th>Nama</th>
-                      <th>Jabatan</th>
-                      @admin
-                      <th>Divisi</th>
-                      @endadmin
-                      <th>Kondisi</th>
-                      <th>View</th>
-                    </tr>
+                  <tr>
+                    <th>Jam</th>
+                    <th>NIP</th>
+                    <th>Nama</th>
+                    <th>Jabatan</th>
+                    @admin
+                    <th>Divisi</th>
+                    @endadmin
+                    <th>Kondisi</th>
+                    <th>View</th>
+                  </tr>
                   </thead>
                   <tbody>
-                    @foreach($sudah as $item)
-                      @if($item->absenes->id_penyakit != 1)
-                        <tr>
-                          <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
-                          <td>{{ $item->username }}</td>
-                          <td>{{ $item->name }}</td>
-                          <td>{{ $item->job }}</td>
-                          @admin
-                          <td>{{ $item->department ? $item->department->department_name : '' }}</td>
-                          @endadmin
-                          <td>{{ $item->disease->penyakit_name }}</td>
-                          <td>
-                            <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
-                              <i class="fas fa-eye"></i>
-                            </a>
-                          </td>
-                        </tr>
-                      @endif
-                    @endforeach
+                  @foreach($sudah as $item)
+                    @if($item->absenes->id_penyakit != 1)
+                      <tr>
+                        <td>{{ \Carbon\Carbon::parse($item->absenes->created_at)->format('H:i') }}</td>
+                        <td>{{ $item->username }}</td>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->job }}</td>
+                        @admin
+                        <td>{{ $item->department ? $item->department->department_name : '' }}</td>
+                        @endadmin
+                        <td>{{ $item->disease->penyakit_name }}</td>
+                        <td>
+                          <a href="{{ route('user.show', $item->id) }}" type="button" class="btn btn-primary btn-xs btn-block">
+                            <i class="fas fa-eye"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    @endif
+                  @endforeach
                   </tbody>
                 </table>
               </div>
@@ -490,21 +501,21 @@
             <div class="modal-body">
               <table id="reportdep" class="table table-bordered table-striped" style="width: 100%">
                 <thead>
-                  <tr>
-                    <th>Divisi</th>
-                    <th>Jumlah</th>
-                    <th>Lapor</th>
-                    <th>%</th>
-                  </tr>
+                <tr>
+                  <th>Divisi</th>
+                  <th>Jumlah</th>
+                  <th>Lapor</th>
+                  <th>%</th>
+                </tr>
                 </thead>
                 <tbody>
-                  @foreach($groupDepartment as $item)
-                    <tr>
-                      <td>{{$item->departmentName}}</td>
-                      <td>{{ $item->totalUser }}</td>
-                      <td>{{ $item->absens }}</td>
-                      <td>{{ round($item->absens/$item->totalUser*100,1) }}%</td>
-                  @endforeach
+                @foreach($groupDepartment as $item)
+                  <tr>
+                    <td>{{$item->departmentName}}</td>
+                    <td>{{ $item->totalUser }}</td>
+                    <td>{{ $item->absens }}</td>
+                    <td>{{ round($item->absens/$item->totalUser*100,1) }}%</td>
+                @endforeach
                 </tbody>
               </table>
             </div>
@@ -549,19 +560,19 @@
             <div class="modal-body">
               <table id="kesehatan" class="table table-bordered table-striped" style="width: 100%">
                 <thead>
-                  <tr>
-                    <th>Dapartment</th>
-                    <th>Sehat</th>
-                    <th>Sakit</th>
-                  </tr>
+                <tr>
+                  <th>Dapartment</th>
+                  <th>Sehat</th>
+                  <th>Sakit</th>
+                </tr>
                 </thead>
                 <tbody>
-                  @foreach($dataDepartment as $item)
-                    <tr>
-                      <td>{{$item->departmentName}}</td>
-                      <td>{{ $item->sehat }}</td>
-                      <td>{{ $item->sakit }}</td>
-                  @endforeach
+                @foreach($groupDepartment as $item)
+                  <tr>
+                    <td>{{$item->departmentName}}</td>
+                    <td>{{ $item->sehat }}</td>
+                    <td>{{ $item->sakit }}</td>
+                @endforeach
                 </tbody>
               </table>
             </div>
@@ -838,7 +849,7 @@
     $(function () {
       let dataDepartment = {
         labels: [
-          @foreach($dataDepartment as $id => $item)
+          @foreach($groupDepartment as $id => $item)
             '{{ $item->departmentName }}',
           @endforeach
         ],
@@ -853,7 +864,7 @@
             pointHighlightFill: '#fff',
             pointHighlightStroke: 'rgba(60,141,188,1)',
             data: [
-              @foreach($dataDepartment as $id => $item)
+              @foreach($groupDepartment as $id => $item)
               {{ $item->sehat }},
               @endforeach
             ]
@@ -868,7 +879,7 @@
             pointHighlightFill: '#fff',
             pointHighlightStroke: 'rgba(220,220,220,1)',
             data: [
-              @foreach($dataDepartment as $id => $item)
+              @foreach($groupDepartment as $id => $item)
               {{ $item->sakit }},
               @endforeach
             ]
@@ -942,7 +953,8 @@
               @foreach($dataSakit as $id => $item)
               {{ $item }},
               @endforeach
-            ],            backgroundColor: ['#f56954', '##e04f53', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de', '#51ff0d', '#ffff00', '#00008b', '#ff0000'],
+            ],
+            backgroundColor: ['#f56954', '##e04f53', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de', '#51ff0d', '#ffff00', '#00008b', '#ff0000'],
 
           }
         ]

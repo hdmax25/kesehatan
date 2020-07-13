@@ -28,12 +28,8 @@ class HomeController extends Controller
    */
   public function index(): Renderable
   {
-    $sehat = 0;
-    $sakit = 0;
     $dataSakit = array();
     if (Auth::user()->role == 1) {
-      $department = Departement::where('delete', 0)->get();
-      $disease = Penyakit::where('delete', 0)->get();
       $report = User::where('role', '!=', 1)->where('delete', 0)->get();
       $report->map(function ($item) {
         $item->department = Departement::find($item->id_department);
@@ -46,17 +42,35 @@ class HomeController extends Controller
         return $item;
       });
 
-      $groupDepartment = User::where('role', '!=', 1)->where('delete', 0)->get()->groupBy(function ($item) {
+      $mirrorReport = $report->chunk(500);
+      foreach ($mirrorReport as $id => $item) {
+        foreach ($item as $subId => $subItem) {
+          if ($subItem->absenes) {
+            if ($subItem->absenes->id_penyakit != 1) {
+              $dataSakit[Penyakit::find($subItem->absenes->id_penyakit)->penyakit_name] = $subItem->absenes->whereDate('created_at', Carbon::now())->where('id_penyakit', $subItem->absenes->id_penyakit)->count();
+            }
+          }
+        }
+      }
+
+      $groupDepartment = $report->groupBy(function ($item) {
         return $item->id_department;
       })->map(function ($item, $id) {
         $item->departmentName = Departement::find($id)->department_name;
         $item->totalUser = 0;
         $item->absens = 0;
         $item->notAbsens = 0;
+        $item->sehat = 0;
+        $item->sakit = 0;
         foreach ($item as $subItem) {
           $item->totalUser++;
           $subItem->absenes = Report::where('id_user', $subItem->id)->whereDate('created_at', Carbon::now())->orderBy('id', 'desc')->first();
           if ($subItem->absenes) {
+            if ($subItem->absenes->id_penyakit == 1) {
+              ++$item->sehat;
+            } else {
+              ++$item->sakit;
+            }
             $item->absens++;
           } else {
             $item->notAbsens++;
@@ -65,47 +79,16 @@ class HomeController extends Controller
         return $item;
       });
 
-      $dataDepartment = Report::whereDate('created_at', Carbon::now())->get()->groupBy(function ($item) {
-        return $item->id_department;
-      })->map(function ($item, $id) {
-        $item->departmentName = Departement::find($id)->department_name;
-        $item->sehat = 0;
-        $item->sakit = 0;
-        foreach ($item as $subItem) {
-          if ($subItem->id_penyakit == 1) {
-            ++$item->sehat;
-          } else {
-            ++$item->sakit;
-          }
-        }
-        return $item;
-      });
-
-      foreach ($report->whereNotNull('absenes') as $item) {
-        if ($item->absenes->id_penyakit != 1) {
-          $dataSakit[Penyakit::find($item->absenes->id_penyakit)->penyakit_name] = $item->absenes->whereDate('created_at', Carbon::now())->where('id_penyakit', $item->absenes->id_penyakit)->count();
-          $sakit++;
-        } else {
-          $sehat++;
-        }
-      }
-
       $data = [
         'groupDepartment' => $groupDepartment,
-        'dataDepartment' => $dataDepartment,
-        'department' => $department,
-        'disease' => $disease,
-        'sehat' => $sehat,
-        'sakit' => $sakit,
+        'sehat' => $report->whereNotNull('absenes')->where('absenes.id_penyakit', 1)->count(),
+        'sakit' => $report->whereNotNull('absenes')->where('absenes.id_penyakit', '!=', 1)->count(),
         'dataSakit' => $dataSakit,
         'sudah' => $report->whereNotNull('absenes'),
         'belum' => $report->whereNull('absenes')
       ];
       return view('home', $data);
     } else if (Auth::user()->role == 2) {
-      $sehat = 0;
-      $sakit = 0;
-      $dataSakit = array();
       $validateToday = Report::where('id_user', Auth::user()->id)->whereDate('created_at', Carbon::now())->count();
       $disease = Penyakit::where('delete', 0)->get();
       $report = User::where('role', '!=', 1)->where('delete', 0)->where('id_department', Auth::user()->id_department)->get();
@@ -122,12 +105,14 @@ class HomeController extends Controller
 
       $domicile = Report::where('id_user', Auth::user()->id)->orderBy('id', 'desc')->first();
 
-      foreach ($report->whereNotNull('absenes') as $item) {
-        if ($item->absenes->id_penyakit != 1) {
-          $dataSakit[Penyakit::find($item->absenes->id_penyakit)->penyakit_name] = $item->absenes->whereDate('created_at', Carbon::now())->where('id_penyakit', $item->absenes->id_penyakit)->count();
-          $sakit++;
-        } else {
-          $sehat++;
+      $mirrorReport = $report->chunk(500);
+      foreach ($mirrorReport as $id => $item) {
+        foreach ($item as $subId => $subItem) {
+          if ($subItem->absenes) {
+            if ($subItem->absenes->id_penyakit != 1) {
+              $dataSakit[Penyakit::find($subItem->absenes->id_penyakit)->penyakit_name] = $subItem->absenes->whereDate('created_at', Carbon::now())->where('id_penyakit', $subItem->absenes->id_penyakit)->count();
+            }
+          }
         }
       }
 
@@ -135,8 +120,8 @@ class HomeController extends Controller
         'domicile' => $domicile,
         'todayCheck' => $validateToday,
         'disease' => $disease,
-        'sehat' => $sehat,
-        'sakit' => $sakit,
+        'sehat' => $report->whereNotNull('absenes')->where('absenes.id_penyakit', 1)->count(),
+        'sakit' => $report->whereNotNull('absenes')->where('absenes.id_penyakit', '!=', 1)->count(),
         'dataSakit' => $dataSakit,
         'sudah' => $report->whereNotNull('absenes'),
         'belum' => $report->whereNull('absenes')

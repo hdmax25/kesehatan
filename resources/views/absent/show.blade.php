@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-  <div class="row">
+  <div class="row" onload="startTime(); getLocation();">
     <div class="col-md-12">
       <div id="warning" class="alert alert-warning d-none">
         <h5><i class="icon fas fa-info"></i> Perhatian</h5>

@@ -207,69 +207,65 @@ class ReportController extends Controller
 
   public function daily(): Renderable
   {
-    $sehat = 0;
-    $sakit = 0;
     $dataSakit = array();
-      $department = Departement::where('delete', 0)->get();
-      $disease = Penyakit::where('delete', 0)->get();
-      $report = User::where('role', '!=', 1)->where('delete', 0)->orderBy('id_department', 'desc')->get();
-      $report->map(function ($item) {
-        $item->department = Departement::find($item->id_department);
-        $item->absenes = Report::whereDate('created_at', Carbon::now())->where('id_user', $item->id)->orderBy('id_department', 'desc')->first();
-        if ($item->absenes) {
-          $item->disease = Penyakit::find($item->absenes->id_penyakit);
-        } else {
-          $item->disease = null;
-        }
-        return $item;
-      });
+    $report = User::where('role', '!=', 1)->where('delete', 0)->get();
+    $report->map(function ($item) {
+      $item->department = Departement::find($item->id_department);
+      $item->absenes = Report::whereDate('created_at', Carbon::now())->where('id_user', $item->id)->orderBy('id', 'desc')->first();
+      if ($item->absenes) {
+        $item->disease = Penyakit::find($item->absenes->id_penyakit);
+      } else {
+        $item->disease = null;
+      }
+      return $item;
+    });
 
-      $groupDepartment = User::where('role', '!=', 1)->where('delete', 0)->get()->groupBy(function ($item) {
-        return $item->id_department;
-      })->map(function ($item, $id) {
-        $item->departmentName = Departement::find($id)->department_name;
-        $item->totalUser = 0;
-        $item->absens = 0;
-        $item->notAbsens = 0;
-        $item->sehat = 0;
-        $item->sakit = 0;
-        foreach ($item as $subItem) {
-          $item->totalUser++;
-          $subItem->absenes = Report::where('id_user', $subItem->id)->whereDate('created_at', Carbon::now())->orderBy('id_department', 'desc')->first();
-          if ($subItem->absenes) {
-            $item->absens++;
-            if ($subItem->absenes->id_penyakit == 1) {
-              ++$item->sehat;
-            } else {
-              ++$item->sakit;
-            }
-          } else {
-            $item->notAbsens++;
+    $mirrorReport = $report->chunk(500);
+    foreach ($mirrorReport as $id => $item) {
+      foreach ($item as $subId => $subItem) {
+        if ($subItem->absenes) {
+          if ($subItem->absenes->id_penyakit != 1) {
+            $dataSakit[Penyakit::find($subItem->absenes->id_penyakit)->penyakit_name] = $subItem->absenes->whereDate('created_at', Carbon::now())->where('id_penyakit', $subItem->absenes->id_penyakit)->count();
           }
         }
-        return $item;
-      });
+      }
+    }
 
-      foreach ($report->whereNotNull('absenes') as $item) {
-        if ($item->absenes->id_penyakit != 1) {
-          $dataSakit[Penyakit::find($item->absenes->id_penyakit)->penyakit_name] = $item->absenes->whereDate('created_at', Carbon::now())->where('id_penyakit', $item->absenes->id_penyakit)->count();
-          $sakit++;
+    $groupDepartment = $report->groupBy(function ($item) {
+      return $item->id_department;
+    })->map(function ($item, $id) {
+      $item->departmentName = Departement::find($id)->department_name;
+      $item->totalUser = 0;
+      $item->absens = 0;
+      $item->notAbsens = 0;
+      $item->sehat = 0;
+      $item->sakit = 0;
+      foreach ($item as $subItem) {
+        $item->totalUser++;
+        $subItem->absenes = Report::where('id_user', $subItem->id)->whereDate('created_at', Carbon::now())->orderBy('id', 'desc')->first();
+        if ($subItem->absenes) {
+          if ($subItem->absenes->id_penyakit == 1) {
+            ++$item->sehat;
+          } else {
+            ++$item->sakit;
+          }
+          $item->absens++;
         } else {
-          $sehat++;
+          $item->notAbsens++;
         }
       }
+      return $item;
+    });
 
-      $data = [
-        'groupDepartment' => $groupDepartment,
-        'department' => $department,
-        'disease' => $disease,
-        'sehat' => $sehat,
-        'sakit' => $sakit,
-        'dataSakit' => $dataSakit,
-        'sudah' => $report->whereNotNull('absenes'),
-        'belum' => $report->whereNull('absenes')
-      ];
-      return view('report.daily', $data);
+    $data = [
+      'groupDepartment' => $groupDepartment,
+      'sehat' => $report->whereNotNull('absenes')->where('absenes.id_penyakit', 1)->count(),
+      'sakit' => $report->whereNotNull('absenes')->where('absenes.id_penyakit', '!=', 1)->count(),
+      'dataSakit' => $dataSakit,
+      'sudah' => $report->whereNotNull('absenes'),
+      'belum' => $report->whereNull('absenes')
+    ];
+    return view('report.daily', $data);
   }
 
   /**
@@ -332,6 +328,7 @@ class ReportController extends Controller
         'domicile' => 'Domisili',
       ]
     ];
+
     $report = Report::where('id_department', Auth::user()->id_department)->get();
     $report->map(function ($item) {
       $item->user = User::find($item->id_user);
