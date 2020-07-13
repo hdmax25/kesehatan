@@ -132,7 +132,7 @@
             <a href="{{ route('absent.show', Auth::user()->id) }}" class="nav-link {{ request()->is('absent/show/*') ? 'active' : '' }}"> 
               <i class="nav-icon far fa-clock"></i>
               <p>
-                Present
+                Presence
                 <span class="right badge badge-warning">Testing</span>
               </p>
             </a>
