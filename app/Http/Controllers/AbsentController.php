@@ -69,7 +69,7 @@ class AbsentController extends Controller
         $checkToday = Absent::where('id_user', Auth::user()->id)->whereDate('created_at', Carbon::now())->count();
         $check = Absent::where('id_user', Auth::user()->id)->count();
 
-        $absent = Absent::where('id_user', $id)->orderBy('created_at', 'desc')->take(30)->get();
+        $absent = Absent::where('id_user', $id)->orderBy('created_at', 'desc')->take(10)->get();
         $absent->map(function ($item) {
             $item->site = Site::find($item->id_location);
         
