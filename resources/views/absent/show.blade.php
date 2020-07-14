@@ -11,7 +11,7 @@
 @endsection
 
 @section('content')
-  <div class="row" onload="startTime(); getLocation();">
+  <div class="row">
     <div class="col-md-12">
       <div id="warning" class="alert alert-warning d-none">
         <h5><i class="icon fas fa-info"></i> Perhatian</h5>
@@ -75,8 +75,8 @@
             <li class="list-group-item">
               <b>Time</b> <a class="float-right" id="clock"></a>
             </li>
-            <li id="locContainer" class="list-group-item">
-              <b>Location</b> <a class="float-right" id="loc"></a>
+            <li class="list-group-item">
+              <b>Location</b> <a class="float-right" id="loc"><i class="fas fa-sync-alt fa-spin"></i></a>
             </li>
           </ul>
             @if ($checkToday < 99)
@@ -190,8 +190,14 @@
   <!-- IP Detect -->
   <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
 
-  <!-- Jam -->
   <script>
+    // Run Away
+    $(function() {
+      startTime();
+      getLocation();
+    });
+
+    //Live Clock
     function startTime() {
       var today = new Date();
       var h = today.getHours();
@@ -207,10 +213,8 @@
       if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
       return i;
     }
-  </script>
-  
-  <!-- Cari Lokasi -->
-  <script>    
+
+    // Find Location
     function getLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -223,10 +227,10 @@
       var x = position.coords.latitude.toFixed(3);
       var y = position.coords.longitude.toFixed(3);
       @foreach($sites as $item) {{ $item->id == $firstSite ? 'if' : 'else if'}} (x == {{ $item->latitude }} && y == {{ $item->longitude }}) {
-          document.getElementById("warning").classList.add("d-none"),
-          loc.innerHTML = "{{ $item->name }}",
-          document.getElementById("show").classList.remove("d-none"),
-          document.getElementById("site").value = "{{ $item->id }}",
+          document.getElementById("warning").classList.add("d-none");
+          loc.innerHTML = "{{ $item->name }}";
+          document.getElementById("show").classList.remove("d-none");
+          document.getElementById("site").value = "{{ $item->id }}";
           document.getElementById("loading").classList.add("d-none");
         } @endforeach else {
         xx.innerHTML = "Posisi anda tidak pada lokasi yang ditentukan <br>Posisi saat ini : " + x + ", " + y;
@@ -234,7 +238,7 @@
         toastr.warning('Posisi belum tepat');
         refresh.innerHTML = "Perbarui Lokasi";
         document.getElementById("warning").classList.remove("d-none");
-        document.getElementById("locContainer").classList.add("d-none");
+        document.getElementById("loading").classList.add("d-none");
       }
     }
 
