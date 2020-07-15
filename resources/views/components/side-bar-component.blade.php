@@ -133,7 +133,7 @@
               <i class="nav-icon far fa-clock"></i>
               <p>
                 Presence
-                <span class="right badge badge-warning">Testing</span>
+                <span class="right badge badge-warning">Trial!!</span>
               </p>
             </a>
           </li>
