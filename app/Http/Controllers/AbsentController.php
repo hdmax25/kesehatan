@@ -67,7 +67,7 @@ class AbsentController extends Controller
         $user = User::find($id);
         $user->department = Departement::find($user->id_department);
 
-        $attLog = tblAttendanceLog::where('EmpCode', Auth::user()->username)->orderBy('CreateDt','desc')->get();
+        $attLog = tblAttendanceLog::where('EmpCode', Auth::user()->username)->orderBy('CreateDt','desc')->take(10)->get();
         $logCount = 0;
         $logCount = $attLog->count();
 
