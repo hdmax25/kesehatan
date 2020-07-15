@@ -13,7 +13,7 @@
 @section('content')
   <div class="row">
     <div class="col-md-12">
-      <div id="warning" class="alert alert-warning d-none">
+      <div id="warning" class="alert alert-warning alert-dismissible d-none">
         <h5><i class="icon fas fa-info"></i> Perhatian</h5>
         <span id="xx"></span>
         <ul class="nav">
@@ -79,67 +79,64 @@
               <b>Location</b> <a class="float-right" id="loc"><i class="fas fa-sync-alt fa-spin"></i></a>
             </li>
           </ul>
-            @if ($checkToday < 99)
-              @if ($check == 0 || $check % 2 == 0)
-                <a href="#" id="show" class="btn btn-danger btn-block d-none" data-toggle="modal" data-target="#masuk"><b>Masuk</b></button></a>
-                <div class="modal fade" id="masuk">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h4 class="modal-title">Masuk</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">×</span>
-                        </button>
-                      </div>
-                      <form action="{{ route('absent.store') }}" method="post">
-                        @csrf
-                        <div class="modal-body">
-                            Selamat bekerja Kak..
-                            <br>Semoga harimu menyenangkan
-                            <span class="d-none">
-                              <input id="site" name="location">
-                              <input id="ipaddress" name="ipaddress">
-                            </span>
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                          <button type="submit" class="btn btn-success">Ya</button>
-                          <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
-                        </div>
-                      </form>
-                    </div>
+          <a href="#" id="show" class="btn btn-danger btn-block d-none" data-toggle="modal" data-target="{{ $logCount%2 == 0 ? '#pulang' : '#masuk' }}"><b>{{ $logCount%2 == 0 ? 'OUT' : 'IN' }}</b></button></a>
+          @if($logCount%2 == 0)
+            <div class="modal fade" id="pulang">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Pulang</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
                   </div>
-                </div>
-              @else
-                <a href="#" id="show" class="btn btn-danger btn-block d-none" data-toggle="modal" data-target="#pulang"><b>Pulang</b></a>
-                <div class="modal fade" id="pulang">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h4 class="modal-title">Pulang</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">×</span>
-                        </button>
-                      </div>
-                      <form action="{{ route('absent.update') }}" method="post">
-                        @csrf
-                        <div class="modal-body">
-                          <p>Lelah usai kerja, bersukurlah. Karena diluar sana banyak yang lelah mencari kerja</p>
-                          <p>Selamat pulang, Hati2 dijalan!!</p>
-                          <span class="d-none">
-                            <input id="site" name="location">
-                            <input id="ipaddress" name="ipaddress">
-                          </span>
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                          <button type="submit" class="btn btn-success">Ya</button>
-                          <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
-                        </div>
-                      </form>
+                  <form action="{{ route('TblAttendanceLog.store') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                      <p>Lelah usai kerja, bersukurlah. Karena diluar sana banyak yang lelah mencari kerja</p>
+                      <p>Selamat pulang, Hati2 dijalan!!</p>
+                      <span class="d-none">
+                        <input id="site" name="location">
+                        <input id="ipaddress" name="ipaddress">
+                      </span>
                     </div>
-                  </div>
+                    <div class="modal-footer justify-content-between">
+                      <button type="submit" class="btn btn-success">Ya</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
+                    </div>
+                  </form>
                 </div>
-              @endif
-            @endif
+              </div>
+            </div>
+          @else
+            <div class="modal fade" id="masuk">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Masuk</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                  <form action="{{ route('TblAttendanceLog.store') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        Selamat bekerja Kak..
+                        <br>Semoga harimu menyenangkan
+                        <span class="d-none">
+                          <input id="site" name="location">
+                          <input id="ipaddress" name="ipaddress">
+                        </span>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                      <button type="submit" class="btn btn-success">Ya</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          @endif
         </div>
         <div id="loading" class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>
       </div>
@@ -153,17 +150,17 @@
           <table class="table table-hover table-sm table-nowarp">
             <thead>
               <tr>
-                <th>Log</th>
-                <th>Date and Time</th>
+                <th>Date</th>
+                <th>Time</th>
                 <th>Location</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($absent as $item)
+              @foreach( $attLog as $item)
                 <tr>
-                  <td>{{ $item->attend == 0 ? 'In' : 'Out' }}</td>
-                  <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y H:i') }}</td>
-                  <td>{{ $item->site->name }}<td>
+                  <td>{{ \Carbon\Carbon::parse($item->CreateDt)->format('d-m-Y') }}</td>
+                  <td>{{ \Carbon\Carbon::parse($item->CreateDt)->format('H:i') }}</td>
+                  <td>{{ $item->Machine }}<td>
                 </tr>
               @endforeach
             </tbody>
@@ -230,7 +227,7 @@
           document.getElementById("warning").classList.add("d-none");
           loc.innerHTML = "{{ $item->name }}";
           document.getElementById("show").classList.remove("d-none");
-          document.getElementById("site").value = "{{ $item->id }}";
+          document.getElementById("site").value = "{{ $item->name }}";
           document.getElementById("loading").classList.add("d-none");
         } @endforeach else {
         xx.innerHTML = "Posisi anda tidak pada lokasi yang ditentukan <br>Posisi saat ini : " + x + ", " + y;

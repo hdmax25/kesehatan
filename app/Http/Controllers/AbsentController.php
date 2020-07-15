@@ -9,6 +9,7 @@ use App\model\Departement;
 use App\model\Penyakit;
 use App\model\Report;
 use Carbon\Carbon;
+use App\model\tblAttendanceLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -66,27 +67,19 @@ class AbsentController extends Controller
         $user = User::find($id);
         $user->department = Departement::find($user->id_department);
 
-        $checkToday = Absent::where('id_user', Auth::user()->id)->whereDate('created_at', Carbon::now())->count();
-        $check = Absent::where('id_user', Auth::user()->id)->count();
-
-        $absent = Absent::where('id_user', $id)->orderBy('created_at', 'desc')->take(10)->get();
-        $absent->map(function ($item) {
-            $item->site = Site::find($item->id_location);
-        
-        });
-        $absentToday = Absent::where('id_user', Auth::user()->id)->orderBy('id', 'desc')->first();
+        $attLog = tblAttendanceLog::where('EmpCode', Auth::user()->username)->orderBy('CreateDt','desc')->get();
+        $logCount = 0;
+        $logCount = $attLog->count();
 
         $sites = Site::where('delete', 0)->get();
         $firstSite = Site::where('delete', 0)->min('id');
 
         $data = [
           'user' => $user,
-          'absent' => $absent,
-          'checkToday' => $checkToday,
-          'check' => $check,
-          'absentToday' => $absentToday,
           'sites' => $sites,
           'firstSite' => $firstSite,
+          'attLog' => $attLog,
+          'logCount' => $logCount,
         ];
         return view('absent.show', $data);
     }

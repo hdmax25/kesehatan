@@ -45,12 +45,20 @@ Route::group(['prefix' => 'absent', 'as' => 'absent.'], static function () {
   Route::get('/destroy/{id}', 'AbsentController@destroy')->name('destroy')->middleware('auth');
 });
 
+Route::group(['prefix' => 'TblAttendanceLog', 'as' => 'TblAttendanceLog.'], static function () {
+  Route::get('/', 'TblAttendanceLogController@index')->name('index')->middleware('auth');
+  Route::get('/show/{id}', 'TblAttendanceLogController@show')->name('show')->middleware('auth');
+  Route::post('/store', 'TblAttendanceLogController@store')->name('store')->middleware('auth');
+  Route::post('/update', 'TblAttendanceLogController@update')->name('update')->middleware('auth');
+  Route::get('/destroy/{id}', 'TblAttendanceLogController@destroy')->name('destroy')->middleware('auth');
+});
+
 Route::group(['prefix' => 'site', 'as' => 'site.'], static function () {
   Route::get('/', 'SiteController@index')->name('index')->middleware('auth', 'role:1');
   Route::get('/show/{id}', 'SiteController@show')->name('show')->middleware('auth', 'role:1');
   Route::post('/store', 'SiteController@store')->name('store')->middleware('auth', 'role:1');
   Route::post('/update/{id}', 'SiteController@update')->name('update')->middleware('auth', 'role:1');
-  Route::get('/destroy/{id}', 'SiteController@destroy')->name('destroy')->middleware('auth', 'role:1');
+  Route::get('/destroy/{id}', 'SitecController@destroy')->name('destroy')->middleware('auth', 'role:1');
 });
 
 Route::group(['prefix' => 'penyakit', 'as' => 'penyakit.'], static function () {
