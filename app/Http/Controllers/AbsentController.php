@@ -67,9 +67,12 @@ class AbsentController extends Controller
         $user = User::find($id);
         $user->department = Departement::find($user->id_department);
 
-        $attLog = tblAttendanceLog::where('EmpCode', Auth::user()->username)->orderBy('CreateDt','desc')->take(10)->get();
-        $logCount = 0;
-        $logCount = $attLog->count();
+        $att = tblAttendanceLog::where('EmpCode', Auth::user()->username)->orderBy('CreateDt','desc')->get();
+        $attLog = $att->take(10);
+        $attLimit = 0;
+        $attLimit = $att->where('created_at', Carbon::now())->count();
+        $attCount = 0;
+        $attCount = $att->count();
 
         $sites = Site::where('delete', 0)->get();
         $firstSite = Site::where('delete', 0)->min('id');
@@ -79,7 +82,8 @@ class AbsentController extends Controller
           'sites' => $sites,
           'firstSite' => $firstSite,
           'attLog' => $attLog,
-          'logCount' => $logCount,
+          'attLimit' => $attLimit,
+          'attCount' => $attCount,
         ];
         return view('absent.show', $data);
     }

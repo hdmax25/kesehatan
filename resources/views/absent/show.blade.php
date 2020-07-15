@@ -79,13 +79,12 @@
               <b>Location</b> <a class="float-right" id="loc"><i class="fas fa-sync-alt fa-spin"></i></a>
             </li>
           </ul>
-          <a href="#" id="show" class="btn btn-danger btn-block d-none" data-toggle="modal" data-target="{{ $logCount%2 == 0 ? '#pulang' : '#masuk' }}"><b>{{ $logCount%2 == 0 ? 'OUT' : 'IN' }}</b></button></a>
-          @if($logCount%2 == 0)
-            <div class="modal fade" id="pulang">
+          <a href="#" id="show" class="btn btn-danger btn-block d-none" data-toggle="modal" data-target="#confirm"><b>{{ $attCount%2 == 0 ? 'OUT' : 'IN' }}</b></button></a>
+            <div class="modal fade" id="confirm">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h4 class="modal-title">Pulang</h4>
+                    <h4 class="modal-title">Konfrimasi</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">×</span>
                     </button>
@@ -93,8 +92,13 @@
                   <form action="{{ route('TblAttendanceLog.store') }}" method="post">
                     @csrf
                     <div class="modal-body">
-                      <p>Lelah usai kerja, bersukurlah. Karena diluar sana banyak yang lelah mencari kerja</p>
-                      <p>Selamat pulang, Hati2 dijalan!!</p>
+                      @if($attCount%2 == 0)
+                        Lelah usai kerja, bersukurlah. Karena diluar sana banyak yang lelah mencari kerja
+                        <br>Selamat pulang, Hati2 dijalan!!
+                      @else
+                        Selamat bekerja Kak..
+                        <br>Semoga harimu menyenangkan
+                      @endif
                       <span class="d-none">
                         <input id="site" name="location">
                         <input id="ipaddress" name="ipaddress">
@@ -102,43 +106,13 @@
                     </div>
                     <div class="modal-footer justify-content-between">
                       <button id="btnInOut" onclick="hideBtn()" type="submit" class="btn btn-success">Ya</button>
-                      <span id="btnLoading" class="btn btn-default d-none"><i class="fas fa-sync-alt fa-spin"></i></span>
+                      <span id="btnLoading" class="btn btn-success d-none"><i class="fas fa-sync-alt fa-spin"></i></span>
                       <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
                     </div>
                   </form>
                 </div>
               </div>
             </div>
-          @else
-            <div class="modal fade" id="masuk">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title">Masuk</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">×</span>
-                    </button>
-                  </div>
-                  <form action="{{ route('TblAttendanceLog.store') }}" method="post">
-                    @csrf
-                    <div class="modal-body">
-                        Selamat bekerja Kak..
-                        <br>Semoga harimu menyenangkan
-                        <span class="d-none">
-                          <input id="site" name="location">
-                          <input id="ipaddress" name="ipaddress">
-                        </span>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                      <button id="btnInOut" onclick="hideBtn()" type="submit" class="btn btn-success">Ya</button>
-                      <span id="btnLoading" class="btn btn-default d-none"><i class="fas fa-sync-alt fa-spin"></i></span>
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          @endif
         </div>
         <div id="loading" class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>
       </div>
