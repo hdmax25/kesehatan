@@ -101,7 +101,8 @@
                       </span>
                     </div>
                     <div class="modal-footer justify-content-between">
-                      <button type="submit" class="btn btn-success">Ya</button>
+                      <button id="btnInOut" onclick="hideBtn()" type="submit" class="btn btn-success">Ya</button>
+                      <span id="btnLoading" class="btn btn-default d-none"><i class="fas fa-sync-alt fa-spin"></i></span>
                       <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
                     </div>
                   </form>
@@ -129,8 +130,9 @@
                         </span>
                     </div>
                     <div class="modal-footer justify-content-between">
-                      <button type="submit" class="btn btn-success">Ya</button>
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+                      <button id="btnInOut" onclick="hideBtn()" type="submit" class="btn btn-success">Ya</button>
+                      <span id="btnLoading" class="btn btn-default d-none"><i class="fas fa-sync-alt fa-spin"></i></span>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
                     </div>
                   </form>
                 </div>
@@ -209,6 +211,12 @@
     function checkTime(i) {
       if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
       return i;
+    }
+
+    //Hide Button
+    function hideBtn() {
+      document.getElementById("btnInOut").classList.add("d-none");
+      document.getElementById("btnLoading").classList.remove("d-none");
     }
 
     // Find Location
