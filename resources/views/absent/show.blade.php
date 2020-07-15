@@ -126,7 +126,7 @@
           <table class="table table-hover table-sm table-nowarp">
             <thead>
               <tr>
-                <th>Log</th>
+                {{-- <th>Log</th> --}}
                 <th>Date</th>
                 <th>Time</th>
                 <th>Location</th>
@@ -135,7 +135,7 @@
             <tbody>
               @foreach( $attLog as $item)
                 <tr>
-                  <td>{{ ($loop->index + $attCount) %2 == 0 ? 'OUT' : 'IN' }}</td>
+                  {{-- <td>{{ ($loop->index + $attCount) %2 == 0 ? 'OUT' : 'IN' }}</td> --}}
                   <td>{{ \Carbon\Carbon::parse($item->CreateDt)->format('d-m-Y') }}</td>
                   <td>{{ \Carbon\Carbon::parse($item->CreateDt)->format('H:i') }}</td>
                   <td>{{ $item->Machine }}<td>
