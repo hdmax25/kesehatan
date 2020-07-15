@@ -155,7 +155,7 @@
                 <th>Location</th>
               </tr>
             </thead>
-            <tbody>
+            {{-- <tbody>
               @foreach( $attLog as $item)
                 <tr>
                   <td>{{ \Carbon\Carbon::parse($item->CreateDt)->format('d-m-Y') }}</td>
@@ -163,7 +163,7 @@
                   <td>{{ $item->Machine }}<td>
                 </tr>
               @endforeach
-            </tbody>
+            </tbody> --}}
           </table>
         </div>
         <!-- /.card-body -->
