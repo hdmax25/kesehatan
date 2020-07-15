@@ -128,7 +128,7 @@
           </li>
         @endadmin
         @if (Auth::user()->role !== 1)
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="{{ route('absent.show', Auth::user()->id) }}" class="nav-link {{ request()->is('absent/show/*') ? 'active' : '' }}"> 
               <i class="nav-icon far fa-clock"></i>
               <p>
@@ -136,7 +136,7 @@
                 <span class="right badge badge-warning">Testing</span>
               </p>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a href="{{ route('user.show', Auth::user()->id) }}" class="nav-link {{ request()->is('user/show*') ? 'active' : '' }}"> 
               <i class="nav-icon fas fa-user"></i>
