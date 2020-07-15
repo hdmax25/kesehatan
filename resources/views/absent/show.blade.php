@@ -79,7 +79,7 @@
               <b>Location</b> <a class="float-right" id="loc"><i class="fas fa-sync-alt fa-spin"></i></a>
             </li>
           </ul>
-          <a href="#" id="show" class="btn btn-danger btn-block d-none" data-toggle="modal" data-target="#confirm"><b>{{ $attCount%2 == 0 ? 'OUT' : 'IN' }}</b></button></a>
+          <a href="#" id="show" class="btn btn-danger btn-block d-none" data-toggle="modal" data-target="#confirm"><b>{{ $attCount%2 == 0 ? 'IN' : 'OUT' }}</b></button></a>
             <div class="modal fade" id="confirm">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -93,11 +93,11 @@
                     @csrf
                     <div class="modal-body">
                       @if($attCount%2 == 0)
-                        Lelah usai kerja, bersukurlah. Karena diluar sana banyak yang lelah mencari kerja
-                        <br>Selamat pulang, Hati2 dijalan!!
-                      @else
                         Selamat bekerja Kak..
                         <br>Semoga harimu menyenangkan
+                      @else
+                        Lelah usai kerja, bersukurlah. Karena diluar sana banyak yang lelah mencari kerja
+                        <br>Selamat pulang, Hati2 dijalan!!
                       @endif
                       <span class="d-none">
                         <input id="site" name="location">
@@ -126,6 +126,7 @@
           <table class="table table-hover table-sm table-nowarp">
             <thead>
               <tr>
+                <th>Log</th>
                 <th>Date</th>
                 <th>Time</th>
                 <th>Location</th>
@@ -134,6 +135,7 @@
             <tbody>
               @foreach( $attLog as $item)
                 <tr>
+                  <td>{{ ($loop->index + $attCount) %2 == 0 ? 'OUT' : 'IN' }}</td>
                   <td>{{ \Carbon\Carbon::parse($item->CreateDt)->format('d-m-Y') }}</td>
                   <td>{{ \Carbon\Carbon::parse($item->CreateDt)->format('H:i') }}</td>
                   <td>{{ $item->Machine }}<td>
