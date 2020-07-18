@@ -67,6 +67,7 @@
                 <option value="KADEP" {{ old('job') == 'KADEP' || $user->job == 'KADEP' ? 'selected' : '' }}>KADEP</option>
                 <option value="KABAG" {{ old('job') == 'KABAG' || $user->job == 'KABAG' ? 'selected' : '' }}>KABAG</option>
                 <option value="KASUBAG" {{ old('job') == 'KASUBAG' || $user->job == 'KASUBAG' ? 'selected' : '' }}>KASUBAG</option>
+                <option value="SUPERVISOR" {{ old('job') == 'SUPERVISOR' || $user->job == 'SUPERVISOR' ? 'selected' : '' }}>SUPERVISOR</option>
                 <option value="STAFF" {{ old('job') == 'STAFF' || $user->job == 'STAFF' ? 'selected' : '' }}>STAFF</option>
                 <option value="OPERATOR" {{ old('job') == 'OPERATOR' || $user->job == 'OPERATOR' ? 'selected' : '' }}>OPERATOR</option>
               </select>

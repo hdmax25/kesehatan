@@ -58,7 +58,7 @@ Route::group(['prefix' => 'site', 'as' => 'site.'], static function () {
   Route::get('/show/{id}', 'SiteController@show')->name('show')->middleware('auth', 'role:1');
   Route::post('/store', 'SiteController@store')->name('store')->middleware('auth', 'role:1');
   Route::post('/update/{id}', 'SiteController@update')->name('update')->middleware('auth', 'role:1');
-  Route::get('/destroy/{id}', 'SitecController@destroy')->name('destroy')->middleware('auth', 'role:1');
+  Route::get('/destroy/{id}', 'SiteController@destroy')->name('destroy')->middleware('auth', 'role:1');
 });
 
 Route::group(['prefix' => 'penyakit', 'as' => 'penyakit.'], static function () {
