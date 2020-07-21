@@ -4,7 +4,7 @@
   <div class="login-logo">
     <small>Monitoring Kesehatan Pegawai</small>
     <a href="{{ url('/') }}">
-      <img src="{{ asset('dist/img/logo.png') }}" class="login-logo" style="width: 300px;" alt="logo">
+      <img src="{{ asset('dist/img/logo.png') }}?new" class="login-logo" style="width: 300px;" alt="logo">
     </a>
   </div>
   <!-- /.login-logo -->
