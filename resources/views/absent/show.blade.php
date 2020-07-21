@@ -136,7 +136,7 @@
               @foreach( $attLog as $item)
                 <tr>
                   {{-- <td>{{ ($loop->index + $attCount) %2 == 0 ? 'OUT' : 'IN' }}</td> --}}
-                  <td>{{ \Carbon\Carbon::parse($item->CreateDt)->format('d-m-Y') }}</td>
+                  <td>{{ \Carbon\Carbon::parse($item->CreateDt)->format('d/m/Y') }}</td>
                   <td>{{ \Carbon\Carbon::parse($item->CreateDt)->format('H:i') }}</td>
                   <td>{{ $item->Machine }}<td>
                 </tr>

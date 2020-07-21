@@ -69,7 +69,7 @@
     <div class="col-md-12">
       <div class="card card-outline card-danger">
         <div class="card-header">
-          <h3 class="card-title">Data Keshetan</h3>
+          <h3 class="card-title">Data Kesehatan</h3>
         </div>
         <div class="card-body">
           <table id="report" class="table table-bordered table-striped">

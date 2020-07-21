@@ -120,7 +120,7 @@
           </li>
           <li class="nav-item">
             <a href="{{ route('site.index') }}" class="nav-link {{ request()->is('site') ? 'active' : '' }}">
-              <i class="nav-icon fa fa-map-marker"></i>
+              <i class="nav-icon fa fa-map-marker-alt"></i>
               <p>
                 Sites
               </p>
@@ -133,19 +133,47 @@
               <i class="nav-icon far fa-clock"></i>
               <p>
                 Presence
-                <span class="right badge badge-warning">Trial!!</span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('user.show', Auth::user()->id) }}" class="nav-link {{ request()->is('user/show*') ? 'active' : '' }}"> 
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                Profile
+                <span class="right badge badge-warning">Trial</span>
               </p>
             </a>
           </li>
         @endif
+        <li class="nav-item has-treeview {{ request()->is(['leave', 'leave/*']) ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ request()->is(['leave', 'leave/*']) ? 'active' : '' }}">
+            <i class="nav-icon fa fa-envelope"></i>
+            <p>
+              Leave Request
+            </p>
+            <i class="right fas fa-angle-left"></i>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{ route('leave.create') }}" class="nav-link {{ request()->is('leave/create') ? 'active' : '' }}"> 
+                <i class="nav-icon fas fa-paper-plane"></i>
+                <p>
+                  Request
+                </p>
+                <span class="right badge badge-warning">Trial</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('leave.index') }}" class="nav-link {{ request()->is('leave') ? 'active' : '' }}"> 
+                <i class="nav-icon fa fa-envelope"></i>
+                <p>
+                  Request List
+                </p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="{{ route('user.show', Auth::user()->id) }}" class="nav-link {{ request()->is('user/show*') ? 'active' : '' }}"> 
+            <i class="nav-icon fas fa-user"></i>
+            <p>
+              Profile
+            </p>
+          </a>
+        </li>
         <li class="nav-item">
           <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="nav-link">
             <i class="nav-icon fas fa-power-off"></i>

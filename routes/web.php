@@ -53,6 +53,18 @@ Route::group(['prefix' => 'TblAttendanceLog', 'as' => 'TblAttendanceLog.'], stat
   Route::get('/destroy/{id}', 'TblAttendanceLogController@destroy')->name('destroy')->middleware('auth');
 });
 
+Route::group(['prefix' => 'leave', 'as' => 'leave.'], static function () {
+  Route::get('/', 'LeaveController@index')->name('index')->middleware('auth');
+  Route::get('/create', 'LeaveController@create')->name('create')->middleware('auth');
+  Route::get('/show/{id}', 'LeaveController@show')->name('show')->middleware('auth');
+  Route::post('/store', 'LeaveController@store')->name('store')->middleware('auth');
+  Route::post('/update/{id}', 'LeaveController@update')->name('update')->middleware('auth');
+  Route::get('/destroy/{id}', 'LeaveController@destroy')->name('destroy')->middleware('auth');
+  Route::get('/edit/{id}', 'LeaveController@edit')->name('edit')->middleware('auth');
+  Route::get('/approve/{id}', 'LeaveController@approve')->name('approve')->middleware('auth');
+  Route::get('/cancel/{id}', 'LeaveController@cancel')->name('cancel')->middleware('auth');
+});
+
 Route::group(['prefix' => 'site', 'as' => 'site.'], static function () {
   Route::get('/', 'SiteController@index')->name('index')->middleware('auth', 'role:1');
   Route::get('/show/{id}', 'SiteController@show')->name('show')->middleware('auth', 'role:1');

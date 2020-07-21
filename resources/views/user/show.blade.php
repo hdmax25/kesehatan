@@ -85,7 +85,7 @@
                 @csrf
                 <div class="form-group row">
                   <div class="col-sm-2 text-center">
-                    <img id="imageView" class="profile-user-img img-fluid img-circle" src="{{ Auth::user()->image ? asset('dist/img/user/'.Auth::user()->image) : asset('dist/img/avatar5.png') }}?{{ \Carbon\Carbon::now()->format('dFYhms') }}" alt="User profile picture">
+                    <img id="imageView" class="profile-user-img img-fluid img-circle" src="{{ Auth::user()->image ? asset('dist/img/user/'.Auth::user()->image) : asset('dist/img/avatar5.png') }}?{{ \Carbon\Carbon::now()->format('dFYhis') }}" alt="User profile picture">
                   </div>
                   <div class="col-sm-10">
                     <label for="name">Foto</label>

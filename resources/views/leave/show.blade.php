@@ -1,0 +1,60 @@
+@extends('layouts.app')
+
+@section('title')
+  <div class="row mb-2">
+    <div class="col-sm-6">
+      <h1>
+        Leave Request
+      </h1>
+    </div>
+  </div>
+@endsection
+
+@section('content')
+  <div class="row">
+    <div class="col-md-12">
+        <!-- Widget: user widget style 2 -->
+        <div class="card card-widget widget-user-2">
+          <!-- Add the bg color to the header using any of the bg-* classes -->
+          <div class="widget-user-header bg-danger">
+            <div class="widget-user-image">
+              <img class="img-circle elevation-2" src="{{ $leave->user->image ? asset('dist/img/user/'.$leave->user->image) : asset('dist/img/avatar5.png') }}?{{ \Carbon\Carbon::now()->format('dmYhis') }}" alt="User Avatar">
+            </div>
+            <!-- /.widget-user-image -->
+            <h3 class="widget-user-username">{{ $leave->user->name }} ({{ $leave->user->username }})</h3>
+            <h5 class="widget-user-desc">{{ $leave->user->job }} {{ $leave->department->department_name }}</h5>
+          </div>
+          <div class="card-footer p-0">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link">
+                    Izin <span class="float-right">{{ $leave->type == '1' ? 'Dinas' : 'Pribadi' }}</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link">
+                  Tanggal <span class="float-right">{{ $leave->start }}</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link">
+                  Sampai Dengan <span class="float-right">{{ $leave->end }}</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link">
+                  Tujuan <span class="float-right">{{ $leave->destination }}</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link">
+                  Keterangan <span class="float-right">{{ $leave->detail }}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /.widget-user -->
+      </div>
+  </div>
+@endsection
