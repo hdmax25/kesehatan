@@ -71,7 +71,7 @@
                               <i class="fas fa-check"></i>
                             </a>
                             <div class="modal fade" id="modal-sm{{ $item->id }}-approve">
-                              <div class="modal-dialog modal-sm">
+                              <div class="modal-dialog">
                                 <div class="modal-content">
                                   <div class="modal-header">
                                     <h4 class="modal-title">Approve</h4>
@@ -95,7 +95,7 @@
                               <i class="fas fa-times"></i>
                             </a>
                             <div class="modal fade" id="modal-sm{{ $item->id }}-cancel">
-                              <div class="modal-dialog modal-sm">
+                              <div class="modal-dialog">
                                 <div class="modal-content">
                                   <div class="modal-header">
                                     <h4 class="modal-title">Cancel</h4>
