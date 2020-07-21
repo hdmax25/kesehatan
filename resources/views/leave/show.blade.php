@@ -28,6 +28,19 @@
             <ul class="nav flex-column">
               <li class="nav-item">
                 <a class="nav-link">
+                  Status <span class="float-right">
+                    @if ($leave->approve == 0)
+                      Pending
+                    @elseif ($leave->approve == 1)
+                      Approved
+                    @else
+                      Canceled
+                    @endif
+                  </span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link">
                     Izin <span class="float-right">{{ $leave->type == '0' ? 'Dinas' : 'Pribadi' }}</span>
                 </a>
               </li>
