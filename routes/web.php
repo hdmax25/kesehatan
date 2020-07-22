@@ -25,6 +25,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::group(['prefix' => 'home', 'as' => 'home.'], static function () {
+  Route::get('/belum', 'HomeController@belum')->name('belum')->middleware  ('auth');
+  Route::get('/sehat', 'HomeController@sehat')->name('sehat')->middleware  ('auth');
+  Route::get('/sakit', 'HomeController@belum')->name('sakit')->middleware  ('auth');
+});
+
 Route::group(['prefix' => 'user', 'as' => 'user.'], static function () {
   Route::get('/', 'UserController@index')->name('index')->middleware('auth', 'role:1');
   Route::get('/create', 'UserController@create')->name('create')->middleware('auth', 'role:1');

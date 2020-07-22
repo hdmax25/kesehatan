@@ -21,6 +21,45 @@
 
 @section('content')
   <div class="row">
+    <div class="col-md-3">
+      <div class="info-box">
+        <span class="info-box-icon bg-primary"><i class="fa fa-envelope"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text">Pending</span>
+          <span class="info-box-number">{{ $pendingCount }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="info-box">
+        <span class="info-box-icon bg-success"><i class="fa fa-envelope"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text">Approved</span>
+          <span class="info-box-number">{{ $approvedCount }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="info-box">
+        <span class="info-box-icon bg-warning"><i class="fa fa-envelope"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text">Canceled</span>
+          <span
+              class="info-box-number">{{ $canceledCount }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="info-box">
+        <span class="info-box-icon bg-danger"><i class="fa fa-envelope"></i></span>
+        <div class="info-box-content">
+          <span class="info-box-text">Expired</span>
+          <span class="info-box-number">{{ $expiredCount }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-md-12">
       <div class="card card-primary">
         <div class="card-header">
@@ -44,9 +83,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($leave as $item)
-                @if($item->start >= \Carbon\Carbon::now()->format('d/m/Y').' 00:00')
-                @if($item->approve == 0)
+                @foreach($pending as $item)
                     <tr>
                       <td class="text-center">
                         <a href="{{ route('leave.edit', $item->id) }}" type="button" class="btn btn-primary btn-sm  btn-block">
@@ -118,8 +155,6 @@
                         <td>{{$item->destination}}</td>
                         <td>{{$item->detail}}</td>
                     </tr>
-                @endif
-                @endif
                 @endforeach
             </tbody>
           </table>
@@ -149,8 +184,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($leave as $item)
-                @if($item->approve == 1)
+                @foreach($approved as $item)
                     <tr>
                         @if ($item->type == 0)
                             <td>Dinas</td>
@@ -172,7 +206,6 @@
                             </a>
                         </td>
                     </tr>
-                @endif
                 @endforeach
             </tbody>
           </table>
@@ -201,8 +234,7 @@
                   </tr>
               </thead>
               <tbody>
-                @foreach($leave as $item)
-                @if($item->approve == 2)
+                @foreach($canceled as $item)
                     <tr>
                         @if ($item->type == 0)
                             <td>Dinas</td>
@@ -219,7 +251,6 @@
                         <td>{{$item->destination}}</td>
                         <td>{{$item->detail}}</td>
                     </tr>
-                @endif
                 @endforeach
               </tbody>
             </table>
@@ -248,9 +279,7 @@
                   </tr>
               </thead>
               <tbody>
-                  @foreach($leave as $item)
-                  @if($item->start < \Carbon\Carbon::now()->format('d/m/Y').' 00:00')
-                  @if($item->approve == 0)
+                  @foreach($expired as $item)
                       <tr>
                           @if ($item->type == 0)
                               <td>Dinas</td>
@@ -267,8 +296,6 @@
                           <td>{{$item->destination}}</td>
                           <td>{{$item->detail}}</td>
                       </tr>
-                  @endif
-                  @endif
                   @endforeach
               </tbody>
             </table>
