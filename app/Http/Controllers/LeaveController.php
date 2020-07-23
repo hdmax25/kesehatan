@@ -119,6 +119,107 @@ class LeaveController extends Controller
         } 
     }
 
+    public function canceled()
+    {
+        if (Auth::user()->role == 1) {
+            $leave = Leave::orderBy('updated_at', 'desc')->where('delete', 0)->get();
+            $leave->map(function ($item) {
+                $item->user = User::find($item->id_user);
+                $item->department = Departement::find($item->id_department);
+                return $item;
+            });
+
+            $canceled = $leave->where('approve', 2)->take(100);
+            $canceledCount = $leave->where('approve', 2)->count();
+            
+            $data = [
+            'canceled' => $canceled,
+            ];
+            return view('leave.canceled', $data);
+
+        } else if (Auth::user()->role == 2) {
+            $leave = Leave::orderBy('updated_at', 'desc')->where('delete', 0)->where('id_department', Auth::user()->id_department)->take(100)->get();
+            $leave->map(function ($item) {
+                $item->user = User::find($item->id_user);
+                $item->department = Departement::find($item->id_department);
+                return $item;
+            });
+
+            $canceled = $leave->where('approve', 2)->take(100);
+            $canceledCount = $leave->where('approve', 2)->count();
+            
+            $data = [
+            'canceled' => $canceled,
+            ];
+            return view('leave.canceled', $data);
+        } else {
+            $leave = Leave::orderBy('updated_at', 'desc')->where('delete', 0)->where('id_user', Auth::user()->id)->take(100)->get();
+            $leave->map(function ($item) {
+                $item->user = User::find($item->id_user);
+                $item->department = Departement::find($item->id_department);
+                return $item;
+            });
+
+            $canceled = $leave->where('approve', 2)->take(100);
+            $canceledCount = $leave->where('approve', 2)->count();
+
+            $data = [
+            'canceled' => $canceled,
+            ];
+            return view('leave.canceled', $data);
+        } 
+    }
+
+    public function expired()
+    {
+        if (Auth::user()->role == 1) {
+            $leave = Leave::orderBy('updated_at', 'desc')->where('delete', 0)->get();
+            $leave->map(function ($item) {
+                $item->user = User::find($item->id_user);
+                $item->department = Departement::find($item->id_department);
+                return $item;
+            });
+
+            $expired = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->take(100);
+            $expiredCount = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->count();
+            
+            $data = [
+            'expired' => $expired,
+            ];
+            return view('leave.expired', $data);
+        } else if (Auth::user()->role == 2) {
+            $leave = Leave::orderBy('updated_at', 'desc')->where('delete', 0)->where('id_department', Auth::user()->id_department)->take(100)->get();
+            $leave->map(function ($item) {
+                $item->user = User::find($item->id_user);
+                $item->department = Departement::find($item->id_department);
+                return $item;
+            });
+
+            $expired = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->take(100);
+            $expiredCount = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->count();
+            
+            $data = [
+            'expired' => $expired,
+            ];
+            return view('leave.expired', $data);
+        } else {
+            $leave = Leave::orderBy('updated_at', 'desc')->where('delete', 0)->where('id_user', Auth::user()->id)->take(100)->get();
+            $leave->map(function ($item) {
+                $item->user = User::find($item->id_user);
+                $item->department = Departement::find($item->id_department);
+                return $item;
+            });
+
+            $expired = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->take(100);
+            $expiredCount = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->count();
+
+            $data = [
+            'expired' => $expired,
+            ];
+            return view('leave.expired', $data);
+        } 
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -40,130 +40,136 @@
       </div>
     </div>
     <div class="col-md-3">
-      <div class="info-box">
-        <span class="info-box-icon bg-warning"><i class="fa fa-envelope"></i></span>
-        <div class="info-box-content">
-          <span class="info-box-text">Canceled</span>
-          <span
-              class="info-box-number">{{ $canceledCount }}</span>
+      <a href="{{ route('leave.canceled') }}">
+        <div class="info-box">
+          <span class="info-box-icon bg-warning"><i class="fa fa-envelope"></i></span>
+          <div class="info-box-content">
+            <span class="info-box-text">Canceled</span>
+            <span
+                class="info-box-number">{{ $canceledCount }}</span>
+          </div>
         </div>
-      </div>
+      </a>
     </div>
     <div class="col-md-3">
-      <div class="info-box">
-        <span class="info-box-icon bg-danger"><i class="fa fa-envelope"></i></span>
-        <div class="info-box-content">
-          <span class="info-box-text">Expired</span>
-          <span class="info-box-number">{{ $expiredCount }}</span>
+      <a href="{{ route('leave.expired') }}">
+        <div class="info-box">
+          <span class="info-box-icon bg-danger"><i class="fa fa-envelope"></i></span>
+          <div class="info-box-content">
+            <span class="info-box-text">Expired</span>
+            <span class="info-box-number">{{ $expiredCount }}</span>
+          </div>
         </div>
-      </div>
+      </a>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
-      <div class="card card-primary">
-        <div class="card-header">
-          <h3 class="card-title">Pending</h3>
-        </div>
-        <div class="card-body table-responsive table-sm">
-          <table id="pending" class="table table-bordered table-striped table-sm">
-            <thead class="text-center">
-                <tr>
-                    <th>Izin</th>
-                    <th style="width: 200px;">Action</th>
-                    @if (Auth::user()->role == 1)
-                        <th>Divisi</th>
-                    @endif
-                    <th>NIP</th>
-                    <th>Nama</th>
-                    <th>Tanggal</th>
-                    <th>Jam</th>
-                    <th>Tujuan</th>
-                    <th>Keterangan</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($pending as $item)
-                    <tr>
-                        @if ($item->type == 0)
-                            <td>Dinas</td>
-                            @else
-                            <td>Pribadi</td>
-                        @endif
-                          <td class="text-center">
-                            <a href="https://api.whatsapp.com/send?phone={{$approval->phone}}&text=Mohon%20segera%20approve%20permintaan%20izin%20saya.%20Terimakasih%0A{{ route('leave.index', $item->id) }}&source=&data=&app_absent=" type="button" class="btn btn-success btn-sm" target="_blank">
-                             <i class="fab fa-whatsapp"></i>
-                           </a>
-                            <a href="{{ route('leave.edit', $item->id) }}" type="button" class="btn btn-primary btn-sm">
-                              <i class="fas fa-edit"></i>
+    @if($pendingCount)
+      <div class="col-md-12">
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Pending</h3>
+          </div>
+          <div class="card-body table-responsive table-sm">
+            <table id="pending" class="table table-bordered table-striped table-sm">
+              <thead class="text-center">
+                  <tr>
+                      <th>Izin</th>
+                      <th style="width: 200px;">Action</th>
+                      @if (Auth::user()->role == 1)
+                          <th>Divisi</th>
+                      @endif
+                      <th>NIP</th>
+                      <th>Nama</th>
+                      <th>Tanggal</th>
+                      <th>Jam</th>
+                      <th>Tujuan</th>
+                      <th>Keterangan</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  @foreach($pending as $item)
+                      <tr>
+                          @if ($item->type == 0)
+                              <td>Dinas</td>
+                              @else
+                              <td>Pribadi</td>
+                          @endif
+                            <td class="text-center">
+                              <a href="https://api.whatsapp.com/send?phone={{$approval->phone}}&text=Mohon%20segera%20approve%20permintaan%20izin%20saya.%20Terimakasih%0A{{ route('leave.index') }}&source=&data=&app_absent=" type="button" class="btn btn-success btn-sm" target="_blank">
+                              <i class="fab fa-whatsapp"></i>
                             </a>
-                            @if (Auth::user()->role !== 3)
-                            <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-sm{{ $item->id }}-approve">
-                              <i class="fas fa-check"></i>
-                            </a>
-                            <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-sm{{ $item->id }}-cancel">
-                              <i class="fas fa-times"></i>
-                            </a>
-                            <div class="modal fade" id="modal-sm{{ $item->id }}-approve">
-                              <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h4 class="modal-title">Approve</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">×</span>
-                                    </button>
-                                  </div>
-                                    <div class="modal-body">
-                                      <div class="form-group">
-                                        Approve ?
+                              <a href="{{ route('leave.edit', $item->id) }}" type="button" class="btn btn-primary btn-sm">
+                                <i class="fas fa-edit"></i>
+                              </a>
+                              @if (Auth::user()->role !== 3)
+                              <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-sm{{ $item->id }}-approve">
+                                <i class="fas fa-check"></i>
+                              </a>
+                              <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-sm{{ $item->id }}-cancel">
+                                <i class="fas fa-times"></i>
+                              </a>
+                              <div class="modal fade" id="modal-sm{{ $item->id }}-approve">
+                                <div class="modal-dialog modal-sm">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h4 class="modal-title">Approve</h4>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                      </button>
+                                    </div>
+                                      <div class="modal-body">
+                                        <div class="form-group">
+                                          Approve ?
+                                        </div>
                                       </div>
-                                    </div>
-                                    <div class="modal-footer justify-content-between">
-                                      <a href="{{ route('leave.approve', $item->id) }}"><button type="submit" class="btn btn-success">Yes</button></a>
-                                      <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-                                    </div>
+                                      <div class="modal-footer justify-content-between">
+                                        <a href="{{ route('leave.approve', $item->id) }}"><button type="submit" class="btn btn-success">Yes</button></a>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                                      </div>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                            <div class="modal fade" id="modal-sm{{ $item->id }}-cancel">
-                              <div class="modal-dialog modal-sm">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h4 class="modal-title">Cancel</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">×</span>
-                                    </button>
-                                  </div>
-                                    <div class="modal-body">
-                                      <div class="form-group">
-                                        Cancel ?
+                              <div class="modal fade" id="modal-sm{{ $item->id }}-cancel">
+                                <div class="modal-dialog modal-sm">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h4 class="modal-title">Cancel</h4>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                      </button>
+                                    </div>
+                                      <div class="modal-body">
+                                        <div class="form-group">
+                                          Cancel ?
+                                        </div>
                                       </div>
-                                    </div>
-                                    <div class="modal-footer justify-content-between">
-                                      <a href="{{ route('leave.cancel', $item->id) }}"><button type="submit" class="btn btn-success">Yes</button></a>
-                                      <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-                                    </div>
+                                      <div class="modal-footer justify-content-between">
+                                        <a href="{{ route('leave.cancel', $item->id) }}"><button type="submit" class="btn btn-success">Yes</button></a>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                                      </div>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                            @endif
-                          </td>
-                        @if (Auth::user()->role == 1)
-                            <td>{{ $item->department->department_name }}</td>
-                        @endif
-                        <td>{{ $item->user->username }}</td>
-                        <td>{{ $item->user->name }}</td>
-                        <td>{{ $item->date }}</td>
-                        <td>{{ $item->start.' - '.$item->end }}</td>
-                        <td>{{$item->destination}}</td>
-                        <td>{{$item->detail}}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-          </table>
+                              @endif
+                            </td>
+                          @if (Auth::user()->role == 1)
+                              <td>{{ $item->department->department_name }}</td>
+                          @endif
+                          <td>{{ $item->user->username }}</td>
+                          <td>{{ $item->user->name }}</td>
+                          <td>{{ $item->date }}</td>
+                          <td>{{ $item->start.' - '.$item->end }}</td>
+                          <td>{{$item->destination}}</td>
+                          <td>{{$item->detail}}</td>
+                      </tr>
+                  @endforeach
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
+    @endif
     <div class="col-md-12">
       <div class="card card-success">
         <div class="card-header">
@@ -215,96 +221,6 @@
         </div>
       </div>
     </div>
-    <div class="col-md-12">
-        <div class="card card-warning">
-          <div class="card-header">
-            <h3 class="card-title">Canceled</h3>
-          </div>
-          <div class="card-body table-responsive table-sm">
-            <table id="canceled" class="table table-bordered table-striped table-sm">
-              <thead class="text-center">
-                  <tr>
-                      <th>Izin</th>
-                      @if (Auth::user()->role == 1)
-                        <th>Divisi</th>
-                      @endif
-                      <th>NIP</th>
-                      <th>Nama</th>
-                      <th>Jam</th>
-                      <th>Tanggal</th>
-                      <th>Tujuan</th>
-                      <th>Keterangan</th>
-                  </tr>
-              </thead>
-              <tbody>
-                @foreach($canceled as $item)
-                    <tr>
-                        @if ($item->type == 0)
-                            <td>Dinas</td>
-                            @else
-                            <td>Pribadi</td>
-                        @endif
-                        @if (Auth::user()->role == 1)
-                            <td>{{ $item->department->department_name }}</td>
-                        @endif
-                        <td>{{ $item->user->username }}</td>
-                        <td>{{ $item->user->name }}</td>
-                        <td>{{ $item->date }}</td>
-                        <td>{{ $item->start.' - '.$item->end }}</td>
-                        <td>{{$item->destination}}</td>
-                        <td>{{$item->detail}}</td>
-                    </tr>
-                @endforeach
-              </tbody>
-            </table>
-          </div>
-        </div>
-    </div>
-    <div class="col-md-12">
-        <div class="card card-danger">
-          <div class="card-header">
-            <h3 class="card-title">Expired</h3>
-          </div>
-          <div class="card-body table-responsive table-sm">
-            <table id="expired" class="table table-bordered table-striped table-sm">
-              <thead class="text-center">
-                  <tr>
-                      <th>Izin</th>
-                      @if (Auth::user()->role == 1)
-                         <th>Divisi</th>
-                      @endif
-                      <th>NIP</th>
-                      <th>Nama</th>
-                      <th>Tanggal</th>
-                      <th>Jam</th>
-                      <th>Tujuan</th>
-                      <th>Keterangan</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  @foreach($expired as $item)
-                      <tr>
-                          @if ($item->type == 0)
-                              <td>Dinas</td>
-                              @else
-                              <td>Pribadi</td>
-                          @endif
-                          @if (Auth::user()->role == 1)
-                          <td>{{ $item->department->department_name }}</td>
-                          @endif
-                          <td>{{ $item->user->username }}</td>
-                          <td>{{ $item->user->name }}</td>
-                          <td>{{ $item->date }}</td>
-                          <td>{{ $item->start.' - '.$item->end }}</td>
-                          <td>{{$item->destination}}</td>
-                          <td>{{$item->detail}}</td>
-                      </tr>
-                  @endforeach
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
   </div>
 @endsection
 
@@ -360,24 +276,6 @@
         "responsive": true,
       });
       $('#approved').DataTable({
-        "paging": true,
-        "lengthChange": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": true,
-        "responsive": true,
-      });
-      $('#canceled').DataTable({
-        "paging": true,
-        "lengthChange": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": true,
-        "responsive": true,
-      });
-      $('#expired').DataTable({
         "paging": true,
         "lengthChange": true,
         "searching": true,
