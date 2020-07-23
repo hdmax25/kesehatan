@@ -39,7 +39,8 @@ class LeaveController extends Controller
             $canceledCount = $leave->where('approve', 2)->count();
             $expired = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->take(100);
             $expiredCount = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->count();
-
+            $approval = User::orderBy('username', 'desc')->where('role', 2)->where('delete', 0)->where('id_department', Auth::user()->id_department)->first();
+            
             $data = [
             'leave' => $leave,
             'pendingCount' => $pendingCount,
@@ -50,6 +51,7 @@ class LeaveController extends Controller
             'approved' => $approved,
             'canceled' => $canceled,
             'expired' => $expired,
+            'approval' => $approval,
             ];
             return view('leave.index', $data);
         } else if (Auth::user()->role == 2) {
@@ -68,7 +70,8 @@ class LeaveController extends Controller
             $canceledCount = $leave->where('approve', 2)->count();
             $expired = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->take(100);
             $expiredCount = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->count();
-
+            $approval = User::orderBy('username', 'desc')->where('role', 2)->where('delete', 0)->where('id_department', Auth::user()->id_department)->first();
+            
             $data = [
             'leave' => $leave,
             'pendingCount' => $pendingCount,
@@ -79,6 +82,7 @@ class LeaveController extends Controller
             'approved' => $approved,
             'canceled' => $canceled,
             'expired' => $expired,
+            'approval' => $approval,
             ];
             return view('leave.index', $data);
         } else {
@@ -97,6 +101,7 @@ class LeaveController extends Controller
             $canceledCount = $leave->where('approve', 2)->count();
             $expired = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->take(100);
             $expiredCount = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->count();
+            $approval = User::orderBy('username', 'desc')->where('role', 2)->where('delete', 0)->where('id_department', Auth::user()->id_department)->first();
 
             $data = [
             'leave' => $leave,
@@ -108,6 +113,7 @@ class LeaveController extends Controller
             'approved' => $approved,
             'canceled' => $canceled,
             'expired' => $expired,
+            'approval' => $approval,
             ];
             return view('leave.index', $data);
         } 

@@ -36,22 +36,28 @@
                 <option value="1" {{ old('type') == 1 ? 'selected' : '' }}>Pribadi</option>
               </select>
             </div>
-            <div class="form-group">
-              <label>Tanggal</label>
-                <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                    <input type="text" name="date" id="date" class="form-control datetimepicker-input" data-target="#reservationdate" value="{{ old('date') }}">
-                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Tanggal</label>
+                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                        <input type="text" name="date" id="date" class="form-control datetimepicker-input" data-target="#reservationdate" value="{{ old('date') }}">
+                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-              <label>Jam</label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text"><i class="far fa-clock"></i></span>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Jam</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="far fa-clock"></i></span>
+                    </div>
+                    <input type="text" name="time" class="form-control float-right @error('time') is-invalid @enderror" id="time" value="{{ old('time') ? old('time') : \Carbon\Carbon::now()->format('H:00').' - '.\Carbon\Carbon::now()->addhours(4)->format('H:00') }}">
+                  </div>
                 </div>
-                <input type="text" name="time" class="form-control float-right @error('time') is-invalid @enderror" id="time" value="{{ old('time') }}">
               </div>
             </div>
             <div class="form-group">
