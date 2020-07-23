@@ -75,7 +75,7 @@
               <thead class="text-center">
                   <tr>
                       <th>Izin</th>
-                      <th style="width: 200px;">Action</th>
+                      <th>Action</th>
                       @if (Auth::user()->role == 1)
                           <th>Divisi</th>
                       @endif
@@ -96,17 +96,17 @@
                               <td>Pribadi</td>
                           @endif
                             <td class="text-center">
-                              <a href="https://api.whatsapp.com/send?phone={{$approval->phone}}&text=Mohon%20segera%20approve%20permintaan%20izin%20saya.%20Terimakasih%0A{{ route('leave.index') }}&source=&data=&app_absent=" type="button" class="btn btn-success btn-sm" target="_blank">
+                              <a class="btn btn-success btn-sm btn-block" href="https://api.whatsapp.com/send?phone={{$approval->phone}}&text=Mohon%20segera%20approve%20permintaan%20izin%20saya.%20Terimakasih%0A{{ route('leave.index') }}&source=&data=&app_absent=" type="button" target="_blank">
                               <i class="fab fa-whatsapp"></i>
                             </a>
-                              <a href="{{ route('leave.edit', $item->id) }}" type="button" class="btn btn-primary btn-sm">
+                              <a href="{{ route('leave.edit', $item->id) }}" type="button" class="btn btn-primary btn-sm btn-block">
                                 <i class="fas fa-edit"></i>
                               </a>
                               @if (Auth::user()->role !== 3)
-                              <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal-sm{{ $item->id }}-approve">
+                              <a href="#" class="btn btn-success btn-sm btn-block" data-toggle="modal" data-target="#modal-sm{{ $item->id }}-approve">
                                 <i class="fas fa-check"></i>
                               </a>
-                              <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-sm{{ $item->id }}-cancel">
+                              <a href="#" class="btn btn-danger btn-sm btn-block" data-toggle="modal" data-target="#modal-sm{{ $item->id }}-cancel">
                                 <i class="fas fa-times"></i>
                               </a>
                               <div class="modal fade" id="modal-sm{{ $item->id }}-approve">

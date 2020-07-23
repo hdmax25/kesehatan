@@ -101,7 +101,7 @@
             </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Tujuan</label>
-              <input type="text" class="form-control @error('destination') is-invalid @enderror" id="destination" name="destination" placeholder="Tujuan" value="{{ old('destination') ? old(destination) : $leave->destination }}">
+              <input type="text" class="form-control @error('destination') is-invalid @enderror" id="destination" name="destination" placeholder="Tujuan" value="{{ old('destination') ? old('destination') : $leave->destination }}">
             </div>
             <div class="form-group">
               <label>Keterangan</label>
