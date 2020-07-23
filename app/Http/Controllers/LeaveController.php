@@ -304,14 +304,15 @@ class LeaveController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'datetime' => 'required|string',
+            'date' => 'required|string',
             'destination' => 'required|string',
             'detail' => 'required|string',
             
           ]);
           $leave = Leave::find($id);
-          $leave->start = explode(' - ', $request->datetime)[0];
-          $leave->end = explode(' - ', $request->datetime)[1];
+          $leave->date = $request->date;
+          $leave->start = explode(' - ', $request->time)[0];
+          $leave->end = explode(' - ', $request->time)[1];
           $leave->destination = $request->destination;
           $leave->detail = $request->detail;
           $leave->save();
