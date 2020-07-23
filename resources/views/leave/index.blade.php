@@ -180,7 +180,7 @@
             <thead class="text-center">
                 <tr>
                     <th>Izin</th>
-                    <th>Action</th>
+                    <th>View</th>
                     @if (Auth::user()->role == 1)
                         <th>Divisi</th>
                     @endif
