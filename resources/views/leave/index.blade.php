@@ -91,7 +91,7 @@
                             <td>Pribadi</td>
                         @endif
                           <td class="text-center">
-                            <a href="https://api.whatsapp.com/send?phone=Mohon%20segera%20approve%20permintaan%20izin%20saya.%20Terimakasih%0A{{$approval->phone}}&text={{ route('leave.index', $item->id) }}&source=&data=&app_absent=" type="button" class="btn btn-success btn-sm" target="_blank">
+                            <a href="https://api.whatsapp.com/send?phone={{$approval->phone}}&text=Mohon%20segera%20approve%20permintaan%20izin%20saya.%20Terimakasih%0A{{ route('leave.index', $item->id) }}&source=&data=&app_absent=" type="button" class="btn btn-success btn-sm" target="_blank">
                              <i class="fab fa-whatsapp"></i>
                            </a>
                             <a href="{{ route('leave.edit', $item->id) }}" type="button" class="btn btn-primary btn-sm">
