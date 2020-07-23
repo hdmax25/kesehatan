@@ -46,12 +46,12 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link">
-                  Tanggal <span class="float-right">{{ $leave->start }}</span>
+                  Tanggal <span class="float-right">{{ $leave->date }}</span>
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link">
-                  Sampai Dengan <span class="float-right">{{ $leave->end }}</span>
+                  Jam <span class="float-right">{{ $leave->start.' - '.$leave->end }}</span>
                 </a>
               </li>
               <li class="nav-item">
@@ -61,7 +61,7 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link">
-                  Keterangan <span class="float-right">{{ $leave->detail }}</span>
+                  Keterangan <span class="float-right"><h3>{{ $leave->detail }}</h3></span>
                 </a>
               </li>
             </ul>

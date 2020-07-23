@@ -37,12 +37,21 @@
               </select>
             </div>
             <div class="form-group">
-              <label>Tanggal dan Jam</label>
+              <label>Tanggal</label>
+                <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                    <input type="text" name="date" id="date" class="form-control datetimepicker-input" data-target="#reservationdate" value="{{ old('date') }}">
+                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+              <label>Jam</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="far fa-clock"></i></span>
                 </div>
-                <input type="text" name="datetime" class="form-control float-right @error('datetime') is-invalid @enderror" id="time" value="{{ old('datetime') }}">
+                <input type="text" name="time" class="form-control float-right @error('time') is-invalid @enderror" id="time" value="{{ old('time') }}">
               </div>
             </div>
             <div class="form-group">
@@ -51,7 +60,7 @@
             </div>
             <div class="form-group">
               <label>Keterangan</label>
-              <textarea class="form-control @error('detail') is-invalid @enderror" rows="3" id="detail" name="detail" placeholder="Tulis Keterangan" value="{{ old('detail') }}"></textarea>
+              <textarea class="form-control @error('detail') is-invalid @enderror" rows="3" id="detail" name="detail" placeholder="Tulis Keterangan">{{ old('detail') }}</textarea>
             </div>
           </div>
           <div class="card-footer">
@@ -113,7 +122,11 @@
         "autoWidth": true,
         "responsive": true,
       });
-        
+
+      @error('date')
+      toastr.warning('{{ $message }}')
+      @enderror
+
       @error('destination')
       toastr.warning('{{ $message }}')
       @enderror
@@ -129,12 +142,17 @@
   </script>
 
   <script>
+      $('#reservationdate').datetimepicker({
+          format: 'DD/MM/YYYY'
+      });
       $('#time').daterangepicker({
         timePicker: true,
         timePicker24Hour: true,
         locale: {
-          format: 'DD/MM/YYYY HH:mm'
+          format: 'HH:mm'
         }
+      }).on('show.daterangepicker', function (ev, picker) {
+        picker.container.find(".calendar-table").hide();
       });
 
       //Initialize Select2 Elements

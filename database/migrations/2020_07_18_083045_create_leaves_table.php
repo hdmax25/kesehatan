@@ -18,6 +18,7 @@ class CreateLeavesTable extends Migration
             $table->integer('id_user');
             $table->integer('id_department');
             $table->integer('type');
+            $table->string('date');
             $table->string('start')->default(0);
             $table->string('end')->default(0);
             $table->string('destination');

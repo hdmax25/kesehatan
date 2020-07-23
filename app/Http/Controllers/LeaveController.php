@@ -31,14 +31,14 @@ class LeaveController extends Controller
                 return $item;
             });
 
-            $pending = $leave->where('approve', 0)->where('start','>=', \Carbon\Carbon::now()->format('d/m/Y').' 00:00')->take(100);
-            $pendingCount = $leave->where('approve', 0)->where('start','>=', \Carbon\Carbon::now()->format('d/m/Y').' 00:00')->count();
+            $pending = $leave->where('approve', 0)->where('date','>=', \Carbon\Carbon::now()->format('d/m/Y'))->take(100);
+            $pendingCount = $leave->where('approve', 0)->where('date','>=', \Carbon\Carbon::now()->format('d/m/Y'))->count();
             $approved = $leave->where('approve', 1)->take(100);
             $approvedCount = $leave->where('approve', 1)->count();
             $canceled = $leave->where('approve', 2)->take(100);
             $canceledCount = $leave->where('approve', 2)->count();
-            $expired = $leave->where('approve', 0)->where('start','<', \Carbon\Carbon::now()->format('d/m/Y').' 00:00')->take(100);
-            $expiredCount = $leave->where('approve', 0)->where('start','<', \Carbon\Carbon::now()->format('d/m/Y').' 00:00')->count();
+            $expired = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->take(100);
+            $expiredCount = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->count();
 
             $data = [
             'leave' => $leave,
@@ -60,14 +60,14 @@ class LeaveController extends Controller
                 return $item;
             });
 
-            $pending = $leave->where('approve', 0)->where('start','>=', \Carbon\Carbon::now()->format('d/m/Y').' 00:00')->take(100);
-            $pendingCount = $leave->where('approve', 0)->where('start','>=', \Carbon\Carbon::now()->format('d/m/Y').' 00:00')->count();
+            $pending = $leave->where('approve', 0)->where('date','>=', \Carbon\Carbon::now()->format('d/m/Y'))->take(100);
+            $pendingCount = $leave->where('approve', 0)->where('date','>=', \Carbon\Carbon::now()->format('d/m/Y'))->count();
             $approved = $leave->where('approve', 1)->take(100);
             $approvedCount = $leave->where('approve', 1)->count();
             $canceled = $leave->where('approve', 2)->take(100);
             $canceledCount = $leave->where('approve', 2)->count();
-            $expired = $leave->where('approve', 0)->where('start','<', \Carbon\Carbon::now()->format('d/m/Y').' 00:00')->take(100);
-            $expiredCount = $leave->where('approve', 0)->where('start','<', \Carbon\Carbon::now()->format('d/m/Y').' 00:00')->count();
+            $expired = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->take(100);
+            $expiredCount = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->count();
 
             $data = [
             'leave' => $leave,
@@ -89,14 +89,14 @@ class LeaveController extends Controller
                 return $item;
             });
 
-            $pending = $leave->where('approve', 0)->where('start','>=', \Carbon\Carbon::now()->format('d/m/Y').' 00:00')->take(100);
-            $pendingCount = $leave->where('approve', 0)->where('start','>=', \Carbon\Carbon::now()->format('d/m/Y').' 00:00')->count();
+            $pending = $leave->where('approve', 0)->where('date','>=', \Carbon\Carbon::now()->format('d/m/Y'))->take(100);
+            $pendingCount = $leave->where('approve', 0)->where('date','>=', \Carbon\Carbon::now()->format('d/m/Y'))->count();
             $approved = $leave->where('approve', 1)->take(100);
             $approvedCount = $leave->where('approve', 1)->count();
             $canceled = $leave->where('approve', 2)->take(100);
             $canceledCount = $leave->where('approve', 2)->count();
-            $expired = $leave->where('approve', 0)->where('start','<', \Carbon\Carbon::now()->format('d/m/Y').' 00:00')->take(100);
-            $expiredCount = $leave->where('approve', 0)->where('start','<', \Carbon\Carbon::now()->format('d/m/Y').' 00:00')->count();
+            $expired = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->take(100);
+            $expiredCount = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->count();
 
             $data = [
             'leave' => $leave,
@@ -132,7 +132,7 @@ class LeaveController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-          'datetime' => 'required|string',
+          'date' => 'required|string',
           'destination' => 'required|string',
           'detail' => 'required|string',
           
@@ -141,8 +141,9 @@ class LeaveController extends Controller
         $leave->type = $request->type;
         $leave->id_user = Auth::user()->id;
         $leave->id_department = Auth::user()->id_department;
-        $leave->start = explode(' - ', $request->datetime)[0];
-        $leave->end = explode(' - ', $request->datetime)[1];
+        $leave->date = $request->date;
+        $leave->start = explode(' - ', $request->time)[0];
+        $leave->end = explode(' - ', $request->time)[1];
         $leave->destination = $request->destination;
         $leave->detail = $request->detail;
         $leave->approve = 0;
