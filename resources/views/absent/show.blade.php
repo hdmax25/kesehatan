@@ -101,7 +101,7 @@
                       @endif
                       <span class="d-none">
                         <input id="site" name="location">
-                        <input id="ipaddress" name="ipaddress">
+                        <input id="ipAddress" name="ipAddress">
                       </span>
                     </div>
                     <div class="modal-footer justify-content-between">
@@ -245,7 +245,7 @@
     }
 
     $.getJSON("https://api.ipify.org?format=json", function(data) {
-            $("#ipaddress").val(data.ip); 
+            $("#ipAddress").val(data.ip); 
     });
 
     $(function () {

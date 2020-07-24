@@ -50,6 +50,7 @@ class TblAttendanceLogController extends Controller
         $attlog->Tm = \Carbon\Carbon::now()->format('His');
         $attlog->Machine = $request->location;
         $attlog->PIN = Auth::user()->username;
+        $attlog->IPAddress = $request->ipAddress;
         $attlog->Remark = 'Data From IT-ERP';
         $attlog->CreateBy = 'MASHARI';
         $attlog->CreateDt = \Carbon\Carbon::now()->format('YmdHi');
