@@ -84,7 +84,7 @@
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h4 class="modal-title">Konfrimasi</h4>
+                    <h4 class="modal-title">Konfirmasi</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">×</span>
                     </button>
@@ -96,7 +96,7 @@
                         Selamat bekerja Kak..
                         <br>Semoga harimu menyenangkan
                       @else
-                        Lelah usai kerja, bersukurlah. Karena diluar sana banyak yang lelah mencari kerja
+                        Lelah usai kerja, bersyukurlah. Karena diluar sana banyak yang lelah mencari kerja
                         <br>Selamat pulang, Hati2 dijalan!!
                       @endif
                       <span class="d-none">
