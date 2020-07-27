@@ -104,7 +104,7 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Domisili </label><small>(Tidak harus sesuai KTP)</small>
+                        <label>Domisili </label>
                         <textarea class="form-control @error('domicile') is-invalid @enderror" name="domicile" rows="3"
                                   placeholder="Masukkan domisili">{{ old('domicile') ? old('domicile') : ($domicile ? $domicile->domicile : '')}}</textarea>
                       </div>

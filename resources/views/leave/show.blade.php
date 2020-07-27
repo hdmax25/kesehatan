@@ -51,7 +51,7 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link">
-                  Jam <span class="float-right">{{ $leave->start.' - '.$leave->end }}</span>
+                  Jam <span class="float-right">{{ $leave->start }} - {{ $leave->end !== '23:59' ? $leave->end : 'Selesai' }}</span>
                 </a>
               </li>
               <li class="nav-item">
