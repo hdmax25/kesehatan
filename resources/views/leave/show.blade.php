@@ -41,6 +41,17 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link">
+                  @if ($leave->approve == 0)
+                      Pending
+                    @elseif ($leave->approve == 1)
+                      Approved By <span class="float-right">{{ $leave->approvedBy->role == 1 ? 'Admin' : 'Kadiv'}} {{ $leave->department->department_name }}</span>
+                    @else
+                      Canceled By <span class="float-right">{{ $leave->approvedBy->role == 1 ? 'Admin' : 'Kadiv'}} {{ $leave->department->department_name }}</span>
+                    @endif
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link">
                     Izin <span class="float-right">{{ $leave->type == '0' ? 'Dinas' : 'Pribadi' }}</span>
                 </a>
               </li>

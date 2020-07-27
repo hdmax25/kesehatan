@@ -24,6 +24,7 @@ class CreateLeavesTable extends Migration
             $table->string('destination');
             $table->string('detail');
             $table->integer('approve');
+            $table->integer('approvedBy')->default(0);
             $table->timestamps();
             $table->integer('delete')->default(0);
         });

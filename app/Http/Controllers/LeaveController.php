@@ -268,6 +268,7 @@ class LeaveController extends Controller
     {
         $leave = Leave::find($id);
         $leave->user = User::find($leave->id_user);
+        $leave->approvedBy = User::find($leave->approvedBy);
         $leave->department = Departement::find($leave->id_department);
 
         $data = [
@@ -336,6 +337,7 @@ class LeaveController extends Controller
     {
         $leave = Leave::find($id);
         $leave->approve = 1;
+        $leave->approvedBy = Auth::user()->id;
         $leave->save();
         return redirect()->back()->with(['message' => 'Request Aprroved']);
     }
@@ -344,6 +346,7 @@ class LeaveController extends Controller
     {
         $leave = Leave::find($id);
         $leave->approve = 2;
+        $leave->approvedBy = Auth::user()->id;
         $leave->save();
         return redirect()->back()->with(['message1' => 'Request Canceled']);
     }

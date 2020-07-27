@@ -33,5 +33,6 @@ class Leave extends Model
      'destination',
      'detail',
      'approve',
+     'approvedBy',
    ];
 }
