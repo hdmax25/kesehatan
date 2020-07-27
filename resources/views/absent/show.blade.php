@@ -205,9 +205,9 @@
     }
 
     function showPosition(position) {
-      var x = position.coords.latitude.toFixed(2);
-      var y = position.coords.longitude.toFixed(2);
-      @foreach($sites as $item) {{ $item->id == $firstSite ? 'if' : 'else if'}} (x == {{ round($item->latitude, 2) }} && y == {{ round($item->longitude, 2) }}) {
+      var x = position.coords.latitude.toFixed(3);
+      var y = position.coords.longitude.toFixed(3);
+      @foreach($sites as $item) {{ $item->id == $firstSite ? 'if' : 'else if'}} (x == {{ round($item->latitude, 3) }} && y == {{ round($item->longitude, 3) }}) {
           document.getElementById("warning").classList.add("d-none");
           loc.innerHTML = "{{ $item->name }}";
           document.getElementById("show").classList.remove("d-none");
