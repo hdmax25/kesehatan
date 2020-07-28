@@ -14,12 +14,21 @@ class CreateAbsentsTable extends Migration
     public function up()
     {
         Schema::create('absents', function (Blueprint $table) {
-            $table->id();
-            $table->integer('id_user');
-            $table->integer('username_user');
-            $table->integer('attend');
-            $table->integer('id_location');
-            $table->timestamps();
+            $table->string('EmpCode', 16);
+            $table->string('Dt', 8);
+            $table->string('Tm', 6);
+            $table->string('Machine', 400)->nullable();
+            $table->string('PIN', 16)->nullable();
+            $table->string('IPAddress',15)->nullable();
+            $table->string('Latitude', 100)->nullable();
+            $table->string('Longitude',100)->nullable();
+            $table->string('City', 250)->nullable();
+            $table->string('Remark', 400)->nullable();
+            $table->string('ProcessInd', 1)->default('N');
+            $table->string('CreateBy', 16);
+            $table->string('CreateDt', 12);
+            $table->string('LastUpBy', 16)->nullable();
+            $table->string('LastUpDt', 12)->nullable();
         });
     }
 

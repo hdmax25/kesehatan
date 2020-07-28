@@ -44,7 +44,6 @@ class TblAttendanceLogController extends Controller
     public function store(Request $request)
     {
         $attlog = new tblAttendanceLog;
-        $attlog->setConnection('mysql2');
         $attlog->EmpCode =  Auth::user()->username;
         $attlog->Dt = \Carbon\Carbon::now()->format('Ymd');
         $attlog->Tm = \Carbon\Carbon::now()->format('His');
@@ -56,6 +55,19 @@ class TblAttendanceLogController extends Controller
         $attlog->CreateDt = \Carbon\Carbon::now()->format('YmdHi');
 
         $attlog->save();
+
+        $attlog1 = new Absent;
+        $attlog1->EmpCode =  Auth::user()->username;
+        $attlog1->Dt = \Carbon\Carbon::now()->format('Ymd');
+        $attlog1->Tm = \Carbon\Carbon::now()->format('His');
+        $attlog1->Machine = $request->location;
+        $attlog1->PIN = Auth::user()->username;
+        $attlog1->IPAddress = $request->ipAddress;
+        $attlog1->Remark = 'Data From IT-ERP';
+        $attlog1->CreateBy = 'MASHARI';
+        $attlog1->CreateDt = \Carbon\Carbon::now()->format('YmdHi');
+
+        $attlog1->save();
         return redirect()->back()->with(['message' => 'Berhasil']);
     }
 
