@@ -51,7 +51,7 @@
             <tr>
               <th style="width: 10px">id</th>
               <th>Kondisi</th>
-              <th style="width: 10px">Edit</th>
+              <th class="text-center">Edit</th>
               <!--  <th>Delete</th> -->
             </tr>
             </thead>
@@ -60,18 +60,16 @@
               <tr>
                 <td>{{ $loop->index + 1 }}</td>
                 <td>{{ $item->penyakit_name }}</td>
-                <td>
+                <td class="text-center">
                   <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-sm{{ $item->id }}">
                   <i class="fas fa-edit"></i>
                   </button>
-                </td>
-                <!-- <td>
                   <a href="{{ route('penyakit.destroy', $item->id) }}">
                     <button type="button" class="btn btn-danger btn-sm">
                       <i class="fas fa-trash-alt"></i>
                     </button>
                   </a>
-                </td>-->
+                </td>
               </tr>
               <div class="modal fade" id="modal-sm{{ $item->id }}">
                 <div class="modal-dialog modal-sm">
