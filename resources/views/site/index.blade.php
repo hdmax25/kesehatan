@@ -87,18 +87,35 @@
                   <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-l{{ $item->id }}">
                   <i class="fas fa-edit"></i>
                   </button>
-                  <a href="{{ route('site.destroy', $item->id) }}">
-                    <button type="button" class="btn btn-danger btn-sm">
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="dlete{{ $item->id }}">
                       <i class="fas fa-trash-alt"></i>
                     </button>
-                  </a>
                 </td>
               </tr>
+              <div class="modal fade" id="delete{{ $item->id }}">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Delete</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Delete
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <a href="{{ route('site.destroy', $item->id) }}"><button type="submit" class="btn btn-danger">Delete</button></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="modal fade" id="modal-l{{ $item->id }}">
                 <div class="modal-dialog modal-l">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h4 class="modal-title">Edit Kondisi</h4>
+                      <h4 class="modal-title">Edit Site</h4>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                       </button>
