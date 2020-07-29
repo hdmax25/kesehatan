@@ -51,7 +51,7 @@
             <tr>
               <th style="width: 10px">id</th>
               <th>Kondisi</th>
-              <th class="text-center">Edit</th>
+              <th class="text-center">Action</th>
               <!--  <th>Delete</th> -->
             </tr>
             </thead>
