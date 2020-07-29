@@ -20,9 +20,7 @@
           <li class="nav-item">
             <a class="nav-link" id="infoLocations" href="#"data-toggle="modal" data-target="#info"></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" id="refresh" onclick="getLocation()" href="#"></a>
-          </li>
+        </ul>
       </div>
       <div class="modal fade" id="info">
         <div class="modal-dialog">
@@ -76,7 +74,7 @@
               <b>Time</b> <a class="float-right" id="clock"></a>
             </li>
             <li class="list-group-item">
-              <b>Location</b> <a class="float-right" id="loc"><i class="fas fa-sync-alt fa-spin"></i></a>
+              <b>Location</b> <a class="float-right" id="loc"><i class="fas fa-sync-alt fa-spin"></i> Menyesuaikan Lokasi</a>
             </li>
           </ul>
           <a href="#" id="show" class="btn btn-danger btn-block d-none" data-toggle="modal" data-target="#confirm"><b>{{ $attCount%2 == 0 ? 'IN' : 'OUT' }}</b></button></a>
@@ -169,8 +167,13 @@
     // Run Away
     $(function() {
       startTime();
-      getLocation();
+      startGetLocation();
     });
+
+    var runAway;
+      function startGetLocation() {
+        runAway = setInterval(getLocation, 1000);
+      }
 
     //Live Clock
     function startTime() {
@@ -213,11 +216,10 @@
           document.getElementById("show").classList.remove("d-none");
           document.getElementById("site").value = "{{ $item->name }}";
           document.getElementById("loading").classList.add("d-none");
+          clearInterval(getLocation);
         } @endforeach else {
         xx.innerHTML = "Posisi anda tidak pada lokasi yang ditentukan <br>Posisi saat ini : " + x + ", " + y;
         infoLocations.innerHTML = "Daftar Lokasi";
-        toastr.warning('Posisi belum tepat');
-        refresh.innerHTML = "Perbarui Lokasi";
         document.getElementById("warning").classList.remove("d-none");
         document.getElementById("loading").classList.add("d-none");
       }
