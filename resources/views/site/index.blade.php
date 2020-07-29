@@ -122,9 +122,6 @@
                           <label for="exampleInputEmail1">Latitude</label>
                           <input type="text" class="form-control @error('longitude') is-invalid @enderror" placeholder="Longitude" name="longitude" value="{{ $item->longitude }}">
                         </div>
-                        <div class="form-group">
-                          <button type="button" class="btn btn-danger btn-block" onclick="getLocation()"><i class="nav-icon fa fa-map-marker"></i> Get Location</button>
-                        </div>
                       </div>
                       <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
