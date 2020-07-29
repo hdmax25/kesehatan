@@ -50,7 +50,7 @@
               </div>
               <div class="col-sm-2">
                 <div class="form-group">
-                  <button type="button" class="btn btn-danger btn-block" onclick="getLocation()"><i class="nav-icon fa fa-map-marker"></i> Get Location</button>
+                  <button type="button" class="btn btn-danger btn-block" onclick="getLocation()"><i class="nav-icon fa fa-map-marker-alt"></i> Get Location</button>
                 </div>
               </div>
             </div>
@@ -87,30 +87,11 @@
                   <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-l{{ $item->id }}">
                   <i class="fas fa-edit"></i>
                   </button>
-                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="dlete{{ $item->id }}">
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#delete{{ $item->id }}">
                       <i class="fas fa-trash-alt"></i>
                     </button>
                 </td>
               </tr>
-              <div class="modal fade" id="delete{{ $item->id }}">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 class="modal-title">Delete</h4>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      Delete
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <a href="{{ route('site.destroy', $item->id) }}"><button type="submit" class="btn btn-danger">Delete</button></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
               <div class="modal fade" id="modal-l{{ $item->id }}">
                 <div class="modal-dialog modal-l">
                   <div class="modal-content">
@@ -145,6 +126,25 @@
                         <button type="submit" class="btn btn-primary">Save changes</button>
                       </div>
                     </form>
+                  </div>
+                </div>
+              </div>
+              <div class="modal fade" id="delete{{ $item->id }}">
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Delete</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Delete {{ $item->name }} ?
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <a href="{{ route('site.destroy', $item->id) }}"><button type="submit" class="btn btn-danger">Delete</button></a>
+                    </div>
                   </div>
                 </div>
               </div>
