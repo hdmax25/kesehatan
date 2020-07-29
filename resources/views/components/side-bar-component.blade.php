@@ -133,7 +133,6 @@
               <i class="nav-icon far fa-clock"></i>
               <p>
                 Presence
-                <span class="right badge badge-warning">Trial</span>
               </p>
             </a>
           </li>
@@ -153,7 +152,6 @@
                 <p>
                   Request
                 </p>
-                <span class="right badge badge-warning">Trial</span>
               </a>
             </li>
             <li class="nav-item">
