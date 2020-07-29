@@ -211,23 +211,6 @@
   @if (Auth::user()->role !== 3)
     <div class="row">
       <div class="col-md-3 col-sm-6 col-12">
-        <div class="info-box bg-primary">
-          <span class="info-box-icon"><i class="fa fa-users"></i></span>
-
-          <div class="info-box-content">
-            <span class="info-box-text">Sudah Lapor</span>
-            <span class="info-box-number">{{$sudah->count()}}/{{$belum->count() + $sudah->count()}}</span>
-
-            <div class="progress">
-              <div class="progress-bar" style="width: {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
-            </div>
-            <span class="progress-description">
-            {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6 col-12">
         <a href="#" title="Click for details" data-toggle="modal" data-target="#belum-lapor">
           <div class="info-box bg-danger">
             <span class="info-box-icon"><i class="fa fa-users"></i></span>
@@ -297,6 +280,23 @@
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box bg-primary">
+          <span class="info-box-icon"><i class="fa fa-users"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Sudah Lapor</span>
+            <span class="info-box-number">{{$sudah->count()}}/{{$belum->count() + $sudah->count()}}</span>
+
+            <div class="progress">
+              <div class="progress-bar" style="width: {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
+            </div>
+            <span class="progress-description">
+            {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
+            </span>
           </div>
         </div>
       </div>
