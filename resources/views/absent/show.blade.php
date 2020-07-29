@@ -218,7 +218,7 @@
           document.getElementById("loading").classList.add("d-none");
           clearInterval(getLocation);
         } @endforeach else {
-        xx.innerHTML = "Posisi anda tidak pada lokasi yang ditentukan <br>Posisi saat ini : " + x + ", " + y;
+        xx.innerHTML = "Posisi anda belumtepat, silakan berpindah ke lokasi yang sudah ditentukan  <br>Posisi saat ini : " + x + ", " + y;
         infoLocations.innerHTML = "Daftar Lokasi";
         document.getElementById("warning").classList.remove("d-none");
         document.getElementById("loading").classList.add("d-none");
