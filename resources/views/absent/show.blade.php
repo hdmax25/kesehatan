@@ -172,7 +172,7 @@
 
     var runAway;
       function startGetLocation() {
-        runAway = setInterval(getLocation, 1000);
+        runAway = setInterval(getLocation, 500);
       }
 
     //Live Clock
