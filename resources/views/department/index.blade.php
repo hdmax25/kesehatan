@@ -52,7 +52,7 @@
             <tr>
               <th style="width: 10px">#</th>
               <th>Divisi</th>
-              <th>Action</th>
+              <th class="text-center">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -60,7 +60,7 @@
               <tr>
                 <td>{{ $item->id }}</td>
                 <td>{{ $item->department_name }}</td>
-                <td>
+                <td class="text-center">
                   <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-sm{{ $item->id }}">
                    <i class="fas fa-edit"></i>
                   </button>
