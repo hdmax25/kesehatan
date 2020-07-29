@@ -53,13 +53,13 @@
               <th style="width: 10px">#</th>
               <th>Divisi</th>
               <th style="width: 10px">Edit</th>
-               <!-- <th>Delete</th>-->
+              <th>Delete</th>
             </tr>
             </thead>
             <tbody>
             @foreach($department as $item)
               <tr>
-                <td>{{ $loop->index + 1 }}</td>
+                <td>{{ $item->id }}</td>
                 <td>{{ $item->department_name }}</td>
                 <td>
                   <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-sm{{ $item->id }}">
