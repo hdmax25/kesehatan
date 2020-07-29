@@ -174,7 +174,8 @@
                 </div>
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-danger">Submit</button>
+                  <button id="btnInOut" onclick="hideBtn()" type="submit" class="btn btn-danger">Submit</button>
+                  <span id="btnLoading" class="btn btn-danger d-none disabled"><i class="fas fa-sync-alt fa-spin"></i> Submiting...</span>
                 </div>
               </form>
             </div>
@@ -626,6 +627,13 @@
   <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
 
   <script>
+
+    //Hide Button
+    function hideBtn() {
+      document.getElementById("btnInOut").classList.add("d-none");
+      document.getElementById("btnLoading").classList.remove("d-none");
+    }
+
     @if (\Carbon\Carbon::now() < \Carbon\Carbon::parse("13:00:00"))
     $(function () {
       let remaining = new Date();
