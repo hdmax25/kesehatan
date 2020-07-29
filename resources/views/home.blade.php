@@ -222,7 +222,7 @@
               <div class="progress-bar" style="width: {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}%"></div>
             </div>
             <span class="progress-description">
-            {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}% Sudah Lapor
+            {{ round($sudah->count()/( $sudah->count()+$belum->count())*100,1) }}% Pegawai
             </span>
           </div>
         </div>
