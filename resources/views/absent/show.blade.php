@@ -106,7 +106,7 @@
                     </div>
                     <div class="modal-footer justify-content-between">
                       <button id="btnInOut" onclick="hideBtn()" type="submit" class="btn btn-success">Ya</button>
-                      <span id="btnLoading" class="btn btn-success d-none"><i class="fas fa-sync-alt fa-spin"></i></span>
+                      <span id="btnLoading" class="btn btn-success d-none disabled"><i class="fas fa-sync-alt fa-spin"></i> Loading...</span>
                       <button type="button" class="btn btn-danger" data-dismiss="modal">Tidak</button>
                     </div>
                   </form>
