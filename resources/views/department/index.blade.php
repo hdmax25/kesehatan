@@ -52,8 +52,7 @@
             <tr>
               <th style="width: 10px">#</th>
               <th>Divisi</th>
-              <th style="width: 10px">Edit</th>
-              <th>Delete</th>
+              <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -65,8 +64,6 @@
                   <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-sm{{ $item->id }}">
                    <i class="fas fa-edit"></i>
                   </button>
-                </td>
-                <td>
                   <a href="{{ route('department.destroy', $item->id) }}">
                     <button type="button" class="btn btn-danger btn-sm">
                       <i class="fas fa-trash-alt"></i>
