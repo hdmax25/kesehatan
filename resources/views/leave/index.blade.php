@@ -22,22 +22,26 @@
 @section('content')
   <div class="row">
     <div class="col-md-3">
-      <div class="info-box">
-        <span class="info-box-icon bg-primary"><i class="fa fa-envelope"></i></span>
-        <div class="info-box-content">
-          <span class="info-box-text">Pending</span>
-          <span class="info-box-number">{{ $pendingCount }}</span>
+      <a href="#pending">
+        <div class="info-box">
+          <span class="info-box-icon bg-primary"><i class="fa fa-envelope"></i></span>
+          <div class="info-box-content">
+            <span class="info-box-text">Pending</span>
+            <span class="info-box-number">{{ $pendingCount }}</span>
+          </div>
         </div>
-      </div>
+      </a>
     </div>
     <div class="col-md-3">
-      <div class="info-box">
-        <span class="info-box-icon bg-success"><i class="fa fa-envelope"></i></span>
-        <div class="info-box-content">
-          <span class="info-box-text">Approved</span>
-          <span class="info-box-number">{{ $approvedCount }}</span>
+      <a href="#approved">
+        <div class="info-box">
+          <span class="info-box-icon bg-success"><i class="fa fa-envelope"></i></span>
+          <div class="info-box-content">
+            <span class="info-box-text">Approved</span>
+            <span class="info-box-number">{{ $approvedCount }}</span>
+          </div>
         </div>
-      </div>
+      </a>
     </div>
     <div class="col-md-3">
       <a href="{{ route('leave.canceled') }}">
@@ -96,11 +100,9 @@
                               <td>Pribadi</td>
                           @endif
                             <td class="text-center">
-                              @if ($approval->phone)
-                                <a class="btn btn-success btn-sm btn-block" href="https://api.whatsapp.com/send?phone={{ $approval->phone }}&text=Mohon%20segera%20approve%20permintaan%20izin%20saya.%20Terimakasih%0A{{ route('leave.index') }}&source=&data=&app_absent=" type="button" target="_blank">
-                                  <i class="fab fa-whatsapp"></i>
-                                </a>
-                              @endif
+                              {{-- <a class="btn btn-success btn-sm btn-block" href="https://api.whatsapp.com/send?phone={{ $approval->phone }}&text=Mohon%20segera%20approve%20permintaan%20izin%20saya.%20Terimakasih%0A{{ route('leave.index') }}&source=&data=&app_absent=" type="button" target="_blank">
+                                <i class="fab fa-whatsapp"></i>
+                              </a> --}}
                               <a href="{{ route('leave.edit', $item->id) }}" type="button" class="btn btn-primary btn-sm btn-block">
                                 <i class="fas fa-edit"></i>
                               </a>

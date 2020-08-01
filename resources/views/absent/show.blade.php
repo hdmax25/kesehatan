@@ -124,7 +124,7 @@
           <table class="table table-hover table-sm table-nowarp">
             <thead>
               <tr>
-                {{-- <th>Log</th> --}}
+                <th>Log</th>
                 <th>Date</th>
                 <th>Time</th>
                 <th>Location</th>
@@ -133,7 +133,7 @@
             <tbody>
               @foreach( $attLog as $item)
                 <tr>
-                  {{-- <td>{{ ($loop->index + $attCount) %2 == 0 ? 'OUT' : 'IN' }}</td> --}}
+                  <td>{{ ($loop->index + $attCount) %2 == 0 ? 'OUT' : 'IN' }}</td>
                   <td>{{ \Carbon\Carbon::parse($item->CreateDt)->format('d/m/Y') }}</td>
                   <td>{{ \Carbon\Carbon::parse($item->CreateDt)->format('H:i') }}</td>
                   <td>{{ $item->Machine }}<td>
@@ -218,7 +218,7 @@
           document.getElementById("loading").classList.add("d-none");
           clearInterval(getLocation);
         } @endforeach else {
-        xx.innerHTML = "Posisi anda belumtepat, silakan berpindah ke lokasi yang sudah ditentukan  <br>Posisi saat ini : " + x + ", " + y;
+        xx.innerHTML = "Posisi anda belum tepat, silakan berpindah ke lokasi yang sudah ditentukan  <br>Posisi saat ini : " + x + ", " + y;
         infoLocations.innerHTML = "Daftar Lokasi";
         document.getElementById("warning").classList.remove("d-none");
         document.getElementById("loading").classList.add("d-none");
