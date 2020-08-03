@@ -59,16 +59,7 @@
             </div>
             <div class="form-group">
               <label for="department">Jabatan</label>
-              <select id="department" name="job" class="form-control @error('job') is-invalid @enderror select2 select2-danger" data-dropdown-css-class="select2-danger" required>
-                <option value="SEMENTARA" {{ old('job') == 'SEMENTARA' ? 'selected' : '' }}>SEMENTARA</option>
-                <option value="DIREKSI" {{ old('job') == 'DIREKSI' ? 'selected' : '' }}>DIREKSI</option>
-                <option value="KADIV" {{ old('job') == 'KADIV' ? 'selected' : '' }}>KADIV</option>
-                <option value="KADEP" {{ old('job') == 'KADEP' ? 'selected' : '' }}>KADEP</option>
-                <option value="KABAG" {{ old('job') == 'KABAG' ? 'selected' : '' }}>KABAG</option>
-                <option value="KASUBAG" {{ old('job') == 'KASUBAG' ? 'selected' : '' }}>KASUBAG</option>
-                <option value="STAFF" {{ old('job') == 'STAFF' ? 'selected' : '' }}>STAFF</option>
-                <option value="OPERATOR" {{ old('job') == 'OPERATOR' ? 'selected' : '' }}>OPERATOR</option>
-              </select>
+              <input type="text" class="form-control @error('job') is-invalid @enderror" name="job" id="job" placeholder="" value="{{ old('job') }}">
             </div>
             <div class="form-group">
               <label for="phone">Phone</label>

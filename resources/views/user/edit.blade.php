@@ -60,17 +60,7 @@
             </div>
             <div class="form-group">
               <label for="department">Jabatan</label>
-              <select id="job" name="job" class="form-control @error('job') is-invalid @enderror select2 select2-danger" data-dropdown-css-class="select2-danger" required>
-                <option value="SEMENTARA" {{ old('job') == 'SEMENTARA' || $user->job == 'SEMENTARA' ? 'selected' : '' }}>SEMENTARA</option>
-                <option value="DIREKSI" {{ old('job') == 'DIREKSI' || $user->job == 'DIREKSI' ? 'selected' : '' }}>DIREKSI</option>
-                <option value="KADIV" {{ old('job') == 'KADIV' || $user->job == 'KADIV' ? 'selected' : '' }}>KADIV</option>
-                <option value="KADEP" {{ old('job') == 'KADEP' || $user->job == 'KADEP' ? 'selected' : '' }}>KADEP</option>
-                <option value="KABAG" {{ old('job') == 'KABAG' || $user->job == 'KABAG' ? 'selected' : '' }}>KABAG</option>
-                <option value="KASUBAG" {{ old('job') == 'KASUBAG' || $user->job == 'KASUBAG' ? 'selected' : '' }}>KASUBAG</option>
-                <option value="SUPERVISOR" {{ old('job') == 'SUPERVISOR' || $user->job == 'SUPERVISOR' ? 'selected' : '' }}>SUPERVISOR</option>
-                <option value="STAFF" {{ old('job') == 'STAFF' || $user->job == 'STAFF' ? 'selected' : '' }}>STAFF</option>
-                <option value="OPERATOR" {{ old('job') == 'OPERATOR' || $user->job == 'OPERATOR' ? 'selected' : '' }}>OPERATOR</option>
-              </select>
+              <input type="text" class="form-control @error('job') is-invalid @enderror" placeholder="" style="text-transform:uppercase" name="job" id="job" value="{{ old('job') ? old('job') : $user->job }}">
             </div>
             <div class="form-group">
               <label for="phone">Phone</label>
