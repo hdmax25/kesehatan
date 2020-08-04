@@ -372,7 +372,7 @@ class ReportController extends Controller
         'domicile' => 'Domisili',
       ]
     ];
-    $report = Report::all();
+    $report = Report::whereDate('created_at', Carbon::now())->get();
     $report->map(function ($item) {
       $item->user = User::find($item->id_user);
       $item->department = Departement::find($item->id_department);

@@ -12,11 +12,17 @@
 
 @section('content')
   <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-info alert-dismissible">
+        <h5><i class="icon fas fa-exclamation-triangle"></i> Perhatian!</h5>
+          Fitur foto sementara dinonaktifkan, karena dalam masa pengembangan
+      </div>
+    </div>
     <div class="col-md-3">
       <div class="card card-danger card-outline">
         <div class="card-body box-profile">
           <div class="text-center">
-            <img class="profile-user-img img-fluid img-circle" src="{{ $user->image ? asset('dist/img/user/'.$user->image) : asset('dist/img/avatar5.png') }}?{{ \Carbon\Carbon::now()->format('dmYhms') }}" alt="User profile picture">
+            <img class="profile-user-img img-fluid img-circle" src="{{ asset('dist/img/avatar5.png') }}" alt="User profile picture">
           </div>
 
           <h3 class="profile-username text-center">{{ $user->name }}</h3>
@@ -85,7 +91,7 @@
                 @csrf
                 <div class="form-group row">
                   <div class="col-sm-2 text-center">
-                    <img id="imageView" class="profile-user-img img-fluid img-circle" src="{{ Auth::user()->image ? asset('dist/img/user/'.Auth::user()->image) : asset('dist/img/avatar5.png') }}?{{ \Carbon\Carbon::now()->format('dFYhis') }}" alt="User profile picture">
+                    <img id="imageView" class="profile-user-img img-fluid img-circle" src="{{ asset('dist/img/avatar5.png') }}" alt="User profile picture">
                   </div>
                   <div class="col-sm-10">
                     <label for="name">Foto</label>
