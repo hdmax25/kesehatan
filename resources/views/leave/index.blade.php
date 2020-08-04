@@ -100,9 +100,9 @@
                               <td>Pribadi</td>
                           @endif
                             <td class="text-center">
-                              {{-- <a class="btn btn-success btn-sm btn-block" href="https://api.whatsapp.com/send?phone={{ $approval->phone }}&text=Mohon%20segera%20approve%20permintaan%20izin%20saya.%20Terimakasih%0A{{ route('leave.index') }}&source=&data=&app_absent=" type="button" target="_blank">
+                              <a class="btn btn-success btn-sm btn-block" href="https://api.whatsapp.com/send?phone={{ $approval->phone }}&text=Mohon%20segera%20approve%20permintaan%20izin%20saya.%20Terimakasih%0A{{ route('leave.index') }}&source=&data=&app_absent=" type="button" target="_blank">
                                 <i class="fab fa-whatsapp"></i>
-                              </a> --}}
+                              </a>
                               <a href="{{ route('leave.edit', $item->id) }}" type="button" class="btn btn-primary btn-sm btn-block">
                                 <i class="fas fa-edit"></i>
                               </a>
