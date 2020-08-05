@@ -63,6 +63,8 @@ Route::group(['prefix' => 'leave', 'as' => 'leave.'], static function () {
   Route::get('/', 'LeaveController@index')->name('index')->middleware('auth');
   Route::get('/canceled', 'LeaveController@canceled')->name('canceled')->middleware('auth');
   Route::get('/expired', 'LeaveController@expired')->name('expired')->middleware('auth');
+  Route::get('/report', 'LeaveController@report')->name('report')->middleware('auth');
+  Route::post('/find', 'LeaveController@find')->name('find')->middleware('auth');
   Route::get('/create', 'LeaveController@create')->name('create')->middleware('auth');
   Route::get('/show/{id}', 'LeaveController@show')->name('show')->middleware('auth');
   Route::post('/store', 'LeaveController@store')->name('store')->middleware('auth');

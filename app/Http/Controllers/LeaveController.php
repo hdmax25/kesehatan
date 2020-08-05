@@ -220,6 +220,79 @@ class LeaveController extends Controller
         } 
     }
 
+    public function report()
+    {
+        $leave = Leave::orderBy('created_at', 'desc')->where('delete', 0)->get();
+        $leave->map(function ($item) {
+            $item->user = User::find($item->id_user);
+            $item->department = Departement::find($item->id_department);
+            return $item;
+        });
+
+        $pending = $leave->where('approve', 0)->where('date','>=', \Carbon\Carbon::now()->format('d/m/Y'))->take(100);
+        $pendingCount = $leave->where('approve', 0)->where('date','>=', \Carbon\Carbon::now()->format('d/m/Y'))->count();
+        $approved = $leave->where('approve', 1)->take(100);
+        $approvedCount = $leave->where('approve', 1)->count();
+        $canceled = $leave->where('approve', 2)->take(100);
+        $canceledCount = $leave->where('approve', 2)->count();
+        $expired = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->take(100);
+        $expiredCount = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->count();
+        $approval = User::orderBy('username', 'desc')->where('role', 2)->where('delete', 0)->where('id_department', Auth::user()->id_department)->first();
+        
+        $data = [
+        'leave' => $leave,
+        'pendingCount' => $pendingCount,
+        'approvedCount' => $approvedCount,
+        'canceledCount' => $canceledCount,
+        'expiredCount' => $expiredCount,
+        'pending' => $pending,
+        'approved' => $approved,
+        'canceled' => $canceled,
+        'expired' => $expired,
+        'approval' => $approval,
+        ];
+        return view('leave.report', $data);
+    }
+
+    public function find(Request $request)
+    {
+        $this->validate($request, [
+        'date' => 'required|string',
+        ]);
+        $date = $request->date;
+        $leave = Leave::orderBy('created_at', 'desc')->where('delete', 0)->where('date', $date)->get();
+        $leave->map(function ($item) {
+            $item->user = User::find($item->id_user);
+            $item->department = Departement::find($item->id_department);
+            return $item;
+        });
+
+        $pending = $leave->where('approve', 0)->where('date','>=', \Carbon\Carbon::now()->format('d/m/Y'))->take(100);
+        $pendingCount = $leave->where('approve', 0)->where('date','>=', \Carbon\Carbon::now()->format('d/m/Y'))->count();
+        $approved = $leave->where('approve', 1)->take(100);
+        $approvedCount = $leave->where('approve', 1)->count();
+        $canceled = $leave->where('approve', 2)->take(100);
+        $canceledCount = $leave->where('approve', 2)->count();
+        $expired = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->take(100);
+        $expiredCount = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->count();
+        $approval = User::orderBy('username', 'desc')->where('role', 2)->where('delete', 0)->where('id_department', Auth::user()->id_department)->first();
+        
+        $data = [
+        'leave' => $leave,
+        'pendingCount' => $pendingCount,
+        'approvedCount' => $approvedCount,
+        'canceledCount' => $canceledCount,
+        'expiredCount' => $expiredCount,
+        'pending' => $pending,
+        'approved' => $approved,
+        'canceled' => $canceled,
+        'expired' => $expired,
+        'approval' => $approval,
+        'date' => $date,
+        ];
+        return view('leave.report', $data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

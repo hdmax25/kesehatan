@@ -162,6 +162,16 @@
                 </p>
               </a>
             </li>
+            @admin
+            <li class="nav-item">
+              <a href="{{ route('leave.report') }}" class="nav-link {{ request()->is('leave/report') ? 'active' : '' }}"> 
+                <i class="nav-icon fas fa-file"></i>
+                <p>
+                  Report
+                </p>
+              </a>
+            </li>
+            @endadmin
           </ul>
         </li>
         <li class="nav-item">
