@@ -222,7 +222,7 @@ class LeaveController extends Controller
 
     public function report()
     {
-        $leave = Leave::orderBy('created_at', 'desc')->where('delete', 0)->get();
+        $leave = Leave::orderBy('created_at', 'desc')->where('delete', 0)->whereDate('created_at', Carbon::now())->get();
         $leave->map(function ($item) {
             $item->user = User::find($item->id_user);
             $item->department = Departement::find($item->id_department);
