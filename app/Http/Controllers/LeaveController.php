@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\model\Leave;
+use Carbon\Carbon;
 use App\model\Departement;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
