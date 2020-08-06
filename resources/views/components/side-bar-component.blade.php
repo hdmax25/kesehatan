@@ -138,6 +138,16 @@
             </a>
           </li>
         @endif
+        @if (Auth::user()->role !== 3)
+          <li class="nav-item">
+            <a href="{{ route('absent.report', Auth::user()->id) }}" class="nav-link {{ request()->is('absent/report') ? 'active' : '' }}"> 
+              <i class="nav-icon fas fa-file"></i>
+              <p>
+                Presence Report
+              </p>
+            </a>
+          </li>
+        @endif
         <li class="nav-item has-treeview {{ request()->is(['leave', 'leave/*']) ? 'menu-open' : '' }}">
           <a href="#" class="nav-link {{ request()->is(['leave', 'leave/*']) ? 'active' : '' }}">
             <i class="nav-icon fa fa-envelope"></i>

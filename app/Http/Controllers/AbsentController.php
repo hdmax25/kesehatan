@@ -88,6 +88,20 @@ class AbsentController extends Controller
         return view('absent.show', $data);
     }
 
+    public function report()
+    {   
+        $absent = Absent::where('Remark', Auth::user()->id_department)->whereDate('CreateDt', Carbon::parse(now())->format('dmY'))->orderBy('CreateDt','desc')->get();
+        $absent->map(function ($item) {
+            $item->user = User::find($item->City);
+            return $item;
+        });
+
+        $data = [
+          'absent' => $absent,
+        ];
+        return view('absent.report', $data);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
