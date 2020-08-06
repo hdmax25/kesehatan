@@ -7,6 +7,7 @@ use App\model\Penyakit;
 use App\model\Report;
 use App\User;
 use App\Absent;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -240,9 +241,9 @@ class UserController extends Controller
     $user = Auth::user();
     try {
       File::delete('dist/img/user/' . $user->image);
-      $imageName = $user->username . '.' . 'jpeg';
+      $imageName = $user->username . '.' . 'jpeg'.'?'.Carbon::now();
     } catch (Exception $e) {
-      $imageName = $user->username . '.' . 'jpeg';
+      $imageName = $user->username . '.' . 'jpeg'.'?'.Carbon::now();
     }
     $request->image->move('dist/img/user/', $imageName);
     $user->image = $imageName;
