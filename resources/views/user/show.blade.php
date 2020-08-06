@@ -12,12 +12,12 @@
 
 @section('content')
   <div class="row">
-    <div class="col-md-12">
+    {{-- <div class="col-md-12">
       <div class="alert alert-info alert-dismissible">
         <h5><i class="icon fas fa-exclamation-triangle"></i> Perhatian!</h5>
           Fitur foto sementara dinonaktifkan, karena dalam masa pengembangan
       </div>
-    </div>
+    </div> --}}
     <div class="col-md-3">
       <div class="card card-danger card-outline">
         <div class="card-body box-profile">
