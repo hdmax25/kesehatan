@@ -59,7 +59,7 @@
             </div>
             <div class="form-group">
               <label for="department">Jabatan</label>
-              <input type="text" class="form-control @error('job') is-invalid @enderror" name="job" id="job" placeholder="" value="{{ old('job') }}">
+              <input type="text" class="form-control @error('job') is-invalid @enderror" style="text-transform:uppercase" name="job" id="job" placeholder="" value="{{ old('job') }}">
             </div>
             <div class="form-group">
               <label for="phone">Phone</label>

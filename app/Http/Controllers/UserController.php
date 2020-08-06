@@ -16,6 +16,7 @@ use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
@@ -90,13 +91,13 @@ class UserController extends Controller
 
     $user = new User();
     $user->username = $request->username;
-    $user->name = $request->name;
+    $user->name = Str::upper($request->name);
     $user->id_department = $request->department;
     $user->password = Hash::make($request->password);
     $user->phone = $request->phone;
-    $user->ktpaddress = $request->address;
+    $user->ktpaddress = Str::upper($request->address);
     $user->role = $request->role;
-    $user->job = $request->job;
+    $user->job = Str::upper($request->job);
     $user->save();
 
     return redirect()->route('user.create')->with(['message' => 'input data berhasil']);
@@ -167,7 +168,7 @@ class UserController extends Controller
     ]);
 
     $user = User::find($id);
-    $user->name = $request->name;
+    $user->name = Str::upper($request->name);
     if ($user->username != $request->username) {
       $this->validate($request, [
         'username' => 'required|numeric|unique:users'
@@ -179,9 +180,9 @@ class UserController extends Controller
       $user->password = Hash::make($request->password);
     }
     $user->phone = $request->phone;
-    $user->ktpaddress = $request->address;
+    $user->ktpaddress = Str::upper($request->address);
     $user->role = $request->role;
-    $user->job = $request->job;
+    $user->job = Str::upper($request->job);
     $user->save();
 
     return redirect()->route('user.edit', $user->id)->with(['message' => 'Input data berhasil']);
@@ -212,7 +213,7 @@ class UserController extends Controller
       $this->validate($request, [
         'address' => 'required|string',
       ]);
-      $user->ktpaddress = $request->address;
+      $user->ktpaddress = Str::upper($request->address);
     }
     if ($user->phone != $request->phone) {
       $this->validate($request, [

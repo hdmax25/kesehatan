@@ -31,6 +31,7 @@
               <thead class="text-center">
                   <tr>
                       <th>Izin</th>
+                      <th>Action</th>
                       @if (Auth::user()->role == 1)
                          <th>Divisi</th>
                       @endif
@@ -50,6 +51,63 @@
                               @else
                               <td>Pribadi</td>
                           @endif
+                          <td class="text-center">
+                            @if ($approval)
+                            <a class="btn btn-success btn-sm btn-block" href="https://api.whatsapp.com/send?phone={{ $approval->phone }}&text=Mohon%20segera%20approve%20permintaan%20izin%20saya.%20Terimakasih%0A{{ route('leave.index') }}&source=&data=&app_absent=" type="button" target="_blank">
+                              <i class="fab fa-whatsapp"></i>
+                            </a>
+                            @endif
+                            @if (Auth::user()->role !== 3)
+                            <a href="#" class="btn btn-success btn-sm btn-block" data-toggle="modal" data-target="#modal-sm{{ $item->id }}-approve">
+                              <i class="fas fa-check"></i>
+                            </a>
+                            <a href="#" class="btn btn-danger btn-sm btn-block" data-toggle="modal" data-target="#modal-sm{{ $item->id }}-cancel">
+                              <i class="fas fa-times"></i>
+                            </a>
+                            <div class="modal fade" id="modal-sm{{ $item->id }}-approve">
+                              <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">Approve</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">×</span>
+                                    </button>
+                                  </div>
+                                    <div class="modal-body">
+                                      <div class="form-group">
+                                        Approve ?
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer justify-content-between">
+                                      <a href="{{ route('leave.approve', $item->id) }}"><button type="submit" class="btn btn-success">Yes</button></a>
+                                      <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="modal fade" id="modal-sm{{ $item->id }}-cancel">
+                              <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">Cancel</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">×</span>
+                                    </button>
+                                  </div>
+                                    <div class="modal-body">
+                                      <div class="form-group">
+                                        Cancel ?
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer justify-content-between">
+                                      <a href="{{ route('leave.cancel', $item->id) }}"><button type="submit" class="btn btn-success">Yes</button></a>
+                                      <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                            @endif
+                          </td>
                           @if (Auth::user()->role == 1)
                           <td>{{ $item->department->department_name }}</td>
                           @endif

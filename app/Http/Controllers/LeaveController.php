@@ -183,9 +183,11 @@ class LeaveController extends Controller
 
             $expired = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->take(100);
             $expiredCount = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->count();
+            $approval = User::orderBy('username', 'desc')->where('role', 2)->where('delete', 0)->where('id_department', Auth::user()->id_department)->first();
             
             $data = [
             'expired' => $expired,
+            'approval' => $approval,
             ];
             return view('leave.expired', $data);
         } else if (Auth::user()->role == 2) {
@@ -198,9 +200,11 @@ class LeaveController extends Controller
 
             $expired = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->take(100);
             $expiredCount = $leave->where('approve', 0)->where('date','<', \Carbon\Carbon::now()->format('d/m/Y'))->count();
+            $approval = User::orderBy('username', 'desc')->where('role', 2)->where('delete', 0)->where('id_department', Auth::user()->id_department)->first();            
             
             $data = [
             'expired' => $expired,
+            'approval' => $approval,
             ];
             return view('leave.expired', $data);
         } else {
@@ -230,6 +234,8 @@ class LeaveController extends Controller
             return $item;
         });
 
+        $date = \Carbon\Carbon::now()->format('d/m/Y');
+
         $pending = $leave->where('approve', 0)->where('date','>=', \Carbon\Carbon::now()->format('d/m/Y'))->take(100);
         $pendingCount = $leave->where('approve', 0)->where('date','>=', \Carbon\Carbon::now()->format('d/m/Y'))->count();
         $approved = $leave->where('approve', 1)->take(100);
@@ -251,6 +257,7 @@ class LeaveController extends Controller
         'canceled' => $canceled,
         'expired' => $expired,
         'approval' => $approval,
+        'date' => $date,
         ];
         return view('leave.report', $data);
     }
