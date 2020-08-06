@@ -18,7 +18,7 @@
           <!-- Add the bg color to the header using any of the bg-* classes -->
           <div class="widget-user-header bg-danger">
             <div class="widget-user-image">
-              <img class="img-circle elevation-2" src="{{ asset('dist/img/avatar5.png') }}?{{ $leave->user->updated_at }}" alt="User Avatar">
+              <img class="img-circle elevation-2" src="{{ asset('dist/img/avatar5.png') }}" alt="User Avatar">
             </div>
             <!-- /.widget-user-image -->
             <h3 class="widget-user-username">{{ $leave->user->name }} ({{ $leave->user->username }})</h3>

@@ -91,7 +91,7 @@
                 @csrf
                 <div class="form-group row">
                   <div class="col-sm-2 text-center">
-                    <img id="imageView" class="profile-user-img img-fluid img-circle" src="{{ $user->image ? asset('dist/img/user/'.$user->image) : asset('dist/img/avatar5.png') }}?{{ $user->updated_at }}" alt="User profile picture">
+                    <img id="imageView" class="profile-user-img img-fluid img-circle" src="{{ $user->image ? asset('dist/img/user/'.$user->image) : asset('dist/img/avatar5.png') }}" alt="User profile picture">
                   </div>
                   <div class="col-sm-10">
                     <label for="name">Foto</label>
