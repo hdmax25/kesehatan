@@ -241,12 +241,12 @@ class UserController extends Controller
     $user = Auth::user();
     try {
       File::delete('dist/img/user/' . $user->image);
-      $imageName = $user->username . '.' . 'jpeg'.'?'.Carbon::now();
+      $imageName = $user->username . '.' . 'jpeg';
     } catch (Exception $e) {
-      $imageName = $user->username . '.' . 'jpeg'.'?'.Carbon::now();
+      $imageName = $user->username . '.' . 'jpeg';
     }
     $request->image->move('dist/img/user/', $imageName);
-    $user->image = $imageName;
+    $user->image = $imageName.'?'.Carbon::now();
     $user->save();
 
     return redirect()->back();
