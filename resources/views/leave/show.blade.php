@@ -18,7 +18,7 @@
           <!-- Add the bg color to the header using any of the bg-* classes -->
           <div class="widget-user-header bg-danger">
             <div class="widget-user-image">
-              <img class="img-circle elevation-2" src="{{ $leave->user->image ? asset('dist/img/user/'.$leave->user->image) : asset('dist/img/avatar5.png') }}?{{ \Carbon\Carbon::now()->format('dmYhis') }}" alt="User Avatar">
+              <img class="img-circle elevation-2" src="{{ asset('dist/img/avatar5.png') }}?{{ $leave->user->updated_at }}" alt="User Avatar">
             </div>
             <!-- /.widget-user-image -->
             <h3 class="widget-user-username">{{ $leave->user->name }} ({{ $leave->user->username }})</h3>
@@ -44,9 +44,9 @@
                   @if ($leave->approve == 0)
                       Pending
                     @elseif ($leave->approve == 1)
-                      Approved By <span class="float-right">{{ $leave->approvedBy->role == 1 ? 'Admin' : 'Kadiv'}} {{ $leave->department->department_name }}</span>
+                      Approved by <span class="float-right">{{ $leave->approvedBy->job }} {{ $leave->department->department_name }}</span>
                     @else
-                      Canceled By <span class="float-right">{{ $leave->approvedBy->role == 1 ? 'Admin' : 'Kadiv'}} {{ $leave->department->department_name }}</span>
+                      Canceled by <span class="float-right">{{ $leave->approvedBy->job }} {{ $leave->department->department_name }}</span>
                     @endif
                 </a>
               </li>
