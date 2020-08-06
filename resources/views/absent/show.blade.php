@@ -241,7 +241,7 @@
       break;
     case error.UNKNOWN_ERROR:
       document.getElementById("warning").classList.remove("d-none"),
-      xx.innerHTML = "An unknown error occurred."
+      xx.innerHTML = "Error tidak diketahui."
       break;
       }
     }
