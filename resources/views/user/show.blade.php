@@ -22,7 +22,7 @@
       <div class="card card-danger card-outline">
         <div class="card-body box-profile">
           <div class="text-center">
-          <img class="profile-user-img img-fluid img-circle" src="{{ $user->image ? asset('dist/img/user/'.$user->image) : asset('dist/img/avatar5.png') }}?{{ $user->updated_at }}" alt="User profile picture">
+          <img class="profile-user-img img-fluid img-circle" src="{{ $user->image ? asset('dist/img/user/'.$user->image) : asset('dist/img/avatar5.png') }}" alt="User profile picture">
           </div>
 
           <h3 class="profile-username text-center">{{ $user->name }}</h3>

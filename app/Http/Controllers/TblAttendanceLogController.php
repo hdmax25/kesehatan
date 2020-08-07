@@ -65,13 +65,13 @@ class TblAttendanceLogController extends Controller
         $attlog1->Machine = $request->location;
         $attlog1->PIN = Auth::user()->username;
         $attlog1->IPAddress = $request->ipAddress;
-        $attlog1->City = Auth::user()->id;
-        $attlog1->Remark = Auth::user()->id_department;
         if ($attCount%2 == 0) {
-            $attlog1->CreateBy = 'OUT';
+            $attlog1->City = 'OUT';
         } else {
-            $attlog1->CreateBy = 'IN';
+            $attlog1->City = 'IN';
         }
+        $attlog1->Remark = Auth::user()->id_department;
+        $attlog1->CreateBy = Auth::user()->id;
         $attlog1->CreateDt = \Carbon\Carbon::now()->format('YmdHi');
 
         $attlog1->save();
