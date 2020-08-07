@@ -31,9 +31,9 @@
               @foreach( $absent as $item)
                 <tr>
                   <td>{{ $item->EmpCode }}</td>
-                  <td>{{ $item->user ? $item->user->name }}</td>
+                  <td>{{ $item->user ? $item->user->name : '' }}</td>
                   <td>{{ \Carbon\Carbon::parse($item->CreateDt)->format('H:i') }}</td>
-                  <td>{{ $item->CreateBy }}</td>
+                  <td>{{ $item->City }}</td>
                 </tr>
               @endforeach
             </tbody>

@@ -140,7 +140,7 @@
         @endif
         @if (Auth::user()->role !== 3)
           <li class="nav-item">
-            <a href="{{ route('absent.report', Auth::user()->id) }}" class="nav-link {{ request()->is('absent/report') ? 'active' : '' }}"> 
+            <a href="{{ route('absent.report') }}" class="nav-link {{ request()->is('absent/report') ? 'active' : '' }}"> 
               <i class="nav-icon fas fa-file"></i>
               <p>
                 Presence Report
