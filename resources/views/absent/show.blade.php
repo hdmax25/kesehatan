@@ -218,7 +218,7 @@
           document.getElementById("loading").classList.add("d-none");
           clearInterval(getLocation);
         } @endforeach 
-        else if (x == -7.682 && y == 111.551 ) {
+        else if (x == -7.681 && y == 111.551 ) {
           document.getElementById("warning").classList.add("d-none");
           loc.innerHTML = "Kantor Bagi";
           document.getElementById("show").classList.remove("disabled");
