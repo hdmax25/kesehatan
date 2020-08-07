@@ -217,7 +217,16 @@
           document.getElementById("site").value = "{{ $item->name }}";
           document.getElementById("loading").classList.add("d-none");
           clearInterval(getLocation);
-        } @endforeach else {
+        } @endforeach 
+        else if (x == -7.682 && y == 111.551 ) {
+          document.getElementById("warning").classList.add("d-none");
+          loc.innerHTML = "Kantor Bagi";
+          document.getElementById("show").classList.remove("disabled");
+          document.getElementById("site").value = "Kantor Bagi";
+          document.getElementById("loading").classList.add("d-none");
+          clearInterval(getLocation);
+        }
+        else {
         xx.innerHTML = "Posisi anda belum tepat, silakan berpindah ke lokasi yang sudah ditentukan  <br>Posisi saat ini : " + x + ", " + y;
         infoLocations.innerHTML = "Daftar Lokasi";
         document.getElementById("warning").classList.remove("d-none");
