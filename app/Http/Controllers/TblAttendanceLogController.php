@@ -55,7 +55,9 @@ class TblAttendanceLogController extends Controller
         $attlog->CreateDt = \Carbon\Carbon::now()->format('YmdHi');
 
         $attlog->save();
-
+        
+        $attCount = 0;
+        $attCount = tblAttendanceLog::where('EmpCode', Auth::user()->username)->count();
         $attlog1 = new Absent;
         $attlog1->EmpCode =  Auth::user()->username;
         $attlog1->Dt = \Carbon\Carbon::now()->format('Ymd');
@@ -65,10 +67,15 @@ class TblAttendanceLogController extends Controller
         $attlog1->IPAddress = $request->ipAddress;
         $attlog1->City = Auth::user()->id;
         $attlog1->Remark = Auth::user()->id_department;
-        $attlog1->CreateBy = 'MASHARI';
+        if ($attCount%2 == 0) {
+            $attlog1->CreateBy = 'OUT';
+        } else {
+            $attlog1->CreateBy = 'IN';
+        }
         $attlog1->CreateDt = \Carbon\Carbon::now()->format('YmdHi');
 
         $attlog1->save();
+
         return redirect()->back()->with(['message' => 'Berhasil']);
     }
 

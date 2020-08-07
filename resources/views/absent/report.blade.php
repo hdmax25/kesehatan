@@ -15,7 +15,7 @@
     <div class="col-md-12">
       <div class="card card-danger card-outline">
         <div class="card-header">
-          <h3 class="card-title">Attendance Report</h3>
+          <h3 class="card-title">Report</h3>
         </div>
         <div class="card-body table-responsive p-0">
           <table class="table table-hover table-sm table-nowarp">
@@ -24,6 +24,7 @@
                 <th>NIP</th>
                 <th>Nama</th>
                 <th>Jam</th>
+                <th>Log</th>
               </tr>
             </thead>
             <tbody>
@@ -32,6 +33,7 @@
                   <td>{{ $item->EmpCode }}</td>
                   <td>{{ $item->user->name }}</td>
                   <td>{{ \Carbon\Carbon::parse($item->CreateDt)->format('H:i') }}</td>
+                  <td>{{ $item->CreateBy }}</td>
                 </tr>
               @endforeach
             </tbody>
