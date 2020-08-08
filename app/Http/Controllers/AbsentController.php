@@ -91,7 +91,7 @@ class AbsentController extends Controller
     public function report()
     {
         if (Auth::user()->role == 1) {
-            $absent = Absent::where('Dt', Carbon::parse(now())->format('Ymd'))->orderBy('CreateDt','desc')->get();
+            $absent = Absent::where('City', 'IN')->where('Dt', Carbon::parse(now())->format('Ymd'))->orderBy('CreateDt','desc')->get();
             $absent->map(function ($item) {
                 $item->user = User::find($item->CreateBy);
                 return $item;
@@ -103,7 +103,7 @@ class AbsentController extends Controller
             return view('absent.report', $data);
         }
         else if (Auth::user()->role == 2) {
-            $absent = Absent::where('Remark', Auth::user()->id_department)->where('Dt', Carbon::parse(now())->format('Ymd'))->orderBy('CreateDt','desc')->get();
+            $absent = Absent::where('City', 'IN')->where('Remark', Auth::user()->id_department)->where('Dt', Carbon::parse(now())->format('Ymd'))->orderBy('CreateDt','desc')->get();
             $absent->map(function ($item) {
                 $item->user = User::find($item->CreateBy);
                 return $item;
