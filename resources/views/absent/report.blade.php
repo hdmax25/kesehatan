@@ -46,6 +46,34 @@
       <!-- /.card -->
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-6 col-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-success"><i class="fa fa-users"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Presence</span>
+          <span class="info-box-number">{{ $absent->count() }} / {{ $user }}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-6 col-sm-6 col-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-warning"><i class="fa fa-users"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Absent</span>
+          <span class="info-box-number">{{  $user - $absent->count()  }} / {{ $user }}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+  </div>
 @endsection
 
 @section('css')

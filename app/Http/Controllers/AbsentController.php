@@ -96,9 +96,11 @@ class AbsentController extends Controller
                 $item->user = User::find($item->CreateBy);
                 return $item;
             });
+            $user = User::where('delete', 0)->count();
 
             $data = [
                 'absent' => $absent,
+                'user' => $user,
             ];
             return view('absent.report', $data);
         }
@@ -108,9 +110,11 @@ class AbsentController extends Controller
                 $item->user = User::find($item->CreateBy);
                 return $item;
             });
+            $user = User::where('delete', 0)->where('id_department', Auth::user()->id_department)->count();
 
             $data = [
                 'absent' => $absent,
+                'user' => $user,
             ];
             return view('absent.report', $data);
         }
