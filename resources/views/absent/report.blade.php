@@ -21,6 +21,7 @@
           <table class="table table-hover table-sm table-nowarp">
             <thead>
               <tr>
+                <th>#</th>
                 <th>NIP</th>
                 <th>Nama</th>
                 <th>Jam</th>
@@ -30,6 +31,7 @@
             <tbody>
               @foreach( $absent as $item)
                 <tr>
+                  <td>{{ $loop->index + 1 }}</td>
                   <td>{{ $item->EmpCode }}</td>
                   <td>{{ $item->user ? $item->user->name : '' }}</td>
                   <td>{{ \Carbon\Carbon::parse($item->CreateDt)->format('H:i') }}</td>
