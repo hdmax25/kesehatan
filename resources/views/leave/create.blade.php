@@ -50,7 +50,7 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>Jam </label><small>Pilih jam 23:59 jika sampai selesai</small>
+                  <label>Jam </label>
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="far fa-clock"></i></span>

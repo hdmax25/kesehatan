@@ -92,7 +92,7 @@
                   <td>{{ $item->user->username }}</td>
                   <td>{{ $item->user->name }}</td>
                   <td>{{ $item->date }}</td>
-                  <td>{{ $item->start }} - {{ $item->end !== '23:59' ? $item->end : 'Selesai' }}</td>
+                  <td>{{ $item->start }} - {{ $item->end }}</td>
                   <td>{{ $item->destination }}</td>
                   <td>{{ $item->detail }}</td>
                   @if ($item->type == 0 && $item->date >= \Carbon\Carbon::now()->format('d/m/Y'))
