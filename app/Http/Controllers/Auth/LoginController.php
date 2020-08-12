@@ -95,7 +95,7 @@ class LoginController extends Controller
     $user = User::where($this->username(), $request->{$this->username()})->first();
 
     if ($user && Hash::check($request->password, $user->password)) {
-      $errors = [$this->username() => trans('Anada Tidak Miliki izin yang sesuwai')];
+      $errors = [$this->username() => trans('Anda Tidak Miliki izin yang sesuai')];
     }
 
     if ($request->expectsJson()) {

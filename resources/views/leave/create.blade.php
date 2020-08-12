@@ -41,7 +41,7 @@
                 <div class="form-group">
                   <label>Tanggal</label>
                     <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                        <input type="text" name="date" id="date" class="form-control datetimepicker-input" data-target="#reservationdate" value="{{ old('date') }}" onkeydown="return false">
+                        <input type="text" name="date" id="date" class="form-control datetimepicker-input" data-target="#reservationdate" value="{{ old('date') ? old('date') : \Carbon\Carbon::now()->format('d/m/Y') }}" onkeydown="return false">
                         <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>
