@@ -34,7 +34,7 @@ class LeaveController extends Controller
 
             $pending = $leave->where('approve', 0)->where('date','>=', \Carbon\Carbon::now()->format('d/m/Y'))->take(100);
             $pendingCount = $leave->where('approve', 0)->where('date','>=', \Carbon\Carbon::now()->format('d/m/Y'))->count();
-            $approved = $leave->where('approve', 1)->take(100);
+            $approved = $leave->where('approve', 1)->take(200);
             $approvedCount = $leave->where('approve', 1)->count();
             $canceled = $leave->where('approve', 2)->take(100);
             $canceledCount = $leave->where('approve', 2)->count();
