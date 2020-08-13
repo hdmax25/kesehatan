@@ -186,7 +186,7 @@
             <thead class="text-center">
                 <tr>
                     <th>Izin</th>
-                    <th>View</th>
+                    <th>Actions</th>
                     @if (Auth::user()->role == 1)
                         <th>Divisi</th>
                     @endif
@@ -210,6 +210,30 @@
                           <a href="{{ route('leave.show', $item->id) }}" type="button" class="btn btn-success btn-block btn-sm">
                               <i class="fas fa-eye"></i>
                           </a>
+                          <a href="#" class="btn btn-danger btn-sm btn-block" data-toggle="modal" data-target="#modal-sm{{ $item->id }}-cancel1">
+                            <i class="fas fa-times"></i>
+                          </a>
+                          <div class="modal fade" id="modal-sm{{ $item->id }}-cancel1">
+                            <div class="modal-dialog modal-sm">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h4 class="modal-title">Cancel</h4>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                  </button>
+                                </div>
+                                  <div class="modal-body">
+                                    <div class="form-group">
+                                      Cancel ?
+                                    </div>
+                                  </div>
+                                  <div class="modal-footer justify-content-between">
+                                    <a href="{{ route('leave.cancel', $item->id) }}"><button type="submit" class="btn btn-success">Yes</button></a>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
                         </td>
                         @if (Auth::user()->role == 1)
                             <td>{{ $item->department->department_name }}</td>
