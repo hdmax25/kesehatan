@@ -210,9 +210,11 @@
                           <a href="{{ route('leave.show', $item->id) }}" type="button" class="btn btn-success btn-block btn-sm">
                               <i class="fas fa-eye"></i>
                           </a>
+                          @if (Auth::user()->role !== 3)
                           <a href="#" class="btn btn-danger btn-sm btn-block" data-toggle="modal" data-target="#modal-sm{{ $item->id }}-cancel1">
                             <i class="fas fa-times"></i>
                           </a>
+                          @endif
                           <div class="modal fade" id="modal-sm{{ $item->id }}-cancel1">
                             <div class="modal-dialog modal-sm">
                               <div class="modal-content">
