@@ -101,6 +101,14 @@
                   </p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ route('user.export') }}" class="nav-link {{ request()->is('export') ? 'active' : '' }}">
+                  <i class="nav-icon fas fa-file-excel"></i>
+                  <p>
+                    Export
+                  </p>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="nav-item">
@@ -144,6 +152,14 @@
               <i class="nav-icon fas fa-file"></i>
               <p>
                 Presence Report
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('absent.index', Auth::user()->id) }}" class="nav-link {{ request()->is('absent') ? 'active' : '' }}"> 
+              <i class="nav-icon fas fa-file-excel"></i>
+              <p>
+                Presence Export
               </p>
             </a>
           </li>

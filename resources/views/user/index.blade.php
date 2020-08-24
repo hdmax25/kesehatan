@@ -83,6 +83,9 @@
             </tbody>
           </table>
         </div>
+        <div class="card-footer">
+          <a target="_blank" href="{{ route('user.export') }}"><button type="submit" class="btn btn-danger">Export</button></a>
+        </div>
       </div>
     </div>
   </div>

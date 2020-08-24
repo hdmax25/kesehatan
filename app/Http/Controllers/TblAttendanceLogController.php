@@ -43,6 +43,9 @@ class TblAttendanceLogController extends Controller
      */
     public function store(Request $request)
     {
+        $attCount = 0;
+        $attCount = tblAttendanceLog::where('EmpCode', Auth::user()->username)->count();
+
         $attlog = new tblAttendanceLog;
         $attlog->EmpCode =  Auth::user()->username;
         $attlog->Dt = \Carbon\Carbon::now()->format('Ymd');
@@ -50,14 +53,17 @@ class TblAttendanceLogController extends Controller
         $attlog->Machine = $request->location;
         $attlog->PIN = Auth::user()->username;
         $attlog->IPAddress = $request->ipAddress;
+        if ($attCount%2 == 0) {
+            $attlog->City = 'OUT';
+        } else {
+            $attlog->City = 'IN';
+        }
         $attlog->Remark = 'Data From IT-ERP';
         $attlog->CreateBy = 'MASHARI';
         $attlog->CreateDt = \Carbon\Carbon::now()->format('YmdHi');
-
+        
         $attlog->save();
         
-        $attCount = 0;
-        $attCount = tblAttendanceLog::where('EmpCode', Auth::user()->username)->count();
         $attlog1 = new Absent;
         $attlog1->EmpCode =  Auth::user()->username;
         $attlog1->Dt = \Carbon\Carbon::now()->format('Ymd');

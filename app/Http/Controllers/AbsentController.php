@@ -12,6 +12,9 @@ use Carbon\Carbon;
 use App\model\tblAttendanceLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\FromCollection\ExportMode;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class AbsentController extends Controller
 {
@@ -22,7 +25,7 @@ class AbsentController extends Controller
      */
     public function index()
     {
-        //
+        return view('absent.index');
     }
 
     /**
@@ -162,5 +165,33 @@ class AbsentController extends Controller
     public function destroy(Absent $absent)
     {
         //
+    }
+
+    public function export(Request $request): BinaryFileResponse
+    {
+      $data = [
+        0 => [
+          'EmpCode' => 'NIP',
+          'Dt' => 'Tanggal',
+          'Tm' => 'Jam',
+          'City' => 'Log',
+        ]
+      ];
+      
+      $this->validate($request, [
+        'date' => 'required|string',
+        ]);
+        $date = $request->date;
+        $att = Absent::where('Dt', $date)->get();
+  
+      foreach ($att as $id => $item) {
+        $data[$id + 1]['EmpCode'] = $item->EmpCode;
+        $data[$id + 1]['Dt'] = \Carbon\Carbon::parse($item->CreateDt)->format('d/m/Y');
+        $data[$id + 1]['Tm'] = \Carbon\Carbon::parse($item->CreateDt)->format('H:i:s');
+        $data[$id + 1]['City'] = $item->City;
+      }
+  
+      $exportMode = new ExportMode($data);
+      return Excel::download($exportMode, 'export.xlsx');
     }
 }

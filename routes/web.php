@@ -33,6 +33,7 @@ Route::group(['prefix' => 'home', 'as' => 'home.'], static function () {
 
 Route::group(['prefix' => 'user', 'as' => 'user.'], static function () {
   Route::get('/', 'UserController@index')->name('index')->middleware('auth', 'role:1');
+  Route::get('/export', 'UserController@export')->name('export')->middleware('auth', 'role:1|2');
   Route::get('/create', 'UserController@create')->name('create')->middleware('auth', 'role:1');
   Route::post('/store', 'UserController@store')->name('store')->middleware('auth', 'role:1');
   Route::get('/show/{id}', 'UserController@show')->name('show')->middleware('auth');
@@ -45,6 +46,8 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], static function () {
 
 Route::group(['prefix' => 'absent', 'as' => 'absent.'], static function () {
   Route::get('/', 'AbsentController@index')->name('index')->middleware('auth');
+  Route::post('/find', 'AbsentController@find')->name('find')->middleware('auth');
+  Route::post('/export', 'AbsentController@export')->name('export')->middleware('auth', 'role:1|2');
   Route::get('/show/{id}', 'AbsentController@show')->name('show')->middleware('auth');
   Route::get('/report', 'AbsentController@report')->name('report')->middleware('auth');
   Route::post('/store', 'AbsentController@store')->name('store')->middleware('auth');

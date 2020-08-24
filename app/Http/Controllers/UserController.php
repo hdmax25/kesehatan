@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\FromCollection\ExportMode;
 use App\model\Departement;
 use App\model\Penyakit;
 use App\model\Report;
@@ -23,6 +24,8 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use mysql_xdevapi\Exception;
 use Intervention\Image\ImageManagerStatic as Image;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class UserController extends Controller
 {
@@ -266,4 +269,42 @@ class UserController extends Controller
 
     return redirect()->back();
   }
+
+   /**
+   * @return BinaryFileResponse
+   */
+  public function export(): BinaryFileResponse
+  {
+    $data = [
+      0 => [
+        'username' => 'NIP',
+        'name' => 'Nama',
+        'job' => 'Jabatan',
+        'department' => 'Divisi',
+        'phone' => 'Phone',
+        'ktpaddress' => 'Alamat',
+      ]
+    ];
+    $user = User::where('delete', 0)->get();
+    $user->map(function ($item) {
+      $item->department = Departement::find($item->id_department);
+    });
+
+    foreach ($user as $id => $item) {
+      $data[$id + 1]['username'] = $item->username;
+      $data[$id + 1]['name'] = $item->name;
+      $data[$id + 1]['job'] = $item->job;
+      if ($item->department){
+        $data[$id + 1]['department'] = $item->department->department_name;
+      } else {
+        $data[$id + 1]['department'] = 'Tidak ada';
+      }
+      $data[$id + 1]['phone'] = ' '.$item->phone;
+      $data[$id + 1]['ktpaddress'] = $item->ktpaddress;
+    }
+
+    $exportMode = new ExportMode($data);
+    return Excel::download($exportMode, 'export.xlsx');
+  }
 }
+
