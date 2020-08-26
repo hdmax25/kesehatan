@@ -181,12 +181,14 @@ class AbsentController extends Controller
       $this->validate($request, [
         'date' => 'required|string',
         ]);
-        $date = $request->date;
-        $att = Absent::where('Dt', $date)->get();
+        $date = explode(' - ', $request->date);
+        $dateStart = Carbon::parse($date[0] . ' 00:00:00');
+        $dateEnd = Carbon::parse($date[1] . ' 23:59:59');
+        $att = Absent::whereBetween('Dt', [$dateStart->format('Ymd'), $dateEnd->format('Ymd')])->get();
   
       foreach ($att as $id => $item) {
         $data[$id + 1]['EmpCode'] = $item->EmpCode;
-        $data[$id + 1]['Dt'] = \Carbon\Carbon::parse($item->CreateDt)->format('d/m/Y');
+        $data[$id + 1]['Dt'] = \Carbon\Carbon::parse($item->CreateDt)->format('d-m-Y');
         $data[$id + 1]['Tm'] = \Carbon\Carbon::parse($item->CreateDt)->format('H:i:s');
         $data[$id + 1]['City'] = $item->City;
       }

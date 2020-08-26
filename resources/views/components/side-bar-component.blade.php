@@ -12,7 +12,6 @@
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
         <img src="{{ Auth::user()->image ? asset('dist/img/user/'. Auth::user()->image) : asset('dist/img/avatar5.png') }}" class="img-circle elevation-2" alt="User Image">
-        {{-- <img src="{{ asset('dist/img/avatar5.png') }}" class="img-circle elevation-2" alt="User Image"> --}}
       </div>
       <div class="info">
         <a href="{{ route('user.show', Auth::user()->id) }}" class="d-block text-wrap">{{ \Illuminate\Support\Facades\Auth::user()->name }}</a>
@@ -156,7 +155,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('absent.index', Auth::user()->id) }}" class="nav-link {{ request()->is('absent') ? 'active' : '' }}"> 
+            <a href="{{ route('absent.index') }}" class="nav-link {{ request()->is('absent') ? 'active' : '' }}"> 
               <i class="nav-icon fas fa-file-excel"></i>
               <p>
                 Presence Export

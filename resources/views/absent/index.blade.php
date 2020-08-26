@@ -25,12 +25,14 @@
       @csrf
       <div class="col-md-10">
         <div class="form-group">
-            <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                <input type="text" name="date" id="date" class="form-control datetimepicker-input" data-target="#reservationdate" value="{{ $date ?? \Carbon\Carbon::now()->format('Ymd') }}" onkeydown="return false">
-                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">
+                <i class="far fa-calendar-alt"></i>
+              </span>
             </div>
+            <input type="text" class="form-control float-right" name="date" id="reservation" value="">
+          </div>
         </div>
       </div>
       <div class="col-md-2">
@@ -81,9 +83,18 @@
   
 
   <script>
-    $('#reservationdate').datetimepicker({
-          format: 'YYYYMMDD',
-      });
+    $('#reservation').daterangepicker({
+      todayHighlight: true,
+      locale: {
+        format: 'DD-MM-YYYY'
+      }
+    });
+
+    //Hide Button
+    function hideBtn() {
+      document.getElementById("btnInOut").classList.add("d-none");
+      document.getElementById("btnLoading").classList.remove("d-none");
+    }
   </script>
 
 @endsection
