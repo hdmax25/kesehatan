@@ -54,12 +54,12 @@ class TblAttendanceLogController extends Controller
         $attlog->PIN = Auth::user()->username;
         $attlog->IPAddress = $request->ipAddress;
         if ($attCount%2 == 0) {
-            $attlog->City = 'OUT';
-        } else {
             $attlog->City = 'IN';
+        } else {
+            $attlog->City = 'OUT';
         }
-        $attlog->Remark = 'Data From IT-ERP';
-        $attlog->CreateBy = 'MASHARI';
+        $attlog->Remark = Auth::user()->id_department;
+        $attlog->CreateBy = Auth::user()->id;
         $attlog->CreateDt = \Carbon\Carbon::now()->format('YmdHi');
         
         $attlog->save();
@@ -72,9 +72,9 @@ class TblAttendanceLogController extends Controller
         $attlog1->PIN = Auth::user()->username;
         $attlog1->IPAddress = $request->ipAddress;
         if ($attCount%2 == 0) {
-            $attlog1->City = 'OUT';
-        } else {
             $attlog1->City = 'IN';
+        } else {
+            $attlog1->City = 'OUT';
         }
         $attlog1->Remark = Auth::user()->id_department;
         $attlog1->CreateBy = Auth::user()->id;

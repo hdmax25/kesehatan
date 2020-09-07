@@ -74,7 +74,8 @@ class AbsentController extends Controller
         $attLog = $att->take(10);
         $attLimit = 0;
         $attLimit = $att->where('created_at', Carbon::now())->count();
-        $attInOut = $att->first();
+        $attCount = 0;
+        $attCount = $att->count();
         
 
         $sites = Site::where('delete', 0)->get();
@@ -86,7 +87,7 @@ class AbsentController extends Controller
           'firstSite' => $firstSite,
           'attLog' => $attLog,
           'attLimit' => $attLimit,
-          'attInOut' => $attInOut,
+          'attCount' => $attCount,
         ];
         return view('absent.show', $data);
     }
@@ -94,7 +95,7 @@ class AbsentController extends Controller
     public function report()
     {
         if (Auth::user()->role == 1) {
-            $absent = Absent::where('City', 'IN')->where('Dt', Carbon::parse(now())->format('Ymd'))->orderBy('CreateDt','desc')->get();
+            $absent = tblAttendanceLog::where('City', 'IN')->where('Dt', Carbon::parse(now())->format('Ymd'))->orderBy('CreateDt','desc')->get();
             $absent->map(function ($item) {
                 $item->user = User::find($item->CreateBy);
                 return $item;
@@ -108,7 +109,7 @@ class AbsentController extends Controller
             return view('absent.report', $data);
         }
         else if (Auth::user()->role == 2) {
-            $absent = Absent::where('City', 'IN')->where('Remark', Auth::user()->id_department)->where('Dt', Carbon::parse(now())->format('Ymd'))->orderBy('CreateDt','desc')->get();
+            $absent = tblAttendanceLog::where('City', 'IN')->where('Remark', Auth::user()->id_department)->where('Dt', Carbon::parse(now())->format('Ymd'))->orderBy('CreateDt','desc')->get();
             $absent->map(function ($item) {
                 $item->user = User::find($item->CreateBy);
                 return $item;

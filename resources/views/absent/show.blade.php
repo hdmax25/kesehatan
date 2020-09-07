@@ -77,7 +77,7 @@
               <b>Location</b> <a class="float-right" id="loc"><i class="fas fa-sync-alt fa-spin"></i> Menyesuaikan Lokasi</a>
             </li>
           </ul>
-          <a href="#" id="show" class="btn btn-danger btn-block disabled" data-toggle="modal" data-target="#confirm"><b>{{ $attInOut->City == 'OUT' ? 'IN' : 'OUT' }}</b></a>
+          <a href="#" id="show" class="btn btn-danger btn-block disabled" data-toggle="modal" data-target="#confirm"><b>{{ $attCount%2 == 0 ? 'IN' : 'OUT' }}</b></a>
             <div class="modal fade" id="confirm">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -90,7 +90,7 @@
                   <form action="{{ route('TblAttendanceLog.store') }}" method="post">
                     @csrf
                     <div class="modal-body">
-                      @if($attInOut->City == 'OUT')
+                      @if($attCount%2 == 0)
                         Selamat bekerja Kak..
                         <br>Semoga harimu menyenangkan
                       @else
