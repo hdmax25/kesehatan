@@ -74,8 +74,8 @@ class AbsentController extends Controller
         $attLog = $att->take(10);
         $attLimit = 0;
         $attLimit = $att->where('created_at', Carbon::now())->count();
-        $attCount = 0;
-        $attCount = $att->count();
+        $attInOut = $att->first();
+        
 
         $sites = Site::where('delete', 0)->get();
         $firstSite = Site::where('delete', 0)->min('id');
@@ -86,7 +86,7 @@ class AbsentController extends Controller
           'firstSite' => $firstSite,
           'attLog' => $attLog,
           'attLimit' => $attLimit,
-          'attCount' => $attCount,
+          'attInOut' => $attInOut,
         ];
         return view('absent.show', $data);
     }

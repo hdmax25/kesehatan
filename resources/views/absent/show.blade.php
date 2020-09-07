@@ -77,7 +77,7 @@
               <b>Location</b> <a class="float-right" id="loc"><i class="fas fa-sync-alt fa-spin"></i> Menyesuaikan Lokasi</a>
             </li>
           </ul>
-          <a href="#" id="show" class="btn btn-danger btn-block disabled" data-toggle="modal" data-target="#confirm"><b>{{ $attCount%2 == 0 ? 'IN' : 'OUT' }}</b></a>
+          <a href="#" id="show" class="btn btn-danger btn-block disabled" data-toggle="modal" data-target="#confirm"><b>{{ $attInOut->City == 'OUT' ? 'IN' : 'OUT' }}</b></a>
             <div class="modal fade" id="confirm">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -90,7 +90,7 @@
                   <form action="{{ route('TblAttendanceLog.store') }}" method="post">
                     @csrf
                     <div class="modal-body">
-                      @if($attCount%2 == 0)
+                      @if($attInOut->City == 'OUT')
                         Selamat bekerja Kak..
                         <br>Semoga harimu menyenangkan
                       @else
@@ -133,7 +133,7 @@
             <tbody>
               @foreach( $attLog as $item)
                 <tr>
-                  <td>{{ ($loop->index + $attCount) %2 == 0 ? 'OUT' : 'IN' }}</td>
+                  <td>{{ $item->City }}</td>
                   <td>{{ \Carbon\Carbon::parse($item->CreateDt)->format('d/m/Y') }}</td>
                   <td>{{ \Carbon\Carbon::parse($item->CreateDt)->format('H:i') }}</td>
                   <td>{{ $item->Machine }}<td>
@@ -218,7 +218,7 @@
           document.getElementById("loading").classList.add("d-none");
           clearInterval(getLocation);
         } @endforeach 
-        else if (x == -7.681 && y == 111.551 ) {
+        else if (x == -7.257 && y == 112.752 ) {
           document.getElementById("warning").classList.add("d-none");
           loc.innerHTML = "Kantor Bagi";
           document.getElementById("show").classList.remove("disabled");
