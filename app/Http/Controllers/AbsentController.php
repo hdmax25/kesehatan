@@ -25,7 +25,12 @@ class AbsentController extends Controller
      */
     public function index()
     {
-        return view('absent.index');
+        $department = Departement::where('delete', 0)->get();
+        $data = [
+            'setDepartment' => 0,
+            'department' => $department,
+          ];
+        return view('absent.index', $data);
     }
 
     /**
@@ -181,11 +186,17 @@ class AbsentController extends Controller
       
       $this->validate($request, [
         'date' => 'required|string',
+        'department' => 'required|string',
         ]);
         $date = explode(' - ', $request->date);
         $dateStart = Carbon::parse($date[0] . ' 00:00:00');
         $dateEnd = Carbon::parse($date[1] . ' 23:59:59');
-        $att = Absent::whereBetween('Dt', [$dateStart->format('Ymd'), $dateEnd->format('Ymd')])->get();
+        $department = $request->department;
+        if ($department == 0) {
+            $att = Absent::whereBetween('Dt', [$dateStart->format('Ymd'), $dateEnd->format('Ymd')])->get();
+        } else {
+            $att = Absent::whereBetween('Dt', [$dateStart->format('Ymd'), $dateEnd->format('Ymd')])->where('Remark', $department)->get();
+        }
   
       foreach ($att as $id => $item) {
         $data[$id + 1]['EmpCode'] = $item->EmpCode;

@@ -23,7 +23,7 @@
 <form action="{{ route('absent.export') }}" method="post">
   <div class="row">
       @csrf
-      <div class="col-md-10">
+      <div class="col-md-5">
         <div class="form-group">
           <div class="input-group">
             <div class="input-group-prepend">
@@ -33,6 +33,20 @@
             </div>
             <input type="text" class="form-control float-right" name="date" id="reservation" value="">
           </div>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="form-group">
+          <select id="department" name="department" class="form-control select2 select2-danger" data-dropdown-css-class="select2-danger" required>
+            @if (Auth::user()->role == 1)
+              <option value="0" {{ $setDepartment == 'x' ? 'selected' :'' }}>Semua Divisi</option>
+              @foreach($department as $item)
+                <option value="{{ $item->id }}" {{ $setDepartment == $item->id ? 'selected' :'' }}>{{ $item->department_name }}</option>
+              @endforeach
+            @elseif (Auth::user()->role == 2)
+              <option value="{{ Auth::user()->id_department }}">{{ \App\model\Departement::find(Auth::user()->id_department) ? \App\model\Departement::find(Auth::user()->id_department)->department_name : '' }}</option>
+            @endif
+          </select>
         </div>
       </div>
       <div class="col-md-2">
