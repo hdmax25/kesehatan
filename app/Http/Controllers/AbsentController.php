@@ -197,9 +197,13 @@ class AbsentController extends Controller
         } else {
             $att = Absent::whereBetween('Dt', [$dateStart->format('Ymd'), $dateEnd->format('Ymd')])->where('Remark', $department)->get();
         }
+        $att->map(function ($item) {
+            $item->user = User::find($item->CreateBy);
+        });
   
       foreach ($att as $id => $item) {
         $data[$id + 1]['EmpCode'] = $item->EmpCode;
+        $data[$id + 1]['Name'] = $item->user->username;
         $data[$id + 1]['Dt'] = \Carbon\Carbon::parse($item->CreateDt)->format('d-m-Y');
         $data[$id + 1]['Tm'] = \Carbon\Carbon::parse($item->CreateDt)->format('H:i:s');
         $data[$id + 1]['City'] = $item->City;
