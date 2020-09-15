@@ -178,7 +178,7 @@ class AbsentController extends Controller
       $data = [
         0 => [
           'EmpCode' => 'NIP',
-          'Name' => 'Nama',
+          'CreateDt' => 'Nama',
           'Dt' => 'Tanggal',
           'Tm' => 'Jam',
           'City' => 'Log',
@@ -204,7 +204,7 @@ class AbsentController extends Controller
   
       foreach ($att as $id => $item) {
         $data[$id + 1]['EmpCode'] = $item->EmpCode;
-        $data[$id + 1]['Name'] = $item->user->name;
+        $data[$id + 1]['CreateDt'] = $item->user->name;
         $data[$id + 1]['Dt'] = \Carbon\Carbon::parse($item->CreateDt)->format('d-m-Y');
         $data[$id + 1]['Tm'] = \Carbon\Carbon::parse($item->CreateDt)->format('H:i:s');
         $data[$id + 1]['City'] = $item->City;
